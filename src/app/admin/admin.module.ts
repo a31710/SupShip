@@ -6,7 +6,6 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
-import { InsertCustomerComponent } from './insert-customer/insert-customer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 @NgModule({
@@ -19,7 +18,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
   ],
-  declarations: [AdminComponent,RegisterUserComponent, InsertCustomerComponent],
+  declarations: [AdminComponent,RegisterUserComponent],
 
 })
 export class AdminModule { }

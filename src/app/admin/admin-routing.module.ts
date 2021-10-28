@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard/auth.guard';
 import { AdminComponent } from './admin.component';
-import { InsertCustomerComponent } from './insert-customer/insert-customer.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
 
 
@@ -13,9 +12,15 @@ const routes: Routes = [{
       path: 'register', component: RegisterUserComponent, canActivate: [AuthGuard]
     },
     {
-      path: 'insert-customer', component: InsertCustomerComponent, canActivate: [AuthGuard]
+      path: 'customer',
+      loadChildren: () => import('./customer-manager/customer-manager.module')
+        .then(m => m.CustomerManagerModule),
     },
-    { path: '**', redirectTo: 'insert-customer' },
+    {
+      path: 'user',
+      loadChildren: () => import('./user-manager/user-manager.module')
+        .then(m => m.UserManagerModule),
+    },
   ],
 }];
 

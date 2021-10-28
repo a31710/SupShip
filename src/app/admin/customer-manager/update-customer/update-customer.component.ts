@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AdminService } from '../service/admin.service';
+import { CustomerService } from '../../service/customer.service';
 
 @Component({
-  selector: 'app-insert-customer',
-  templateUrl: './insert-customer.component.html',
-  styleUrls: ['./insert-customer.component.css']
+  selector: 'app-update-customer',
+  templateUrl: './update-customer.component.html',
+  styleUrls: ['./update-customer.component.css']
 })
-export class InsertCustomerComponent implements OnInit {
+export class UpdateCustomerComponent implements OnInit {
   proviceSelect:any
   districtSelect:any
   wardSelect:any
@@ -19,7 +19,6 @@ export class InsertCustomerComponent implements OnInit {
   selectedIndustryValues:String[] = [];
   industryError: Boolean = true;
   bodyApi: any;
-
 
   insertCustomerMessage = {
     'title': [
@@ -49,49 +48,46 @@ export class InsertCustomerComponent implements OnInit {
 
     }
 
-  industryData = [
-    { value: 'THU', name: 'Thư, hóa đơn, chứng từ' },
-    { value: 'DC', name: 'Đồ Chơi' },
-    { value: 'SACH', name: 'Sách, văn phòng phẩm' },
-    { value: 'NS', name: 'Hàng nông sản' },
-    { value: 'DT', name: 'Thiết bị điện tử' },
-    { value: 'NT', name: 'Thiết bị nội thất' },
-    { value: 'TT', name: 'Thời trang' },
-    { value: 'DP', name: 'Dược phẩm' },
-    { value: 'PKTT', name: 'Phu kiện thời trang' },
-    { value: 'PKXM', name: 'Ô tô xe máy, phụ kiện' },
-    { value: 'MP', name: 'Mỹ phẩm' },
-    { value: 'HXT', name: 'Hàng xách tay' },
-    { value: 'TBGD', name: 'Thiết bị gia dụng' },
-    { value: 'KHAC', name: 'Khác' },
-  ];
+    industryData = [
+      { value: 'THU', name: 'Thư, hóa đơn, chứng từ' },
+      { value: 'DC', name: 'Đồ Chơi' },
+      { value: 'SACH', name: 'Sách, văn phòng phẩm' },
+      { value: 'NS', name: 'Hàng nông sản' },
+      { value: 'DT', name: 'Thiết bị điện tử' },
+      { value: 'NT', name: 'Thiết bị nội thất' },
+      { value: 'TT', name: 'Thời trang' },
+      { value: 'DP', name: 'Dược phẩm' },
+      { value: 'PKTT', name: 'Phu kiện thời trang' },
+      { value: 'PKXM', name: 'Ô tô xe máy, phụ kiện' },
+      { value: 'MP', name: 'Mỹ phẩm' },
+      { value: 'HXT', name: 'Hàng xách tay' },
+      { value: 'TBGD', name: 'Thiết bị gia dụng' },
+      { value: 'KHAC', name: 'Khác' },
+    ];
 
-  get industryFormArray() {
-    return this.insertCustomerForm.get('industry') as FormArray;
-  }
-  get addressArray() {
-    return this.insertCustomerForm.get('address') as FormArray;
-  }
 
-  get leadSource() {
-    return this.insertCustomerForm.get('leadSource') as FormArray;
-  }
-  constructor(private fb: FormBuilder, private adminService: AdminService, private toastr: ToastrService) {
+    get industryFormArray() {
+      return this.insertCustomerForm.get('industry') as FormArray;
+    }
+    get addressArray() {
+      return this.insertCustomerForm.get('address') as FormArray;
+    }
+
+    get leadSource() {
+      return this.insertCustomerForm.get('leadSource') as FormArray;
+    }
+
+
+  constructor(private fb: FormBuilder, private customerService: CustomerService, private toastr: ToastrService) {
     this.getAllCity();
     this.createForm();
     this.addIndustrysControls();
-   }
-
-
+  }
   private addIndustrysControls() {
     this.industryData.forEach(() => this.industryFormArray.push(this.fb.control(false)));
   }
-  ngOnInit(): void {
+  ngOnInit() {
   }
-
-
-
-
 
   createForm(){
     this.insertCustomerForm = this.fb.group({
@@ -99,7 +95,7 @@ export class InsertCustomerComponent implements OnInit {
         companyName: ['', [Validators.required,Validators.minLength(5)]],
         fullName: ['', [Validators.required ,Validators.minLength(5)]],
         representation: ['', [Validators.required ,Validators.min(5)]],
-        phone:['', [Validators.required, Validators.pattern('[89][0-9]{8}')]],
+        phone:['', [Validators.required,]],
         quantityMonth:['', [Validators.required]],
         inProvincePrice: ['', [Validators.required]],
         outProvincePrice: ['', [Validators.required]],
@@ -156,13 +152,13 @@ export class InsertCustomerComponent implements OnInit {
   }
 
   getAllCity(){
-    this.adminService.getProvince().subscribe(data=>{
+    this.customerService.getProvince().subscribe(data=>{
       this.dataProvince = data;
     })
   }
 
   getAllDistrict(value:any){
-    this.adminService.getDistrictById(value).subscribe(data=>{
+    this.customerService.getDistrictById(value).subscribe(data=>{
       this.dataDistrict = data
       console.log(value);
 
@@ -170,7 +166,7 @@ export class InsertCustomerComponent implements OnInit {
   }
 
   getAllWard(value:any){
-    this.adminService.getWardById(value).subscribe(data=>{
+    this.customerService.getWardById(value).subscribe(data=>{
       this.dataWard = data;
     })
   }
@@ -181,9 +177,10 @@ export class InsertCustomerComponent implements OnInit {
   this.bodyApi.address=this.addressArray.value[0]
   console.log(this.bodyApi);
   this.insertCustomerForm.reset();
-  this.adminService.insertCustomer(this.bodyApi).subscribe(data=>{
+  this.customerService.insertCustomer(this.bodyApi).subscribe(data=>{
     console.log(data);
     this.toastr.success("Tạo mới thành công");
   })
   }
+
 }
