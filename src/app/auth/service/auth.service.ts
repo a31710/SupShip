@@ -16,7 +16,7 @@ import { ChangePassword } from '../login/model/change-password';
 })
 export class AuthService {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
-  @Output() username: EventEmitter<String> = new EventEmitter();
+  @Output() userId: EventEmitter<String> = new EventEmitter();
 constructor(private http: HttpClient, ) { }
 
 vertifyEmail(vertifyEmail: VertifyEmail): Observable<any>{
@@ -31,6 +31,8 @@ login(loginModel: LoginModel): Observable<any>{
   .pipe(map(data =>{
     localStorage.setItem("isLogin",data.success);
     localStorage.setItem("token",data.data.token);
+    localStorage.setItem("userId",data.data.userUid);
+    this.userId.emit(data.data.userUid);
     this.loggedIn.emit(true);
     return true;
   }));
@@ -44,11 +46,21 @@ checkEmail(email: string): Observable<any>{
   }));
 }
 
+
 forgotPassword(email:string):Observable<any>{
   return this.http.post<any>('http://localhost:8085/user/password/forgot', email)
 }
 changePassword(changeModel: ChangePassword):Observable<any>{
   return this.http.post<any>('http://localhost:8085/user/password/change', changeModel)
+}
+
+checkUpdate(email: string): Observable<any>{
+  return this.http.post<any>('http://localhost:8085/user/check-update', email)
+  .pipe(map(data =>{
+    localStorage.setItem("isUpdate",data.success);
+    return true;
+  }));
+
 }
 
 
@@ -65,6 +77,9 @@ getCheck(){
 
 isLoggedIn(): boolean {
   return this.getLogin() == 'true';
+}
+getUpdate(){
+  return localStorage.getItem("isUpdate");
 }
 
 }

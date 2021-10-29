@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../service/auth.service';
-
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -38,7 +38,7 @@ export class ChangePasswordComponent implements OnInit {
   createForm() {
     this.changeForm = this.fb.group({
       forGotPassword: [true],
-      email: [null, [Validators.required, Validators.email]],
+      email: [this.username, [Validators.required, Validators.email]],
       tokenCode:[null, Validators.required],
       newPassword:[null, [Validators.required, Validators.minLength(6),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,255}$')]],
       reNewPassword:[null, [Validators.required, Validators.minLength(6),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,255}$')]],
@@ -55,9 +55,14 @@ export class ChangePasswordComponent implements OnInit {
   onSubmit(){
 
     this.authService.changePassword(this.changeForm.value).subscribe(()=>{
+      Swal.fire(
+        'Đổi mật khẩu thành công!',
+        '',
+        'success'
+      )
       this.router.navigateByUrl('auth/checkemail');
     })
-    this.toastr.success('Bạn đã đổi mật khẩu thành công')
+
 
   }
   checkMatch(){

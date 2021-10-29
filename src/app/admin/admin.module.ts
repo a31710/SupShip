@@ -8,6 +8,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './shared/header/header.component';
+import { SideBarComponent } from './shared/side-bar/side-bar.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +20,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
   ],
-  declarations: [AdminComponent,RegisterUserComponent],
+  declarations: [AdminComponent,RegisterUserComponent,HeaderComponent,SideBarComponent],
 
 })
 export class AdminModule { }

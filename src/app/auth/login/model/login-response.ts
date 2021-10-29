@@ -1,6 +1,6 @@
 
 export interface DataLogin{
-  userUid: String;
+  userUid: string;
   token: string;
 }
 
