@@ -386,7 +386,7 @@
                       <div class="z-menu-separator"></div><i class="z-menu-icon z-icon-caret-down"></i>
                     </a></li>
                                       <li id="w1uPe" class="z-menu">
-                                          <a href="javascript:;" id="w1uPe-a" class="z-menu-content"><img id="w1uPe-img" style="display:none" src="data:image/png;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" class="z-menu-image" align="absmiddle"><span class="z-menu-text">Quản lý khách hàng</span>
+                                          <a href="javascript:;" id="w1uPe-a" class="z-menu-content"><img id="w1uPe-img" style="display:none" src="data:image/png;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" class="z-menu-image" align="absmiddle"><span class="z-menu-text">Cập nhật thông tin</span>
                                               <div class="z-menu-separator"></div><i class="z-menu-icon z-icon-caret-down"></i>
                                           </a>
                                       </li>
@@ -556,9 +556,9 @@
                                           </div>
                                           <div  class="z-vlayout-inner" style="width: 357px;">
                                             <div  class="z-div"> <span  class="z-label">Giới Tính</span> <span id="w1uPgc4" style="color:red;" class="z-label">(*)</span></div>
-                                            <div   class="z-vlayout-inner"> <span  class="z-radiogroup"><span  class="z-radio"><input type="radio" checked="checked" formControlName="gender" name="gender" value=1><label  class="z-radio-content">Nam</label></span>
+                                            <div   class="z-vlayout-inner"> <span  class="z-radiogroup"><span  class="z-radio"><input type="radio"  formControlName="gender" name="gender" value="1"><label  class="z-radio-content">Nam</label></span>
                                               <span
-                                                   class="z-radio"><input type="radio" formControlName="gender" name="gender" value=0 ><label  class="z-radio-content">Nữ</label></span></span>
+                                                   class="z-radio"><input type="radio" formControlName="gender" name="gender" value="0" ><label  class="z-radio-content">Nữ</label></span></span>
 
                                           </div>
                                         </div>
@@ -573,7 +573,7 @@
                                               <div  class="z-vlayout-inner" style="padding-bottom:0">
                                                   <div  class="z-div"> <span  class="z-label">Số điện thoại</span> <span id="w1uPgc4" style="color:red;" class="z-label">(*)</span></div>
                                               </div>
-                                              <div  class="z-vlayout-inner" style="width: 358px;"><input formControlName="mobile"  class="z-textbox" value="" type="number" maxlength="100"  style="width: 356px;"></div>
+                                              <div  class="z-vlayout-inner" style="width: 358px;"><input formControlName="mobile"  class="z-textbox" value="" type="text" maxlength="100"  style="width: 356px;"></div>
 
                                             </div>
                                       </div>
@@ -653,6 +653,7 @@
                                             <div id="w1uPgg4" class="row z-div">
                                               <div id="w1uPhg4" class="col-md-12 z-div">
                                                   <div id="w1uPig4" style="float:right;" class="z-hlayout">
+                                                    <div id="w1uPjg4-chdex" class="z-hlayout-inner" style="padding-right:5px"><button (click)='changePassword()' type="button" id="w1uPjg4" class="z-button">Đổi mật khẩu</button></div>
                                                       <div id="w1uPkg4-chdex" class="z-hlayout-inner" ><button type="submit"  class="btn btn-success z-button">Cập nhật</button></div>
                                                   </div>
                                               </div>

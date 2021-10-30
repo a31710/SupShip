@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../service/profile.service';
-
+import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -18,11 +19,14 @@ export class EditProfileComponent implements OnInit {
   dataWard: "" | any
   userForm: FormGroup | any
   userId:any
-  constructor(private profileService: ProfileService, private fb: FormBuilder) {
+  constructor(private profileService: ProfileService, private fb: FormBuilder, private route: Router) {
 
     this.userId = localStorage.getItem('userId');
     this.profileService.getUserInfor(this.userId).subscribe((data) =>{
+      console.log(data.data);
+
       this.updateValue(data.data);
+
     }
     )
     this.getAllCity();
@@ -35,13 +39,18 @@ export class EditProfileComponent implements OnInit {
     this.fullNameArray.setValue(userData?.fullName);
     this.birthDayArray.setValue(userData?.birthday);
     this.mobileArray.setValue(userData?.mobile);
-    this.genderArray.setValue(userData?.gender);
-    this.dataProvince = userData?.address?.province;
-    this.dataDistrict = userData?.address?.district;
-    this.dataWard = userData?.address?.ward;
+    this.genderArray.setValue(userData?.gender.toString());
+    this.getAllDistrict(userData?.address?.province);
+    this.getAllWard(userData?.address?.district)
+
     this.addressArray.patchValue([{
-      homeNo: userData?.address?.homeNo
+      homeNo: userData?.address?.homeNo,
+      province: userData?.address?.province,
+      ward: userData?.address?.ward,
+      district: userData?.address?.district
     }])
+
+
   }
   createForm(){
     this.userForm = this.fb.group({
@@ -79,14 +88,13 @@ export class EditProfileComponent implements OnInit {
   getAllCity(){
     this.profileService.getProvince().subscribe(data=>{
       this.dataProvince = data;
+
     })
   }
 
   getAllDistrict(value:any){
     this.profileService.getDistrictById(value).subscribe(data=>{
       this.dataDistrict = data
-      console.log(value);
-
     })
   }
 
@@ -95,9 +103,29 @@ export class EditProfileComponent implements OnInit {
       this.dataWard = data;
     })
   }
+
+  changePassword(){
+    this.route.navigateByUrl('/client/profile/change-pasword');
+  }
+
   updateUser(){
     this.bodyUpdate = this.userForm.value;
     this.bodyUpdate.address = this.addressArray.value[0];
-    console.log(this.userForm.value);
+    if(this.genderArray.value == 1){
+      this.bodyUpdate.gender = 1;
+    }else{
+      this.bodyUpdate.gender = 0;
+    }
+    this.profileService.updateUser(this.bodyUpdate,this.userId).subscribe(()=>{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Cập nhật thông tin cá nhân thành công',
+        showConfirmButton: false,
+        timer: 3000
+      })
+      window.location.reload();
+    }
+    )
   }
 }

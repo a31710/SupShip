@@ -30,4 +30,7 @@ export class ProfileService {
   getWardById(district: number): Observable<any>{
     return this.http.get<any>(`http://localhost:8085/ward?districtCode=${district}`);
   }
+  changePassword(body:any):Observable<any>{
+    return this.http.post<any>('http://localhost:8085/user/password/change',body);
+  }
 }
