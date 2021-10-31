@@ -1,9 +1,7 @@
 
 
 <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
-  <!-- Page Heading -->
-  <h1 class="h3 mb-1 text-gray-800">Tạo mới khách hàng</h1>
-  <!-- Content Row -->
+
   <div class="row">
 
       <!-- Grow In Utility -->
@@ -11,7 +9,7 @@
 
           <div class="card position-relative">
               <div class="card-header py-3">
-                  <h2 class="m-0 font-weight-bold text-primary">Phân loại khách hàng</h2>
+                  <h2 class="m-0 font-weight-bold text-primary">Tạo tài khoản</h2>
               </div>
               <div class="card-body">
 
@@ -36,7 +34,7 @@
                           </div>
                           <select [(ngModel)]="deptCodeSelect" (change)="getPostCode(deptCodeSelect)"  class="combobox"  formControlName="deptCode" >
                             <option  [ngValue]="null" [disabled]="true" >Chọn DeptCode</option>
-                            <option *ngFor="let d of dataDept" [ngValue]="d.id"> {{d.deptName}}</option>
+                            <option *ngFor="let d of dataDept" [ngValue]="d.deptCode"> {{d.deptName}}</option>
 
                           </select>
                       </div>
@@ -51,7 +49,7 @@
                         </div>
                         <select [(ngModel)]="postCodeSelect" class="combobox"  formControlName="postCode">
                           <option [ngValue]="null" [disabled]="true">Chọn PostCode</option>
-                          <option *ngFor="let d of dataPost" [ngValue]="d.id"> {{d.postName}}</option>
+                          <option *ngFor="let d of dataPost" [ngValue]="d.postCode"> {{d.postName}}</option>
                         </select>
                 </div>
             </div>
