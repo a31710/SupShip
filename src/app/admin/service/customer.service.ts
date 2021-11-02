@@ -40,4 +40,5 @@ constructor(private http: HttpClient) { }
   deleteCustomer(id:any):Observable<any>{
     return this.http.delete<any>(`http://localhost:8085/api/lead/evtp/${id}`);
   }
+
 }

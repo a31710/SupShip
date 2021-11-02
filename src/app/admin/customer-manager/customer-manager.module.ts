@@ -6,13 +6,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { UpdateCustomerComponent } from './update-customer/update-customer.component';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
+import { SharedModule } from 'src/app/shared/share.module';
 
 @NgModule({
   imports: [
     CommonModule,
     CustomerManagerRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule,
   ],
   declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent]
 })

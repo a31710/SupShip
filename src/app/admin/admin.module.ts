@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './shared/header/header.component';
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
+import { SharedModule } from '../shared/share.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +20,7 @@ import { SideBarComponent } from './shared/side-bar/side-bar.component';
     MatSelectModule,
     HttpClientModule,
     FormsModule,
+    SharedModule,
   ],
   declarations: [AdminComponent,RegisterUserComponent,HeaderComponent,SideBarComponent],
 

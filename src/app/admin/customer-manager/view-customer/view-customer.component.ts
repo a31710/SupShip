@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
+import { CommonService } from 'src/app/shared/service/common.service';
 import { CustomerService } from '../../service/customer.service';
 
 @Component({
@@ -11,10 +12,14 @@ import { CustomerService } from '../../service/customer.service';
 })
 export class ViewCustomerComponent implements OnInit {
 listCustomer:any
+page:number = 1;
+size: number = 15;
 
-
-  constructor(private customerService: CustomerService, private route: Router, private toastr: ToastrService, private cookieService: CookieService) {
-    this.customerService.getAllCustomer().subscribe(data=>this.listCustomer =data.data)
+  constructor(private customerService: CustomerService, private route: Router, private toastr: ToastrService, private commonService: CommonService) {
+    // this.customerService.getAllCustomer().subscribe(data=>this.listCustomer =data.data)
+    // this.commonService.addPaginationParams(this.page,this.size).subscribe((data)=>{
+    //   this.listCustomer = data.data;
+    // })
   }
 
   ngOnInit() {
@@ -29,5 +34,6 @@ listCustomer:any
   onUpdate(id:any){
     this.route.navigateByUrl(`/admin/customer/update/${id}`);
   }
+
 
 }
