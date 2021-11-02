@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { InterceptorService } from './interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,10 @@ import { ToastrModule } from 'ngx-toastr';
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true
-  },],
+  },
+  [CookieService],
+
+],
   bootstrap: [AppComponent,],
 })
 export class AppModule { }

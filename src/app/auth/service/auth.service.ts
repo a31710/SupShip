@@ -8,6 +8,7 @@ import { VertifyEmail } from '../login/model/vertify-email';
 import { VertifyResponse } from '../login/model/vertify-response';
 import { CheckResponse } from '../login/model/check-response';
 import { ChangePassword } from '../login/model/change-password';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ import { ChangePassword } from '../login/model/change-password';
 export class AuthService {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() userId: EventEmitter<String> = new EventEmitter();
-constructor(private http: HttpClient, ) { }
+constructor(private http: HttpClient,private cookieService: CookieService ) { }
 
 vertifyEmail(vertifyEmail: VertifyEmail): Observable<any>{
   return this.http.post<VertifyResponse>('http://localhost:8085/user/verify', vertifyEmail)
@@ -29,8 +30,8 @@ login(loginModel: LoginModel): Observable<any>{
   return this.http.post<LoginResponse>('http://localhost:8085/user/login', loginModel)
   .pipe(map(data =>{
     localStorage.setItem("isLogin",data.success);
-    localStorage.setItem("token",data.data.token);
-    localStorage.setItem("userId",data.data.userUid);
+    this.cookieService.set('token', data.data.token);
+    this.cookieService.set('userId', data.data.userUid);
     this.userId.emit(data.data.userUid);
     this.loggedIn.emit(true);
     return true;
@@ -63,6 +64,7 @@ checkUpdate(email: string): Observable<any>{
 }
 logOut(){
   localStorage.clear();
+  this.cookieService.deleteAll();
 }
 
 

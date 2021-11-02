@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../service/profile.service';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -19,9 +20,9 @@ export class EditProfileComponent implements OnInit {
   dataWard: "" | any
   userForm: FormGroup | any
   userId:any
-  constructor(private profileService: ProfileService, private fb: FormBuilder, private route: Router) {
+  constructor(private profileService: ProfileService, private fb: FormBuilder, private route: Router,private cookieService: CookieService) {
 
-    this.userId = localStorage.getItem('userId');
+    this.userId =  this.cookieService.get('userId');
     this.profileService.getUserInfor(this.userId).subscribe((data) =>{
       console.log(data.data);
 

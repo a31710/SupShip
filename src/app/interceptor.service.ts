@@ -6,6 +6,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -14,6 +15,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class InterceptorService implements HttpInterceptor {
+
+  constructor(private cookieService: CookieService){
+
+  }
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -24,7 +29,7 @@ export class InterceptorService implements HttpInterceptor {
       'Access-Control-Allow-Origin':'*',
       "Access-Control-Allow-Credentials": "true",
       "Access-Control-Allow-Methods": "POST",
-      "Authorization": `Bearer ${localStorage.getItem('token')}`
+      "Authorization": `Bearer ${this.cookieService.get('token')}`
     });
 
     const newReq = req.clone({ headers: header });
