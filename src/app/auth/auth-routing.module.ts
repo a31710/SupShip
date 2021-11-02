@@ -22,9 +22,6 @@ const routes: Routes = [{
     {
       path: 'change-password', component: ChangePasswordComponent,
     },
-
-
-
     { path: '**', redirectTo: 'checkemail' },
   ],
 }];

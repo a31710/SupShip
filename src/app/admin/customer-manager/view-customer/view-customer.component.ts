@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../service/admin.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from '../../service/customer.service';
 
 @Component({
@@ -11,11 +12,21 @@ export class ViewCustomerComponent implements OnInit {
 listCustomer:any
 
 
-  constructor(private customerService: CustomerService) {
+  constructor(private customerService: CustomerService, private route: Router, private toastr: ToastrService) {
     this.customerService.getAllCustomer().subscribe(data=>this.listCustomer =data.data)
   }
 
   ngOnInit() {
+  }
+
+  onDelete(id:any){
+     this.listCustomer = this.listCustomer.filter((data:any) => data.id !== id);
+    this.customerService.deleteCustomer(id).subscribe(()=>{
+      this.toastr.success('Xóa thành công');
+    })
+  }
+  onUpdate(id:any){
+    this.route.navigateByUrl(`/admin/customer/update/${id}`);
   }
 
 }

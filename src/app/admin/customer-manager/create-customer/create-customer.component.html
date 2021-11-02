@@ -2,7 +2,7 @@
 
 <form [formGroup]="insertCustomerForm" (ngSubmit)="insertCustomer();">
     <!-- Page Heading -->
-    <h1 class="h3 mb-1 text-gray-800">Tạo mới khách hàng</h1>
+    <h1 class="h3 mb-1 " style="color: #4e73df;">Tạo mới khách hàng</h1>
     <!-- Content Row -->
     <div class="row">
 
@@ -10,8 +10,8 @@
         <div class="col-lg-6">
 
             <div class="card position-relative">
-                <div class="card-header py-3">
-                    <h2 class="m-0 font-weight-bold text-primary">Phân loại khách hàng</h2>
+                <div class="card-header py-3" style="background-color: #4e73df;">
+                    <h2 class="m-0 font-weight-bold" style="color: white;">Phân loại khách hàng</h2>
                 </div>
                 <div class="card-body">
                   <div class="custom-control custom-radio custom-control-inline">
@@ -57,8 +57,8 @@
         <div class="col-lg-6">
 
             <div class="card position-relative">
-                <div class="card-header py-3">
-                    <h2 class="m-0 font-weight-bold text-primary">Thông tin khách hàng</h2>
+              <div class="card-header py-3" style="background-color: #4e73df;">
+                <h2 class="m-0 font-weight-bold" style="color: white;">Thông tin khách hàng</h2>
                 </div>
                 <div class="card-body">
 
@@ -95,9 +95,9 @@
                           <div  class="z-vlayout-inner" style="padding-bottom:0">
                               <div  class="z-div"> <span  class="z-label">Họ và tên</span> <span style="color:red;" class="z-label">(*)</span></div>
                           </div>
-                          <div class="z-vlayout-inner" style="width: 357px;"><input formControlName="fullName"  class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập người liên hệ" style="width: 355px;"></div>
-                          <div *ngFor="let validation of insertCustomerMessage.fullName">
-                            <small class="text-danger"   *ngIf="insertCustomerForm.get('fullName')?.hasError(validation.type) && insertCustomerForm.get('fullName').touched">
+                          <div class="z-vlayout-inner" style="width: 357px;"><input formControlName="representation"  class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập người liên hệ" style="width: 355px;"></div>
+                          <div *ngFor="let validation of insertCustomerMessage.representation">
+                            <small class="text-danger"   *ngIf="insertCustomerForm.get('representation')?.hasError(validation.type) && insertCustomerForm.get('representation').touched">
                              {{validation.message}}</small>
                           </div>
                         </div>

@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 import { VertifyEmail } from '../login/model/vertify-email';
 import { VertifyResponse } from '../login/model/vertify-response';
 import { CheckResponse } from '../login/model/check-response';
-import { environment } from 'src/environments/environment';
 import { ChangePassword } from '../login/model/change-password';
 
 
@@ -61,6 +60,9 @@ checkUpdate(email: string): Observable<any>{
     return true;
   }));
 
+}
+logOut(){
+  localStorage.clear();
 }
 
 

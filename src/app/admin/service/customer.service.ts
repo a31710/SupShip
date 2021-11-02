@@ -30,6 +30,14 @@ constructor(private http: HttpClient) { }
     return this.http.post<any>('http://localhost:8085/api/lead/createWeb', body);
   }
 
+  getDetailCustomer(id:any):Observable<any>{
+    return this.http.get<any>(`http://localhost:8085/api/lead/evtp/${id}`);
+  }
 
-
+  updateCustomer(id:any, body:any):Observable<any>{
+    return this.http.put<any>(`http://localhost:8085/api/lead/evtp/${id}`,body)
+  }
+  deleteCustomer(id:any):Observable<any>{
+    return this.http.delete<any>(`http://localhost:8085/api/lead/evtp/${id}`);
+  }
 }
