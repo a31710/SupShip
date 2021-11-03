@@ -12,11 +12,14 @@ import { CustomerService } from '../../service/customer.service';
 })
 export class ViewCustomerComponent implements OnInit {
 listCustomer:any
-page:number = 1;
-size: number = 15;
+offset: number = 0;
+limit: number = 10;
+size: number = 100;
+totalPage:number = 3;
+
 
   constructor(private customerService: CustomerService, private route: Router, private toastr: ToastrService, private commonService: CommonService) {
-    // this.customerService.getAllCustomer().subscribe(data=>this.listCustomer =data.data)
+    this.customerService.getAllCustomer().subscribe(data=>this.listCustomer =data.data)
     // this.commonService.addPaginationParams(this.page,this.size).subscribe((data)=>{
     //   this.listCustomer = data.data;
     // })
@@ -24,7 +27,11 @@ size: number = 15;
 
   ngOnInit() {
   }
+  onPageChange(offset: number) {
+    this.offset = offset;
+    console.log(offset);
 
+  }
   onDelete(id:any){
      this.listCustomer = this.listCustomer.filter((data:any) => data.id !== id);
     this.customerService.deleteCustomer(id).subscribe(()=>{

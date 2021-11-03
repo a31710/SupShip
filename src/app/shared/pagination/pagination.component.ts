@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-import { range } from 'rxjs';
+import { Observable, range } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
@@ -10,16 +10,18 @@ export class PaginationComponent implements OnInit {
   @Input() offset:any;
   @Input() limit: any;
   @Input() size: any;
+  @Input() totalPage: any;
   @Input() range: number = 3;
+
 
   @Output() pageChange: EventEmitter<any>;
   currentPage: any;
   totalPages: any;
-  pages: Observable<number[]> | any;
+  pages:any
   constructor() {
     this.pageChange = new EventEmitter<any>()
   }
-
+  ob:Observable<any> |any
   ngOnInit() {
     this.getPages(this.offset, this.limit, this.size);
   }
@@ -34,14 +36,20 @@ export class PaginationComponent implements OnInit {
   }
 
   getPages(offset: number, limit: number, size: number) {
-    // this.currentPage = this.getCurrentPage(offset, limit);
-    // this.totalPages = this.getTotalPages(limit, size);
-    // this.pages =  Observable.range(-this.range, this.range * 2 + 1)
-    //   .map((offset:any) => this.currentPage + offset)
-    //   .filter((page:any) => this.isValidPageNumber(page, this.totalPages))
-    //   .toArray();
+    this.currentPage = this.getCurrentPage(offset, limit);
+    this.totalPages = this.getTotalPages(limit, size);
+    this.pages = (this.rangeFunc(-this.range, this.range).map(offset=>this.currentPage+ offset
+    ).filter(page => this.isValidPageNumber(page, this.totalPages)));
   }
 
+
+  rangeFunc(start:any, end:any) {
+    var ans = [];
+    for (let i = start; i <= end; i++) {
+        ans.push(i);
+    }
+    return ans;
+  }
 
   isValidPageNumber(page: number, totalPages: number): boolean {
   return page > 0 && page <= totalPages;
@@ -52,6 +60,9 @@ selectPage(page: number, event: any) {
   if (this.isValidPageNumber(page, this.totalPages)) {
     this.pageChange.emit((page - 1) * this.limit);
   }
+  this.currentPage = page
+  this.pages = (this.rangeFunc(-this.range, this.range).map(offset=>this.currentPage+ offset
+    ).filter(page => this.isValidPageNumber(page, this.totalPages)));
 }
 
 cancelEvent(event:any) {
