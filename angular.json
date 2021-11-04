@@ -32,7 +32,7 @@
             ],
             "styles": [
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "src/assets/styles/my-theme.scss",
               "src/styles.css",
               "src/assets/admin/vendor/fontawesome-free/css/all.min.css",
               "src/assets/admin/css/sb-admin-2.min.css"

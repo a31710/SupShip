@@ -7,7 +7,7 @@ import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { UpdateCustomerComponent } from './update-customer/update-customer.component';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { SharedModule } from 'src/app/shared/share.module';
-
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +15,7 @@ import { SharedModule } from 'src/app/shared/share.module';
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    MatTabsModule,
   ],
   declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent]
 })

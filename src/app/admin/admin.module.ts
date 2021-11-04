@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './shared/header/header.component';
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
 import { SharedModule } from '../shared/share.module';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,6 +22,7 @@ import { SharedModule } from '../shared/share.module';
     HttpClientModule,
     FormsModule,
     SharedModule,
+    MatTabsModule,
   ],
   declarations: [AdminComponent,RegisterUserComponent,HeaderComponent,SideBarComponent],
 
