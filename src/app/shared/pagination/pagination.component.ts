@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, range } from 'rxjs';
-import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',

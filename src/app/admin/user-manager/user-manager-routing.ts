@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { UserManagerComponent } from './user-manager.component';
+import { ViewUserComponent } from './view-user/view-user.component';
 
 const routes: Routes = [{
   path: '', component: UserManagerComponent,
   children: [
-    // {
-    //   path: '', component: ViewStaffComponent,
-    // },
+    {
+      path: '', component: ViewUserComponent,
+    },
     {
       path: 'create-user', component: CreateUserComponent,
     },

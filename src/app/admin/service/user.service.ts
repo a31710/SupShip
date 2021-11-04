@@ -19,4 +19,13 @@ constructor(private http: HttpClient) { }
       return this.http.post<any>('http://localhost:8085/user/register',body)
     }
 
+    getListUser():Observable<any>{
+      return this.http.get<any>(`http://localhost:8085/user/list?page=0&size=10&desc`);
+    }
+    banUser(uid:any):Observable<any>{
+      return this.http.post<any>('http://localhost:8085/user/ban-user',uid);
+    }
+    unlockUser(uid:any):Observable<any>{
+      return this.http.post<any>('http://localhost:8085/user/unlock-user',uid);
+    }
 }

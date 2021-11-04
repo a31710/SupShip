@@ -30,6 +30,7 @@ login(loginModel: LoginModel): Observable<any>{
   return this.http.post<LoginResponse>('http://localhost:8085/user/login', loginModel)
   .pipe(map(data =>{
     localStorage.setItem("isLogin",data.success);
+    localStorage.setItem("token",data.data.token)
     this.cookieService.set('token', data.data.token);
     this.cookieService.set('userId', data.data.userUid);
     this.userId.emit(data.data.userUid);
