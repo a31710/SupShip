@@ -2,18 +2,20 @@
   <h1 class="h3 mb-0 " style="color: #4e73df;">Danh Sách Tài Khoản</h1>
 </div>
 
-<div class="row col-xl-6 col-md-6 mb-4">
-  <div class="col-6">
-    <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-      <input placeholder="Tìm kiếm nhân tài khoản" type="text" id="example" class="form-control">
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+  <div class="row col-xl-6 col-md-6 mb-4">
+    <div class="col-6">
+      <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
+        <input placeholder="Tìm kiếm nhân tài khoản" type="text" id="example" class="form-control" formControlName="search">
+      </div>
+    </div>
+
+    <div class="col-3 pt-1">
+      <button type="submit" class="btn btn-sm btn-primary"><i
+        class="fas fa-search fa-sm text-white-50"></i> Tìm kiếm</button>
     </div>
   </div>
-
-  <div class="col-3 pt-1">
-    <a href="#" class="btn btn-sm btn-primary"><i
-      class="fas fa-search fa-sm text-white-50"></i> Tìm kiếm</a>
-  </div>
-</div>
+</form>
 <hr>
 
 

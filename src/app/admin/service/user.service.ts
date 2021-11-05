@@ -28,4 +28,7 @@ constructor(private http: HttpClient) { }
     unlockUser(uid:any):Observable<any>{
       return this.http.post<any>('http://localhost:8085/user/unlock-user',uid);
     }
+    searchUser(req:any):Observable<any>{
+      return this.http.get<any>(`http://localhost:8085/user?keyword=${req}`);
+    }
 }
