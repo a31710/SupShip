@@ -8,6 +8,8 @@ import { UpdateCustomerComponent } from './update-customer/update-customer.compo
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { SharedModule } from 'src/app/shared/share.module';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,6 +18,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     FormsModule,
     SharedModule,
     MatTabsModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+
   ],
   declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent]
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';import { Router } from '@angular/router';import { CookieService } from 'ngx-cookie-service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { CustomerService } from '../../service/customer.service';
@@ -14,9 +14,11 @@ offset: number = 0;
 limit: number = 15;
 size: number = 200;
 totalPage:number = 3;
+@Output() addDataCreate: EventEmitter<any>;
 
 
   constructor(private customerService: CustomerService, private route: Router, private toastr: ToastrService, private commonService: CommonService) {
+    this.addDataCreate = new EventEmitter<any>()
     this.customerService.getAllCustomer().subscribe(data=>{
       this.listCustomer =data.data
       console.log(data);
@@ -39,6 +41,10 @@ totalPage:number = 3;
   }
   onUpdate(id:any){
     this.route.navigateByUrl(`/admin/customer/update/${id}`);
+  }
+  addCreateTab(){
+    const createCustomer = {title:'Tạo mới khách hàng', value:2}
+    this.addDataCreate.emit(createCustomer);
   }
 
 

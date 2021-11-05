@@ -1,11 +1,5 @@
 
-<mat-tab-group animationDuration="0ms" [color]="'primary'">
-  <mat-tab label="First" >Content 1</mat-tab>
-  <mat-tab label="Second">Content 2</mat-tab>
-  <mat-tab label="Third">Content 3</mat-tab>
-</mat-tab-group>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 " style="color: #4e73df;">Danh Sách Khách Hàng</h1>
 </div>
 <!-- Earnings (Monthly) Card Example -->
 <div class="row col-12">
@@ -40,8 +34,8 @@
 
     </div>
     <div class="col-2 pt-1">
-      <a href="#" class="btn btn-sm btn-success"><i
-        class="fas fa-download fa-sm text-white-50"></i> Thêm mới</a>
+      <button  class="btn btn-sm btn-success" (click)="addCreateTab()"><i
+        class="fas fa-download fa-sm text-white-50" ></i> Thêm mới</button>
     </div>
     <div class="col-4 ">
       <a href="#" class="btn btn-light btn-icon-split" style="background-color: white;">
