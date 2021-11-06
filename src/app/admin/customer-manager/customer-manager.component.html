@@ -1,28 +1,2 @@
+<router-outlet></router-outlet>
 
-<!-- <mat-tab-group animationDuration="0ms" [color]="'primary'">
-  <mat-tab label="Danh sách khách hàng" ><app-view-customer></app-view-customer></mat-tab>
-  <mat-tab label="Second">Content 2</mat-tab>
-  <mat-tab label="Third">Content 3</mat-tab>
-</mat-tab-group> -->
-
-
-
-
-
-
-
-
-
-<mat-tab-group [selectedIndex]="selected.value"
-               (selectedIndexChange)="selected.setValue($event)">
-  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.title" >
-        <div *ngIf="tab.value == 1">
-          <app-view-customer (addDataCreate)="addCreateTab($event)"></app-view-customer>
-        </div>
-        <div *ngIf="tab.value == 2">
-         <app-create-customer></app-create-customer>
-        </div>
-
-
-  </mat-tab>
-</mat-tab-group>

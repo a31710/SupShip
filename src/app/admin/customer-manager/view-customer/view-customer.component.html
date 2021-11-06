@@ -1,119 +1,142 @@
 
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-</div>
-<!-- Earnings (Monthly) Card Example -->
-<div class="row col-12">
-  <div class="row col-xl-6 col-md-6 mb-4">
-    <div class="col-3">
-      <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-        <input placeholder="Select date" type="text" id="example" class="form-control">
+<mat-tab-group [selectedIndex]="selected.value"
+(selectedIndexChange)="selected.setValue($event)">
+
+<mat-tab *ngFor="let tab of tabs; let index = index" >
+  <ng-template mat-tab-label >
+    {{tab.title}}
+    <i *ngIf="index>0" class="fas fa-times ml-3" (click)="removeTab(index)"></i>
+  </ng-template>
+
+<div *ngIf="tab.value == 1">
+
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+  </div>
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="row col-12">
+    <div class="row col-xl-6 col-md-6 mb-4">
+      <div class="col-3">
+        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
+          <input placeholder="Select date" type="text" id="example" class="form-control">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="md-form md-outline input-with-post-icon datepicker">
+          <input placeholder="Select date" type="date" id="example" class="form-control">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="md-form md-outline input-with-post-icon datepicker">
+          <input placeholder="Select date" type="date" id="example" class="form-control">
+        </div>
+      </div>
+      <div class="col-3 pt-1">
+        <a href="#" class="btn btn-sm btn-success"><i
+          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
       </div>
     </div>
-    <div class="col-3">
-      <div class="md-form md-outline input-with-post-icon datepicker">
-        <input placeholder="Select date" type="date" id="example" class="form-control">
+
+    <div class="row col-xl-6 col-md-6 mb-4">
+
+      <div class="col-2 pt-1">
+
+      </div>
+      <div class="col-2 pt-1">
+
+      </div>
+      <div class="col-2 pt-1">
+        <button  class="btn btn-sm btn-success" (click)="addCreateTab()"><i
+          class="fas fa-download fa-sm text-white-50" ></i> Thêm mới</button>
+      </div>
+      <div class="col-4 ">
+        <a href="#" class="btn btn-light btn-icon-split" style="background-color: white;">
+          <span class="icon text-gray-600">
+              <i class="fas fa-arrow-right"></i>
+          </span>
+          <span class="text">Giao khách hàng excel</span>
+      </a>
+      </div>
+      <div class="col-2 pt-1">
+        <a href="#" class="btn btn-sm btn-success"><i
+          class="fas fa-download fa-sm text-white-50"></i> Xuất excel</a>
       </div>
     </div>
-    <div class="col-3">
-      <div class="md-form md-outline input-with-post-icon datepicker">
-        <input placeholder="Select date" type="date" id="example" class="form-control">
-      </div>
-    </div>
-    <div class="col-3 pt-1">
-      <a href="#" class="btn btn-sm btn-success"><i
-        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-    </div>
+
   </div>
 
-  <div class="row col-xl-6 col-md-6 mb-4">
-
-    <div class="col-2 pt-1">
-
-    </div>
-    <div class="col-2 pt-1">
-
-    </div>
-    <div class="col-2 pt-1">
-      <button  class="btn btn-sm btn-success" (click)="addCreateTab()"><i
-        class="fas fa-download fa-sm text-white-50" ></i> Thêm mới</button>
-    </div>
-    <div class="col-4 ">
-      <a href="#" class="btn btn-light btn-icon-split" style="background-color: white;">
-        <span class="icon text-gray-600">
-            <i class="fas fa-arrow-right"></i>
-        </span>
-        <span class="text">Giao khách hàng excel</span>
-    </a>
-    </div>
-    <div class="col-2 pt-1">
-      <a href="#" class="btn btn-sm btn-success"><i
-        class="fas fa-download fa-sm text-white-50"></i> Xuất excel</a>
-    </div>
+  <div class="row col-12">
+    <hr>
   </div>
 
+  <div class="mb-4">
+    <a href="#" class="btn btn-sm btn-secondary mr-2">Tất cả</a>
+    <a href="#" class="btn btn-sm btn-primary mr-2">Mới</a>
+    <a href="#" class="btn btn-sm btn-info mr-2">Chưa tiếp xúc</a>
+    <a href="#" class="btn btn-sm btn-warning mr-2">Đang tiếp xúc</a>
+    <a href="#" class="btn btn-sm btn-success mr-2">Thành công</a>
+    <a href="#" class="btn btn-sm btn-danger mr-2">Thất bại</a>
+  </div>
+
+
+
+
+
+
+    <table class="table align-middle" style="background-color: white">
+      <thead style="background-color: #4e73df; color: white;">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nguồn</th>
+          <th scope="col">Tên công ty (Cửa hàng)/ Địa chỉ</th>
+          <th scope="col">Người liên hệ/ Số ĐT</th>
+          <th scope="col">Trạng thái</th>
+          <th scope="col">Trạng thái TX</th>
+          <th scope="col">Chi nhánh</th>
+          <th scope="col">Bưu cục</th>
+          <th scope="col">Nhân viên TX</th>
+          <th scope="col">Ngày giao TX</th>
+          <th scope="col">Ngày tác động</th>
+          <th scope="col">Công cụ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of listCustomer">
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.leadSource}}</td>
+          <td>{{item.companyName}}</td>
+          <td>{{item.representation}}</td>
+          <td>{{item.status}}</td>
+          <td>Sit</td>
+          <td>Amet</td>
+          <td>Sit</td>
+          <td>Amet</td>
+          <td>Sit</td>
+          <td>Amet</td>
+          <td>
+            <button type="button" (click)="onDelete(item.id)" class="btn btn-danger btn-sm px-3 mr-2">
+              <i class="fas fa-times"></i>
+            </button>
+            <button type="button" (click)="onUpdate(item.id)" class="btn btn-primary btn-sm px-3">
+              <i class="fas fa-pen-alt"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+   <app-pagination [offset]="offset" [limit]="limit" [size]="size" totalPage="totalPage" (pageChange)="onPageChange($event)"></app-pagination>
+
+
+</div>
+<div *ngIf="tab.value == 2">
+<app-create-customer></app-create-customer>
 </div>
 
-<div class="row col-12">
-  <hr>
-</div>
 
-<div class="mb-4">
-  <a href="#" class="btn btn-sm btn-secondary mr-2">Tất cả</a>
-  <a href="#" class="btn btn-sm btn-primary mr-2">Mới</a>
-  <a href="#" class="btn btn-sm btn-info mr-2">Chưa tiếp xúc</a>
-  <a href="#" class="btn btn-sm btn-warning mr-2">Đang tiếp xúc</a>
-  <a href="#" class="btn btn-sm btn-success mr-2">Thành công</a>
-  <a href="#" class="btn btn-sm btn-danger mr-2">Thất bại</a>
-</div>
+</mat-tab>
+</mat-tab-group>
 
 
-
-
-
-
-  <table class="table align-middle" style="background-color: white">
-    <thead style="background-color: #4e73df; color: white;">
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Nguồn</th>
-        <th scope="col">Tên công ty (Cửa hàng)/ Địa chỉ</th>
-        <th scope="col">Người liên hệ/ Số ĐT</th>
-        <th scope="col">Trạng thái</th>
-        <th scope="col">Trạng thái TX</th>
-        <th scope="col">Chi nhánh</th>
-        <th scope="col">Bưu cục</th>
-        <th scope="col">Nhân viên TX</th>
-        <th scope="col">Ngày giao TX</th>
-        <th scope="col">Ngày tác động</th>
-        <th scope="col">Công cụ</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of listCustomer">
-        <th scope="row">{{item.id}}</th>
-        <td>{{item.leadSource}}</td>
-        <td>{{item.companyName}}</td>
-        <td>{{item.representation}}</td>
-        <td>{{item.status}}</td>
-        <td>Sit</td>
-        <td>Amet</td>
-        <td>Sit</td>
-        <td>Amet</td>
-        <td>Sit</td>
-        <td>Amet</td>
-        <td>
-          <button type="button" (click)="onDelete(item.id)" class="btn btn-danger btn-sm px-3 mr-2">
-            <i class="fas fa-times"></i>
-          </button>
-          <button type="button" (click)="onUpdate(item.id)" class="btn btn-primary btn-sm px-3">
-            <i class="fas fa-pen-alt"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
- <app-pagination [offset]="offset" [limit]="limit" [size]="size" totalPage="totalPage" (pageChange)="onPageChange($event)"></app-pagination>
 
 
 

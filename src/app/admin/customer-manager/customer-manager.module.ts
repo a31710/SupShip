@@ -10,6 +10,7 @@ import { SharedModule } from 'src/app/shared/share.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,6 +21,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatTabsModule,
     MatCheckboxModule,
     MatFormFieldModule,
+    MatIconModule,
 
   ],
   declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent]
