@@ -1,0 +1,105 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 " style="color: #4e73df;">Danh Sách Tài Khoản</h1>
+</div>
+
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+  <div class="row col-xl-6 col-md-6 mb-4">
+    <div class="col-6">
+      <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
+        <input placeholder="Tìm kiếm nhân tài khoản" type="text" id="example" class="form-control" formControlName="search">
+      </div>
+    </div>
+
+    <div class="col-3 pt-1">
+      <button type="submit" class="btn btn-sm btn-primary"><i
+        class="fas fa-search fa-sm text-white-50"></i> Tìm kiếm</button>
+    </div>
+  </div>
+</form>
+<hr>
+
+
+  <table class="table align-middle" style="background-color: white">
+    <thead style="background-color: #4e73df; color: white;">
+      <tr>
+        <th scope="col">Id tài khoản</th>
+        <th scope="col">Tên tài khoản</th>
+        <th scope="col">Số điện thoại</th>
+        <th scope="col">Chức vụ</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Công cụ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataUser">
+        <th >{{item.uid}}</th>
+        <td>{{item.fullName}}</td>
+        <td>{{item.mobile}}</td>
+        <td>
+          <container-element [ngSwitch]="item.roles">
+            <some-element *ngSwitchCase="1">Nhân viên</some-element>
+            <some-element *ngSwitchCase="2">Chi nhánh</some-element>
+            <some-element *ngSwitchCase="3">Tổng bưu cục</some-element>
+            <some-element *ngSwitchCase="4">Tổng công ty</some-element>
+            <some-element *ngSwitchDefault>Nhân viên</some-element>
+         </container-element>
+        </td>
+        <td   class="success" [class.active]="item.isActive == 0">{{item.isActive == 1? 'Bình thường': 'Bị khóa'}}</td>
+        <td>
+          <a type="button"  class="btn btn-danger btn-sm px-3 mr-2" data-toggle="modal" data-target="#banModal">
+            <span>Khóa tài khoản</span>
+          </a>
+          <a type="button" class="btn btn-info btn-sm px-3" data-toggle="modal" data-target="#unluckModal">
+            <span>Mở khóa</span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div class="modal fade" id="unluckModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn mở khóa tài khoản này</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <div class="modal-body">chọn "Chập nhận" Nếu bạn chắc chắn muốn mở khóa tài khoản này</div>
+          <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+              <button class="btn btn-primary"  type="button" data-dismiss="modal">Chấp nhận</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="banModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn khóa tài khoản này</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">chọn "Chập nhận" Nếu bạn chắc chắn muốn khóa tài khoản này</div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+            <button class="btn btn-primary"  type="button" data-dismiss="modal">Chấp nhận</button>
+        </div>
+    </div>
+</div>
+</div>
+ <app-pagination [offset]="offset" [limit]="limit" [size]="size" totalPage="totalPage" (pageChange)="onPageChange($event)"></app-pagination>
+
+
+
+
+
+
+

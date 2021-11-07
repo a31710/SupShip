@@ -9,9 +9,18 @@ const routes: Routes = [{
   path: '', component: AdminComponent,
   children: [
     {
-      path: 'register', component: RegisterUserComponent,
+      path: 'register', component: RegisterUserComponent, canActivate: [AuthGuard]
     },
-    { path: '**', redirectTo: 'register' },
+    {
+      path: 'customer',
+      loadChildren: () => import('./customer-manager/customer-manager.module')
+        .then(m => m.CustomerManagerModule),
+    },
+    {
+      path: 'user',
+      loadChildren: () => import('./user-manager/user-manager.module')
+        .then(m => m.UserManagerModule),
+    },
   ],
 }];
 

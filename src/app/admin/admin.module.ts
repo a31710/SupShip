@@ -6,6 +6,12 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './shared/header/header.component';
+import { SideBarComponent } from './shared/side-bar/side-bar.component';
+import { SharedModule } from '../shared/share.module';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   imports: [
     CommonModule,
@@ -13,8 +19,12 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
+    HttpClientModule,
+    FormsModule,
+    SharedModule,
+    MatTabsModule,
   ],
-  declarations: [AdminComponent,RegisterUserComponent],
+  declarations: [AdminComponent,RegisterUserComponent,HeaderComponent,SideBarComponent],
 
 })
 export class AdminModule { }

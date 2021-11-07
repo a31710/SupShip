@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
@@ -22,16 +22,19 @@ export class CheckemailComponent implements OnInit {
   }
   createForm() {
     this.checkForm = this.fb.group({
-      email: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
 
     });
   }
   checkEmail(){
     localStorage.setItem('email', JSON.stringify(this.checkForm.get('email').value));
     this.authService.checkEmail(this.checkForm.value).subscribe(()=>{
-      this.router.navigateByUrl('/login')
+      this.router.navigateByUrl('auth/login')
       console.log(this.authService.getCheck());
 
     })
-}
+  }
+  get email(): FormArray {
+    return this.checkForm.get('email') as FormArray;
+  }
 }

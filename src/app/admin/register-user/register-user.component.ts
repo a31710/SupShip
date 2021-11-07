@@ -24,7 +24,7 @@ export class RegisterUserComponent implements OnInit {
   }
   register(){
     console.log(this.registerForm.value);
-    this.toastr.success("Bạn cần đăng nhập để có quyền truy cập trang này");
+    this.toastr.success("Thêm thành công");
   }
 
 

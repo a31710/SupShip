@@ -26,15 +26,23 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              "src/assets/svg/*",
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.css"
+              "src/assets/styles/my-theme.scss",
+              "src/styles.css",
+              "src/assets/admin/vendor/fontawesome-free/css/all.min.css",
+              "src/assets/admin/css/sb-admin-2.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/admin/vendor/jquery/jquery.min.js",
+              "src/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js",
+              "src/assets/admin/vendor/jquery-easing/jquery.easing.min.js",
+              "src/assets/admin/js/sb-admin-2.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -101,9 +109,17 @@
             "styles": [
               "./node_modules/ngx-toastr/toastr.css",
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/admin/vendor/fontawesome-free/css/all.min.css",
+              "src/assets/admin/css/sb-admin-2.min.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/admin/vendor/jquery/jquery.min.js",
+              "src/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js",
+              "src/assets/admin/vendor/jquery-easing/jquery.easing.min.js",
+              "src/assets/admin/js/sb-admin-2.min.js"
+            ]
           }
         }
       }

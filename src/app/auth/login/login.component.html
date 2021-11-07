@@ -1,74 +1,77 @@
 
-  <div id="vHFP_" style="width:100%;height:100%;" class="z-page">
-    <div id="vHFP0" style="overflow: hidden;width:100%;height:100%;" class="z-include">
-      <div style="display:none" id="vHFP1">&nbsp;</div>
-      <table id="vHFP2" class="z-bg-img z-hbox" cellpadding="0" cellspacing="0" border="0" style="background-image: url('https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg'); height: 969px; width: 1920px; background-repeat: no-repeat; background-size: cover;">
-        <tbody>
-          <tr valign="middle">
-            <td id="vHFP2-frame" style="height: 969px;" align="center">
-              <table id="vHFP2-real" height="100%" cellpadding="0" cellspacing="0" border="0" style="text-align:left">
-                <tbody>
-                  <tr valign="middle">
-                    <td id="vHFP3-chdex" style="">
-                      <div id="vHFP3" style="width:100%;" class="z-login-box z-vlayout">
-                        <div id="vHFP4-chdex" class="z-vlayout-inner" style="padding-bottom:5px">
-                          <div id="vHFP4" style="margin-bottom: 0!important;" class="row z-div">
-                            <div id="vHFP5" style="text-align:center!important; padding-top:10px;" class="logo col-md-12 z-div"> <img id="vHFP6" style="width:100%;height:100%;" class="z-image" src="https://firebasestorage.googleapis.com/v0/b/fir-upload-e5fd0.appspot.com/o/image%2FLOGOSUPSHIP.jpg?alt=media&token=57a8dc49-d3a2-44c0-bf83-95c8efd6f730"></div>
-                          </div>
-                        </div>
-                        <div id="vHFP7-chdex" class="z-vlayout-inner" style="padding-bottom:5px">
-                          <div id="vHFP7" class="row z-div">
-                            <div id="vHFP8" style="text-align:center!important;" class="col-md-12 z-div"> <span id="vHFP9" style="color: #00857f; font-size: 18px; padding: 5px; text-transform: uppercase; text-rendering: optimizelegibility; font-family: CoreSansGS; font-weight: bold; width: 370px;" class="z-label">Đăng nhập hệ thống</span></div>
-                          </div>
-                        </div>
-                      <form (ngSubmit)="login()"  [formGroup]="loginForm">
-                        <!-- <div id="vHFPa-chdex" class="z-vlayout-inner" style="padding-bottom:5px">
-                          <div id="vHFPa" style="margin-bottom: 15px !important;" class="row z-div">
-                            <div  class="col-md-12 z-div"> <input formControlName="email" formCon style="width:100%;" class="z-login-control z-textbox"  type="text" maxlength="100" placeholder="Nhập tài khoản email..."></div>
-                          </div>
-                        </div> -->
-                        <div class="input-email">
-                            {{username}}
-                        </div>
-                        <div id="vHFPa-chdex" class="z-vlayout-inner" style="padding-bottom:5px">
-                          <div id="vHFPa" style="margin-bottom: 15px !important;" class="row z-div">
-                            <div  class="col-md-12 z-div"> <input  formControlName="password" style="width:100%;" class="z-login-control z-textbox"  type="password" maxlength="100" placeholder="Mật khẩu"></div>
-                          </div>
-                        </div>
-                        <div *ngIf="isCheck =='false'">
-                          <div id="vHFPa-chdex" class="z-vlayout-inner" style="padding-bottom:5px">
-                            <div id="vHFPa" style="margin-bottom: 15px !important;" class="row z-div">
-                              <div  class="col-md-12 z-div"> <input  formControlName="tokenCode" style="width:100%;" class="z-login-control z-textbox"  type="text" maxlength="100" placeholder="Mã Otp"></div>
+<div  >
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center pt-5">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
+                                    <p class="mb-4">We get it, stuff happens. Just enter your email address below
+                                        and we'll send you a link to reset your password!</p>
+                                </div>
+                                <form class="user" (ngSubmit)="login()"  [formGroup]="loginForm">
+                                  <div class="form-group">
+                                    <div class="card bg-primary text-white shadow" style="border-radius: 50px;">
+                                      <div class="card-body">
+                                        {{username}}
+                                      </div>
+                                  </div>
+                                </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="exampleInputEmail" aria-describedby="emailHelp"
+                                            formControlName="password"
+                                            placeholder="Nhập mật khẩu">
+                                            <small class="text-danger"
+                                            *ngIf="password?.errors?.minlength  && password?.touched">
+                                            Mật khẩu phải trên 5 kí tự</small><br>
+                                            <small class="text-danger"   *ngIf="password?.errors?.pattern  && password?.touched">
+                                              Mật khẩu của bạn phải chứa ít nhất, một chữ hoa, một chữ thường và một số</small>
+                                            <small class="text-danger"
+                                          *ngIf="password?.errors?.required && password?.touched">
+                                          Bạn chưa nhập mật khẩu</small>
+
+                                    </div>
+                                    <div class="form-group"  *ngIf="isCheck =='false'">
+                                      <input type="password" class="form-control form-control-user"
+                                          id="exampleInputEmail" aria-describedby="emailHelp"
+                                          formControlName="tokenCode"
+                                          placeholder="Nhập OTP">
+
+                                          <small class="text-danger"
+                                        *ngIf="password?.errors?.required && password?.touched">
+                                        Bạn chưa nhập OTP</small>
+
+                                  </div>
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        Đăng nhập
+                                    </button>
+                                </form>
+                                <hr>
+
+                                <div class="text-center">
+                                    <a class="small" routerLink="/auth/forgot-password">Quên mật khẩu?</a>
+                                </div>
                             </div>
-                          </div>
                         </div>
-                        <div id="vHFPg-chdex" class="z-vlayout-inner" style="padding-bottom:5px">
-                          <div id="vHFPg" style="margin-bottom:15px!important;" class="row z-div">
-                            <div  id="vHFPh" class="col-md-12 z-div"> <button type="submit" id="vHFPi" style="background-color:#00857f;" class="btn btn-block z-login-control z-button z-button-primary">Nhận mã OTP</button></div>
-                          </div>
-                        </div>
-                      </form>
-                        <div id="vHFPj-chdex" class="z-vlayout-inner" style="">
-                          <div id="vHFPj" style="text-align:center;margin-bottom:0!important;" class="row z-div">
-                            <div id="vHFPk" class="col-md-12 z-div"> <span id="vHFPl" class="label-warning z-label" style="width: 370px;"></span></div>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+                    </div>
+                </div>
+            </div>
 
-  <noscript>
-    <div class="noscript">
-      <p>Sorry, JavaScript must be enabled.<br />Change your browser options, then <a href="">try again</a>.</p>
-    </div>
-  </noscript>
+        </div>
 
-  <div style="left: -1000px; top: -1000px; position: absolute; visibility: hidden; border: none; white-space: normal; word-spacing: 0px; direction: ltr; text-overflow: clip; text-transform: none; text-shadow: none; text-indent: 0px; text-decoration: none solid rgb(51, 51, 51); text-align: start; line-height: 20px; letter-spacing: 0px; font-style: normal; font-weight: 400; font-size: 14px; font-family: Muli, Arial; display: none;"></div>
+    </div>
+
+</div>
+</div>
+

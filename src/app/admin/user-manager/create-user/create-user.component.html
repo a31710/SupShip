@@ -1,0 +1,87 @@
+
+
+<form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
+
+  <div class="row">
+
+      <!-- Grow In Utility -->
+      <div class="col-lg-6">
+
+          <div class="card position-relative">
+            <div class="card-header py-3" style="background-color: #4e73df;">
+              <h2 class="m-0 font-weight-bold" style="color: white;">Tạo tài khoản</h2>
+              </div>
+              <div class="card-body">
+
+                <div  class="row z-div" >
+
+                  <div  class="col-md-6 z-div">
+                    <div  class="z-vlayout" style="width: 357px;">
+                        <div  class="z-vlayout-inner" style="padding-bottom:0">
+                            <div  class="z-div"> <span  class="z-label">Email</span> </div>
+                        </div>
+                        <div  class="z-vlayout-inner" style="width: 357px;"><input formControlName="email" class="z-textbox" value="" type="text" maxlength="100"  style="width: 355px;"></div>
+                        <div *ngFor="let validation of insertUserMessage.email">
+                          <small class="text-danger"   *ngIf="createUserForm.get('email')?.hasError(validation.type) && createUserForm.get('email').touched">
+                           {{validation.message}}</small>
+                        </div>
+                    </div>
+                    </div>
+                  <div class="col-md-6 z-div">
+                      <div  class="z-vlayout" style="width: 357px;">
+                          <div  class="z-vlayout-inner" style="padding-bottom:0">
+                              <div  class="z-div"> <span  class="z-label">DeptCode</span> <span  style="color:red;" class="z-label">(*)</span></div>
+                          </div>
+                          <select [(ngModel)]="deptCodeSelect" (change)="getPostCode(deptCodeSelect)"  class="combobox"  formControlName="deptCode" >
+                            <option  [ngValue]="null" [disabled]="true" >Chọn DeptCode</option>
+                            <option *ngFor="let d of dataDept" [ngValue]="d.deptCode"> {{d.deptName}}</option>
+
+                          </select>
+                      </div>
+                  </div>
+              </div>
+
+              <div  class="row z-div">
+                <div  class="col-md-6 z-div">
+                    <div  class="z-vlayout" style="width: 357px;">
+                        <div class="z-vlayout-inner" style="padding-bottom:0">
+                            <div  class="z-div"> <span  class="z-label">PostCode</span> <span  style="color:red;" class="z-label">(*)</span></div>
+                        </div>
+                        <select [(ngModel)]="postCodeSelect" class="combobox"  formControlName="postCode">
+                          <option [ngValue]="null" [disabled]="true">Chọn PostCode</option>
+                          <option *ngFor="let d of dataPost" [ngValue]="d.postCode"> {{d.postName}}</option>
+                        </select>
+                </div>
+            </div>
+
+            <div  class="col-md-6 z-div">
+                <div  class="z-vlayout" style="width: 358px;">
+                    <div  class="z-vlayout-inner" style="padding-bottom:0">
+                        <div  class="z-div"> <span  class="z-label">Role</span> <span  style="color:red;" class="z-label">(*)</span></div>
+                    </div>
+                    <select [(ngModel)]="roleSelect" class="combobox"   formControlName="roles">
+                      <option  [ngValue]="null" [disabled]="true" >Chọn role</option>
+                      <option *ngFor="let d of roleData" [ngValue]="d.value"> {{d.name}}</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+                    <!-- BUTTON -->
+                    <br>
+                    <div id="w1uPgg4" class="row z-div">
+                      <div id="w1uPhg4" class="col-md-12 z-div">
+                          <div id="w1uPig4" style="float:right;" class="z-hlayout">
+
+                              <div id="w1uPkg4-chdex" class="z-hlayout-inner" ><button type="submit"  class="btn btn-success z-button">Đăng ký </button></div>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+    </div>
+
+</form>
+

@@ -17,11 +17,13 @@ export class AuthGuard implements CanActivate {
 
     // Kiểm tra người dùng đã đăng nhập chưa
     const isAuthenticated = this.authService.isLoggedIn();
+    console.log(this.authService.isLoggedIn());
+
     if (isAuthenticated) {
         return true;
     } else {
         this.toastr.error("Bạn cần đăng nhập để có quyền truy cập trang này");
-        this.router.navigateByUrl('/auth/login');
+        this.router.navigateByUrl('/auth/checkemail');
     }
 
     return true;

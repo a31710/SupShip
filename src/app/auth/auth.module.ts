@@ -6,6 +6,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { CheckemailComponent } from './checkemail/checkemail.component';
 import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+
 
 @NgModule({
   imports: [
@@ -14,6 +17,6 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  declarations: [AuthComponent,CheckemailComponent,LoginComponent]
+  declarations: [AuthComponent,CheckemailComponent,LoginComponent, ForgotPasswordComponent, ChangePasswordComponent]
 })
 export class AuthModule { }
