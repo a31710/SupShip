@@ -41,5 +41,7 @@ constructor(private http: HttpClient) { }
   deleteCustomer(id:any):Observable<any>{
     return this.http.delete<any>(`${this.url}/api/lead/evtp/${id}`);
   }
-
+  getCustomerPagi(page:any, size:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/lead/filter?page=${page}&size=${size}&sort=lastModifiedDate,desc`)
+  }
 }

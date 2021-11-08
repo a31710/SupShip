@@ -131,6 +131,7 @@ export class UpdateCustomerComponent implements OnInit {
 
   uploadValue(customerData:any){
 
+
     this.companyNameArray.setValue(customerData?.companyName);
     this.titleArray.setValue(customerData?.title);
     this.expectedRevenueArray.setValue(customerData?.expectedRevenue);
@@ -138,14 +139,14 @@ export class UpdateCustomerComponent implements OnInit {
     this.quantityMonthArray.setValue(customerData?.quantityMonth);
     this.representationArray.setValue(customerData?.representation);
     this.phoneArray.setValue(customerData?.phone);
-    this.getAllDistrict(customerData?.addressResponse?.province);
-    this.getAllWard(customerData?.addressResponse?.district)
+    this.getAllDistrict(customerData?.address?.province);
+    this.getAllWard(customerData?.address?.district)
     this.leadSource.setValue(customerData?.leadSource);
     this.addressArray.patchValue([{
-      homeNo: customerData?.addressResponse?.homeNo,
-      province: customerData?.addressResponse?.province,
-      ward: customerData?.addressResponse?.ward,
-      district: customerData?.addressResponse?.district
+      homeNo: customerData?.address?.homeNo,
+      province: customerData?.address?.province,
+      ward: customerData?.address?.ward,
+      district: customerData?.address?.district
     }])
 
     customerData?.industries.map((data:any)=>{

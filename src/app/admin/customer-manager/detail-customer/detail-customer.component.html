@@ -11,7 +11,7 @@
 
           <div class="card position-relative">
               <div class="card-header py-3" style="background-color: #4e73df;">
-                  <h2 class="m-0 font-weight-bold" style="color: white;"> <i class="fas fa-user mr-2" ></i> Thông tin khách hàng</h2>
+                  <h2 class="m-0 " style="color: white;"> <i class="fas fa-user mr-2" ></i> Thông tin khách hàng</h2>
               </div>
               <div class="card-body">
                 <div class="container">
@@ -127,7 +127,7 @@
                   <div  class="col-md-6 z-div">
                     <div  class="z-vlayout" style="width: 357px;">
                         <div  class="z-vlayout-inner" style="padding-bottom:0">
-                            <div  class="z-div"> <span  class="z-label text-gray-900">Mã khách hàng: <span class="text-primary ml-3">{{infoCusomter?.id}}</span></span> </div>
+                            <div  class="z-div"> <span  class="z-label text-gray-900">Địa chỉ: <span class="text-primary ml-3">{{infoCusomter?.address?.district}}, {{infoCusomter?.address?.province}}</span></span> </div>
                         </div>
 
                       </div>
@@ -149,7 +149,7 @@
                 <div  class="col-md-12 z-div">
                     <div  class="z-vlayout" style="width: 743px;">
                         <div  class="z-vlayout-inner" style="padding-bottom:0">
-                          <div  class="z-div"> <span  class="z-label text-gray-900">Dịch vụ: <span *ngFor="let item of infoCusomter?.industry" class="text-primary ml-3">{{item}}</span></span> </div>
+                          <div  class="z-div"> <span  class="z-label text-gray-900">Dịch vụ: <span *ngFor="let item of infoCusomter?.industries" class="text-primary ml-3">{{item.name}}</span></span> </div>
                         </div>
 
                       </div>
@@ -189,7 +189,7 @@
 
         <div class="card position-relative">
             <div class="card-header py-3" style="background-color: #4e73df;">
-                <h2 class="m-0 font-weight-bold" style="color: white;"><i class="fas fa-history mr-2"></i>Lịch sử tiếp xúc</h2>
+                <h2 class="m-0 " style="color: white;"><i class="fas fa-history mr-2"></i>Lịch sử tiếp xúc</h2>
             </div>
             <div class="card-body">
 

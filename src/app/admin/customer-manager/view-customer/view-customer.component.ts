@@ -29,7 +29,6 @@ dataPost:any
 dataDept:any
 deptCodeSelect:any;
 postCodeSelect:any;
-existArray:any[] = [];
 idUpdate:any;
 
   constructor(private customerService: CustomerService, private route: Router,
@@ -64,6 +63,12 @@ idUpdate:any;
   }
   onPageChange(offset: number) {
     this.offset = offset;
+    console.log(this.offset/this.limit);
+
+    this.customerService.getCustomerPagi((this.offset/this.limit)+1, this.limit).subscribe((data)=>{
+      this.listCustomer = data.data
+    })
+    this.idArray = [];
   }
   onDelete(id:any){
     this.tabs.map((d,i)=>{
@@ -140,23 +145,27 @@ idUpdate:any;
   singleTranfer(id:any){
     const data  = this.listCustomer.filter((data:any)=> data.id === id);
     this.tranferData= data;
-    this.existArray.push(id);
-
   }
   getIdArray(id:any){
-    this.idArray.push(id);
+    if(this.idArray.includes(id)){
+      const newArr = this.idArray.filter(d => d !== id)
+      this.idArray = newArr
+    }else{
+      this.idArray.push(id);
+    }
+    console.log(this.idArray);
+
   }
 
   allTranfer(){
-    //  this.idArray.forEach((d)=>{
-    //    if(this.existArray.includes(d)){
-    //       const deleteData = this.tranferData.filter((data:any)=> data.id !== d)
-    //       this.tranferData = deleteData;
-    //    }else{
-    //     const data = this.listCustomer.filter((data:any)=> data.id == d)
-    //     this.tranferData.push(data[0]);
-    //    }
-    //   })
+      const resetArr = this.tranferData.filter((d:any) => d.id == -1)
+      this.tranferData = resetArr
+
+     this.idArray.forEach((d)=>{
+       const data = this.listCustomer.filter((data:any)=> data.id == d)
+      this.tranferData.push(data[0]);
+      })
+      console.log(this.tranferData);
 
   }
 
