@@ -9,7 +9,7 @@ import { VertifyResponse } from '../login/model/vertify-response';
 import { CheckResponse } from '../login/model/check-response';
 import { ChangePassword } from '../login/model/change-password';
 import { CookieService } from 'ngx-cookie-service';
-
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,17 +17,19 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() userId: EventEmitter<String> = new EventEmitter();
-constructor(private http: HttpClient,private cookieService: CookieService ) { }
+  url = environment.url
+constructor(private http: HttpClient,private cookieService: CookieService, ) { }
 
 vertifyEmail(vertifyEmail: VertifyEmail): Observable<any>{
-  return this.http.post<VertifyResponse>('http://localhost:8085/user/verify', vertifyEmail)
+  return this.http.post<VertifyResponse>(`${this.url}/user/verify`, vertifyEmail)
   .pipe(map(data =>{
       localStorage.setItem("isVertify",data.success);
       return true;
   }));
+
 }
 login(loginModel: LoginModel): Observable<any>{
-  return this.http.post<LoginResponse>('http://localhost:8085/user/login', loginModel)
+  return this.http.post<LoginResponse>(`${this.url}/user/login`, loginModel)
   .pipe(map(data =>{
     localStorage.setItem("isLogin",data.success);
     localStorage.setItem("token",data.data.token)
@@ -40,7 +42,7 @@ login(loginModel: LoginModel): Observable<any>{
 }
 
 checkEmail(email: string): Observable<any>{
-  return this.http.post<CheckResponse>('http://localhost:8085/user/check-email', email)
+  return this.http.post<CheckResponse>(`${this.url}/user/check-email`, email)
   .pipe(map(data =>{
     localStorage.setItem("isCheck",data.success);
     return true;
@@ -49,14 +51,14 @@ checkEmail(email: string): Observable<any>{
 
 
 forgotPassword(email:string):Observable<any>{
-  return this.http.post<any>('http://localhost:8085/user/password/forgot', email)
+  return this.http.post<any>(`${this.url}/user/password/forgot`, email)
 }
 changePassword(changeModel: ChangePassword):Observable<any>{
-  return this.http.post<any>('http://localhost:8085/user/password/change', changeModel)
+  return this.http.post<any>(`${this.url}/user/password/change`, changeModel)
 }
 
 checkUpdate(email: string): Observable<any>{
-  return this.http.post<any>('http://localhost:8085/user/check-update', email)
+  return this.http.post<any>(`${this.url}/user/check-update`, email)
   .pipe(map(data =>{
     localStorage.setItem("isUpdate",data.success);
     return true;

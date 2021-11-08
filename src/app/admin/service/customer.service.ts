@@ -1,44 +1,45 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-
+url = environment.url;
 constructor(private http: HttpClient) { }
 
 
   getAllCustomer(): Observable<any>{
-    return this.http.get<any>('http://localhost:8085/api/lead/filter');
+    return this.http.get<any>(`${this.url}/api/lead/filter`);
   }
 
   getProvince(): Observable<any>{
-    return this.http.get<any>('http://localhost:8085/province');
+    return this.http.get<any>(`${this.url}/province`);
   }
 
   getDistrictById(cityId: number): Observable<any>{
-    return this.http.get<any>(`http://localhost:8085/district?provinceCode=${cityId}`);
+    return this.http.get<any>(`${this.url}/district?provinceCode=${cityId}`);
   }
 
   getWardById(district: number): Observable<any>{
-    return this.http.get<any>(`http://localhost:8085/ward?districtCode=${district}`);
+    return this.http.get<any>(`${this.url}/ward?districtCode=${district}`);
   }
 
   insertCustomer(body:any): Observable<any>{
-    return this.http.post<any>('http://localhost:8085/api/lead/createWeb', body);
+    return this.http.post<any>(`${this.url}/api/lead/createWeb`, body);
   }
 
   getDetailCustomer(id:any):Observable<any>{
-    return this.http.get<any>(`http://localhost:8085/api/lead/evtp/${id}`);
+    return this.http.get<any>(`${this.url}/api/lead/evtp/${id}`);
   }
 
   updateCustomer(id:any, body:any):Observable<any>{
-    return this.http.put<any>(`http://localhost:8085/api/lead/evtp/${id}`,body)
+    return this.http.put<any>(`${this.url}/api/lead/evtp/${id}`,body)
   }
   deleteCustomer(id:any):Observable<any>{
-    return this.http.delete<any>(`http://localhost:8085/api/lead/evtp/${id}`);
+    return this.http.delete<any>(`${this.url}/api/lead/evtp/${id}`);
   }
 
 }

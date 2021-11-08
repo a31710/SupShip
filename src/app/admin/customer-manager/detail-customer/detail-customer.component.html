@@ -1,0 +1,239 @@
+
+
+<br>
+<br>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- Grow In Utility -->
+      <div class="col-lg-6">
+
+          <div class="card position-relative">
+              <div class="card-header py-3" style="background-color: #4e73df;">
+                  <h2 class="m-0 font-weight-bold" style="color: white;"> <i class="fas fa-user mr-2" ></i> Thông tin khách hàng</h2>
+              </div>
+              <div class="card-body">
+                <div class="container">
+                  <div  class="row z-div mt-3">
+                    <div  class="col-md-12 z-div">
+
+
+                      <div  class="row z-div">
+                        <div  class="col-md-6 z-div">
+                            <div  class="z-vlayout" style="width: 357px;">
+                                <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                    <div  class="z-div"> <span  class="z-label text-gray-900">Mã khách hàng: <span class="text-primary ml-3">{{idUpdate}}</span></span> </div>
+                                </div>
+
+                              </div>
+                        </div>
+
+                        <div  class="col-md-6 z-div">
+                          <div  class="z-vlayout" style="width: 357px;">
+                              <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                  <div  class="z-div"> <span  class="z-label text-gray-900">Trạng thái: <span class="text-success ml-3">{{infoCusomter?.statusDescription}}</span></span> </div>
+                              </div>
+
+                            </div>
+                      </div>
+
+
+                      </div>
+
+
+
+
+                    </div>
+                </div>
+
+
+                <div  class="row z-div mt-3">
+                  <div  class="col-md-12 z-div">
+
+
+                    <div  class="row z-div">
+                      <div  class="col-md-6 z-div">
+                          <div  class="z-vlayout" style="width: 357px;">
+                              <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                  <div  class="z-div"> <span  class="z-label text-gray-900">Khách hàng <span class="text-primary ml-3">{{infoCusomter?.representation}}</span></span> </div>
+                              </div>
+
+                            </div>
+                      </div>
+
+                      <div  class="col-md-6 z-div">
+                        <div  class="z-vlayout" style="width: 357px;">
+                            <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                <div  class="z-div"> <span  class="z-label text-gray-900">Địa chỉ: <span class="text-primary ml-3">{{infoCusomter?.address?.district}}, {{infoCusomter?.address?.province}}</span></span> </div>
+                            </div>
+
+                          </div>
+                    </div>
+
+
+                    </div>
+
+
+
+
+                  </div>
+              </div>
+              <div  class="row z-div mt-3">
+                <div  class="col-md-12 z-div">
+
+
+                  <div  class="row z-div">
+                    <div  class="col-md-6 z-div">
+                        <div  class="z-vlayout" style="width: 357px;">
+                            <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                <div  class="z-div"> <span  class="z-label text-gray-900">Người liên hệ: <span class="text-primary ml-3">{{infoCusomter?.representation}} </span></span> </div>
+                            </div>
+
+                          </div>
+                    </div>
+
+                    <div  class="col-md-6 z-div">
+                      <div  class="z-vlayout" style="width: 357px;">
+                          <div  class="z-vlayout-inner" style="padding-bottom:0">
+                              <div  class="z-div"> <span  class="z-label text-gray-900">Số điện thoại <span class="text-primary ml-3">{{infoCusomter?.phone}}</span></span> </div>
+                          </div>
+
+                        </div>
+                  </div>
+
+
+                  </div>
+
+
+
+
+                </div>
+            </div>
+            <div  class="row z-div mt-3">
+              <div  class="col-md-12 z-div">
+
+
+                <div  class="row z-div">
+                  <div  class="col-md-6 z-div">
+                      <div  class="z-vlayout" style="width: 357px;">
+                          <div  class="z-vlayout-inner" style="padding-bottom:0">
+                            <div  class="z-div"> <span  class="z-label text-gray-900">Doanh thu dự kiến: <span class="text-primary ml-3">{{infoCusomter?.expectedRevenue}}</span></span> </div>
+                          </div>
+
+                        </div>
+                  </div>
+
+                  <div  class="col-md-6 z-div">
+                    <div  class="z-vlayout" style="width: 357px;">
+                        <div  class="z-vlayout-inner" style="padding-bottom:0">
+                            <div  class="z-div"> <span  class="z-label text-gray-900">Mã khách hàng: <span class="text-primary ml-3">{{infoCusomter?.id}}</span></span> </div>
+                        </div>
+
+                      </div>
+                </div>
+
+
+                </div>
+
+
+
+
+              </div>
+          </div>
+          <div  class="row z-div mt-3">
+            <div  class="col-md-12 z-div">
+
+
+              <div  class="row z-div">
+                <div  class="col-md-12 z-div">
+                    <div  class="z-vlayout" style="width: 743px;">
+                        <div  class="z-vlayout-inner" style="padding-bottom:0">
+                          <div  class="z-div"> <span  class="z-label text-gray-900">Dịch vụ: <span *ngFor="let item of infoCusomter?.industry" class="text-primary ml-3">{{item}}</span></span> </div>
+                        </div>
+
+                      </div>
+                </div>
+
+
+
+
+              </div>
+
+
+
+
+            </div>
+        </div>
+                </div>
+              </div>
+
+
+
+
+
+            <br>
+            <br>
+
+          </div>
+
+      </div>
+
+
+
+
+
+
+
+      <div class="col-lg-6">
+
+        <div class="card position-relative">
+            <div class="card-header py-3" style="background-color: #4e73df;">
+                <h2 class="m-0 font-weight-bold" style="color: white;"><i class="fas fa-history mr-2"></i>Lịch sử tiếp xúc</h2>
+            </div>
+            <div class="card-body">
+
+            </div>
+
+
+          <div class="container">
+            <div  class="row z-div">
+              <div  class="col-md-12 z-div">
+
+                  <div  class="row z-div">
+                    <div  class="z-div"> <span  class="z-label text-gray-900">Chưa tiếp xúc</span> </div>
+                  </div>
+              </div>
+          </div>
+          </div>
+
+
+          <br>
+          <br>
+
+        </div>
+
+    </div>
+
+
+
+    <div id="switcher">
+      <div class="button selected" id="switcher-default">
+        <button class="btn btn-sm btn-dark" (click)="onDelete(idUpdate)">Xóa khách hàng</button>
+      </div>
+      <div class="button" id="switcher-narrow">
+        <button class="btn btn-sm btn-success" (click)="onUpdate(idUpdate)">Sửa thông tin</button>
+      </div>
+  </div>
+
+
+
+
+
+
+
+  </div>
+  </div>
+
+
+

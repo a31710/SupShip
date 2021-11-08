@@ -33,6 +33,18 @@ export class CreateCustomerComponent implements OnInit {
       { type: 'required', message: 'Bạn chưa nhập ô này' },
       { type: 'minlength', message: 'phải có ít nhất 5 kí tự'},
     ],
+    'quantityMonth': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'min', message: 'Số phải lớn hơn 0' },
+    ],
+    'weight': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'min', message: 'Số phải lớn hơn 0' },
+    ],
+    'expectedRevenue': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'min', message: 'Số phải lớn hơn 0'},
+    ],
     'representation': [
       { type: 'required', message: 'Bạn chưa nhập ô này' },
       { type: 'minlength', message: 'phải có ít nhất 5 kí tự' },
@@ -94,19 +106,12 @@ export class CreateCustomerComponent implements OnInit {
     this.insertCustomerForm = this.fb.group({
         title:['', [Validators.required,Validators.minLength(5)  ]],
         companyName: ['', [Validators.required,Validators.minLength(5)]],
-        fullName: ['', [Validators.required ,Validators.minLength(5)]],
-        representation: ['', [Validators.required ,Validators.min(5)]],
+        representation: ['', [Validators.required ,Validators.minLength(5)]],
         phone:['', [Validators.required,]],
-        quantityMonth:['', [Validators.required]],
-        inProvincePrice: ['', [Validators.required]],
-        outProvincePrice: ['', [Validators.required]],
-        weight: ['', [Validators.required]],
-        expectedRevenue: ['', [Validators.required]],
-        quality:['', [Validators.required]],
-        compensation:['', [Validators.required]],
-        payment:['', [Validators.required]],
-        other:['', [Validators.required]],
-        leadSource:['', [Validators.required]],
+        quantityMonth:['', [Validators.required, Validators.min(1)]], //
+        weight: ['', [Validators.required,Validators.min(1)]], //
+        expectedRevenue: ['', [Validators.required,Validators.min(1)]], //
+        leadSource:['', ],
         address: this.fb.array([this.addAddressGroup()]),
         industry: this.fb.array([]),
     })

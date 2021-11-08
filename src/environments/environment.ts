@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   Token: "",
+  url: "http://159.223.105.240:8085"
 };
 
 /*

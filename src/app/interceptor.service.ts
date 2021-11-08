@@ -29,7 +29,8 @@ export class InterceptorService implements HttpInterceptor {
       'Access-Control-Allow-Origin':'*',
       "Access-Control-Allow-Credentials": "true",
       "Access-Control-Allow-Methods": "POST",
-      "Authorization": `Bearer ${this.cookieService.get('token')}`
+      // "Authorization": `Bearer ${this.cookieService.get('token')}`
+      "Authorization": `Bearer ${localStorage.getItem('token')}`
     });
 
     const newReq = req.clone({ headers: header });

@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, range } from 'rxjs';
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit,AfterViewInit {
   @Input() offset:any;
   @Input() limit: any;
   @Input() size: any;
@@ -13,18 +13,27 @@ export class PaginationComponent implements OnInit {
   @Input() range: number = 3;
 
 
+
   @Output() pageChange: EventEmitter<any>;
   currentPage: any;
   totalPages: any;
   pages:any
   constructor() {
-    this.pageChange = new EventEmitter<any>()
+    this.pageChange = new EventEmitter<any>();
+
   }
   ob:Observable<any> |any
   ngOnInit() {
-    this.getPages(this.offset, this.limit, this.size);
-  }
 
+  }
+  ngAfterViewInit(){
+   setTimeout(()=>{
+    this.getPages(this.offset, this.limit, this.size);
+    console.log(this.size);
+   },2000)
+
+
+  }
 
   getCurrentPage(offset: number, limit: number): number {
     return Math.floor(offset / limit) + 1;

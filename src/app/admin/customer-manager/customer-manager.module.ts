@@ -11,6 +11,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +25,6 @@ import {MatIconModule} from '@angular/material/icon';
     MatIconModule,
 
   ],
-  declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent]
+  declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent,DetailCustomerComponent]
 })
 export class CustomerManagerModule { }

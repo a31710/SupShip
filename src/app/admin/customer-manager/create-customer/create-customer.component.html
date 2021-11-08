@@ -1,8 +1,8 @@
 
-
+<br>
+<br>
 <form [formGroup]="insertCustomerForm" (ngSubmit)="insertCustomer();">
     <!-- Page Heading -->
-    <h1 class="h3 mb-1 " style="color: #4e73df;">Tạo mới khách hàng</h1>
     <!-- Content Row -->
     <div class="row">
 
@@ -15,11 +15,11 @@
                 </div>
                 <div class="card-body">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" value="PRIVATE">
                     <label class="custom-control-label" for="customRadioInline1">KH cá nhân</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" value="ENTERPRISE">
                     <label class="custom-control-label" for="customRadioInline2">KH doanh nghiệp</label>
                   </div>
                 </div>
@@ -47,7 +47,8 @@
               </div>
 
 
-
+              <br>
+              <br>
 
             </div>
 
@@ -116,6 +117,49 @@
                   </div>
               </div>
 
+              <div  class="row z-div">
+                <div  class="col-md-6 z-div">
+                    <div  class="z-vlayout" style="width: 357px;">
+                        <div  class="z-vlayout-inner" style="padding-bottom:0">
+                            <div  class="z-div"> <span  class="z-label">Số lương đơn / tháng</span> <span style="color:red;" class="z-label">(*)</span></div>
+                        </div>
+                        <div class="z-vlayout-inner" style="width: 357px;"><input formControlName="quantityMonth"  class="z-textbox" value="" type="number" maxlength="100" placeholder="Nhập người liên hệ" style="width: 355px;"></div>
+                        <div *ngFor="let validation of insertCustomerMessage.quantityMonth">
+                          <small class="text-danger"   *ngIf="insertCustomerForm.get('quantityMonth')?.hasError(validation.type) && insertCustomerForm.get('quantityMonth').touched">
+                           {{validation.message}}</small>
+                        </div>
+                      </div>
+                </div>
+                <div  class="col-md-6 z-div">
+                    <div  class="z-vlayout" style="width: 358px;">
+                        <div  class="z-vlayout-inner" style="padding-bottom:0">
+                            <div  class="z-div"> <span  class="z-label">Trọng lượng</span> <span  style="color:red;" class="z-label">(*)</span></div>
+                        </div>
+                        <div  class="z-vlayout-inner" style="width: 358px;"><input formControlName="weight" class="z-textbox" value="" type="number" maxlength="11" placeholder="Nhập số điện thoại" style="width: 356px;"></div>
+                        <div *ngFor="let validation of insertCustomerMessage.weight">
+                          <small class="text-danger"   *ngIf="insertCustomerForm.get('weight')?.hasError(validation.type) && insertCustomerForm.get('weight').touched">
+                           {{validation.message}}</small>
+                        </div>
+                      </div>
+                </div>
+            </div>
+
+
+            <div  class="row z-div">
+              <div  class="col-md-6 z-div">
+                  <div  class="z-vlayout" style="width: 357px;">
+                      <div  class="z-vlayout-inner" style="padding-bottom:0">
+                          <div  class="z-div"> <span  class="z-label">Doanh thu dự kiến</span> <span style="color:red;" class="z-label">(*)</span></div>
+                      </div>
+                      <div class="z-vlayout-inner" style="width: 357px;"><input formControlName="expectedRevenue"  class="z-textbox" value="" type="number" maxlength="100" placeholder="Nhập người liên hệ" style="width: 355px;"></div>
+                      <div *ngFor="let validation of insertCustomerMessage.expectedRevenue">
+                        <small class="text-danger"   *ngIf="insertCustomerForm.get('expectedRevenue')?.hasError(validation.type) && insertCustomerForm.get('expectedRevenue').touched">
+                         {{validation.message}}</small>
+                      </div>
+                    </div>
+              </div>
+          </div>
+
               <ng-container formArrayName="address">
                 <div  class="row z-div" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
                   <div  class="col-md-6 z-div">
@@ -159,20 +203,18 @@
                       </select>
                   </div>
               </div>
-          </div>
-          <div  class="row z-div" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
-              <div  class="col-md-12 z-div">
-                  <div  class="z-vlayout" style="width: 745px;">
-                      <div  class="z-vlayout-inner" style="padding-bottom:0">
-                          <div class="z-div"> <span  class="z-label">Địa chỉ</span> <span  style="color:red;" class="z-label">(*)</span></div>
-                      </div>
-                      <div class="z-vlayout-inner" style="width: 745px;"><input  formControlName="homeNo" class="z-textbox"  type="text" maxlength="100" placeholder="Nhập địa chỉ" style="width: 743px;"></div>
-                      <div *ngFor="let validation of insertCustomerMessage.homeNo">
-                        <small class="text-danger"   *ngIf="addressArray.controls[i]?.get('homeNo')?.hasError(validation.type) && addressArray.controls[i]?.get('homeNo')?.touched">
-                         {{validation.message}}</small>
-                      </div>
+              <div class="col-md-6 z-div">
+                <div  class="z-vlayout" style="width: 357px;">
+                    <div  class="z-vlayout-inner" style="padding-bottom:0">
+                      <div class="z-div"> <span  class="z-label">Địa chỉ</span> <span  style="color:red;" class="z-label">(*)</span></div>
                     </div>
-              </div>
+                    <div class="z-vlayout-inner" ><input  formControlName="homeNo" class="z-textbox"  type="text" maxlength="100" placeholder="Nhập địa chỉ" style="width: 743px;"></div>
+                    <div *ngFor="let validation of insertCustomerMessage.homeNo">
+                      <small class="text-danger"   *ngIf="addressArray.controls[i]?.get('homeNo')?.hasError(validation.type) && addressArray.controls[i]?.get('homeNo')?.touched">
+                       {{validation.message}}</small>
+                    </div>
+                </div>
+            </div>
           </div>
               </ng-container>
 
@@ -180,11 +222,11 @@
             </div>
 
         </div>
-        <br>
+
         <div id="w1uPgg4" class="row z-div">
           <div id="w1uPhg4" class="col-md-12 z-div">
               <div id="w1uPig4" style="float:right;" class="z-hlayout">
-                  <div id="w1uPkg4-chdex" class="z-hlayout-inner" ><button type="submit"  class="btn btn-success z-button">Tạo mới</button></div>
+                  <div id="w1uPkg4-chdex" class="z-hlayout-inner" ><button [disabled]="insertCustomerForm.invalid" type="submit"  class="btn btn-success z-button">Tạo mới</button></div>
               </div>
           </div>
       </div>

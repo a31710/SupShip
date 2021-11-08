@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from '../../service/customer.service';
-
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-update-customer',
   templateUrl: './update-customer.component.html',
   styleUrls: ['./update-customer.component.css']
 })
 export class UpdateCustomerComponent implements OnInit {
+  @Input() idUpdate:any;
   idCustomer:any
   proviceSelect:any
   districtSelect:any
@@ -31,6 +32,22 @@ export class UpdateCustomerComponent implements OnInit {
     'companyName': [
       { type: 'required', message: 'Bạn chưa nhập ô này' },
       { type: 'minlength', message: 'phải có ít nhất 5 kí tự' },
+    ],
+    'fullName': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'minlength', message: 'phải có ít nhất 5 kí tự'},
+    ],
+    'quantityMonth': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'min', message: 'Số phải lớn hơn 0' },
+    ],
+    'weight': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'min', message: 'Số phải lớn hơn 0' },
+    ],
+    'expectedRevenue': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'min', message: 'Số phải lớn hơn 0'},
     ],
     'representation': [
       { type: 'required', message: 'Bạn chưa nhập ô này' },
@@ -77,15 +94,8 @@ export class UpdateCustomerComponent implements OnInit {
     }
 
 
-  constructor(private fb: FormBuilder, private customerService: CustomerService, private toastr: ToastrService,private activeRoute: ActivatedRoute,private route: Router) {
-    this.activeRoute.params.subscribe(params=>{
-      this.idCustomer = params['id'];
-      this.customerService.getDetailCustomer(this.idCustomer).subscribe(data=>{
+  constructor(private fb: FormBuilder, private customerService: CustomerService, private toastr: ToastrService,private route: Router) {
 
-
-        this.uploadValue(data);
-      })
-    })
     this.getAllCity();
     this.createForm();
     this.addIndustrysControls();
@@ -94,6 +104,7 @@ export class UpdateCustomerComponent implements OnInit {
     this.industryData.forEach(() => this.industryFormArray.push(this.fb.control(false)));
   }
   ngOnInit() {
+    this.customerService.getDetailCustomer(this.idUpdate).subscribe(data=>this.uploadValue(data))
   }
 
   get titleArray(){
@@ -108,24 +119,35 @@ export class UpdateCustomerComponent implements OnInit {
   get phoneArray(){
     return this.updateCustomerForm.get('phone') as FormArray;
   }
-
+  get expectedRevenueArray(){
+    return this.updateCustomerForm.get('expectedRevenue') as FormArray;
+  }
+  get weightArray(){
+    return this.updateCustomerForm.get('weight') as FormArray;
+  }
+  get quantityMonthArray(){
+    return this.updateCustomerForm.get('quantityMonth') as FormArray;
+  }
 
   uploadValue(customerData:any){
+
     this.companyNameArray.setValue(customerData?.companyName);
     this.titleArray.setValue(customerData?.title);
+    this.expectedRevenueArray.setValue(customerData?.expectedRevenue);
+    this.weightArray.setValue(customerData?.weight);
+    this.quantityMonthArray.setValue(customerData?.quantityMonth);
     this.representationArray.setValue(customerData?.representation);
     this.phoneArray.setValue(customerData?.phone);
-
     this.getAllDistrict(customerData?.addressResponse?.province);
     this.getAllWard(customerData?.addressResponse?.district)
-
+    this.leadSource.setValue(customerData?.leadSource);
     this.addressArray.patchValue([{
       homeNo: customerData?.addressResponse?.homeNo,
       province: customerData?.addressResponse?.province,
       ward: customerData?.addressResponse?.ward,
       district: customerData?.addressResponse?.district
     }])
-    this.leadSource.setValue(customerData?.leadSource);
+
     customerData?.industries.map((data:any)=>{
       this.selectedIndustryValues.push(data.code);
       const indexCode = this.industryData.findIndex(x => x.value ===data.code)
@@ -143,24 +165,17 @@ export class UpdateCustomerComponent implements OnInit {
 
   createForm(){
     this.updateCustomerForm = this.fb.group({
-        title:['', [Validators.required,Validators.minLength(5)  ]],
-        companyName: ['', [Validators.required,Validators.minLength(5)]],
-        fullName: ['', [Validators.required ,Validators.minLength(5)]],
-        representation: ['', [Validators.required ,Validators.min(5)]],
-        phone:['', [Validators.required,]],
-        quantityMonth:['', [Validators.required]],
-        inProvincePrice: ['', [Validators.required]],
-        outProvincePrice: ['', [Validators.required]],
-        weight: ['', [Validators.required]],
-        expectedRevenue: ['', [Validators.required]],
-        quality:['', [Validators.required]],
-        compensation:['', [Validators.required]],
-        payment:['', [Validators.required]],
-        other:['', [Validators.required]],
-        leadSource:['', [Validators.required]],
-        address: this.fb.array([this.addAddressGroup()]),
-        industry: this.fb.array([]),
-    })
+      title:['', [Validators.required,Validators.minLength(5)  ]],
+      companyName: ['', [Validators.required,Validators.minLength(5)]],
+      representation: ['', [Validators.required ,Validators.minLength(5)]],
+      phone:['', [Validators.required,]],
+      quantityMonth:['', [Validators.required,]], //
+      weight: ['', [Validators.required]], //
+      expectedRevenue: ['', [Validators.required]], //
+      leadSource:['', ],
+      address: this.fb.array([this.addAddressGroup()]),
+      industry: this.fb.array([]),
+  })
 
   }
 
@@ -218,9 +233,17 @@ export class UpdateCustomerComponent implements OnInit {
   this.bodyApi= this.updateCustomerForm.value;
   this.bodyApi.industry=this.selectedIndustryValues;
   this.bodyApi.address=this.addressArray.value[0]
-  this.customerService.updateCustomer(this.idCustomer,this.bodyApi).subscribe(data=>{
-    this.toastr.success("Cập nhật thành công");
-    this.route.navigateByUrl('/admin/customer')
+  console.log(this.bodyApi);
+
+  this.customerService.updateCustomer(this.idUpdate,this.bodyApi).subscribe(data=>{
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Cập nhật thành công',
+      showConfirmButton: false,
+      timer: 3000
+    })
+
   })
   }
 

@@ -1,0 +1,13 @@
+#switcher {
+  text-align: right;
+}
+
+h3 {
+  text-align: left;
+}
+
+
+.button {
+  display: inline-block;
+  margin-right: 20px;
+}
