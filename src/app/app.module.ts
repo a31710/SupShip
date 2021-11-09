@@ -10,7 +10,8 @@ import { InterceptorService } from './interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent
@@ -25,7 +26,9 @@ import { CookieService } from 'ngx-cookie-service';
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-
+    NgbModule,
+    NgbPaginationModule,
+    NgbAlertModule
   ],
 
   providers: [ {

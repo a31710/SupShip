@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card bg-primary text-white shadow">
+        <div class="card-body" style="text-align: center;">
+        Tạo mới tiếp xúc
+        </div>
+    </div>
+</div>
+</div>
+
+<br>
+<form class="row form-inline">
+  <div class="col-12">
+    <div class="form-group">
+      <span class="text-gray-900">Ngày tiếp xúc </span>
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd"
+               name="dp" [(ngModel)]="model" ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-sm btn-primary calendar" (click)="d.toggle()" type="button"><i class="far fa-calendar-alt"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="form-group">
+      <span class="text-gray-900">thời gian từ </span>
+      <div class="input-group">
+        <input class="form-control" >
+        <div class="input-group-append">
+          <button class="btn btn-sm btn-primary calendar"  type="button"><i class="far fa-clock"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-group">
+      <span class="text-gray-900">Đến</span>
+      <div class="input-group">
+        <input class="form-control" >
+        <div class="input-group-append">
+          <button class="btn btn-sm btn-primary calendar"  type="button"><i class="far fa-clock"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h3 class="m-0 text-primary">KH0010001</h3>
+          <div class="dropdown no-arrow">
+              <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink">
+                <i class="fas fa-window-close" style="font-size: 25px;"></i>
+              </a>
+
+          </div>
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-home mr-2"></i>Công ty CP Thương mại Toàn Thắng</h3></div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1"></i>P, Liêu Giai,Văn Cao, Ba Đình, Hà Nội</h3> </div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-user mr-2 ml-1"></i>Nguyễn Thị Ngân</h3></div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3>0961565015</h3></div>
+      </div>
+
+  </div>
+  </div>
+</div>
+
+<div class="fixed" style="margin-left: -10px;">
+
+    <div class="row col-12" >
+      <button class="btn btn-sm btn-primary p-2" >Tạo mới</button>
+    </div>
+</div>
+
+<ng-template #footerTemplate>
+  <hr class="my-0">
+  <button class="btn btn-primary btn-sm m-2 float-left" (click)="model = today; d.close()">Today</button>
+  <button class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">Close</button>
+</ng-template>
