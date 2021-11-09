@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/service/auth.service';
+
 import Swal from 'sweetalert2'
 @Component({
   selector: 'app-admin',
@@ -24,4 +25,5 @@ export class AdminComponent implements OnInit {
     this.authService.logOut()
 
   }
+
 }

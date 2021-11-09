@@ -11,5 +11,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
+  toggle(){
+    $("#sidebarToggle, #sidebarToggleTop, #accordionSidebar").toggleClass("toggled si");
 
+  }
 }

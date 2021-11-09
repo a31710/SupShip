@@ -11,5 +11,8 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit() {
   }
+  toggle(){
+    $("#sidebarToggle, #sidebarToggleTop, #accordionSidebar").toggleClass("toggled si");
 
+  }
 }

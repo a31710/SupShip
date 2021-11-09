@@ -38,6 +38,7 @@
               "src/assets/admin/css/sb-admin-2.min.css"
             ],
             "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
               "src/assets/admin/vendor/jquery/jquery.min.js",
               "src/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js",
               "src/assets/admin/vendor/jquery-easing/jquery.easing.min.js",
