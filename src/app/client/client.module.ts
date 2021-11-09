@@ -8,14 +8,17 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { CreateScheduleComponent } from './create-schedule/create-schedule.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { CreateCustomerComponent } from './create-customer/create-customer.component';
+import {MatStepperModule} from '@angular/material/stepper';
 @NgModule({
   imports: [
     CommonModule,
     ClientRoutingModule,
     MatTabsModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    MatStepperModule
   ],
-  declarations: [ClientComponent,HeaderComponent,SideBarComponent,CreateScheduleComponent]
+  declarations: [ClientComponent,HeaderComponent,SideBarComponent,CreateScheduleComponent,CreateCustomerComponent]
 })
 export class ClientModule { }

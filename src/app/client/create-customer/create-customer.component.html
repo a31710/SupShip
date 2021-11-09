@@ -1,0 +1,52 @@
+<div class="row">
+  <mat-stepper labelPosition="bottom" #stepper>
+    <mat-step >
+      <form >
+        <ng-template matStepLabel>Phân loại</ng-template>
+
+
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <span class="text-gray-900">Loại khách hàng</span>
+                <div class="input-group">
+                  <div class="button">
+                    <input type="radio" id="a25" name="check-substitution-2" />
+                    <label class="btn btn-default" for="a25">Læg i kurv</label>
+                  </div>
+                  <div class="button">
+                    <input type="radio" id="a50" name="check-substitution-2" />
+                    <label class="btn btn-default" for="a50">Læg i kurv</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="fixed" style="margin-left: -35px;">
+          <div class="row col-12" >
+            <button class="btn btn-sm btn-primary p-2"mat-button matStepperNext >Tiếp theo</button>
+          </div>
+      </div>
+
+      </form>
+    </mat-step>
+    <mat-step >
+      <form >
+        <ng-template matStepLabel>Thông tin</ng-template>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Dịch vụ</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

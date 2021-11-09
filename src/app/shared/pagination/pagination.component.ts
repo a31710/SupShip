@@ -29,8 +29,8 @@ export class PaginationComponent implements OnInit,AfterViewInit {
   ngAfterViewInit(){
    setTimeout(()=>{
     this.getPages(this.offset, this.limit, this.size);
-    console.log(this.size);
-   },2000)
+    console.log(this.size+ 'ảo thật đấy');
+   },10000)
 
 
   }

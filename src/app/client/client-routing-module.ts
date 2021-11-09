@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard/auth.guard';
 import { ClientComponent } from './client.component';
+import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { CreateScheduleComponent } from './create-schedule/create-schedule.component';
 import { HomeComponent } from './home/home.component';
 
@@ -25,6 +26,9 @@ const routes: Routes = [{
     },
     {
       path: 'create-schedule', component: CreateScheduleComponent,
+    },
+    {
+      path: 'create-customer', component: CreateCustomerComponent,
     },
 
     { path: '**', redirectTo: '' },

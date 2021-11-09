@@ -1,0 +1,42 @@
+div.fixed {
+  position: fixed;
+  width: 100%;
+  bottom: 10px;
+
+}
+.button {
+  float: left;
+  width: 120px;
+  height: 40px;
+  position: relative;
+
+}
+
+.button label,
+.button input {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: rgb(71, 67, 67);
+  border-radius: 20px;
+  border: 2px solid #4e73df;
+}
+
+.button input[type="radio"] {
+  opacity: 0.011;
+  z-index: 100;
+}
+
+.button input[type="radio"]:checked + label {
+  background: #4e73df;
+  border-radius: 20px;
+}
+
+.button label {
+  cursor: pointer;
+  z-index: 90;
+  line-height: 1.8em;
+}
