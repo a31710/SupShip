@@ -1,52 +1,226 @@
+<form [formGroup]="insertCustomerForm" (ngSubmit)="onSubmit()">
 <div class="row">
   <mat-stepper labelPosition="bottom" #stepper>
     <mat-step >
-      <form >
+
         <ng-template matStepLabel>Phân loại</ng-template>
 
 
-          <div class="row">
+          <div class="row mt-2">
             <div class="col-12">
               <div class="form-group">
                 <span class="text-gray-900">Loại khách hàng</span>
-                <div class="input-group">
-                  <div class="button">
-                    <input type="radio" id="a25" name="check-substitution-2" />
-                    <label class="btn btn-default" for="a25">Læg i kurv</label>
-                  </div>
-                  <div class="button">
-                    <input type="radio" id="a50" name="check-substitution-2" />
-                    <label class="btn btn-default" for="a50">Læg i kurv</label>
+                <div class="input-group mt-2">
+                  <div class="switch-field">
+                    <input type="radio" id="radio-one" name="leadSource"  formControlName="leadSource" value="PRIVATE" />
+                    <label for="radio-one">Cá nhân</label>
+                    <input type="radio" id="radio-two" name="leadSource" formControlName="leadSource" value="ENTERPRISE" />
+                    <label for="radio-two">Doanh nghiệp</label>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <span class="text-gray-900">Sản phẩm kinh doanh</span>
+                <ng-container formArrayName="industry">
+                  <div class="input-group mt-2"  *ngFor="let b of industryFormArray.controls; let index = index">
+                    <div class="form-check">
+                      <input [formControl]="b" (change)="getSelectedIndustryValue()" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label mt-1" for="flexCheckDefault">
+                        {{industryData[index].name}}
+                      </label>
+
+                    </div>
+                  </div>
+                </ng-container>
+                <br>
+                <br>
+
               </div>
             </div>
           </div>
         <div class="fixed" style="margin-left: -35px;">
           <div class="row col-12" >
-            <button class="btn btn-sm btn-primary p-2"mat-button matStepperNext >Tiếp theo</button>
+            <button type="button" class="btn btn-sm btn-primary p-2"mat-button matStepperNext >Tiếp theo</button>
           </div>
       </div>
 
-      </form>
+
     </mat-step>
     <mat-step >
-      <form >
+        <button class="btn btn-circle btn-primary mb-2" mat-button matStepperPrevious><i class="fas fa-arrow-left"></i></button>
         <ng-template matStepLabel>Thông tin</ng-template>
 
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+        <div class="row mt-2">
+          <div class="col-12">
+            <div class="form-group">
+              <span class="text-gray-900">Tên cửa hàng/công ty</span>
+              <div class="input-group mt-1">
+                <input class="form-control" placeholder="Nhập tên cửa hàng" formControlName="companyName">
+              </div>
+              <div *ngFor="let validation of insertCustomerMessage.companyName">
+                <small class="text-danger"   *ngIf="insertCustomerForm.get('companyName')?.hasError(validation.type) && insertCustomerForm.get('companyName').touched">
+                 {{validation.message}}</small>
+              </div>
+            </div>
+          </div>
         </div>
-      </form>
+
+        <div class="row mt-2">
+          <div class="col-12">
+            <div class="form-group">
+              <span class="text-gray-900">Người liên hệ</span>
+              <div class="input-group mt-1">
+                <input class="form-control" placeholder="Nhập tên người liên hệ" formControlName="representation">
+              </div>
+              <div *ngFor="let validation of insertCustomerMessage.representation">
+                <small class="text-danger"   *ngIf="insertCustomerForm.get('representation')?.hasError(validation.type) && insertCustomerForm.get('representation').touched">
+                 {{validation.message}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-12">
+            <div class="form-group">
+              <span class="text-gray-900">Chức danh</span>
+              <div class="input-group mt-1">
+                <input class="form-control" placeholder="Nhập chức danh" formControlName="title">
+              </div>
+              <div *ngFor="let validation of insertCustomerMessage.title">
+                <small class="text-danger"   *ngIf="insertCustomerForm.get('title')?.hasError(validation.type) && insertCustomerForm.get('title').touched">
+                 {{validation.message}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-12">
+            <div class="form-group">
+              <span class="text-gray-900">Số điện thoại</span>
+              <div class="input-group mt-1">
+                <input class="form-control" placeholder="Nhập số điện thoại" formControlName="phone">
+              </div>
+              <div *ngFor="let validation of insertCustomerMessage.phone">
+                <small class="text-danger"   *ngIf="insertCustomerForm.get('phone')?.hasError(validation.type) && insertCustomerForm.get('phone').touched">
+                 {{validation.message}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      <ng-container formArrayName="address">
+        <div class="row mt-2" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
+          <div class="col-12">
+            <div class="row form-group">
+              <span class="text-gray-900">Địa chỉ</span>
+
+              <div class="col-6">
+                <div class="input-group mt-1">
+                  <select  class="combobox form-control" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)"  formControlName="province">
+                    <option [ngValue]="null" [disabled]="true" [selected]="true">Chọn Tỉnh</option>
+                    <option *ngFor="let d of dataProvince" [ngValue]="d.provinceCode"> {{d.provinceName}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="input-group mt-1">
+                  <select class="combobox form-control" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)"  formControlName="district">
+                    <option [ngValue]="null" [disabled]="true" [selected]="true">Quận/Huyện</option>
+                    <option *ngFor="let d of dataDistrict" [ngValue]="d.districtCode"> {{d.districtName}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="input-group mt-3">
+                  <select class="combobox form-control" [(ngModel)]="wardSelect" formControlName="ward" >
+                    <option [ngValue]="null" [disabled]="true" [selected]="true">Chọn Phường/xã</option>
+                    <option *ngFor="let d of dataWard" [ngValue]="d.wardCode"> {{d.wardName}}</option>
+                  </select>
+                </div>
+              </div>
+
+
+
+              <div class="col-6">
+                <div class="input-group mt-3">
+                  <input class="form-control" placeholder="Nhập số nhà" formControlName="homeNo">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+      </ng-container>
+
+          <div class="fixed" style="margin-left: -35px;">
+            <div class="row col-12" >
+              <button type="button" class="btn btn-sm btn-primary p-2"mat-button matStepperNext >Tiếp theo</button>
+            </div>
+        </div>
+
+
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Dịch vụ</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+      <button class="btn btn-circle btn-primary mb-2" mat-button matStepperPrevious><i class="fas fa-arrow-left"></i></button>
+      <div class="row mt-2">
+        <div class="col-12">
+          <div class="form-group">
+            <span class="text-gray-900">Số lượng đơn trên tháng</span>
+            <div class="input-group mt-1">
+              <input class="form-control" placeholder="0" formControlName="quantityMonth">
+            </div>
+            <div *ngFor="let validation of insertCustomerMessage.quantityMonth">
+              <small class="text-danger"   *ngIf="insertCustomerForm.get('quantityMonth')?.hasError(validation.type) && insertCustomerForm.get('quantityMonth').touched">
+               {{validation.message}}</small>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <div class="row mt-2">
+        <div class="col-12">
+          <div class="form-group">
+            <span class="text-gray-900">Trọng lượng/Bưu phẩm</span>
+            <div class="input-group mt-1">
+              <input class="form-control" placeholder="0 Kg" formControlName="weight">
+            </div>
+            <div *ngFor="let validation of insertCustomerMessage.weight">
+              <small class="text-danger"   *ngIf="insertCustomerForm.get('weight')?.hasError(validation.type) && insertCustomerForm.get('weight').touched">
+               {{validation.message}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12">
+          <div class="form-group">
+            <span class="text-gray-900">Doanh thu dự kiến</span>
+            <div class="input-group mt-1">
+              <input class="form-control" placeholder="0 VNĐ" formControlName="expectedRevenue">
+            </div>
+            <div *ngFor="let validation of insertCustomerMessage.expectedRevenue">
+              <small class="text-danger"   *ngIf="insertCustomerForm.get('expectedRevenue')?.hasError(validation.type) && insertCustomerForm.get('expectedRevenue').touched">
+               {{validation.message}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fixed" style="margin-left: -35px;">
+        <div class="row col-12" >
+          <button class="btn btn-sm btn-primary p-2" type="submit" >Tạo mới khách hàng</button>
+        </div>
+    </div>
     </mat-step>
   </mat-stepper>
 </div>
+</form>

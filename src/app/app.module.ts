@@ -12,6 +12,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
+
 @NgModule({
   declarations: [
     AppComponent
@@ -28,7 +30,9 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
     ToastrModule.forRoot(),
     NgbModule,
     NgbPaginationModule,
-    NgbAlertModule
+    NgbAlertModule,
+    AccordionModule,
+
   ],
 
   providers: [ {

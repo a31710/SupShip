@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
@@ -48,11 +48,21 @@ idUpdate:any;
 
   createForm(){
     this.tranferForm = this.fb.group({
-      userAssigneeId: ['',],
-      userRecipientId: ['',],
-      deptCode: ['',],
-      postCode: ['',],
+      userAssigneeId: ['',Validators.required],
+      userRecipientId: ['',Validators.required],
+      leadIds:['',],
+      deptCode: ['',Validators.required],
+      postCode: ['',Validators.required],
+
     })
+  }
+
+  get leadIdArray(){
+    return this.tranferForm.get('leadIds') as FormArray;
+  }
+  onSubmit(){
+    this.leadIdArray.setValue(this.idArray);
+    console.log(this.tranferForm.value);
   }
   getAllDeptCode(){
     this.userService.getDeptCode().subscribe(data=>this.dataDept=data)
@@ -68,6 +78,8 @@ idUpdate:any;
     this.customerService.getCustomerPagi((this.offset/this.limit)+1, this.limit).subscribe((data)=>{
       this.listCustomer = data.data
     })
+
+
     this.idArray = [];
   }
   onDelete(id:any){
@@ -170,5 +182,43 @@ idUpdate:any;
   }
 
 
+  getListNew(){
+    this.customerService.getLeadStatus('NEW').subscribe((data)=>{
+      this.listCustomer = data.data
+    })
+  }
 
+  getListAll(){
+    this.customerService.getLeadStatus('null').subscribe((data)=>{
+      this.listCustomer = data.data
+    })
+  }
+
+  getListContacting(){
+    this.customerService.getLeadStatus('CONTACTING').subscribe((data)=>{
+      this.listCustomer = data.data
+    })
+  }
+
+  getListSuccess(){
+    this.customerService.getLeadStatus('SUCCESS').subscribe((data)=>{
+      this.listCustomer = data.data
+    })
+  }
+
+  getListFalied(){
+    this.customerService.getLeadStatus('FAILED').subscribe((data)=>{
+      this.listCustomer = data.data
+    })
+  }
+
+  getListNotContacting(){
+    this.customerService.getLeadStatus('NOT_CONTACTING').subscribe((data)=>{
+      this.listCustomer = data.data
+    })
+  }
+
+  toggle(i:any){
+    $(`.toogle${i}`).toggleClass("bg-gradient-light");
+  }
 }

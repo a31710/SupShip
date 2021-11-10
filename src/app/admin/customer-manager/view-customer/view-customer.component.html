@@ -32,7 +32,7 @@
       </div>
       <div class="col-3 pt-1">
         <a  class="btn btn-sm btn-success"><i
-          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+          class="fas fa-download fa-sm text-white-50"></i> Tìm kiếm</a>
       </div>
     </div>
 
@@ -74,36 +74,36 @@
   <div class="row col-12">
     <div class="row col-xl-6 col-md-6 mb-4">
       <div class="mb-4">
-        <a  class="btn btn-sm btn-secondary mr-2">Tất cả</a>
-        <a  class="btn btn-sm btn-primary mr-2">Mới</a>
-        <a  class="btn btn-sm btn-info mr-2">Chưa tiếp xúc</a>
-        <a  class="btn btn-sm btn-warning mr-2">Đang tiếp xúc</a>
-        <a  class="btn btn-sm btn-success mr-2">Thành công</a>
-        <a  class="btn btn-sm btn-danger mr-2" >Thất bại</a>
+        <a  (click)="getListAll()" class="btn btn-sm btn-secondary mr-2">Tất cả</a>
+        <a  (click)="getListNew()" class="btn btn-sm btn-primary mr-2">Mới</a>
+        <a  (click)="getListNotContacting()" class="btn btn-sm btn-info mr-2">Chưa tiếp xúc</a>
+        <a  (click)="getListContacting()" class="btn btn-sm btn-warning mr-2">Đang tiếp xúc</a>
+        <a  (click)="getListSuccess()" class="btn btn-sm btn-success mr-2">Thành công</a>
+        <a  (click)="getListFalied()" class="btn btn-sm btn-danger mr-2" >Thất bại</a>
       </div>
     </div>
 
     <div class="row col-xl-6 col-md-6 mb-4">
 
-      <div class="col-2 pt-1">
+      <div class="col-lg-2 col-sm-1  pt-1">
 
       </div>
-      <div class="col-2 pt-1">
+      <div class="col-lg-2 col-sm-1 pt-1">
 
       </div>
-      <div class="col-2 pt-1">
+      <div class="col-lg-2 col-sm-1 pt-1">
 
       </div>
-      <div class="col-2 pt-1">
+      <div class="col-lg-2  col-sm-1 pt-1">
 
       </div>
-      <div class="col-2 pt-1">
-        <a  class="btn btn-sm btn-success">
+      <div class="col-lg-2 col-md-4  pt-1">
+        <button [disabled]="idArray.length<1" class="btn btn-sm btn-success">
           <span class="text" (click)="allTranfer()" data-toggle="modal" data-target="#tranfer">Giao tiếp xúc</span>
-      </a>
+        </button>
       </div>
-      <div class="col-2 pt-1">
-        <a  class="btn btn-sm btn-dark">Xóa bản ghi</a>
+      <div class="col-lg-2 pt-1">
+        <button [disabled]="idArray.length<1" class="btn btn-sm btn-dark">Xóa bản ghi</button>
       </div>
     </div>
 
@@ -130,8 +130,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of listCustomer" >
-          <th scope="col"><input type="checkbox" (change)="getIdArray(item.id)"></th>
+        <tr *ngFor="let item of listCustomer, let i = index" [ngClass]="'toogle'+i">
+          <th scope="col"><input (click)="toggle(i)" type="checkbox" (change)="getIdArray(item.id)"></th>
           <th scope="row">{{item.id}}</th>
           <td>{{item.leadSource}}</td>
           <td>{{item.companyName}}</td>
@@ -241,8 +241,10 @@ aria-hidden="true">
 </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-        <button class="btn btn-success"  type="button" data-dismiss="modal">Giao</button>
+        <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+        <button class="btn btn-sm btn-success" (click)="onSubmit()" type="button"  data-dismiss="modal" aria-label="Close">
+         Giao
+      </button>
     </div>
 </div>
  </form>

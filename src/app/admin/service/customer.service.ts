@@ -44,4 +44,8 @@ constructor(private http: HttpClient) { }
   getCustomerPagi(page:any, size:any):Observable<any>{
     return this.http.get<any>(`${this.url}/api/lead/filter?page=${page}&size=${size}&sort=lastModifiedDate,desc`)
   }
+
+  getLeadStatus(status:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/lead/filter?status=${status}`)
+  }
 }

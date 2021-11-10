@@ -13,6 +13,5 @@ export class SideBarComponent implements OnInit {
   }
   toggle(){
     $("#sidebarToggle, #sidebarToggleTop, #accordionSidebar").toggleClass("toggled si");
-
   }
 }

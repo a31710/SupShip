@@ -11,7 +11,7 @@ export class PaginationComponent implements OnInit,AfterViewInit {
   @Input() size: any;
   @Input() totalPage: any;
   @Input() range: number = 3;
-
+  time:any = 1000;
 
 
   @Output() pageChange: EventEmitter<any>;
@@ -27,12 +27,18 @@ export class PaginationComponent implements OnInit,AfterViewInit {
 
   }
   ngAfterViewInit(){
-   setTimeout(()=>{
-    this.getPages(this.offset, this.limit, this.size);
-    console.log(this.size+ 'ảo thật đấy');
-   },10000)
+    this.timeout(1000);
 
-
+  }
+  timeout(time:any){
+    setTimeout( () => {
+      if(this.size == undefined){
+        console.log("recall");
+        this.timeout(time);
+      }else{
+        this.getPages(this.offset, this.limit, this.size);
+      }
+    }, time);
   }
 
   getCurrentPage(offset: number, limit: number): number {
