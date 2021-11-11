@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CustomerService } from '../../service/customer.service';
 
 @Component({
   selector: 'app-receive',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./receive.component.css']
 })
 export class ReceiveComponent implements OnInit {
+  totalLead:any
+  leadData:any
+  constructor(private customerService: CustomerService, private router:Router) {
+    this.customerService.getLeadByUser().subscribe(data=>{
+      this.leadData = data.data
+      this.totalLead = data.totalItem;
+      console.log(data);
 
-  constructor() { }
+    })
+  }
 
   ngOnInit() {
   }
-
+  detailCustomer(id:any){
+    this.router.navigateByUrl(`client/customer/${id}`);
+  }
 }

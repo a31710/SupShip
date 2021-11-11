@@ -1,0 +1,58 @@
+<div class="row">
+
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header bg-gradient-primary d-flex flex-row align-items-center justify-content-between">
+        <i style="font-size: 20px;" [routerLink]="['/client/customer']"   class="text-gray-100 fas fa-arrow-left"></i>
+        <h3 class="m-0 text-gray-100 mr-2">KH{{leadData?.id}}</h3>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <h6 class="mt-2 text-gray-100"><i style="font-size: 20px;" class="fas fa-ellipsis-v"></i></h6>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Sửa thông tin</a>
+                <a class="dropdown-item" href="#">Xóa khách hàng</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card shadow mb-4 mt-2">
+      <!-- Card Header - Dropdown -->
+      <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-gray-100 bg-gradient-primary" style="border: 2px; border-radius: 5px;"><span class="p-1">Gửi báo giá</span></h6>
+          <div class="dropdown no-arrow">
+              <a class="dropdown-toggle" href="#" role="button" >
+                  <h6 class="m-0 font-weight-bold text-gray-100 bg-gradient-success" style="border: 2px; border-radius: 5px;"><span class="p-1">Được giao</span></h6>
+              </a>
+          </div>
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-home mr-2"></i>{{leadData?.companyName}}</h3></div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1"></i>P, Liêu Giai,Văn Cao, Ba Đình, Hà Nội</h3> </div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-user mr-2 ml-1"></i>{{leadData?.representation}}</h3></div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3>+{{leadData?.phone}}</h3></div>
+      </div>
+  </div>
+
+
+  <div class="card shadow mb-4 ">
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h3 class="m-0 font-weight-bold text-primary"><i class="fas fa-history mr-2"></i>Lịch sử tiếp xúc</h3>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+        <div class="chart-area">
+            <canvas id="myAreaChart"></canvas>
+        </div>
+    </div>
+</div>
+
+
+</div>
