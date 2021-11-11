@@ -48,4 +48,8 @@ constructor(private http: HttpClient) { }
   getLeadStatus(status:any):Observable<any>{
     return this.http.get<any>(`${this.url}/api/lead/filter?status=${status}`)
   }
+
+  getLeadByPostCode(podeCode:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/user/postcode?postCode=${podeCode}`);
+  }
 }

@@ -27,8 +27,10 @@ tabs = [{
 selected = new FormControl(0);
 dataPost:any
 dataDept:any
+dataLead:any
 deptCodeSelect:any;
 postCodeSelect:any;
+leadSelect:any
 idUpdate:any;
 
   constructor(private customerService: CustomerService, private route: Router,
@@ -70,6 +72,13 @@ idUpdate:any;
 
   getPostCode(value:any){
     this.userService.getPostCode(value).subscribe(data=>this.dataPost=data)
+  }
+
+  getListByPostCode(postCode:any){
+    this.customerService.getLeadByPostCode(postCode).subscribe(data=>{
+      this.dataLead = data
+      console.log(data);
+    })
   }
   onPageChange(offset: number) {
     this.offset = offset;

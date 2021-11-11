@@ -21,7 +21,7 @@ constructor(private http: HttpClient) { }
     }
 
     getListUser():Observable<any>{
-      return this.http.get<any>(`${this.url}/user/list?page=1&size=5&desc`);
+      return this.http.get<any>(`${this.url}/api/user/list?page=0&size=5`);
     }
     banUser(uid:any):Observable<any>{
       return this.http.post<any>(`${this.url}/user/ban-user`,uid);

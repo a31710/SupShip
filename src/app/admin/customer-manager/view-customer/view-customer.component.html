@@ -200,7 +200,7 @@ aria-hidden="true">
           <div class="row col-6">
             <span>Mã Bưu cục</span>
             <div  class="md-form md-outline input-with-post-icon " inline="true">
-              <select [(ngModel)]="postCodeSelect" class="form-control"  formControlName="postCode">
+              <select [(ngModel)]="postCodeSelect"(change)="getListByPostCode(postCodeSelect)" class="form-control"  formControlName="postCode">
                 <option [ngValue]="null" [disabled]="true">Chọn PostCode</option>
                 <option *ngFor="let d of dataPost" [ngValue]="d.postCode"> {{d.postName}}</option>
               </select>
@@ -212,7 +212,10 @@ aria-hidden="true">
        <div class="row col-6">
         <span>Nhân viên tiếp xúc</span>
         <div  class="md-form md-outline input-with-post-icon " inline="true">
-          <input  type="text" id="example" class="form-control">
+          <select [(ngModel)]="leadSelect" class="form-control"  formControlName="postCode">
+            <option [ngValue]="null" [disabled]="true">Chọn Nhân viên</option>
+            <option *ngFor="let d of dataPost" [ngValue]="d.postCode"> {{d.postName}}</option>
+          </select>
         </div>
        </div>
 
