@@ -212,9 +212,9 @@ aria-hidden="true">
        <div class="row col-6">
         <span>Nhân viên tiếp xúc</span>
         <div  class="md-form md-outline input-with-post-icon " inline="true">
-          <select [(ngModel)]="leadSelect" class="form-control"  formControlName="postCode">
+          <select [(ngModel)]="leadSelect" class="form-control"  formControlName="userRecipientId">
             <option [ngValue]="null" [disabled]="true">Chọn Nhân viên</option>
-            <option *ngFor="let d of dataPost" [ngValue]="d.postCode"> {{d.postName}}</option>
+            <option *ngFor="let d of dataLead" [ngValue]="d.empCode"> {{d.name}}</option>
           </select>
         </div>
        </div>

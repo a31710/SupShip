@@ -10,6 +10,9 @@ import { CustomerService } from '../service/customer.service';
   styleUrls: ['./create-schedule.component.css']
 })
 export class CreateScheduleComponent implements OnInit {
+  time1:any
+  time2:any
+  day: Date | any;
   model: NgbDateStruct | any;
   today = this.calendar.getToday();
 
@@ -39,8 +42,8 @@ export class CreateScheduleComponent implements OnInit {
   }
   onSubmit(){
     this.activateRoute.params.subscribe(params => this.leadIdArr.setValue(params['id']))
-    const form:any = `${this.model?.day<10?`0${this.model?.day}`: this.model?.day}-${this.model?.month<10?`0${this.model?.month}`: this.model?.month}-${this.model?.year} ${this.fromArr.value<10?`0${this.fromArr.value}`: this.fromArr.value}:00:00`
-    const to:any = `${this.model?.day<10?`0${this.model?.day}`: this.model?.day}-${this.model?.month<10?`0${this.model?.month}`: this.model?.month}-${this.model?.year} ${this.toArr.value<10?`0${this.toArr.value}`: this.toArr.value}:00:00`
+    const form:any = `${this.datePipe(this.day)} ${this.time1}:00`
+    const to:any = `${this.datePipe(this.day)} ${this.time2}:00`
     this.fromArr.setValue(form);
     this.toArr.setValue(to);
     this.customerService.createSchedule(this.scheduleForm.value).subscribe(data=>{
@@ -55,6 +58,12 @@ export class CreateScheduleComponent implements OnInit {
       this.router.navigateByUrl('/client/customer')
 
     })
+  }
 
+  datePipe(time:any){
+    const day= time.getDate()<10?`0${time.getDate()}`:time.getDate();
+    const month = time.getMonth()<10?`0${time.getMonth()}`:time.getMonth();
+    const year = time.getYear().toString().substring(1,3);
+    return `${day}-${month}-20${year}`
   }
 }

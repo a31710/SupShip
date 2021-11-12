@@ -14,6 +14,9 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
 import { TimelineModule } from "primeng/timeline";
 import { CardModule } from "primeng/card";
+import {CalendarModule} from 'primeng/calendar';
+import {InputTextModule} from 'primeng/inputtext';
+import {InputMaskModule} from 'primeng/inputmask';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,6 +29,10 @@ import { CardModule } from "primeng/card";
     SelectButtonModule,
     TimelineModule,
     CardModule,
+    CalendarModule,
+    InputTextModule,
+    InputMaskModule
+
   ],
   declarations: [ClientComponent,HeaderComponent,SideBarComponent,CreateScheduleComponent,CreateCustomerComponent, DetailCustomerComponent]
 })

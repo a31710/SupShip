@@ -32,7 +32,6 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/ngx-toastr/toastr.css",
               "src/assets/styles/my-theme.scss",
               "src/styles.css",
               "src/assets/admin/vendor/fontawesome-free/css/all.min.css",
