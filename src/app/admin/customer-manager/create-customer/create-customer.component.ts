@@ -9,6 +9,8 @@ import { CustomerService } from '../../service/customer.service';
   styleUrls: ['./create-customer.component.css']
 })
 export class CreateCustomerComponent implements OnInit {
+  val:any;
+  value2:any;
   proviceSelect:any
   districtSelect:any
   wardSelect:any

@@ -125,7 +125,6 @@ export class EditProfileComponent implements OnInit {
         showConfirmButton: false,
         timer: 3000
       })
-      window.location.reload();
     }
     )
   }

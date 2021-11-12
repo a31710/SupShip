@@ -26,7 +26,7 @@ const routes: Routes = [{
         .then(m => m.CustomerModule), canActivate: [AuthGuard],
     },
     {
-      path: 'create-schedule', component: CreateScheduleComponent,
+      path: 'create-schedule/:id', component: CreateScheduleComponent,
     },
     {
       path: 'create-customer', component: CreateCustomerComponent,

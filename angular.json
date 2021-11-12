@@ -38,7 +38,7 @@
               "src/assets/admin/vendor/fontawesome-free/css/all.min.css",
               "src/assets/admin/css/sb-admin-2.min.css",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/rhea/theme.css",
+              "node_modules/primeng/resources/themes/mdc-light-indigo/theme.css",
               "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [

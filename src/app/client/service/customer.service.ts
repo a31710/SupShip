@@ -20,7 +20,9 @@ getLeadByUser():Observable<any>{
 getDetailCustomer(id:any):Observable<any>{
   return this.http.get<any>(`${this.url}/api/lead/evtp/${id}`);
 }
-
+createSchedule(body:any):Observable<any>{
+  return this.http.post<any>(`${this.url}/api/schedules/save`,body)
+}
 
 }
 

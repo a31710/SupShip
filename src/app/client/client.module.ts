@@ -12,6 +12,8 @@ import { CreateCustomerComponent } from './create-customer/create-customer.compo
 import {MatStepperModule} from '@angular/material/stepper';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
+import { TimelineModule } from "primeng/timeline";
+import { CardModule } from "primeng/card";
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +23,9 @@ import { DetailCustomerComponent } from './detail-customer/detail-customer.compo
     FormsModule,
     ReactiveFormsModule,
     MatStepperModule,
-    SelectButtonModule
+    SelectButtonModule,
+    TimelineModule,
+    CardModule,
   ],
   declarations: [ClientComponent,HeaderComponent,SideBarComponent,CreateScheduleComponent,CreateCustomerComponent, DetailCustomerComponent]
 })

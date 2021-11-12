@@ -23,10 +23,10 @@
       <!-- Card Header - Dropdown -->
       <div
           class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6 class="m-0 font-weight-bold text-gray-100 bg-gradient-primary" style="border: 2px; border-radius: 5px;"><span class="p-1">Gửi báo giá</span></h6>
+          <h5 class="m-0 font-weight-bold text-gray-100 bg-gradient-primary" style="border: 2px; border-radius: 5px;"><span class="p-1">Gửi báo giá</span></h5>
           <div class="dropdown no-arrow">
               <a class="dropdown-toggle" href="#" role="button" >
-                  <h6 class="m-0 font-weight-bold text-gray-100 bg-gradient-success" style="border: 2px; border-radius: 5px;"><span class="p-1">Được giao</span></h6>
+                  <h5 class="m-0 font-weight-bold text-gray-100 bg-gradient-success" style="border: 2px; border-radius: 5px;"><span class="p-1">Được giao</span></h5>
               </a>
           </div>
       </div>
@@ -47,10 +47,22 @@
         <h3 class="m-0 font-weight-bold text-primary"><i class="fas fa-history mr-2"></i>Lịch sử tiếp xúc</h3>
     </div>
     <!-- Card Body -->
-    <div class="card-body">
-        <div class="chart-area">
-            <canvas id="myAreaChart"></canvas>
-        </div>
+    <div class="mt-3 mb-3">
+      <p-timeline [value]="events1" align="alternate" styleClass="customized-timeline">
+        <ng-template pTemplate="marker" let-event>
+            <span class="custom-marker p-shadow-2" [style.backgroundColor]="event.color">
+            </span>
+        </ng-template>
+        <ng-template pTemplate="content" let-event>
+          <small class="text-primary">{{event.status}}</small> -
+          <small class="text-primary">{{event.date}}</small>
+          <br>
+          <small class="text-danger">{{event.danger}}</small>
+      </ng-template>
+
+    </p-timeline>
+
+
     </div>
 </div>
 

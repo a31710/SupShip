@@ -24,4 +24,7 @@ export class ReceiveComponent implements OnInit {
   detailCustomer(id:any){
     this.router.navigateByUrl(`client/customer/${id}`);
   }
+  createSchedule(id:any){
+    this.router.navigateByUrl(`client/create-schedule/${id}`)
+  }
 }

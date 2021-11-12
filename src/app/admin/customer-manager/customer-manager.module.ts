@@ -12,6 +12,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {InputMaskModule} from 'primeng/inputmask';
 @NgModule({
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { DetailCustomerComponent } from './detail-customer/detail-customer.compo
     MatCheckboxModule,
     MatFormFieldModule,
     MatIconModule,
-
+    InputNumberModule,
+    InputMaskModule
   ],
   declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent,DetailCustomerComponent]
 })
