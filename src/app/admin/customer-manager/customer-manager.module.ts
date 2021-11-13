@@ -15,6 +15,7 @@ import { DetailCustomerComponent } from './detail-customer/detail-customer.compo
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputMaskModule} from 'primeng/inputmask';
 import { ContactReportComponent } from './contact-report/contact-report.component';
+import { PostReportComponent } from './post-report/post-report.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -29,6 +30,6 @@ import { ContactReportComponent } from './contact-report/contact-report.componen
     InputNumberModule,
     InputMaskModule
   ],
-  declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent,DetailCustomerComponent, ContactReportComponent]
+  declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent,DetailCustomerComponent, ContactReportComponent,PostReportComponent]
 })
 export class CustomerManagerModule { }

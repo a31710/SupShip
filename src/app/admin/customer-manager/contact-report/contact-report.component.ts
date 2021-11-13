@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-contact-report',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactReportComponent implements OnInit {
 
-  constructor() { }
+  @Output() onPostChange: EventEmitter<any>;
+  constructor() {
+    this.onPostChange = new EventEmitter<any>();
+  }
 
   ngOnInit() {
   }
-
+  postReport(){
+    this.onPostChange.emit("3");
+  }
 }

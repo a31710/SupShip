@@ -112,6 +112,24 @@ idUpdate:any;
       })
     })
   }
+
+  addPostReport(event:any){
+    const postReport = {title:'Bưu cục lồn', value:6};
+    const oldData = this.tabs.filter(data => data.value == 6)
+    if(oldData[0]?.value == 6){
+      console.log('bị trùng, trở về tab cũ');
+      this.tabs.forEach((d,i)=>{
+        if(d.value == 6){
+          this.selected.setValue(i);
+        }
+      })
+    }else{
+      console.log('tạo mới');
+      this.tabs.push(postReport);
+      this.selected.setValue(this.tabs.length - 1);
+    }
+    console.log(event);
+  }
   addUpdateTab(id:any){
     const updateCustomer = {title:'Cập nhật khách hàng', value:4}
     const oldData = this.tabs.filter(data => data.value == 4)

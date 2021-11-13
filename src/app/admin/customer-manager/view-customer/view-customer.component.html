@@ -167,7 +167,10 @@
   <app-update-customer [idUpdate]="idUpdate"></app-update-customer>
 </div>
 <div *ngIf="tab.value == 5">
-  <app-contact-report></app-contact-report>
+  <app-contact-report (onPostChange)="addPostReport($event)"></app-contact-report>
+</div>
+<div *ngIf="tab.value == 6">
+  <app-post-report></app-post-report>
 </div>
 
 
