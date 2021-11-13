@@ -1,0 +1,58 @@
+.tp-event {
+  border: 1px solid  rgb(189, 188, 188);
+  padding: 10px;
+  overflow: hidden;
+  background-color: #ffffff;
+  color: #555;
+}
+
+.tp-event .btn.btn-primary {
+  font-size: 1.3em;
+}
+
+.tp-event-calendar {
+  float: left;
+  margin-right: 20px;
+  width: 75px;
+  box-shadow: 1px 1px 6px rgba(0,0,0,0.15);
+  background-color: #fff;
+}
+
+.tp-event-month {
+  background: #4e73df;
+  color: white;
+  padding: 5px;
+  text-align: center;
+}
+
+.tp-event-day {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding: 3px 0;
+}
+
+.tp-event-details {
+  font-size: 15px;
+  display: tabel-cell;
+  vertical-align: middle;
+}
+
+.tp-event-title {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.tp-event-info {
+  margin: 8px 0;
+}
+
+.tp-event-info .glyphicon:last-child {
+  margin-left: 10px;
+}
+
+.icon-botton{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}

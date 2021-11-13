@@ -166,6 +166,9 @@
 <div *ngIf="tab.value == 4">
   <app-update-customer [idUpdate]="idUpdate"></app-update-customer>
 </div>
+<div *ngIf="tab.value == 5">
+  <app-contact-report></app-contact-report>
+</div>
 
 
 </mat-tab>
@@ -214,7 +217,7 @@ aria-hidden="true">
         <div  class="md-form md-outline input-with-post-icon " inline="true">
           <select [(ngModel)]="leadSelect" class="form-control"  formControlName="userRecipientId">
             <option [ngValue]="null" [disabled]="true">Chọn Nhân viên</option>
-            <option *ngFor="let d of dataLead" [ngValue]="d.empCode"> {{d.name}}</option>
+            <option *ngFor="let d of dataLead" [ngValue]="d.empId"> {{d.name}}</option>
           </select>
         </div>
        </div>

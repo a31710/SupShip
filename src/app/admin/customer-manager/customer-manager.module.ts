@@ -14,6 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputMaskModule} from 'primeng/inputmask';
+import { ContactReportComponent } from './contact-report/contact-report.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,6 +29,6 @@ import {InputMaskModule} from 'primeng/inputmask';
     InputNumberModule,
     InputMaskModule
   ],
-  declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent,DetailCustomerComponent]
+  declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent,DetailCustomerComponent, ContactReportComponent]
 })
 export class CustomerManagerModule { }

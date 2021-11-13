@@ -17,13 +17,17 @@ idArray: any[] = []
 tranferData:any[] |any = [] ;
 listCustomer:any
 offset: number = 0;
-limit: number = 5;
+limit: number = 15;
 size:any
 totalPage:number = 3;
 tabs = [{
   title:'Danh sách khách hàng',
   value: 1
-},];
+},{
+  title:'Báo cáo tiếp xúc',
+  value: 5
+}
+];
 selected = new FormControl(0);
 dataPost:any
 dataDept:any

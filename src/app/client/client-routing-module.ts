@@ -5,6 +5,7 @@ import { ClientComponent } from './client.component';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { CreateScheduleComponent } from './create-schedule/create-schedule.component';
 import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
+import { DetailScheduleComponent } from './detail-schedule/detail-schedule.component';
 import { HomeComponent } from './home/home.component';
 
 
@@ -33,6 +34,9 @@ const routes: Routes = [{
     },
     {
       path: 'customer/:id', component: DetailCustomerComponent,
+    },
+    {
+      path: 'schedule', component: DetailScheduleComponent,
     },
 
     { path: '**', redirectTo: '' },

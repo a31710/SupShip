@@ -117,7 +117,8 @@ export class EditProfileComponent implements OnInit {
     }else{
       this.bodyUpdate.gender = 0;
     }
-    this.profileService.updateUser(this.bodyUpdate,this.userId).subscribe(()=>{
+    this.profileService.updateUser(this.bodyUpdate,this.userId).subscribe((data)=>{
+      console.log(data);
       Swal.fire({
         position: 'top-end',
         icon: 'success',

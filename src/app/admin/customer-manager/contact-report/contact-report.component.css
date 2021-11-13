@@ -1,0 +1,149 @@
+/*! CSS Used from: https://devevtp2.viettelpost.vn/assets/bootstrap/css/bootstrap.css ; media=screen */
+@media screen {
+  @media print {
+    * {
+      color: #000 !important;
+      text-shadow: none !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+  }
+  *,
+  *:before,
+  *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .row {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  .row:before,
+  .row:after {
+    display: table;
+    content: " ";
+  }
+  .row:after {
+    clear: both;
+  }
+  .row:before,
+  .row:after {
+    display: table;
+    content: " ";
+  }
+  .row:after {
+    clear: both;
+  }
+  .col-md-1,
+  .col-md-2 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 2px;
+  }
+  @media (min-width: 992px) {
+    .col-md-1,
+    .col-md-2 {
+      float: left;
+    }
+    .col-md-2 {
+      width: 16.666666666666664%;
+    }
+    .col-md-1 {
+      width: 8.333333333333332%;
+    }
+  }
+}
+/*! CSS Used from: https://devevtp2.viettelpost.vn/assets/css/main.css ; media=screen */
+@media screen {
+  * {
+    box-sizing: border-box;
+  }
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+  }
+  ::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+    -webkit-border-radius: 3px;
+  }
+}
+/*! CSS Used from: https://devevtp2.viettelpost.vn/assets/css/style.css ; media=screen */
+@media screen {
+  @media print {
+    * {
+      text-shadow: none !important;
+      box-shadow: none !important;
+    }
+  }
+  [class^="z-"],
+  [class*=" z-"],
+  [class^="z-"]:after,
+  [class*=" z-"]:after,
+  [class^="z-"]:before,
+  [class*=" z-"]:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  *:focus {
+    outline: 0;
+  }
+  .z-label {
+    line-height: normal;
+    word-break: break-word;
+    white-space: normal;
+  }
+  .z-label {
+    font-family: CoreSansGS45;
+    font-size: 13px;
+    font-weight: normal;
+  }
+  .z-vlayout {
+    overflow: hidden;
+  }
+  .z-vlayout-inner {
+    position: relative;
+  }
+  ::-webkit-scrollbar {
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #00857f;
+    border-radius: 6px;
+  }
+}
+/*! CSS Used from: Embedded */
+::-webkit-scrollbar {
+  height: 14px;
+}
+::-webkit-scrollbar-thumb {
+  background: #00857f;
+}
+/*! CSS Used fontfaces */
+@font-face {
+  font-family: "CoreSansGS45";
+  src: url("https://devevtp2.viettelpost.vn/assets/fonts/CoreSansGS45.ttf")
+      format("truetype"),
+    url("https://devevtp2.viettelpost.vn/assets/fonts/CoreSansGS45.svg")
+      format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "CoreSansGS45";
+  src: url("https://devevtp2.viettelpost.vn/assets/fonts/CoreSansGS45Bold.ttf")
+      format("truetype"),
+    url("https://devevtp2.viettelpost.vn/assets/fonts/CoreSansGS45Bold.svg")
+      format("svg");
+  font-weight: 800;
+  font-style: normal;
+}
+.body{
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
