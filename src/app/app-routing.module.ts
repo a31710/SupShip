@@ -4,6 +4,11 @@ import { HomeComponent } from './client/home/home.component';
 
 const routes: Routes = [
 {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'client'
+},
+{
   path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
 },
 {
@@ -12,9 +17,6 @@ const routes: Routes = [
 {
   path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule),
 },
-{
-  path:'', component: HomeComponent
-}
 
 ];
 

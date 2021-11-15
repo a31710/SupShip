@@ -23,7 +23,6 @@ getDetailCustomer(id:any):Observable<any>{
 createSchedule(body:any):Observable<any>{
   return this.http.post<any>(`${this.url}/api/schedules/save`,body)
 }
-
 }
 
 
