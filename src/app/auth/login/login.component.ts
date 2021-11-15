@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
               '',
               'success'
             )
-            this.router.navigateByUrl('/admin/customer');
+            this.router.navigateByUrl('/client');
            }
          })
         }else{

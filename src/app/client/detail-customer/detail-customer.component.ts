@@ -14,7 +14,11 @@ export class DetailCustomerComponent implements OnInit {
   constructor(private customerService: CustomerService, private activateRoute: ActivatedRoute) {
     this.activateRoute.params.subscribe(param=>{
       const id = param['id']
-      this.customerService.getDetailCustomer(id).subscribe(data=>this.leadData = data
+      this.customerService.getDetailCustomer(id).subscribe(data=>{
+        this.leadData = [data];
+        console.log(data);
+
+      }
       )
 
     })

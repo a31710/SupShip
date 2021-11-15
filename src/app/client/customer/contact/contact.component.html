@@ -1,163 +1,62 @@
 
 
 
+<div class="p-fluid mt-4 body">
+  <div class="p-field">
+    <span class="text-gray-900">Lọc theo ngày</span>
+      <p-calendar  [(ngModel)]="day" showButtonBar="true" (onSelect)="onChangeDay($event)" ></p-calendar>
+  </div>
+
+</div>
 
 <div class="p-fluid row mt-4 mb-1">
+  <span class="text-gray-900">Lọc theo tháng</span>
   <div class="p-field col-6">
-    <p-calendar [(ngModel)]="dateValue" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030"></p-calendar>
+
+    <p-calendar (onSelect)="onChangeMonth($event)" [(ngModel)]="dateValue" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030"></p-calendar>
 </div>
 <div class="p-field col-6 mt-2">
   <h4 > 4/12 chưa hoàn thành</h4>
 </div>
 </div>
 <br>
-  <div (click)="log()" class="tp-event mt-2">
-    <div class="tp-event-calendar">
-      <div class="tp-event-month">Tháng 12</div>
-      <div class="tp-event-day">14</div>
+<div (click)="log()" class="tp-event mt-2" *ngFor="let item of scheduleData">
+  <div class="tp-event-calendar">
+    <div class="tp-event-month">{{item?.fromDate | date:'MMMM' }}  </div>
+    <div class="tp-event-day">{{item?.fromDate | date:'dd' }}</div>
+  </div>
+  <div class="tp-event-details">
+    <div class="tp-event-title">
+      {{item?.lead?.companyName}}
     </div>
-    <div class="tp-event-details">
-      <div class="tp-event-title">
-        Công ty CP thương mại toàn thắng
-      </div>
-      <div class="tp-event-info">
-        <span class="glyphicon glyphicon-map-marker"></span>
-        Đang tiếp xúc
-        <span class="glyphicon glyphicon-time"></span>
-        06:00 - 08:00
-      </div>
+    <div class="tp-event-info">
+      <span class="glyphicon glyphicon-map-marker"></span>
+      {{item?.lead?.statusDescription}}
+      <span class="glyphicon glyphicon-time"></span>
+      {{item?.fromDate | date:'hh:mm' }} - {{item?.toDate | date:'hh:mm' }}
     </div>
   </div>
+</div>
 
 
-  <div class="tp-event mt-2">
-    <div class="tp-event-calendar">
-      <div class="tp-event-month">Tháng 12</div>
-      <div class="tp-event-day">14</div>
-    </div>
-    <div class="tp-event-details">
-      <div class="tp-event-title">
-        Công ty CP thương mại toàn thắng
-      </div>
-      <div class="tp-event-info">
-        <span class="glyphicon glyphicon-map-marker"></span>
-        Thành công
-        <span class="glyphicon glyphicon-time"></span>
-        06:00 - 08:00
-      </div>
-    </div>
-  </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
-  <div class="tp-event mt-2">
-    <div class="tp-event-calendar">
-      <div class="tp-event-month">Tháng 12</div>
-      <div class="tp-event-day">14</div>
-    </div>
-    <div class="tp-event-details">
-      <div class="tp-event-title">
-        Công ty CP thương mại toàn thắng
-      </div>
-      <div class="tp-event-info">
-        <span class="glyphicon glyphicon-map-marker"></span>
-        Thành công
-        <span class="glyphicon glyphicon-time"></span>
-        06:00 - 08:00
-      </div>
-    </div>
-  </div>
-
-  <div class="tp-event mt-2">
-    <div class="tp-event-calendar">
-      <div class="tp-event-month">Tháng 12</div>
-      <div class="tp-event-day">14</div>
-    </div>
-    <div class="tp-event-details">
-      <div class="tp-event-title">
-        Công ty CP thương mại toàn thắng
-      </div>
-      <div class="tp-event-info">
-        <span class="glyphicon glyphicon-map-marker"></span>
-        Thành công
-        <span class="glyphicon glyphicon-time"></span>
-        06:00 - 08:00
-      </div>
-    </div>
-  </div>
-
-  <div class="tp-event mt-2">
-    <div class="tp-event-calendar">
-      <div class="tp-event-month">Tháng 12</div>
-      <div class="tp-event-day">14</div>
-    </div>
-    <div class="tp-event-details">
-      <div class="tp-event-title">
-        Công ty CP thương mại toàn thắng
-      </div>
-      <div class="tp-event-info">
-        <span class="glyphicon glyphicon-map-marker"></span>
-        Thành công
-        <span class="glyphicon glyphicon-time"></span>
-        06:00 - 08:00
-      </div>
-    </div>
-  </div>
-
-  <div class="tp-event mt-2">
-    <div class="tp-event-calendar">
-      <div class="tp-event-month">Tháng 12</div>
-      <div class="tp-event-day">14</div>
-    </div>
-    <div class="tp-event-details">
-      <div class="tp-event-title">
-        Công ty CP thương mại toàn thắng
-      </div>
-      <div class="tp-event-info">
-        <span class="glyphicon glyphicon-map-marker"></span>
-        Thành công
-        <span class="glyphicon glyphicon-time"></span>
-        06:00 - 08:00
-      </div>
-    </div>
-  </div>
-
-  <div class="tp-event mt-2">
-    <div class="tp-event-calendar">
-      <div class="tp-event-month">Tháng 12</div>
-      <div class="tp-event-day">14</div>
-    </div>
-    <div class="tp-event-details">
-      <div class="tp-event-title">
-        Công ty CP thương mại toàn thắng
-      </div>
-      <div class="tp-event-info">
-        <span class="glyphicon glyphicon-map-marker"></span>
-        Thành công
-        <span class="glyphicon glyphicon-time"></span>
-        06:00 - 08:00
-      </div>
-    </div>
-  </div>
-
-  <div class="tp-event mt-2">
-    <div class="tp-event-calendar">
-      <div class="tp-event-month">Tháng 12</div>
-      <div class="tp-event-day">14</div>
-    </div>
-    <div class="tp-event-details">
-      <div class="tp-event-title">
-        Công ty CP thương mại toàn thắng
-      </div>
-      <div class="tp-event-info">
-        <span class="glyphicon glyphicon-map-marker"></span>
-        Thành công
-        <span class="glyphicon glyphicon-time"></span>
-        06:00 - 08:00
-      </div>
-    </div>
-  </div>
 
   <div class="icon-botton">
     <a [routerLink]="['/client/create-schedule']"   class="btn btn-primary btn-circle btn-lg">
       <i class="fas fa-calendar-plus"></i></a>
   </div>
+
+

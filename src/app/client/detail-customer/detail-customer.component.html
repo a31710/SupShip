@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngFor="let item of leadData">
 
     <!-- Card Header - Dropdown -->
     <div
@@ -32,10 +32,10 @@
       </div>
       <!-- Card Body -->
       <div class="card-body">
-        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-home mr-2"></i>{{leadData?.companyName}}</h3></div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-home mr-2"></i>{{item?.companyName}}</h3></div>
         <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1"></i>P, Liêu Giai,Văn Cao, Ba Đình, Hà Nội</h3> </div>
-        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-user mr-2 ml-1"></i>{{leadData?.representation}}</h3></div>
-        <div class="h5 mb-0 text-gray-800 mt-2"><h3>+{{leadData?.phone}}</h3></div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-user mr-2 ml-1"></i>{{item?.representation}}</h3></div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3>+{{item?.phone}}</h3></div>
       </div>
   </div>
 

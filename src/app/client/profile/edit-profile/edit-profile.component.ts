@@ -22,7 +22,7 @@ export class EditProfileComponent implements OnInit {
   userId:any
   constructor(private profileService: ProfileService, private fb: FormBuilder, private route: Router,private cookieService: CookieService) {
 
-    this.userId =  this.cookieService.get('userId');
+    this.userId =  localStorage.getItem('userId');
     this.profileService.getUserInfor(this.userId).subscribe((data) =>{
       console.log(data.data);
 

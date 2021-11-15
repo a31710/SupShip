@@ -30,6 +30,6 @@ constructor(private http: HttpClient) { }
       return this.http.post<any>(`${this.url}/user/unlock-user`,uid);
     }
     searchUser(req:any):Observable<any>{
-      return this.http.get<any>(`${this.url}/user?keyword=${req}`);
+      return this.http.get<any>(`${this.url}/api/user?keyword=${req}`);
     }
 }

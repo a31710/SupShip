@@ -32,9 +32,13 @@ login(loginModel: LoginModel): Observable<any>{
   return this.http.post<LoginResponse>(`${this.url}/user/login`, loginModel)
   .pipe(map(data =>{
     localStorage.setItem("isLogin",data.success);
-    localStorage.setItem("token",data.data.token)
+    localStorage.setItem("token",data.data.token);
+    localStorage.setItem("userId",data.data.userUid)
     this.cookieService.set('token', data.data.token);
     this.cookieService.set('userId', data.data.userUid);
+    this.userInfo(data.data.userUid).subscribe(data=>{
+      localStorage.setItem('roles',data.data.roles);
+    })
     this.userId.emit(data.data.userUid);
     this.loggedIn.emit(true);
     return true;
@@ -65,6 +69,11 @@ checkUpdate(email: string): Observable<any>{
   }));
 
 }
+
+userInfo(id:any):Observable<any>{
+  return this.http.get<any>(`${this.url}/user/${id}`)
+}
+
 logOut(){
   localStorage.clear();
   this.cookieService.deleteAll();
