@@ -1,0 +1,183 @@
+
+
+<div class="p-fluid mt-2 body">
+  <div class="p-field mt-2">
+    <span class="text-gray-900">Chọn tháng</span>
+      <p-calendar  [(ngModel)]="day" showButtonBar="true" (onSelect)="onChangeDay($event)" ></p-calendar>
+  </div>
+
+</div>
+
+<div class="p-fluid row mt-4 mb-1">
+  <div class="p-field col-8">
+
+    <span class="text-gray-900"><i class="fas fa-bullseye mr-2 text-primary"></i>Tỉ lệ hoàn thành KHTX</span>
+</div>
+<div class="p-field col-4 ">
+  <h5 ><span class="text-primary">50%</span> (125/250)</h5>
+</div>
+</div>
+
+
+<div class="row">
+  <div class="col-6">
+    <div class="card bg-danger text-white shadow">
+      <div class="row " style="margin:5px">
+          <div class="col-8">
+            64/125
+          </div>
+          <div class="col-4">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="col-12 mt-1">
+            <p-progressBar  [value]="value" [style]="{'height': '5px','background-color':'white', 'font-size':'0px'}"></p-progressBar>
+          </div>
+          <div class="col-8 mt-1">
+            <h6>Tỉ lệ tiếp xúc KH</h6>
+          </div>
+          <div class="col-4 mt-1">
+            <h6>30%</h6>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card bg-success text-white shadow">
+      <div class="row " style="margin:5px">
+          <div class="col-8">
+            36/64
+          </div>
+          <div class="col-4">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="col-12 mt-1">
+            <p-progressBar  [value]="value" [style]="{'height': '5px','background-color':'white', 'font-size':'0px'}"></p-progressBar>
+          </div>
+          <div class="col-8 mt-1">
+            <h6 style="font-size: 8.5px;">Tỉ lệ phát triển TC</h6>
+          </div>
+          <div class="col-4 mt-1">
+            <h6>30%</h6>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="card shadow mb-4 mt-2">
+  <!-- Card Header - Dropdown -->
+
+  <!-- Card Body -->
+  <div class="row">
+    <div class="col-10">
+      <div class="card-body">
+        <div class="h5 mb-0 text-primary"><h5>Khách hàng chưa tiếp xúc</h5></div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h5><i class="fas fa-square mr-2 text-info" ></i>Được giao</h5></div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h5><i class="fas fa-square mr-2 text-danger" ></i>Tự nhập</h5> </div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h5><i class="fas fa-square mr-2 text-warning" ></i>Tồn</h5></div>
+        </div>
+    </div>
+    <div class="col-2" style="margin-top:20px">
+      <div class="h5 mb-0 text-gray-800"><h5>61 </h5></div>
+        <div class="h5 mb-0 text-info mt-2"><h5>36 </h5></div>
+        <div class="h5 mb-0 text-danger mt-2"><h5>36 </h5> </div>
+        <div class="h5 mb-0 text-warning mt-2"><h5>36 </h5></div>
+
+    </div>
+
+
+  </div>
+
+
+  </div>
+
+
+
+
+  <div class="card shadow mb-4 mt-1">
+    <!-- Card Header - Dropdown -->
+    <div
+      class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h5 class="m-0  text-primary " ><span >Khách hàng đã tiếp xúc</span></h5>
+      <div class="dropdown no-arrow">
+          <a class="dropdown-toggle" href="#" role="button" >
+              <h5 class="m-0 font-weight-bold text-gray-100 bg-gradient-success" style="border: 2px; border-radius: 5px;"><span class="p-1">64</span></h5>
+          </a>
+      </div>
+    </div>
+    <!-- Card Body -->
+    <div class="row">
+      <div class="col-6">
+        <div class="card-body">
+          <div class="h5 mb-0 text-gray-800 mt-2"><h5><i class="fas fa-circle mr-2" style="color: #1cc88a;"></i>Thành công</h5></div>
+          <div class="h5 mb-0 text-gray-800 mt-2"><h5><i class="fas fa-circle mr-2 " style="color: #f6c23e;"></i>Đang tiếp xúc</h5> </div>
+          <div class="h5 mb-0 text-gray-800 mt-2"><h5><i class="fas fa-circle mr-2 " style="color: #e74a3b;"></i>Thất bại</h5></div>
+          </div>
+      </div>
+      <div class="col-3" style="margin-top:20px">
+          <div class="h5 mb-0 text-success mt-2"><h5>36 (56%)</h5></div>
+          <div class="h5 mb-0 text-warning mt-2"><h5>36 (56%)</h5> </div>
+          <div class="h5 mb-0 text-danger mt-2"><h5>36 (56%) </h5></div>
+
+      </div>
+      <div class="col-3" style="margin-left: -45px; margin-top:15px ">
+      <ngx-charts-pie-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="single"
+      [gradient]="gradient"
+      [doughnut]="isDoughnut"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+      >
+    </ngx-charts-pie-chart>
+      </div>
+
+    </div>
+
+
+    </div>
+
+
+
+
+    <div class="card shadow mb-4 mt-1">
+      <!-- Card Header - Dropdown -->
+      <!-- Card Body -->
+      <div
+      class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h5 class="m-0  text-primary " ><span >19/11</span></h5>
+
+    </div>
+      <div class="row">
+        <div class="col-8">
+          <div class="card-body">
+            <div class="h5 mb-0 text-gray-800 mt-2"><h5>Khách hàng mới</h5></div>
+            <div class="h5 mb-0 text-gray-800 mt-2"><h5>Dược giao</h5> </div>
+            <div class="h5 mb-0 text-gray-800 mt-2"><h5>Tự nhập</h5></div>
+            <div class="h5 mb-0 text-gray-800 mt-2"><h5>Tiếp xúc</h5></div>
+            <div class="h5 mb-0 text-gray-800 mt-2"><h5>Đang tiếp xúc</h5> </div>
+            <div class="h5 mb-0 text-gray-800 mt-2"><h5>Thành công</h5></div>
+            <div class="h5 mb-0 text-gray-800 mt-2"><h5>Thất bại</h5></div>
+            </div>
+        </div>
+        <div class="col-4" style="margin-top:20px">
+            <div class="h5 mb-0 text-info mt-2"><h5>3 </h5></div>
+            <div class="h5 mb-0 text-danger mt-2"><h5>4 </h5> </div>
+            <div class="h5 mb-0 text-warning mt-2"><h5>5 </h5></div>
+            <div class="h5 mb-0 text-info mt-2"><h5>3 </h5></div>
+            <div class="h5 mb-0 text-danger mt-2"><h5>4 </h5> </div>
+            <div class="h5 mb-0 text-warning mt-2"><h5>5 </h5></div>
+            <div class="h5 mb-0 text-warning mt-2"><h5>5 </h5></div>
+        </div>
+
+
+
+
+      </div>
+
+
+      </div>

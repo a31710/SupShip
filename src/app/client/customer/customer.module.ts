@@ -8,6 +8,10 @@ import { ReceiveComponent } from './receive/receive.component';
 import { ContactComponent } from './contact/contact.component';
 import {CalendarModule} from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
+import { ReportComponent } from './report/report.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {ProgressBarModule} from 'primeng/progressbar';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +20,9 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     CalendarModule,
     FormsModule,
+    NgxChartsModule,
+    ProgressBarModule
   ],
-  declarations: [CustomerComponent,ReceiveComponent, ContactComponent]
+  declarations: [CustomerComponent,ReceiveComponent, ContactComponent,ReportComponent]
 })
 export class CustomerModule { }

@@ -1,6 +1,7 @@
 
 
 
+
 <div class="p-fluid mt-4 body">
   <div class="p-field">
     <span class="text-gray-900">Lọc theo ngày</span>
@@ -20,7 +21,7 @@
 </div>
 </div>
 <br>
-<div (click)="log()" class="tp-event mt-2" *ngFor="let item of scheduleData">
+<div (click)="log()" class="tp-event " *ngFor="let item of scheduleData">
   <div class="tp-event-calendar">
     <div class="tp-event-month">{{item?.fromDate | date:'MMMM' }}  </div>
     <div class="tp-event-day">{{item?.fromDate | date:'dd' }}</div>
@@ -29,7 +30,7 @@
     <div class="tp-event-title">
       {{item?.lead?.companyName}}
     </div>
-    <div class="tp-event-info">
+    <div class="tp-event-info" >
       <span class="glyphicon glyphicon-map-marker"></span>
       {{item?.lead?.statusDescription}}
       <span class="glyphicon glyphicon-time"></span>
@@ -51,12 +52,24 @@
 <br>
 <br>
 <br>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
   <div class="icon-botton">
     <a [routerLink]="['/client/create-schedule']"   class="btn btn-primary btn-circle btn-lg">
       <i class="fas fa-calendar-plus"></i></a>
   </div>
+
+
 
 
