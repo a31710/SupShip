@@ -45,8 +45,8 @@ constructor(private http: HttpClient) { }
     return this.http.get<any>(`${this.url}/api/lead/filter?page=${page}&size=${size}&sort=lastModifiedDate,desc`)
   }
 
-  getLeadStatus(status:any):Observable<any>{
-    return this.http.get<any>(`${this.url}/api/lead/filter?status=${status}`)
+  getLeadStatus(page:any,size:any,status:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/lead/filter?page=${page}&size=${size}&status=${status}`)
   }
 
   getLeadByPostCode(podeCode:any):Observable<any>{

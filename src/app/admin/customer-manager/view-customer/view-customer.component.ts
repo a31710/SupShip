@@ -28,6 +28,7 @@ tabs = [{
   value: 5
 }
 ];
+status:any = 'ALL';
 selected = new FormControl(0);
 dataPost:any
 dataDept:any
@@ -87,9 +88,11 @@ idUpdate:any;
   onPageChange(offset: number) {
     this.offset = offset;
     console.log(this.offset/this.limit);
-
-    this.customerService.getCustomerPagi((this.offset/this.limit)+1, this.limit).subscribe((data)=>{
-      this.listCustomer = data.data
+    // this.customerService.getCustomerPagi((this.offset/this.limit)+1, this.limit).subscribe((data)=>{
+    //   this.listCustomer = data.data
+    // })
+    this.customerService.getLeadStatus((this.offset/this.limit)+1,this.limit,this.status).subscribe(data=>{
+      this.listCustomer = data.data;
     })
 
 
@@ -214,38 +217,62 @@ idUpdate:any;
 
 
   getListNew(){
-    this.customerService.getLeadStatus('NEW').subscribe((data)=>{
+    this.customerService.getLeadStatus(1,15,'NEW').subscribe((data)=>{
+      this.status = 'NEW';
       this.listCustomer = data.data
+      console.log(data.data);
+      this.size = data.totalItem;
+
     })
   }
 
   getListAll(){
-    this.customerService.getLeadStatus('null').subscribe((data)=>{
+    this.customerService.getLeadStatus(1,15,'null').subscribe((data)=>{
+      this.status = 'null';
       this.listCustomer = data.data
+      console.log(data.data);
+      this.size = data.totalItem;
+
     })
   }
 
   getListContacting(){
-    this.customerService.getLeadStatus('CONTACTING').subscribe((data)=>{
+    this.customerService.getLeadStatus(1,15,'CONTACTING').subscribe((data)=>{
+      this.status = 'CONTACTING';
       this.listCustomer = data.data
+      console.log(data.data);
+      this.size = data.totalItem;
+
     })
   }
 
   getListSuccess(){
-    this.customerService.getLeadStatus('SUCCESS').subscribe((data)=>{
+    this.customerService.getLeadStatus(1,15,'SUCCESS').subscribe((data)=>{
+      this.status = 'SUCCESS';
       this.listCustomer = data.data
+      console.log(data.data);
+      this.size = data.totalItem;
+
     })
   }
 
   getListFalied(){
-    this.customerService.getLeadStatus('FAILED').subscribe((data)=>{
+    this.customerService.getLeadStatus(1,15,'FAILED').subscribe((data)=>{
+      this.status = 'FAILED';
       this.listCustomer = data.data
+      console.log(data.data);
+      this.size = data.totalItem;
+
     })
   }
 
   getListNotContacting(){
-    this.customerService.getLeadStatus('NOT_CONTACTING').subscribe((data)=>{
+    this.customerService.getLeadStatus(1,15,'NOT_CONTACTING').subscribe((data)=>{
+      this.status = 'NOT_CONTACTING';
       this.listCustomer = data.data
+      console.log(data.data);
+      this.size = data.totalItem;
+
     })
   }
 

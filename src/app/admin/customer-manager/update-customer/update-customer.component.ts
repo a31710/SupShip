@@ -130,6 +130,7 @@ export class UpdateCustomerComponent implements OnInit {
   }
 
   uploadValue(customerData:any){
+    console.log(customerData);
 
 
     this.companyNameArray.setValue(customerData?.companyName);

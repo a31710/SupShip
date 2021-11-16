@@ -6,7 +6,7 @@ import { UserManagerRoutingModule } from './user-manager-routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewUserComponent } from './view-user/view-user.component';
 import { SharedModule } from 'src/app/shared/share.module';
-
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,6 +14,8 @@ import { SharedModule } from 'src/app/shared/share.module';
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    MatTabsModule
+
   ],
   declarations: [UserManagerComponent,CreateUserComponent, ViewUserComponent]
 })

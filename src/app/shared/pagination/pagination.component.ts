@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Observable, range } from 'rxjs';
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css']
 })
-export class PaginationComponent implements OnInit,AfterViewInit {
+export class PaginationComponent implements OnInit,OnChanges {
   @Input() offset:any;
   @Input() limit: any;
   @Input() size: any;
@@ -26,20 +26,10 @@ export class PaginationComponent implements OnInit,AfterViewInit {
   ngOnInit() {
 
   }
-  ngAfterViewInit(){
-    this.timeout(1000);
+  ngOnChanges(){
+    this.getPages(this.offset, this.limit, this.size);
+  }
 
-  }
-  timeout(time:any){
-    setTimeout( () => {
-      if(this.size == undefined){
-        console.log("recall");
-        this.timeout(time);
-      }else{
-        this.getPages(this.offset, this.limit, this.size);
-      }
-    }, time);
-  }
 
   getCurrentPage(offset: number, limit: number): number {
     return Math.floor(offset / limit) + 1;
