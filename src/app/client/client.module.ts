@@ -18,6 +18,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {InputTextModule} from 'primeng/inputtext';
 import {InputMaskModule} from 'primeng/inputmask';
 import { HomeComponent } from './home/home.component';
+import { DetailScheduleComponent } from './detail-schedule/detail-schedule.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -35,6 +36,6 @@ import { HomeComponent } from './home/home.component';
     InputMaskModule
 
   ],
-  declarations: [ClientComponent,HeaderComponent,SideBarComponent,CreateScheduleComponent,CreateCustomerComponent, DetailCustomerComponent,HomeComponent]
+  declarations: [ClientComponent,HeaderComponent,SideBarComponent,CreateScheduleComponent,CreateCustomerComponent, DetailCustomerComponent,HomeComponent,DetailScheduleComponent]
 })
 export class ClientModule { }
