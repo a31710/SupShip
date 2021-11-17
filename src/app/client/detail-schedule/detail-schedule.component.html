@@ -1,147 +1,209 @@
-<div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
-  <!-- Card Header - Dropdown -->
-  <div
-      class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-      <h3 class="m-0 text-primary"><span class="p-1">KH110</span></h3>
-      <div class="dropdown no-arrow">
-          <a class="dropdown-toggle" href="#" role="button" >
-              <h5 class="m-0 font-weight-bold text-gray-100 bg-gradient-info" style="border: 2px; border-radius: 5px;"><span class="p-1">Được giao</span></h5>
-          </a>
-      </div>
-  </div>
-  <!-- Card Body -->
-  <div class="card-body">
-    <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-home mr-2"></i>Công ty CP Cao Việt Thấng</h4></div>
-    <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1"></i>P, Liêu Giai,Văn Cao, Ba Đình, Hà Nội</h4> </div>
-    <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="far fa-clock mr-2 ml-1"></i>08:00 AM - 09:00 AM</h4></div>
-
-  </div>
-</div>
-
-<div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
-  <!-- Card Header - Dropdown -->
-  <div
-      class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-      <h3 class="m-0 text-primary"><span class="p-1">Kết quả tiếp xúc</span></h3>
-  </div>
-  <!-- Card Body -->
-  <div class="card-body">
-    <div class="row">
-      <div class="h5 mb-0 text-gray-800"><h4>Kết quả</h4></div>
-      <div class="input-group">
-        <select class="combobox form-control" [(ngModel)]="resultSelect" >
-          <option *ngFor="let d of result" [ngValue]="d.value"> {{d.name}}</option>
-        </select>
-      </div>
-    </div>
-
- <ng-container *ngIf="resultSelect == 1;">
-  <div class="row">
-    <div class="h5 mb-0 text-gray-800 mt-2"><h4>Địa chỉ lấy hàng</h4></div>
-    <div class="col-6">
-      <div class="input-group">
-        <select  class="combobox form-control" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)"  >
-          <option [ngValue]="null" [disabled]="true" [selected]="true">Chọn Tỉnh</option>
-          <option *ngFor="let d of dataProvince" [ngValue]="d.provinceCode"> {{d.provinceName}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="input-group">
-        <select class="combobox form-control" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)"  >
-          <option [ngValue]="null" [disabled]="true" [selected]="true">Quận/Huyện</option>
-          <option *ngFor="let d of dataDistrict" [ngValue]="d.districtCode"> {{d.districtName}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-6 mt-2">
-      <div class="input-group">
-        <select class="combobox form-control" [(ngModel)]="wardSelect"  >
-          <option [ngValue]="null" [disabled]="true" [selected]="true">Chọn Phường/xã</option>
-          <option *ngFor="let d of dataWard" [ngValue]="d.wardCode"> {{d.wardName}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-6 mt-2">
-      <div class="input-group">
-        <input class="form-control" placeholder="Nhập số nhà" >
-      </div>
-    </div>
-  </div>
- </ng-container>
-
-<ng-container *ngIf="resultSelect == 2;">
-  <div class="row">
-    <div class="h5 mb-0 text-gray-800 mt-2"><h4>lý do</h4></div>
-    <div class="input-group">
-      <input class="form-control" placeholder="Sai thông tin khách hàng" >
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="h5 mb-0 text-gray-800 mt-2"><h4>Đề xuất ( không bắt buộc)</h4></div>
-    <div class="input-group">
-      <input class="form-control" placeholder="" style="height: 70px;">
-    </div>
-  </div>
-</ng-container>
-
-  </div>
-</div>
-
-
-<ng-container *ngIf="resultSelect == 1;">
+<ng-container *ngFor="let item of scheduleData">
   <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
     <!-- Card Header - Dropdown -->
     <div
         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h3 class="m-0 text-primary"><span class="p-1">Chính sách áp dụng</span></h3>
+        <h3 class="m-0 text-primary"><span class="p-1">KH{{item?.lead?.id}}</span></h3>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" >
+                <h5 class="m-0 font-weight-bold text-gray-100 bg-gradient-info" style="border: 2px; border-radius: 5px;"><span class="p-1">Được giao</span></h5>
+            </a>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-home mr-2"></i>{{item?.lead?.companyName}}</h4></div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1"></i>P, Liêu Giai,Văn Cao, Ba Đình, Hà Nội</h4> </div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="far fa-clock mr-2 ml-1"></i>{{item?.fromDate | date:'shortTime'}} - {{item?.toDate | date:'shortTime'}}</h4></div>
+
+    </div>
+  </div>
+</ng-container>
+
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+  <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h3 class="m-0 text-primary"><span class="p-1">Kết quả tiếp xúc</span></h3>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+      <div class="row">
+        <div class="h5 mb-0 text-gray-800"><h4>Kết quả</h4></div>
+        <div class="input-group">
+          <select class="combobox form-control" [(ngModel)]="resultSelect" formControlName="status">
+            <option *ngFor="let d of result" [ngValue]="d.value"> {{d.name}}</option>
+          </select>
+        </div>
+      </div>
+
+     <ng-container *ngIf="resultSelect == 3;">
+      <div class="row">
+        <div class="h5 mb-0 text-gray-800 mt-2"><h4>Mã khách hàng</h4></div>
+        <div class="input-group">
+          <input class="form-control" placeholder=""  formControlName="customerCode">
+        </div>
+      </div>
+     </ng-container>
+
+   <ng-container *ngIf="resultSelect == 3;" formArrayName="pickupAddress" >
+    <div class="row" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4>Địa chỉ lấy hàng</h4></div>
+      <div class="col-6">
+        <div class="input-group">
+          <select  class="combobox form-control" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)"  formControlName="province">
+            <option [ngValue]="null" [disabled]="true" [selected]="true">Chọn Tỉnh</option>
+            <option *ngFor="let d of dataProvince" [ngValue]="d.provinceCode"> {{d.provinceName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="input-group">
+          <select class="combobox form-control" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" formControlName="district" >
+            <option [ngValue]="null" [disabled]="true" [selected]="true">Quận/Huyện</option>
+            <option *ngFor="let d of dataDistrict" [ngValue]="d.districtCode"> {{d.districtName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-6 mt-2">
+        <div class="input-group">
+          <select class="combobox form-control" [(ngModel)]="wardSelect" formControlName="ward" >
+            <option [ngValue]="null" [disabled]="true" [selected]="true">Chọn Phường/xã</option>
+            <option *ngFor="let d of dataWard" [ngValue]="d.wardCode"> {{d.wardName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-6 mt-2">
+        <div class="input-group">
+          <input class="form-control" placeholder="Nhập số nhà" formControlName="homeNo">
+        </div>
+      </div>
+    </div>
+   </ng-container>
+
+  <ng-container *ngIf="resultSelect == 5;">
+    <div class="row">
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4>lý do</h4></div>
+      <div class="input-group">
+        <input class="form-control"  formControlName="reason">
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="resultSelect == 5 || resultSelect == 1;">
+    <div class="row">
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4>Đề xuất ( không bắt buộc)</h4></div>
+      <div class="input-group">
+        <input class="form-control" placeholder="" style="height: 70px;" formControlName="proposal">
+      </div>
+    </div>
+  </ng-container>
+
+    </div>
+  </div>
+
+
+  <ng-container *ngIf="resultSelect == 3;">
+    <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
+      <!-- Card Header - Dropdown -->
+      <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h3 class="m-0 text-primary"><span class="p-1">Chính sách áp dụng</span></h3>
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+
+        <div class="row">
+          <div class="h5 mb-0 text-gray-800"><h4>Giá áp dụng</h4></div>
+          <div class="input-group">
+            <select class="combobox form-control"  >
+              <option  [selected]="true">Giá thỏa thuận riêng</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="h5 mb-0 text-gray-800 mt-2"><h4>Giá nội tỉnh</h4></div>
+            <input class="form-control" placeholder="0%" type="number" formControlName="inProvincePercent">
+          </div>
+          <div class="col-6">
+            <div class="h5 mb-0 text-gray-800 mt-2"><h4>Giá liên tỉnh</h4></div>
+            <input class="form-control" placeholder="0%" type="number" formControlName="outProvincePercent">
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="h5 mb-0 text-gray-800 mt-2"><h4>Chiết khấu</h4></div>
+          <div class="input-group">
+            <input class="form-control" placeholder="0%" type="number" formControlName="discount">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="h5 mb-0 text-gray-800 mt-2"><h4>Đề xuất ( không bắt buộc)</h4></div>
+          <div class="input-group">
+            <input class="form-control" placeholder="" style="height: 70px;">
+          </div>
+        </div>
+
+
+     </div>
+    </div>
+  </ng-container>
+
+  <div class="fixed" style="margin-left: -10px;">
+    <div class="row col-12" >
+      <button type="submit" class="btn btn-sm btn-primary p-2" >Cập nhật</button>
+    </div>
+  </div>
+</form>
+<ng-container *ngIf="resultSelect == 1;">
+
+  <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h3 class="m-0 text-primary"><span class="p-1">Tiếp xúc</span></h3>
     </div>
     <!-- Card Body -->
     <div class="card-body">
 
-      <div class="row">
-        <div class="col-4">
-          <div class="h5 mb-0 text-gray-800"><h4>tỉ lệ huyện</h4></div>
-          <input class="form-control" placeholder="0%" >
-        </div>
-        <div class="col-4">
-          <div class="h5 mb-0 text-gray-800"><h4>tỉ lệ hoàn</h4></div>
-          <input class="form-control" placeholder="0%" >
-        </div>
-        <div class="col-4">
-          <div class="h5 mb-0 text-gray-800"><h4>tỉ lệ nội tỉnh</h4></div>
-          <input class="form-control" placeholder="0%" >
-        </div>
-      </div>
-      <div class="row">
-        <div class="h5 mb-0 text-gray-800 mt-2"><h4>Giá áp dụng</h4></div>
-        <div class="input-group">
-          <input class="form-control" placeholder="Bảng giá công bố" >
+      <div class="p-fluid mt-2">
+        <div class="p-field">
+          <span class="text-gray-900">Lần tiếp xúc tiếp theo</span>
+            <p-calendar  [(ngModel)]="day" showButtonBar="true"  ></p-calendar>
         </div>
       </div>
 
-      <div class="row">
-        <div class="h5 mb-0 text-gray-800 mt-2"><h4>Chiết khấu</h4></div>
-        <div class="input-group">
-          <input class="form-control" placeholder="0%" >
-        </div>
+      <div class="p-fluid row mt-2 mb-4">
+        <div class="p-field col-6">
+          <span class="text-gray-900">thời gian từ </span>
+          <span class="p-input-icon-right">
+          <i class="far fa-clock"></i>
+          <p-inputMask [(ngModel)]="time1"  class="p-inputtext-sm" mask="99:99"></p-inputMask>
+        </span>
       </div>
-
-      <div class="row">
-        <div class="h5 mb-0 text-gray-800 mt-2"><h4>Đề xuất ( không bắt buộc)</h4></div>
-        <div class="input-group">
-          <input class="form-control" placeholder="" style="height: 70px;">
-        </div>
+        <div class="p-field col-6">
+          <span class="text-gray-900">Đến</span>
+          <span class="p-input-icon-right">
+          <i class="far fa-clock"></i>
+          <p-inputMask [(ngModel)]="time2"  class="p-inputtext-sm" mask="99:99"></p-inputMask>
+        </span>
       </div>
-
+      </div>
 
    </div>
   </div>
-</ng-container>
 
-<div class="fixed" style="margin-left: -10px;">
-  <div class="row col-12" >
-    <button class="btn btn-sm btn-primary p-2" >Cập nhật</button>
-  </div>
-</div>
+
+
+ </ng-container>
+
+<ng-template #footerTemplate>
+  <hr class="my-0">
+  <button class="btn btn-primary btn-sm m-2 float-left" (click)="model = today; d.close()">Today</button>
+  <button class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">Close</button>
+</ng-template>

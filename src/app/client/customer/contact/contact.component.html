@@ -21,23 +21,26 @@
 </div>
 </div>
 <br>
-<div (click)="log()" class="tp-event " *ngFor="let item of scheduleData">
-  <div class="tp-event-calendar">
-    <div class="tp-event-month">{{item?.fromDate | date:'MMMM' }}  </div>
-    <div class="tp-event-day">{{item?.fromDate | date:'dd' }}</div>
-  </div>
-  <div class="tp-event-details">
-    <div class="tp-event-title">
-      {{item?.lead?.companyName}}
+<ng-container  *ngFor="let item of scheduleData">
+  <div (click)="detailSchedule(item.id)" class="tp-event ">
+    <div class="tp-event-calendar">
+      <div class="tp-event-month">{{item?.fromDate | date:'MMMM' }}  </div>
+      <div class="tp-event-day">{{item?.fromDate | date:'dd' }}</div>
     </div>
-    <div class="tp-event-info" >
-      <span class="glyphicon glyphicon-map-marker"></span>
-      {{item?.lead?.statusDescription}}
-      <span class="glyphicon glyphicon-time"></span>
-      {{item?.fromDate | date:'hh:mm' }} - {{item?.toDate | date:'hh:mm' }}
+    <div class="tp-event-details">
+      <div class="tp-event-title">
+        {{item?.lead?.companyName}}
+      </div>
+      <div class="tp-event-info" >
+        <span class="glyphicon glyphicon-map-marker"></span>
+        {{item?.lead?.statusDescription}}
+        <span class="glyphicon glyphicon-time"></span>
+        {{item?.fromDate | date:'hh:mm' }} - {{item?.toDate | date:'hh:mm' }}
+      </div>
     </div>
   </div>
-</div>
+</ng-container>
+
 
 
 <br>

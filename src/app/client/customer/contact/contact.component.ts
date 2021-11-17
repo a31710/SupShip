@@ -36,9 +36,8 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
   }
-  log(){
-    this.router.navigateByUrl('/client/schedule')
-    console.log(this.dateValue);
+  detailSchedule(id:any){
+    this.router.navigateByUrl(`/client/schedule/${id}`)
   }
   datePipe(date:any){
     const day =  date.getDate();

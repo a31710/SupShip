@@ -37,7 +37,7 @@ const routes: Routes = [{
       path: 'customer/:id', component: DetailCustomerComponent,
     },
     {
-      path: 'schedule', component: DetailScheduleComponent,
+      path: 'schedule/:id', component: DetailScheduleComponent,
     },
 
     { path: '**', redirectTo: '' },
