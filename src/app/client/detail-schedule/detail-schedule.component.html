@@ -126,11 +126,11 @@
         <div class="row">
           <div class="col-6">
             <div class="h5 mb-0 text-gray-800 mt-2"><h4>Giá nội tỉnh</h4></div>
-            <input class="form-control" placeholder="0%" type="number" formControlName="inProvincePercent">
+            <input class="form-control" appMoney  type="text" formControlName="inProvincePercent">
           </div>
           <div class="col-6">
             <div class="h5 mb-0 text-gray-800 mt-2"><h4>Giá liên tỉnh</h4></div>
-            <input class="form-control" placeholder="0%" type="number" formControlName="outProvincePercent">
+            <input class="form-control" appMoney  type="text" formControlName="outProvincePercent">
           </div>
         </div>
 
@@ -138,7 +138,13 @@
         <div class="row">
           <div class="h5 mb-0 text-gray-800 mt-2"><h4>Chiết khấu</h4></div>
           <div class="input-group">
-            <input class="form-control" placeholder="0%" type="number" formControlName="discount">
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="0%" formControlName="discount" maxlength="2">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">%</span>
+              </div>
+            </div>
           </div>
         </div>
 

@@ -19,6 +19,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {InputMaskModule} from 'primeng/inputmask';
 import { HomeComponent } from './home/home.component';
 import { DetailScheduleComponent } from './detail-schedule/detail-schedule.component';
+import { DirectiveModule } from '../directive/directive.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -33,7 +34,8 @@ import { DetailScheduleComponent } from './detail-schedule/detail-schedule.compo
     CardModule,
     CalendarModule,
     InputTextModule,
-    InputMaskModule
+    InputMaskModule,
+    DirectiveModule,
 
   ],
   declarations: [ClientComponent,HeaderComponent,SideBarComponent,CreateScheduleComponent,CreateCustomerComponent, DetailCustomerComponent,HomeComponent,DetailScheduleComponent]

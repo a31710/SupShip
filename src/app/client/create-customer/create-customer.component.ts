@@ -98,6 +98,9 @@ export class CreateCustomerComponent implements OnInit {
   get addressArray() {
     return this.insertCustomerForm.get('address') as FormArray;
   }
+  get phoneArr() {
+    return this.insertCustomerForm.get('phone') as FormArray;
+  }
 
   get leadSource() {
     return this.insertCustomerForm.get('leadSource') as FormArray;
@@ -167,10 +170,42 @@ export class CreateCustomerComponent implements OnInit {
       this.dataWard = data;
     })
   }
+
+  pipePhone(phone:any){
+    const output = phone.substring(0,3) + phone.substring(4,7) + phone.substring(8,12)
+    return output;
+
+  }
+
+   get quantityMonthArr(){
+    return this.insertCustomerForm.get('quantityMonth') as FormArray;
+  }
+
+  get weightArr(){
+    return this.insertCustomerForm.get('weight') as FormArray;
+  }
+
+  get expectedRevenueArr(){
+    return this.insertCustomerForm.get('expectedRevenue') as FormArray;
+  }
+
+
+  toNumber(val:any) {
+    let valArr = val.split('');
+    let valFiltered = valArr.filter((x:any) => !isNaN(x));
+    let valProcessed = valFiltered.join('');
+    return parseInt(valProcessed);
+  }
+
   onSubmit(){
   this.bodyApi= this.insertCustomerForm.value;
   this.bodyApi.industry=this.selectedIndustryValues;
-  this.bodyApi.address=this.addressArray.value[0]
+  this.bodyApi.address=this.addressArray.value[0];
+  this.bodyApi.phone = this.pipePhone(this.phoneArr.value);
+  this.bodyApi.weight = parseInt(this.weightArr.value)
+  this.bodyApi.quantityMonth = parseInt(this.quantityMonthArr.value)
+  this.bodyApi.expectedRevenue = this.toNumber(this.expectedRevenueArr.value);
+
   this.customerService.createCustomer(this.bodyApi).subscribe((data)=>{
     console.log(data);
     this.insertCustomerForm.reset();

@@ -38,7 +38,7 @@ export class EditProfileComponent implements OnInit {
   }
   updateValue(userData:any){
     this.fullNameArray.setValue(userData?.fullName);
-    this.birthDayArray.setValue(userData?.birthday);
+    this.birthDayArray.setValue(this.pipeDateGet(userData?.birthday));
     this.mobileArray.setValue(userData?.mobile);
     this.genderArray.setValue(userData?.gender.toString());
     this.getAllDistrict(userData?.address?.province);
@@ -62,6 +62,8 @@ export class EditProfileComponent implements OnInit {
         birthday:['', [Validators.required, Validators.pattern("")]],
     })
   }
+
+
   get addressArray() {
     return this.userForm.get('address') as FormArray;
   }
@@ -109,6 +111,26 @@ export class EditProfileComponent implements OnInit {
     this.route.navigateByUrl('/client/profile/change-pasword');
   }
 
+  pipePhone(phone:any){
+    const output = phone.substring(0,3) + phone.substring(4,7) + phone.substring(8,12)
+    return output;
+
+  }
+  pipeDateGet(date:any){
+    const year = date.substring(0,4);
+    const month = date.substring(5,7);
+    const day = date.substring(8,10);
+    return day+month+year
+
+  }
+
+  pipeDatePost(date:any){
+    const day = date.substring(0,2);
+    const month = date.substring(3,5);
+    const year = date.substring(6,10);
+    return `${year}-${month}-${day}`
+  }
+
   updateUser(){
     this.bodyUpdate = this.userForm.value;
     this.bodyUpdate.address = this.addressArray.value[0];
@@ -117,6 +139,11 @@ export class EditProfileComponent implements OnInit {
     }else{
       this.bodyUpdate.gender = 0;
     }
+    this.bodyUpdate.mobile = this.pipePhone(this.mobileArray.value);
+    this.bodyUpdate.birthday = this.pipeDatePost(this.birthDayArray.value);
+
+    console.log(this.bodyUpdate);
+
     this.profileService.updateUser(this.bodyUpdate,this.userId).subscribe((data)=>{
       console.log(data);
       Swal.fire({

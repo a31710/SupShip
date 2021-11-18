@@ -46,7 +46,7 @@
                       <div  class="z-vlayout-inner" style="padding-bottom:0">
                           <div  class="z-div"> <span  class="z-label">Số điện thoại</span> </div>
                       </div>
-                      <div  class="z-vlayout-inner" ><input formControlName="mobile"  class="form-control" value="" type="text" maxlength="100"  ></div>
+                      <div  class="z-vlayout-inner" ><input appPhoneNumber formControlName="mobile" maxlength="12" class="form-control" value="" type="text" id="phone-number"   ></div>
 
                     </div>
               </div>
@@ -55,7 +55,7 @@
                     <div  class="z-vlayout-inner" style="padding-bottom:0">
                         <div  class="z-div"> <span  class="z-label"> Ngày sinh  (Ngày/tháng/năm) </span> </div>
                     </div>
-                    <div  class="z-vlayout-inner" ><input formControlName="birthday"  class="form-control" value="" type="text" maxlength="100"  ></div>
+                    <div  class="z-vlayout-inner" ><input formControlName="birthday"  class="form-control" appDate value="" type="text" maxlength="100"  ></div>
 
                   </div>
             </div>

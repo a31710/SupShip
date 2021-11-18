@@ -110,7 +110,7 @@
                           <div  class="z-div"> <span  class="z-label text-gray-900">Số điện thoại</span> </div>
                       </div>
                       <div  class="z-vlayout-inner" >
-                        <input formControlName="phone" class="form-control" value="" type="text" maxlength="11" placeholder="Nhập số điện thoại" ></div>
+                        <input formControlName="phone" class="form-control" value="" appPhoneNumber type="text" maxlength="12" placeholder="Nhập số điện thoại" ></div>
                       <div *ngFor="let validation of updateCustomerForm.phone">
                         <small class="text-danger"   *ngIf="insertCustomerForm.get('phone')?.hasError(validation.type) && insertCustomerForm.get('phone').touched">
                          {{validation.message}}</small>

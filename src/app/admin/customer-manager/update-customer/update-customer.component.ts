@@ -229,10 +229,19 @@ export class UpdateCustomerComponent implements OnInit {
     })
   }
 
+
+  pipePhone(phone:any){
+    const output = phone.substring(0,3) + phone.substring(4,7) + phone.substring(8,12)
+    return output;
+
+  }
+
+
   onSubmit(){
   this.bodyApi= this.updateCustomerForm.value;
   this.bodyApi.industry=this.selectedIndustryValues;
-  this.bodyApi.address=this.addressArray.value[0]
+  this.bodyApi.address=this.addressArray.value[0];
+  this.bodyApi.phone = this.pipePhone(this.phoneArray.value);
   console.log(this.bodyApi);
 
   this.customerService.updateCustomer(this.idUpdate,this.bodyApi).subscribe(data=>{

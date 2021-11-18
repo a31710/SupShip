@@ -5,6 +5,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { DirectiveModule } from 'src/app/directive/directive.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ProfileRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    DirectiveModule,
   ],
   declarations: [ProfileComponent,EditProfileComponent,ChangePasswordComponent]
 })

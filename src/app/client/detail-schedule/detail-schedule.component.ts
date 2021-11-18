@@ -52,6 +52,13 @@ day: Date  = new Date;
   ngOnInit() {
   }
 
+  toNumber(val:any) {
+    let valArr = val.split('');
+    let valFiltered = valArr.filter((x:any) => !isNaN(x));
+    let valProcessed = valFiltered.join('');
+    return parseInt(valProcessed);
+  }
+
 
   onSubmit(){
     const form:any = `${this.datePipe(this.day)} ${this.time1}:00`
@@ -60,6 +67,9 @@ day: Date  = new Date;
     this.toArr.setValue(to);
     this.bodyApi = this.updateForm.value;
     this.bodyApi.pickupAddress = this.addressArray.value[0];
+    this.bodyApi.discount = parseInt(this.discountArr.value);
+    this.bodyApi.inProvincePercent = this.toNumber(this.inProvincePercentArr.value)
+    this.bodyApi.outProvincePercent = this.toNumber(this.outProvincePercentArr.value)
     console.log(this.bodyApi);
 
     this.scheduleService.updateSchedule(this.bodyApi).subscribe(data=>{
@@ -83,6 +93,17 @@ day: Date  = new Date;
       ward: data?.address?.ward,
       district: data?.address?.district
     }])
+  }
+
+  get discountArr(){
+    return this.updateForm.get('discount') as FormArray;
+  }
+
+  get inProvincePercentArr(){
+    return this.updateForm.get('inProvincePercent') as FormArray;
+  }
+  get outProvincePercentArr(){
+    return this.updateForm.get('outProvincePercent') as FormArray;
   }
 
   get fromArr(){

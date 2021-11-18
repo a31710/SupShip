@@ -102,7 +102,7 @@
             <div class="form-group">
               <span class="text-gray-900">Số điện thoại</span>
               <div class="input-group mt-1">
-                <input class="form-control" placeholder="Nhập số điện thoại" formControlName="phone">
+                <input class="form-control" appPhoneNumber placeholder="Nhập số điện thoại" maxlength="12" formControlName="phone">
               </div>
               <div *ngFor="let validation of insertCustomerMessage.phone">
                 <small class="text-danger"   *ngIf="insertCustomerForm.get('phone')?.hasError(validation.type) && insertCustomerForm.get('phone').touched">
@@ -176,7 +176,12 @@
           <div class="form-group">
             <span class="text-gray-900">Số lượng đơn trên tháng</span>
             <div class="input-group mt-1">
-              <input class="form-control" placeholder="0" formControlName="quantityMonth">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" formControlName="quantityMonth" maxlength="3">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">Đơn</span>
+                </div>
+              </div>
             </div>
             <div *ngFor="let validation of insertCustomerMessage.quantityMonth">
               <small class="text-danger"   *ngIf="insertCustomerForm.get('quantityMonth')?.hasError(validation.type) && insertCustomerForm.get('quantityMonth').touched">
@@ -191,7 +196,13 @@
           <div class="form-group">
             <span class="text-gray-900">Trọng lượng/Bưu phẩm</span>
             <div class="input-group mt-1">
-              <input class="form-control" placeholder="0 Kg" formControlName="weight">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" formControlName="weight" maxlength="3">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">Kg</span>
+                </div>
+              </div>
+
             </div>
             <div *ngFor="let validation of insertCustomerMessage.weight">
               <small class="text-danger"   *ngIf="insertCustomerForm.get('weight')?.hasError(validation.type) && insertCustomerForm.get('weight').touched">
@@ -206,10 +217,18 @@
           <div class="form-group">
             <span class="text-gray-900">Doanh thu dự kiến</span>
             <div class="input-group mt-1">
-              <input class="form-control" placeholder="0 VNĐ" formControlName="expectedRevenue">
+
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" appMoney formControlName="expectedRevenue" >
+                <div class="input-group-append">
+                  <span  class="input-group-text" id="basic-addon2">VNĐ</span>
+                </div>
+              </div>
+
+
             </div>
             <div *ngFor="let validation of insertCustomerMessage.expectedRevenue">
-              <small class="text-danger"   *ngIf="insertCustomerForm.get('expectedRevenue')?.hasError(validation.type) && insertCustomerForm.get('expectedRevenue').touched">
+              <small class="text-danger"  *ngIf="insertCustomerForm.get('expectedRevenue')?.hasError(validation.type) && insertCustomerForm.get('expectedRevenue').touched">
                {{validation.message}}</small>
             </div>
           </div>

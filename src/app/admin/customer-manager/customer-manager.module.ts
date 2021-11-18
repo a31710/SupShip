@@ -16,6 +16,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {InputMaskModule} from 'primeng/inputmask';
 import { ContactReportComponent } from './contact-report/contact-report.component';
 import { PostReportComponent } from './post-report/post-report.component';
+import { DirectiveModule } from 'src/app/directive/directive.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,7 +29,8 @@ import { PostReportComponent } from './post-report/post-report.component';
     MatFormFieldModule,
     MatIconModule,
     InputNumberModule,
-    InputMaskModule
+    InputMaskModule,
+    DirectiveModule,
   ],
   declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent,DetailCustomerComponent, ContactReportComponent,PostReportComponent]
 })

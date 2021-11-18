@@ -79,7 +79,17 @@ export class CreateCustomerComponent implements OnInit {
       { value: 'KHAC', name: 'Khác' },
     ];
 
+    get quantityMonthArr(){
+      return this.insertCustomerForm.get('quantityMonth') as FormArray;
+    }
 
+    get weightArr(){
+      return this.insertCustomerForm.get('weight') as FormArray;
+    }
+
+    get expectedRevenueArr(){
+      return this.insertCustomerForm.get('expectedRevenue') as FormArray;
+    }
     get industryFormArray() {
       return this.insertCustomerForm.get('industry') as FormArray;
     }
@@ -89,6 +99,10 @@ export class CreateCustomerComponent implements OnInit {
 
     get leadSource() {
       return this.insertCustomerForm.get('leadSource') as FormArray;
+    }
+
+    get phoneArray() {
+      return this.insertCustomerForm.get('phone') as FormArray;
     }
 
   constructor(private fb: FormBuilder, private customerService: CustomerService, private toastr: ToastrService) {
@@ -179,10 +193,28 @@ export class CreateCustomerComponent implements OnInit {
     })
   }
 
+  pipePhone(phone:any){
+    const output = phone.substring(0,3) + phone.substring(4,7) + phone.substring(8,12)
+    return output;
+
+  }
+
+
+
+  toNumber(val:any) {
+    let valArr = val.split('');
+    let valFiltered = valArr.filter((x:any) => !isNaN(x));
+    let valProcessed = valFiltered.join('');
+    return parseInt(valProcessed);
+  }
   insertCustomer(){
   this.bodyApi= this.insertCustomerForm.value;
   this.bodyApi.industry=this.selectedIndustryValues;
-  this.bodyApi.address=this.addressArray.value[0]
+  this.bodyApi.address=this.addressArray.value[0];
+  this.bodyApi.phone = this.pipePhone(this.phoneArray.value);
+  this.bodyApi.weight = parseInt(this.weightArr.value)
+  this.bodyApi.quantityMonth = parseInt(this.quantityMonthArr.value)
+  this.bodyApi.expectedRevenue = this.toNumber(this.expectedRevenueArr.value);
   console.log(this.bodyApi);
   this.insertCustomerForm.reset();
   this.customerService.insertCustomer(this.bodyApi).subscribe(data=>{
@@ -190,5 +222,7 @@ export class CreateCustomerComponent implements OnInit {
     this.toastr.success("Tạo mới thành công");
   })
   }
+
+
 
 }
