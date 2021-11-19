@@ -63,12 +63,20 @@
       <div class="col-lg-2 col-sm-1 pt-1">
 
       </div>
-      <div class="col-lg-2 col-sm-1 pt-1">
+      <div class="col-lg-1 col-sm-1 pt-1">
 
       </div>
-      <div class="col-lg-2  col-sm-1 pt-1">
 
+
+      <div class="col-lg-2 pt-1">
+        <button  class="btn btn-sm btn-success" (click)="addCreateTab()"><i
+          class="fas fa-user-plus fa-sm text-white-50" ></i> Thêm mới</button>
       </div>
+
+      <div class="col-lg-3  col-sm-1 pt-1">
+        <button  class="btn btn-sm btn-success" (click)="addContactExcel()"> Giao khách hàng Excel</button>
+      </div>
+
       <div class="col-lg-2 col-md-4  pt-1">
         <button [disabled]="idArray.length<1" class="btn btn-sm btn-success">
           <span class="text" (click)="allTranfer()" data-toggle="modal" data-target="#tranfer">Giao tiếp xúc</span>
@@ -78,10 +86,7 @@
         <button [disabled]="idArray.length<1" class="btn btn-sm btn-dark">Xóa bản ghi</button>
       </div>
 
-      <div class="col-lg-2 pt-1">
-        <button  class="btn btn-sm btn-success" (click)="addCreateTab()"><i
-          class="fas fa-user-plus fa-sm text-white-50" ></i> Thêm mới</button>
-      </div>
+
 
     </div>
 
@@ -149,6 +154,9 @@
 </div>
 <div *ngIf="tab.value == 6">
   <app-post-report></app-post-report>
+</div>
+<div *ngIf="tab.value == 7">
+  <app-contact-excel></app-contact-excel>
 </div>
 
 
@@ -235,6 +243,28 @@ aria-hidden="true">
     </div>
 </div>
  </form>
+</div>
+</div>
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Giao khách hàng Excel</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+
+        <!-- Code Here -->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+        </div>
+    </div>
 </div>
 </div>
 

@@ -116,6 +116,23 @@ idUpdate:any;
     })
   }
 
+  addContactExcel(){
+    const contactexcel = {title:'Giao khách hàng excel', value:7};
+    const oldData = this.tabs.filter(data => data.value == 7)
+    if(oldData[0]?.value == 7){
+      console.log('bị trùng, trở về tab cũ');
+      this.tabs.forEach((d,i)=>{
+        if(d.value == 7){
+          this.selected.setValue(i);
+        }
+      })
+    }else{
+      console.log('tạo mới');
+      this.tabs.push(contactexcel);
+      this.selected.setValue(this.tabs.length - 1);
+    }
+  }
+
   addPostReport(event:any){
     const postReport = {title:'Bưu cục lồn', value:6};
     const oldData = this.tabs.filter(data => data.value == 6)

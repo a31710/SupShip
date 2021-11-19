@@ -193,7 +193,7 @@
                     <div class="z-vlayout-inner" style="padding-bottom:0">
                         <div  class="z-div"> <span  class="z-label text-gray-900">Tỉnh/Thành phố</span> </div>
                     </div>
-                    <select  class="combobox form-control" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)"  formControlName="province">
+                    <select  class="combobox form-control"  [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)"  formControlName="province">
                       <option [ngValue]="null" [disabled]="true" >Chọn Tỉnh</option>
                       <option *ngFor="let d of dataProvince" [ngValue]="d.provinceCode"> {{d.provinceName}}</option>
                     </select>

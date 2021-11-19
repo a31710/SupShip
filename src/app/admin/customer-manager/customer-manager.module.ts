@@ -17,6 +17,7 @@ import {InputMaskModule} from 'primeng/inputmask';
 import { ContactReportComponent } from './contact-report/contact-report.component';
 import { PostReportComponent } from './post-report/post-report.component';
 import { DirectiveModule } from 'src/app/directive/directive.module';
+import { ContactExcelComponent } from './contact-excel/contact-excel.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -32,6 +33,7 @@ import { DirectiveModule } from 'src/app/directive/directive.module';
     InputMaskModule,
     DirectiveModule,
   ],
-  declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,CreateCustomerComponent,DetailCustomerComponent, ContactReportComponent,PostReportComponent]
+  declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,ContactExcelComponent,
+    CreateCustomerComponent,DetailCustomerComponent, ContactReportComponent,PostReportComponent]
 })
 export class CustomerManagerModule { }
