@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { post } from 'jquery';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -51,5 +52,9 @@ constructor(private http: HttpClient) { }
 
   getLeadByPostCode(podeCode:any):Observable<any>{
     return this.http.get<any>(`${this.url}/api/user/postcode?postCode=${podeCode}`);
+  }
+
+  contactExcel(body:any):Observable<any>{
+    return this.http.post<any>(`${this.url}/api/lead-assigns/import`,body)
   }
 }

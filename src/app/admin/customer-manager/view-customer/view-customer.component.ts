@@ -6,12 +6,14 @@ import { CommonService } from 'src/app/shared/service/common.service';
 import { CustomerService } from '../../service/customer.service';
 import { UserService } from '../../service/user.service';
 import Swal from 'sweetalert2'
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',
   styleUrls: ['./view-customer.component.css']
 })
 export class ViewCustomerComponent implements OnInit {
+url = environment.url;
 tranferForm: FormGroup | any;
 idArray: any[] = []
 tranferData:any[] |any = [] ;
@@ -296,4 +298,35 @@ idUpdate:any;
   toggle(i:any){
     $(`.toogle${i}`).toggleClass("bg-gradient-light");
   }
+
+  // Upload File excel
+
+
+
+
+  afuConfig = {
+    uploadAPI:  {
+      url:`${this.url}/api/lead-assigns/import`,
+      method:"POST",
+      headers: {
+     "Authorization": `Bearer ${localStorage.getItem('token')}`
+      },
+      responseType: 'blob',
+      withCredentials: false,
+    },
+    theme: "dragNDrop",
+    fileNameIndex:false,
+    hideResetBtn: true,
+    autoUpload: false,
+    replaceTexts: {
+      selectFileBtn: 'Chọn file',
+      resetBtn: 'Reset',
+      uploadBtn: 'Tải lên',
+      dragNDropBox: 'Kéo thả tệp tin vào đây',
+      attachPinBtn: 'Attach Files...',
+      afterUploadMsg_success: 'tạo mới khách hàng thành công !',
+      afterUploadMsg_error: 'tải lên thất bại !',
+      sizeLimit: 'Size Limit'
+    }
+  };
 }

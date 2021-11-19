@@ -18,6 +18,7 @@ import { ContactReportComponent } from './contact-report/contact-report.componen
 import { PostReportComponent } from './post-report/post-report.component';
 import { DirectiveModule } from 'src/app/directive/directive.module';
 import { ContactExcelComponent } from './contact-excel/contact-excel.component';
+import { AngularFileUploaderModule } from "angular-file-uploader";
 @NgModule({
   imports: [
     CommonModule,
@@ -32,6 +33,7 @@ import { ContactExcelComponent } from './contact-excel/contact-excel.component';
     InputNumberModule,
     InputMaskModule,
     DirectiveModule,
+    AngularFileUploaderModule,
   ],
   declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,ContactExcelComponent,
     CreateCustomerComponent,DetailCustomerComponent, ContactReportComponent,PostReportComponent]
