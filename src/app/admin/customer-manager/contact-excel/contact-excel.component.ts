@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { timeThursdays } from 'd3-time';
 import { CustomerService } from '../../service/customer.service';
-
+import * as fileSaver from 'file-saver';
 @Component({
   selector: 'app-contact-excel',
   templateUrl: './contact-excel.component.html',
   styleUrls: ['./contact-excel.component.css']
 })
 export class ContactExcelComponent implements OnInit {
+  fileName='Giao-tiep-xuc-khach-hang-mau.xlsx'
   detailData:any
   historyData:any
   leadsAssignByExcel:any[] = [];
@@ -61,4 +62,18 @@ export class ContactExcelComponent implements OnInit {
     })
   }
 
+  returnBlob(res:any) : Blob {
+    console.log('file Downloaded');
+    return new Blob([res], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  });
+  }
+  download(){
+
+    this.customerService.DownloadFile(this.fileName).subscribe( res =>{
+      if(res){
+        fileSaver.saveAs(this.returnBlob(res),this.fileName);
+      }
+    })
+  }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { timeThursdays } from 'd3-time';
 import { post } from 'jquery';
@@ -71,5 +71,13 @@ constructor(private http: HttpClient) { }
   }
   detailHIstory(id:any):Observable<any>{
     return this.http.get<any>(`${this.url}/api/lead-assigns/import/${id}`)
+  }
+
+  DownloadFile(x :string):Observable<any>{
+    const param = new HttpParams().set('filename',x);
+    const options = {
+      params: param
+    };
+    return this.http.get(`${this.url}/api/lead-assigns/templates/download`,{...options, responseType: 'blob'} );
   }
 }
