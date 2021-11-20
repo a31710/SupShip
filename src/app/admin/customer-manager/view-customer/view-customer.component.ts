@@ -31,7 +31,7 @@ tabs = [{
   value: 5
 }
 ];
-status:any = 'NEW';
+status:any = 'ALL';
 selected = new FormControl(0);
 dataPost:any
 dataDept:any
@@ -46,9 +46,16 @@ isSearch:Boolean = false;
      private toastr: ToastrService, private fb: FormBuilder,private userService: UserService) {
       this.fromDate =  new Date(this.toDate.getFullYear(), this.toDate.getMonth(), 1);
 
-    this.customerService.getAllCustomer().subscribe(data=>{
+    // this.customerService.getAllCustomer().subscribe(data=>{
+    //   this.size = data.totalItem;
+    //   this.listCustomer =data.data
+    // })
+    this.customerService.getLeadStatus(1,15,'ALL').subscribe((data)=>{
+      this.status = 'ALL';
+      this.listCustomer = data.data
+      console.log(data.data);
       this.size = data.totalItem;
-      this.listCustomer =data.data
+      this.isSearch = false;
     })
     this.createForm();
     this.getAllDeptCode();
@@ -261,6 +268,7 @@ isSearch:Boolean = false;
 
 
   getListNew(){
+    this.offset = 0;
     this.customerService.getLeadStatus(1,15,'NEW').subscribe((data)=>{
       this.status = 'NEW';
       this.listCustomer = data.data
@@ -271,8 +279,9 @@ isSearch:Boolean = false;
   }
 
   getListAll(){
-    this.customerService.getLeadStatus(1,15,'null').subscribe((data)=>{
-      this.status = 'null';
+    this.offset = 0;
+    this.customerService.getLeadStatus(1,15,'ALL').subscribe((data)=>{
+      this.status = 'ALL';
       this.listCustomer = data.data
       console.log(data.data);
       this.size = data.totalItem;
@@ -281,6 +290,7 @@ isSearch:Boolean = false;
   }
 
   getListContacting(){
+    this.offset = 0;
     this.customerService.getLeadStatus(1,15,'CONTACTING').subscribe((data)=>{
       this.status = 'CONTACTING';
       this.listCustomer = data.data
@@ -291,6 +301,7 @@ isSearch:Boolean = false;
   }
 
   getListSuccess(){
+    this.offset = 0;
     this.customerService.getLeadStatus(1,15,'SUCCESS').subscribe((data)=>{
       this.status = 'SUCCESS';
       this.listCustomer = data.data
@@ -301,6 +312,7 @@ isSearch:Boolean = false;
   }
 
   getListFalied(){
+    this.offset = 0;
     this.customerService.getLeadStatus(1,15,'FAILED').subscribe((data)=>{
       this.status = 'FAILED';
       this.listCustomer = data.data
@@ -311,8 +323,9 @@ isSearch:Boolean = false;
   }
 
   getListNotContacting(){
-    this.customerService.getLeadStatus(1,15,'NOT_CONTACTING').subscribe((data)=>{
-      this.status = 'NOT_CONTACTING';
+    this.offset = 0;
+    this.customerService.getLeadStatus(1,15,'NOT_CONTACTED').subscribe((data)=>{
+      this.status = 'NOT_CONTACTED';
       this.listCustomer = data.data
       console.log(data.data);
       this.size = data.totalItem;

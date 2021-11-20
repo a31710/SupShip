@@ -236,7 +236,7 @@
       </div>
       <div class="fixed" style="margin-left: -35px;">
         <div class="row col-12" >
-          <button class="btn btn-sm btn-primary p-2" type="submit" >Tạo mới khách hàng</button>
+          <button [disabled]="insertCustomerForm.invalid" class="btn btn-sm btn-primary p-2" type="submit" >Tạo mới khách hàng</button>
         </div>
     </div>
     </mat-step>

@@ -9,6 +9,9 @@ import * as fileSaver from 'file-saver';
   styleUrls: ['./contact-excel.component.css']
 })
 export class ContactExcelComponent implements OnInit {
+  offset: number = 0;
+  limit: number = 15;
+  size:any
   fileName='Giao-tiep-xuc-khach-hang-mau.xlsx'
   detailData:any
   historyData:any
@@ -39,10 +42,16 @@ export class ContactExcelComponent implements OnInit {
   constructor(private customerService: CustomerService) {
     this.customerService.excelHistory().subscribe(data=>{
       this.historyData = data.data
+      this.size = data.totalItem;
     })
    }
 
   ngOnInit() {
+  }
+
+  onPageChange(offset: number) {
+      console.log(offset);
+
   }
 
   detailTab(id:any){

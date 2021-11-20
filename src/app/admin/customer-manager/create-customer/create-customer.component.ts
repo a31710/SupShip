@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from '../../service/customer.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
@@ -25,7 +25,7 @@ export class CreateCustomerComponent implements OnInit {
   insertCustomerMessage = {
     'title': [
       { type: 'required', message: 'Bạn chưa nhập ô này' },
-      { type: 'minlength', message: 'phải có ít nhất 5 kí tự' },
+      { type: 'minlength', message: 'phải có ít nhất 2 kí tự' },
     ],
     'companyName': [
       { type: 'required', message: 'Bạn chưa nhập ô này' },
@@ -120,7 +120,7 @@ export class CreateCustomerComponent implements OnInit {
 
   createForm(){
     this.insertCustomerForm = this.fb.group({
-        title:['', [Validators.required,Validators.minLength(5)  ]],
+        title:['', [Validators.required,Validators.minLength(2)  ]],
         companyName: ['', [Validators.required,Validators.minLength(5)]],
         representation: ['', [Validators.required ,Validators.minLength(5)]],
         phone:['', [Validators.required,]],
@@ -219,7 +219,13 @@ export class CreateCustomerComponent implements OnInit {
   this.insertCustomerForm.reset();
   this.customerService.insertCustomer(this.bodyApi).subscribe(data=>{
     console.log(data);
-    this.toastr.success("Tạo mới thành công");
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Cập nhật thành công',
+      showConfirmButton: false,
+      timer: 3000
+    })
   })
   }
 

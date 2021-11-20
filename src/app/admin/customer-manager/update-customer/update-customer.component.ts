@@ -133,7 +133,7 @@ export class UpdateCustomerComponent implements OnInit {
     console.log(customerData);
     this.companyNameArray.setValue(customerData?.companyName);
     this.titleArray.setValue(customerData?.title);
-    this.expectedRevenueArray.setValue(customerData?.expectedRevenue);
+    this.expectedRevenueArray.setValue(customerData?.expectedRevenue.toString());
     this.weightArray.setValue(customerData?.weight);
     this.quantityMonthArray.setValue(customerData?.quantityMonth);
     this.representationArray.setValue(customerData?.representation);
@@ -236,12 +236,20 @@ export class UpdateCustomerComponent implements OnInit {
 
   }
 
-
+  toNumber(val:any) {
+    let valArr = val.split('');
+    let valFiltered = valArr.filter((x:any) => !isNaN(x));
+    let valProcessed = valFiltered.join('');
+    return parseInt(valProcessed);
+  }
   onSubmit(){
   this.bodyApi= this.updateCustomerForm.value;
   this.bodyApi.industry=this.selectedIndustryValues;
   this.bodyApi.address=this.addressArray.value[0];
   this.bodyApi.phone = this.pipePhone(this.phoneArray.value);
+  this.bodyApi.weight = parseInt(this.weightArray.value)
+  this.bodyApi.quantityMonth = parseInt(this.quantityMonthArray.value)
+  this.bodyApi.expectedRevenue = this.toNumber(this.expectedRevenueArray.value);
   console.log(this.bodyApi);
 
   this.customerService.updateCustomer(this.idUpdate,this.bodyApi).subscribe(data=>{
