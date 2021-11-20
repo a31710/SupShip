@@ -8,6 +8,7 @@ import { CustomerService } from '../../service/customer.service';
   styleUrls: ['./receive.component.css']
 })
 export class ReceiveComponent implements OnInit {
+  tien = 3000000;
   totalLead:any
   leadData:any
   constructor(private customerService: CustomerService, private router:Router) {

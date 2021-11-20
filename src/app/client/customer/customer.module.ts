@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ReportComponent } from './report/report.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {ProgressBarModule} from 'primeng/progressbar';
+import { PipeModule } from 'src/app/pipe/pipe.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import {ProgressBarModule} from 'primeng/progressbar';
     CalendarModule,
     FormsModule,
     NgxChartsModule,
-    ProgressBarModule
+    ProgressBarModule,
+    PipeModule,
   ],
   declarations: [CustomerComponent,ReceiveComponent, ContactComponent,ReportComponent]
 })

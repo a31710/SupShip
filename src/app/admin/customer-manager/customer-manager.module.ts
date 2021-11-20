@@ -20,6 +20,7 @@ import { DirectiveModule } from 'src/app/directive/directive.module';
 import { ContactExcelComponent } from './contact-excel/contact-excel.component';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import {CalendarModule} from 'primeng/calendar';
+import { PipeModule } from 'src/app/pipe/pipe.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -36,6 +37,7 @@ import {CalendarModule} from 'primeng/calendar';
     DirectiveModule,
     AngularFileUploaderModule,
     CalendarModule,
+    PipeModule,
 
   ],
   declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,ContactExcelComponent,
