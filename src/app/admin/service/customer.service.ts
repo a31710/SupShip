@@ -57,4 +57,12 @@ constructor(private http: HttpClient) { }
   contactExcel(body:any):Observable<any>{
     return this.http.post<any>(`${this.url}/api/lead-assigns/import`,body)
   }
+
+  searchLead(fromDate:any,toDate:any,status:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/lead/filter?from=${fromDate}&to=${toDate}&status=${status}`);
+  }
+
+  searchLeadPagi(fromDate:any,toDate:any,status:any,page:any,size:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/lead/filter?from=${fromDate}&to=${toDate}&status=${status}&page=${page}&size=${size}`);
+  }
 }

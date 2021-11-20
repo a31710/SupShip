@@ -1,8 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject } from 'rxjs';
-import { CommonService } from 'src/app/shared/service/common.service';
 import { CustomerService } from '../../service/customer.service';
 import { UserService } from '../../service/user.service';
 import Swal from 'sweetalert2'
@@ -13,6 +11,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./view-customer.component.css']
 })
 export class ViewCustomerComponent implements OnInit {
+req:any;
+fromDate:any;
+toDate: Date = new Date;
 url = environment.url;
 tranferForm: FormGroup | any;
 idArray: any[] = []
@@ -30,7 +31,7 @@ tabs = [{
   value: 5
 }
 ];
-status:any = 'ALL';
+status:any = 'NEW';
 selected = new FormControl(0);
 dataPost:any
 dataDept:any
@@ -39,9 +40,11 @@ deptCodeSelect:any;
 postCodeSelect:any;
 leadSelect:any
 idUpdate:any;
+isSearch:Boolean = false;
 
   constructor(private customerService: CustomerService, private route: Router,
      private toastr: ToastrService, private fb: FormBuilder,private userService: UserService) {
+      this.fromDate =  new Date(this.toDate.getFullYear(), this.toDate.getMonth(), 1);
 
     this.customerService.getAllCustomer().subscribe(data=>{
       this.size = data.totalItem;
@@ -73,6 +76,21 @@ idUpdate:any;
     this.leadIdArray.setValue(this.idArray);
     console.log(this.tranferForm.value);
   }
+  onSearch(){
+    this.customerService.searchLead(this.datePipe(this.fromDate),this.datePipe(this.toDate),this.status)
+    .subscribe(data=>{
+      this.listCustomer = data.data
+      this.size = data.totalItem;
+      this.isSearch = true;
+    })
+
+  }
+
+  datePipe(date:any){
+    return ('0' + date.getDate()).slice(-2) + '-'
+    + ('0' + (date.getMonth()+1)).slice(-2) + '-'
+    + date.getFullYear();
+  }
   getAllDeptCode(){
     this.userService.getDeptCode().subscribe(data=>this.dataDept=data)
   }
@@ -90,12 +108,19 @@ idUpdate:any;
   onPageChange(offset: number) {
     this.offset = offset;
     console.log(this.offset/this.limit);
-    // this.customerService.getCustomerPagi((this.offset/this.limit)+1, this.limit).subscribe((data)=>{
-    //   this.listCustomer = data.data
-    // })
-    this.customerService.getLeadStatus((this.offset/this.limit)+1,this.limit,this.status).subscribe(data=>{
-      this.listCustomer = data.data;
-    })
+    if(this.isSearch == false){
+      this.customerService.getLeadStatus((this.offset/this.limit)+1,this.limit,this.status).subscribe(data=>{
+        this.listCustomer = data.data;
+        this.isSearch = false;
+      })
+    }else{
+      this.customerService.searchLeadPagi(this.datePipe(this.fromDate),this.datePipe(this.toDate),this.status,(this.offset/this.limit)+1,this.limit)
+      .subscribe(data=>{
+        this.listCustomer = data.data;
+        this.isSearch = true;
+      })
+    }
+
 
 
     this.idArray = [];
@@ -241,7 +266,7 @@ idUpdate:any;
       this.listCustomer = data.data
       console.log(data.data);
       this.size = data.totalItem;
-
+      this.isSearch = false;
     })
   }
 
@@ -251,7 +276,7 @@ idUpdate:any;
       this.listCustomer = data.data
       console.log(data.data);
       this.size = data.totalItem;
-
+      this.isSearch = false;
     })
   }
 
@@ -261,7 +286,7 @@ idUpdate:any;
       this.listCustomer = data.data
       console.log(data.data);
       this.size = data.totalItem;
-
+      this.isSearch = false;
     })
   }
 
@@ -271,7 +296,7 @@ idUpdate:any;
       this.listCustomer = data.data
       console.log(data.data);
       this.size = data.totalItem;
-
+      this.isSearch = false;
     })
   }
 
@@ -281,7 +306,7 @@ idUpdate:any;
       this.listCustomer = data.data
       console.log(data.data);
       this.size = data.totalItem;
-
+      this.isSearch = false;
     })
   }
 
@@ -291,7 +316,7 @@ idUpdate:any;
       this.listCustomer = data.data
       console.log(data.data);
       this.size = data.totalItem;
-
+      this.isSearch = false;
     })
   }
 

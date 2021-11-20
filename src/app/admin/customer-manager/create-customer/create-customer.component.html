@@ -1,105 +1,143 @@
+<div class="container-fluid">
 
-<br>
-<br>
+  <br>
+  <br>
 
-<form [formGroup]="insertCustomerForm" (ngSubmit)="insertCustomer();">
-    <!-- Page Heading -->
-  <!-- Content Row -->
-  <div class="row">
+  <form [formGroup]="insertCustomerForm" (ngSubmit)="insertCustomer();">
+      <!-- Page Heading -->
+    <!-- Content Row -->
+    <div class="row">
 
-    <!-- Grow In Utility -->
-    <div class="col-lg-6">
+      <!-- Grow In Utility -->
+      <div class="col-lg-6">
+
+          <div class="card position-relative">
+            <div class="card-header py-3" style="background-color: #4e73df;">
+              <h2 class="m-0 " style="color: white;">Phân loại khách hàng</h2>
+              </div>
+              <div class="card-body">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="customRadioInline1" name="leadSource"  value="PRIVATE" class="custom-control-input" formControlName="leadSource">
+                  <label class="custom-control-label text-gray-900" for="customRadioInline1" >KH cá nhân</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="customRadioInline2" name="leadSource" value="ENTERPRISE" formControlName="leadSource" class="custom-control-input">
+                  <label class="custom-control-label text-gray-900" for="customRadioInline2" >KH doanh nghiệp</label>
+                </div>
+              </div>
+
+
+            <div class="container">
+              <div  class="row ">
+                <div  class="col-md-12 ">
+                    <div  style="padding: 2% 0 1.9%;" class="row ">
+                        <div  class="col-md-12"> <span  class="z-label">Sản phẩm kinh doanh</span> </div>
+                    </div>
+                    <div  class="row ">
+                      <ng-container formArrayName="industry">
+                        <div  class="col-md-6 "
+                        *ngFor="let b of industryFormArray.controls; let index = index">
+                          <input  type="checkbox" [formControl]="b" (change)="getSelectedIndustryValue()" >
+                          <label  class="text-gray-900 ml-2"> {{industryData[index].name}}</label></div>
+                          <small class="text-danger"
+                          *ngIf="industryError && checkIndustryControlsTouched()">
+                              Chọn ít nhất 1 sản phẩm kinh doanh</small>
+                      </ng-container>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+  <br>
+  <br>
+
+
+          </div>
+
+      </div>
+
+      <!-- Fade In Utility -->
+      <div class="col-lg-6">
 
         <div class="card position-relative">
           <div class="card-header py-3" style="background-color: #4e73df;">
-            <h2 class="m-0 " style="color: white;">Phân loại khách hàng</h2>
+            <h2 class="m-0 " style="color: white;">Thông tin khách hàng</h2>
             </div>
             <div class="card-body">
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline1" name="leadSource"  value="PRIVATE" class="custom-control-input" formControlName="leadSource">
-                <label class="custom-control-label text-gray-900" for="customRadioInline1" >KH cá nhân</label>
-              </div>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline2" name="leadSource" value="ENTERPRISE" formControlName="leadSource" class="custom-control-input">
-                <label class="custom-control-label text-gray-900" for="customRadioInline2" >KH doanh nghiệp</label>
-              </div>
+
+              <div  class="row z-div ">
+                <div  class="col-md-6 z-div">
+                    <div  class="z-vlayout" >
+                        <div  class="z-vlayout-inner" style="padding-bottom:0">
+                            <div  class="z-div"> <span  class="z-label text-gray-900">Tên cửa hàng/ công ty</span> </div>
+                        </div>
+                        <div  class="z-vlayout-inner" ><input formControlName="companyName" class="form-control" value="" type="text" maxlength="100" placeholder="Nhập tên cửa hàng" ></div>
+                        <div *ngFor="let validation of insertCustomerForm.companyName">
+                          <small class="text-danger"   *ngIf="insertCustomerForm.get('companyName')?.hasError(validation.type) && insertCustomerForm.get('companyName').touched">
+                           {{validation.message}}</small>
+                        </div>
+                    </div>
+                </div>
+                <div  class="col-md-6 z-div">
+                    <div  class="z-vlayout" >
+                        <div  class="z-vlayout-inner" style="padding-bottom:0">
+                            <div  class="z-div"> <span  class="z-label text-gray-900">Chức danh</span> </div>
+                        </div>
+                        <div  class="z-vlayout-inner" ><input formControlName="title"  class="form-control" value="" type="text" maxlength="100" placeholder="Nhập chức danh" ></div>
+                        <div *ngFor="let validation of insertCustomerForm.title">
+                          <small class="text-danger"   *ngIf="insertCustomerForm.get('title')?.hasError(validation.type) && insertCustomerForm.get('title').touched">
+                           {{validation.message}}</small>
+                        </div>
+                      </div>
+                </div>
             </div>
 
-
-          <div class="container">
-            <div  class="row ">
-              <div  class="col-md-12 ">
-                  <div  style="padding: 2% 0 1.9%;" class="row ">
-                      <div  class="col-md-12"> <span  class="z-label">Sản phẩm kinh doanh</span> </div>
-                  </div>
-                  <div  class="row ">
-                    <ng-container formArrayName="industry">
-                      <div  class="col-md-6 "
-                      *ngFor="let b of industryFormArray.controls; let index = index">
-                        <input  type="checkbox" [formControl]="b" (change)="getSelectedIndustryValue()" >
-                        <label  class="text-gray-900 ml-2"> {{industryData[index].name}}</label></div>
-                        <small class="text-danger"
-                        *ngIf="industryError && checkIndustryControlsTouched()">
-                            Chọn ít nhất 1 sản phẩm kinh doanh</small>
-                    </ng-container>
-                  </div>
-              </div>
-          </div>
-          </div>
-
-<br>
-<br>
-
-
-        </div>
-
-    </div>
-
-    <!-- Fade In Utility -->
-    <div class="col-lg-6">
-
-      <div class="card position-relative">
-        <div class="card-header py-3" style="background-color: #4e73df;">
-          <h2 class="m-0 " style="color: white;">Thông tin khách hàng</h2>
-          </div>
-          <div class="card-body">
-
-            <div  class="row z-div ">
+            <div  class="row z-div mt-3">
               <div  class="col-md-6 z-div">
                   <div  class="z-vlayout" >
                       <div  class="z-vlayout-inner" style="padding-bottom:0">
-                          <div  class="z-div"> <span  class="z-label text-gray-900">Tên cửa hàng/ công ty</span> </div>
+                          <div  class="z-div"> <span  class="z-label text-gray-900">Họ và tên</span> </div>
                       </div>
-                      <div  class="z-vlayout-inner" ><input formControlName="companyName" class="form-control" value="" type="text" maxlength="100" placeholder="Nhập tên cửa hàng" ></div>
-                      <div *ngFor="let validation of insertCustomerForm.companyName">
-                        <small class="text-danger"   *ngIf="insertCustomerForm.get('companyName')?.hasError(validation.type) && insertCustomerForm.get('companyName').touched">
+                      <div class="z-vlayout-inner" ><input formControlName="representation"  class="form-control" value="" type="text" maxlength="100" placeholder="Nhập người liên hệ" ></div>
+                      <div *ngFor="let validation of insertCustomerForm.representation">
+                        <small class="text-danger"   *ngIf="insertCustomerForm.get('representation')?.hasError(validation.type) && insertCustomerForm.get('representation').touched">
                          {{validation.message}}</small>
                       </div>
-                  </div>
+                    </div>
               </div>
               <div  class="col-md-6 z-div">
                   <div  class="z-vlayout" >
                       <div  class="z-vlayout-inner" style="padding-bottom:0">
-                          <div  class="z-div"> <span  class="z-label text-gray-900">Chức danh</span> </div>
+                          <div  class="z-div"> <span  class="z-label text-gray-900">Số điện thoại</span> </div>
                       </div>
-                      <div  class="z-vlayout-inner" ><input formControlName="title"  class="form-control" value="" type="text" maxlength="100" placeholder="Nhập chức danh" ></div>
-                      <div *ngFor="let validation of insertCustomerForm.title">
-                        <small class="text-danger"   *ngIf="insertCustomerForm.get('title')?.hasError(validation.type) && insertCustomerForm.get('title').touched">
+                      <div  class="z-vlayout-inner" >
+                        <input formControlName="phone" class="form-control" appPhoneNumber value="" type="text" maxlength="12" placeholder="Nhập số điện thoại" ></div>
+                      <div *ngFor="let validation of insertCustomerForm.phone">
+                        <small class="text-danger"   *ngIf="insertCustomerForm.get('phone')?.hasError(validation.type) && insertCustomerForm.get('phone').touched">
                          {{validation.message}}</small>
                       </div>
                     </div>
               </div>
           </div>
 
-          <div  class="row z-div mt-3">
+          <div  class="row z-div  mt-3">
             <div  class="col-md-6 z-div">
                 <div  class="z-vlayout" >
                     <div  class="z-vlayout-inner" style="padding-bottom:0">
-                        <div  class="z-div"> <span  class="z-label text-gray-900">Họ và tên</span> </div>
+                        <div  class="z-div"> <span  class="z-label text-gray-900" >Số lương đơn / tháng</span> </div>
                     </div>
-                    <div class="z-vlayout-inner" ><input formControlName="representation"  class="form-control" value="" type="text" maxlength="100" placeholder="Nhập người liên hệ" ></div>
-                    <div *ngFor="let validation of insertCustomerForm.representation">
-                      <small class="text-danger"   *ngIf="insertCustomerForm.get('representation')?.hasError(validation.type) && insertCustomerForm.get('representation').touched">
+                    <div class="z-vlayout-inner" >
+                      <div class="input-group mb-3">
+                        <input type="text"  formControlName="quantityMonth" class="form-control"  maxlength="3">
+                        <div class="input-group-append">
+                          <span class="input-group-text" id="basic-addon2">Đơn</span>
+                        </div>
+                      </div>
+
+
+                    </div>
+                    <div *ngFor="let validation of insertCustomerForm.quantityMonth">
+                      <small class="text-danger"   *ngIf="insertCustomerForm.get('quantityMonth')?.hasError(validation.type) && insertCustomerForm.get('quantityMonth').touched">
                        {{validation.message}}</small>
                     </div>
                   </div>
@@ -107,155 +145,120 @@
             <div  class="col-md-6 z-div">
                 <div  class="z-vlayout" >
                     <div  class="z-vlayout-inner" style="padding-bottom:0">
-                        <div  class="z-div"> <span  class="z-label text-gray-900">Số điện thoại</span> </div>
+                        <div  class="z-div"> <span  class="z-label text-gray-900">Trọng lượng</span></div>
                     </div>
                     <div  class="z-vlayout-inner" >
-                      <input formControlName="phone" class="form-control" appPhoneNumber value="" type="text" maxlength="12" placeholder="Nhập số điện thoại" ></div>
-                    <div *ngFor="let validation of insertCustomerForm.phone">
-                      <small class="text-danger"   *ngIf="insertCustomerForm.get('phone')?.hasError(validation.type) && insertCustomerForm.get('phone').touched">
+
+                      <div class="input-group mb-3">
+                        <input type="text" formControlName="weight"   class="form-control" maxlength="3">
+                        <div class="input-group-append">
+                          <span class="input-group-text" id="basic-addon2">Kg</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngFor="let validation of insertCustomerForm.weight">
+                      <small class="text-danger"   *ngIf="insertCustomerForm.get('weight')?.hasError(validation.type) && insertCustomerForm.get('weight').touched">
                        {{validation.message}}</small>
                     </div>
                   </div>
             </div>
         </div>
+
 
         <div  class="row z-div  mt-3">
           <div  class="col-md-6 z-div">
               <div  class="z-vlayout" >
                   <div  class="z-vlayout-inner" style="padding-bottom:0">
-                      <div  class="z-div"> <span  class="z-label text-gray-900" >Số lương đơn / tháng</span> </div>
+                      <div  class="z-div"> <span  class="z-label text-gray-900">Doanh thu dự kiến</span> </div>
                   </div>
                   <div class="z-vlayout-inner" >
                     <div class="input-group mb-3">
-                      <input type="text"  formControlName="quantityMonth" class="form-control"  maxlength="3">
+                      <input  formControlName="expectedRevenue" class="form-control" type="text" appMoney >
                       <div class="input-group-append">
-                        <span class="input-group-text" id="basic-addon2">Đơn</span>
+                        <span class="input-group-text" id="basic-addon2" >VNĐ</span>
                       </div>
                     </div>
-
-
                   </div>
-                  <div *ngFor="let validation of insertCustomerForm.quantityMonth">
-                    <small class="text-danger"   *ngIf="insertCustomerForm.get('quantityMonth')?.hasError(validation.type) && insertCustomerForm.get('quantityMonth').touched">
+                  <div *ngFor="let validation of insertCustomerForm.expectedRevenue">
+                    <small class="text-danger"   *ngIf="insertCustomerForm.get('expectedRevenue')?.hasError(validation.type) && insertCustomerForm.get('expectedRevenue').touched">
                      {{validation.message}}</small>
                   </div>
                 </div>
           </div>
-          <div  class="col-md-6 z-div">
+      </div>
+
+          <ng-container formArrayName="address">
+            <div  class="row z-div" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
+              <div  class="col-md-6 z-div">
+                  <div  class="z-vlayout" >
+                      <div class="z-vlayout-inner" style="padding-bottom:0">
+                          <div  class="z-div"> <span  class="z-label text-gray-900">Tỉnh/Thành phố</span> </div>
+                      </div>
+                      <select  class="combobox form-control"  [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)"  formControlName="province">
+                        <option [ngValue]="null" [disabled]="true" >Chọn Tỉnh</option>
+                        <option *ngFor="let d of dataProvince" [ngValue]="d.provinceCode"> {{d.provinceName}}</option>
+                      </select>
+              </div>
+          </div>
+
+          <div  class="col-md-6 z-div ">
               <div  class="z-vlayout" >
                   <div  class="z-vlayout-inner" style="padding-bottom:0">
-                      <div  class="z-div"> <span  class="z-label text-gray-900">Trọng lượng</span></div>
+                      <div  class="z-div"> <span  class="z-label text-gray-900">Quận/Huyện</span> </div>
                   </div>
-                  <div  class="z-vlayout-inner" >
+                  <select  class="combobox form-control" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)"  formControlName="district">
+                    <option [ngValue]="null" [disabled]="true" >Chọn Quận/Huyện</option>
+                    <option *ngFor="let d of dataDistrict" [ngValue]="d.districtCode"> {{d.districtName}}</option>
 
-                    <div class="input-group mb-3">
-                      <input type="text" formControlName="weight"   class="form-control" maxlength="3">
-                      <div class="input-group-append">
-                        <span class="input-group-text" id="basic-addon2">Kg</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div *ngFor="let validation of insertCustomerForm.weight">
-                    <small class="text-danger"   *ngIf="insertCustomerForm.get('weight')?.hasError(validation.type) && insertCustomerForm.get('weight').touched">
-                     {{validation.message}}</small>
-                  </div>
-                </div>
+                  </select>
+              </div>
           </div>
       </div>
 
 
-      <div  class="row z-div  mt-3">
-        <div  class="col-md-6 z-div">
+
+      <div  class="row z-div  mt-3" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
+          <div class="col-md-6 z-div">
+              <div  class="z-vlayout" >
+                  <div  class="z-vlayout-inner" style="padding-bottom:0">
+                      <div  class="z-div"> <span  class="z-label text-gray-900">Phường/xã</span></div>
+                  </div>
+                  <select class="combobox form-control" [(ngModel)]="wardSelect" formControlName="ward"  >
+                    <option [ngValue]="null" [disabled]="true" >Chọn Phường/xã</option>
+                    <option *ngFor="let d of dataWard" [ngValue]="d.wardCode"> {{d.wardName}}</option>
+
+                  </select>
+              </div>
+          </div>
+          <div class="col-md-6 z-div">
             <div  class="z-vlayout" >
                 <div  class="z-vlayout-inner" style="padding-bottom:0">
-                    <div  class="z-div"> <span  class="z-label text-gray-900">Doanh thu dự kiến</span> </div>
+                  <div class="z-div"> <span  class="z-label text-gray-900">Địa chỉ</span> </div>
                 </div>
-                <div class="z-vlayout-inner" >
-                  <div class="input-group mb-3">
-                    <input  formControlName="expectedRevenue" class="form-control" type="text" appMoney >
-                    <div class="input-group-append">
-                      <span class="input-group-text" id="basic-addon2" >VNĐ</span>
-                    </div>
-                  </div>
-                </div>
-                <div *ngFor="let validation of insertCustomerForm.expectedRevenue">
-                  <small class="text-danger"   *ngIf="insertCustomerForm.get('expectedRevenue')?.hasError(validation.type) && insertCustomerForm.get('expectedRevenue').touched">
+                <div class="z-vlayout-inner" ><input  formControlName="homeNo" class="form-control"  type="text" maxlength="100" placeholder="Nhập địa chỉ" ></div>
+                <div *ngFor="let validation of insertCustomerForm.homeNo">
+                  <small class="text-danger"   *ngIf="addressArray.controls[i]?.get('homeNo')?.hasError(validation.type) && addressArray.controls[i]?.get('homeNo')?.touched">
                    {{validation.message}}</small>
                 </div>
-              </div>
-        </div>
-    </div>
-
-        <ng-container formArrayName="address">
-          <div  class="row z-div" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
-            <div  class="col-md-6 z-div">
-                <div  class="z-vlayout" >
-                    <div class="z-vlayout-inner" style="padding-bottom:0">
-                        <div  class="z-div"> <span  class="z-label text-gray-900">Tỉnh/Thành phố</span> </div>
-                    </div>
-                    <select  class="combobox form-control"  [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)"  formControlName="province">
-                      <option [ngValue]="null" [disabled]="true" >Chọn Tỉnh</option>
-                      <option *ngFor="let d of dataProvince" [ngValue]="d.provinceCode"> {{d.provinceName}}</option>
-                    </select>
             </div>
         </div>
-
-        <div  class="col-md-6 z-div ">
-            <div  class="z-vlayout" >
-                <div  class="z-vlayout-inner" style="padding-bottom:0">
-                    <div  class="z-div"> <span  class="z-label text-gray-900">Quận/Huyện</span> </div>
-                </div>
-                <select  class="combobox form-control" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)"  formControlName="district">
-                  <option [ngValue]="null" [disabled]="true" >Chọn Quận/Huyện</option>
-                  <option *ngFor="let d of dataDistrict" [ngValue]="d.districtCode"> {{d.districtName}}</option>
-
-                </select>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div  class="row z-div  mt-3" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
-        <div class="col-md-6 z-div">
-            <div  class="z-vlayout" >
-                <div  class="z-vlayout-inner" style="padding-bottom:0">
-                    <div  class="z-div"> <span  class="z-label text-gray-900">Phường/xã</span></div>
-                </div>
-                <select class="combobox form-control" [(ngModel)]="wardSelect" formControlName="ward"  >
-                  <option [ngValue]="null" [disabled]="true" >Chọn Phường/xã</option>
-                  <option *ngFor="let d of dataWard" [ngValue]="d.wardCode"> {{d.wardName}}</option>
-
-                </select>
-            </div>
-        </div>
-        <div class="col-md-6 z-div">
-          <div  class="z-vlayout" >
-              <div  class="z-vlayout-inner" style="padding-bottom:0">
-                <div class="z-div"> <span  class="z-label text-gray-900">Địa chỉ</span> </div>
-              </div>
-              <div class="z-vlayout-inner" ><input  formControlName="homeNo" class="form-control"  type="text" maxlength="100" placeholder="Nhập địa chỉ" ></div>
-              <div *ngFor="let validation of insertCustomerForm.homeNo">
-                <small class="text-danger"   *ngIf="addressArray.controls[i]?.get('homeNo')?.hasError(validation.type) && addressArray.controls[i]?.get('homeNo')?.touched">
-                 {{validation.message}}</small>
-              </div>
-          </div>
       </div>
+          </ng-container>
+
+            </div>
+        </div>
+
     </div>
-        </ng-container>
-
-          </div>
-      </div>
-
+      <br>
+      <div id="w1uPgg4" class="row z-div  mt-3">
+        <div id="w1uPhg4" class="col-md-12 z-div">
+            <div id="w1uPig4" style="float:right;" class="z-hlayout">
+                <div id="w1uPkg4-chdex" class="z-hlayout-inner" ><button  type="submit"  class="btn btn-success z-button">Tạo mới</button></div>
+            </div>
+        </div>
+    </div>
   </div>
-    <br>
-    <div id="w1uPgg4" class="row z-div  mt-3">
-      <div id="w1uPhg4" class="col-md-12 z-div">
-          <div id="w1uPig4" style="float:right;" class="z-hlayout">
-              <div id="w1uPkg4-chdex" class="z-hlayout-inner" ><button  type="submit"  class="btn btn-success z-button">Tạo mới</button></div>
-          </div>
-      </div>
-  </div>
+  </form>
+
+
 </div>
-</form>
-

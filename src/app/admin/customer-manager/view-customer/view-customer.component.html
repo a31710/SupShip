@@ -17,22 +17,22 @@
     <div class="row col-xl-6 col-md-6 mb-4">
       <div class="col-3">
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-          <input placeholder="Select date" type="text" id="example" class="form-control">
+          <input [(ngModel)]="req" placeholder="Id hoặc tên khách hàng" type="text" id="example" class="form-control" style="border: 1px solid rgb(160, 154, 154); padding: 22px;">
         </div>
       </div>
       <div class="col-3">
         <div class="md-form md-outline input-with-post-icon datepicker">
-          <input placeholder="Select date" type="date" id="example" class="form-control">
+            <p-calendar [(ngModel)]="fromDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
         </div>
       </div>
       <div class="col-3">
         <div class="md-form md-outline input-with-post-icon datepicker">
-          <input placeholder="Select date" type="date" id="example" class="form-control">
+            <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
         </div>
       </div>
       <div class="col-3 pt-1">
-        <a  class="btn btn-sm btn-success"><i
-          class="fas fa-search fa-sm text-white-50"></i> Tìm kiếm</a>
+        <a  class="btn btn-sm btn-success" (click)="onSearch()" ><i
+          class="fas fa-search fa-sm text-white-50" ></i> Tìm kiếm</a>
       </div>
     </div>
 

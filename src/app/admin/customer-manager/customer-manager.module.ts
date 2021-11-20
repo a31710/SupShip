@@ -19,6 +19,7 @@ import { PostReportComponent } from './post-report/post-report.component';
 import { DirectiveModule } from 'src/app/directive/directive.module';
 import { ContactExcelComponent } from './contact-excel/contact-excel.component';
 import { AngularFileUploaderModule } from "angular-file-uploader";
+import {CalendarModule} from 'primeng/calendar';
 @NgModule({
   imports: [
     CommonModule,
@@ -34,6 +35,8 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
     InputMaskModule,
     DirectiveModule,
     AngularFileUploaderModule,
+    CalendarModule,
+
   ],
   declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,ContactExcelComponent,
     CreateCustomerComponent,DetailCustomerComponent, ContactReportComponent,PostReportComponent]

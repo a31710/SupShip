@@ -38,6 +38,7 @@ login(loginModel: LoginModel): Observable<any>{
     this.cookieService.set('userId', data.data.userUid);
     this.userInfo(data.data.userUid).subscribe(data=>{
       localStorage.setItem('roles',data.data.roles);
+      localStorage.setItem('username',data.data.fullName);
     })
     this.userId.emit(data.data.userUid);
     this.loggedIn.emit(true);
