@@ -4,6 +4,7 @@ import { ProfileService } from '../../service/profile.service';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { NgSelectConfig } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-edit-profile',
@@ -20,8 +21,10 @@ export class EditProfileComponent implements OnInit {
   dataWard: "" | any
   userForm: FormGroup | any
   userId:any
-  constructor(private profileService: ProfileService, private fb: FormBuilder, private route: Router,private cookieService: CookieService) {
-
+  constructor(private profileService: ProfileService, private fb: FormBuilder, private config: NgSelectConfig,
+    private route: Router,private cookieService: CookieService) {
+      this.config.appendTo = 'body';
+      this.config.bindValue = 'value';
     this.userId =  localStorage.getItem('userId');
     this.profileService.getUserInfor(this.userId).subscribe((data) =>{
       console.log(data.data);

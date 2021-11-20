@@ -71,10 +71,8 @@
                           <div class="z-vlayout-inner" style="padding-bottom:0">
                               <div  class="z-div"> <span  class="z-label">Tỉnh/Thành phố</span></div>
                           </div>
-                          <select class="form-control" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)"  formControlName="province">
-                            <option [ngValue]="null" [disabled]="true" >Chọn Tỉnh</option>
-                            <option *ngFor="let d of dataProvince" [ngValue]="d.provinceCode"> {{d.provinceName}}</option>
-                          </select>
+                          <ng-select   bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
+                          </ng-select>
                   </div>
               </div>
 
@@ -85,11 +83,8 @@
                       <div  class="z-vlayout-inner" style="padding-bottom:0">
                           <div  class="z-div"> <span  class="z-label">Quận/Huyện</span> </div>
                       </div>
-                      <select class="form-control" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)"  formControlName="district">
-                        <option [ngValue]="null" [disabled]="true" >Chọn Quận/Huyện</option>
-                        <option *ngFor="let d of dataDistrict" [ngValue]="d.districtCode"> {{d.districtName}}</option>
-
-                      </select>
+                      <ng-select   bindValue="districtCode" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" [items]="dataDistrict" bindLabel="districtName" formControlName="district" >
+                      </ng-select>
                   </div>
               </div>
           </div>
@@ -102,11 +97,8 @@
                       <div  class="z-vlayout-inner" style="padding-bottom:0">
                           <div  class="z-div"> <span  class="z-label">Phường/xã</span></div>
                       </div>
-                      <select class="form-control" [(ngModel)]="wardSelect" formControlName="ward" >
-                        <option [ngValue]="null" [disabled]="true" >Chọn Phường/xã</option>
-                        <option *ngFor="let d of dataWard" [ngValue]="d.wardCode"> {{d.wardName}}</option>
-
-                      </select>
+                      <ng-select   bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
+                      </ng-select>
                   </div>
               </div>
               <div  class="col-md-6 z-div">

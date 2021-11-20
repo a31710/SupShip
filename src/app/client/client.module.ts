@@ -20,6 +20,7 @@ import {InputMaskModule} from 'primeng/inputmask';
 import { HomeComponent } from './home/home.component';
 import { DetailScheduleComponent } from './detail-schedule/detail-schedule.component';
 import { DirectiveModule } from '../directive/directive.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   imports: [
     CommonModule,
@@ -36,7 +37,7 @@ import { DirectiveModule } from '../directive/directive.module';
     InputTextModule,
     InputMaskModule,
     DirectiveModule,
-
+    NgSelectModule,
   ],
   declarations: [ClientComponent,HeaderComponent,SideBarComponent,CreateScheduleComponent,CreateCustomerComponent, DetailCustomerComponent,HomeComponent,DetailScheduleComponent]
 })

@@ -120,29 +120,23 @@
               <span class="text-gray-900">Địa chỉ</span>
 
               <div class="col-6">
-                <div class="input-group mt-1">
-                  <select  class="combobox form-control" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)"  formControlName="province">
-                    <option [ngValue]="null" [disabled]="true" [selected]="true">Chọn Tỉnh</option>
-                    <option *ngFor="let d of dataProvince" [ngValue]="d.provinceCode"> {{d.provinceName}}</option>
-                  </select>
+                <div class="mt-1">
+                  <ng-select  placeholder="Chọn Tỉnh/Thành Phố" bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
+                  </ng-select>
                 </div>
               </div>
 
               <div class="col-6">
-                <div class="input-group mt-1">
-                  <select class="combobox form-control" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)"  formControlName="district">
-                    <option [ngValue]="null" [disabled]="true" [selected]="true">Quận/Huyện</option>
-                    <option *ngFor="let d of dataDistrict" [ngValue]="d.districtCode"> {{d.districtName}}</option>
-                  </select>
+                <div class="mt-1">
+                  <ng-select placeholder="Chọn Quận/Huyện"  bindValue="districtCode" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" [items]="dataDistrict" bindLabel="districtName" formControlName="district" >
+                  </ng-select>
                 </div>
               </div>
 
               <div class="col-6">
-                <div class="input-group mt-3">
-                  <select class="combobox form-control" [(ngModel)]="wardSelect" formControlName="ward" >
-                    <option [ngValue]="null" [disabled]="true" [selected]="true">Chọn Phường/xã</option>
-                    <option *ngFor="let d of dataWard" [ngValue]="d.wardCode"> {{d.wardName}}</option>
-                  </select>
+                <div class="mt-3">
+                  <ng-select  placeholder="Chọn xã" bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
+                  </ng-select>
                 </div>
               </div>
 

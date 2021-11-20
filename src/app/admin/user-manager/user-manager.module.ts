@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewUserComponent } from './view-user/view-user.component';
 import { SharedModule } from 'src/app/shared/share.module';
 import {MatTabsModule} from '@angular/material/tabs';
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,7 +15,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
-    MatTabsModule
+    MatTabsModule,
+    NgSelectModule
+
 
   ],
   declarations: [UserManagerComponent,CreateUserComponent, ViewUserComponent]

@@ -21,6 +21,7 @@ import { ContactExcelComponent } from './contact-excel/contact-excel.component';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import {CalendarModule} from 'primeng/calendar';
 import { PipeModule } from 'src/app/pipe/pipe.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,6 +39,7 @@ import { PipeModule } from 'src/app/pipe/pipe.module';
     AngularFileUploaderModule,
     CalendarModule,
     PipeModule,
+    NgSelectModule,
 
   ],
   declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,ContactExcelComponent,

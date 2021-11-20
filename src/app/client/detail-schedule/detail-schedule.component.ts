@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../service/profile.service';
 import { ScheduleService } from '../service/schedule.service';
 import Swal from 'sweetalert2';
+import { NgSelectConfig } from '@ng-select/ng-select';
 @Component({
   selector: 'app-detail-schedule',
   templateUrl: './detail-schedule.component.html',
@@ -33,7 +34,7 @@ export class DetailScheduleComponent implements OnInit {
 time1:any
 time2:any
 day: Date  = new Date;
-  constructor(private profileSerivce: ProfileService, private fb: FormBuilder,
+  constructor(private profileSerivce: ProfileService, private fb: FormBuilder,private config: NgSelectConfig,
      private scheduleService: ScheduleService, private activatedRoute: ActivatedRoute) {
    this.activatedRoute.params.subscribe(params=>{
      const id = params['id'];

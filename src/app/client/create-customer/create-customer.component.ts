@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CustomerService } from '../service/customer.service';
 import { ProfileService } from '../service/profile.service';
 import Swal from 'sweetalert2'
+import { NgSelectConfig } from '@ng-select/ng-select';
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
@@ -22,10 +23,13 @@ export class CreateCustomerComponent implements OnInit {
   insertCustomerForm: FormGroup | any;
   selectedIndustryValues:String[] = [];
   industryError: Boolean = true;
-  constructor(private fb: FormBuilder, private profileSerivce: ProfileService, private customerService: CustomerService, private router: Router) {
+  constructor(private fb: FormBuilder, private profileSerivce: ProfileService, private customerService: CustomerService, private router: Router,private config: NgSelectConfig) {
     this.getAllCity();
     this.createForm();
     this.addIndustrysControls();
+
+    this.config.appendTo = 'body';
+    this.config.bindValue = 'value';
   }
 
   insertCustomerMessage = {

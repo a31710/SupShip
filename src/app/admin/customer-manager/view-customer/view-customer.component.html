@@ -115,9 +115,9 @@
       <tbody>
         <tr *ngFor="let item of listCustomer, let i = index" [ngClass]="'toogle'+i">
           <th scope="col"><input (click)="toggle(i)" type="checkbox" (change)="getIdArray(item.id)"></th>
-          <th scope="row">{{item.id}}</th>
+          <th scope="row">KH{{item.id}}</th>
           <td>{{item?.leadSource=='PRIVATE'?'Cá nhân':'Doanh nghiệp'}}</td>
-          <td>{{item?.companyName}}<br> {{item?.address?.fomatAddress}}<br>{{item?.address?.homeNo}}</td>
+          <td>{{item?.companyName}}<br>{{item?.address?.homeNo}}</td>
           <td>{{item?.representation}}</td>
           <td>{{item?.statusDescription}}</td>
           <td>{{item?.statusDescription}}</td>
@@ -183,20 +183,20 @@ aria-hidden="true">
           <div class="row col-6 ">
             <span>Mã chi nhánh</span>
             <div  class="md-form md-outline input-with-post-icon " inline="true">
-              <select [(ngModel)]="deptCodeSelect" (change)="getPostCode(deptCodeSelect)"  class="form-control"  formControlName="deptCode" >
-                <option  [ngValue]="null" [disabled]="true" >Chọn DeptCode</option>
-                <option *ngFor="let d of dataDept" [ngValue]="d.deptCode"> {{d.deptName}}</option>
 
-              </select>
+              <ng-select placeholder="Chọn mã chi nhánh"  bindValue="deptCode" (change)="getPostCode(deptCodeSelect)"
+               [(ngModel)]="deptCodeSelect"  [items]="dataDept" bindLabel="deptName" formControlName="deptCode" >
+              </ng-select>
             </div>
           </div>
           <div class="row col-6">
             <span>Mã Bưu cục</span>
             <div  class="md-form md-outline input-with-post-icon " inline="true">
-              <select [(ngModel)]="postCodeSelect"(change)="getListByPostCode(postCodeSelect)" class="form-control"  formControlName="postCode">
-                <option [ngValue]="null" [disabled]="true">Chọn PostCode</option>
-                <option *ngFor="let d of dataPost" [ngValue]="d.postCode"> {{d.postName}}</option>
-              </select>
+
+
+              <ng-select placeholder="Chọn mã Bưu cục"   bindValue="postCode" (change)="getListByPostCode(postCodeSelect)"
+              [(ngModel)]="postCodeSelect"  [items]="dataPost" bindLabel="postName" formControlName="postCode" >
+             </ng-select>
             </div>
      </div>
      </div>
@@ -205,10 +205,11 @@ aria-hidden="true">
        <div class="row col-6">
         <span>Nhân viên tiếp xúc</span>
         <div  class="md-form md-outline input-with-post-icon " inline="true">
-          <select [(ngModel)]="leadSelect" class="form-control"  formControlName="userRecipientId">
-            <option [ngValue]="null" [disabled]="true">Chọn Nhân viên</option>
-            <option *ngFor="let d of dataLead" [ngValue]="d.empId"> {{d.name}}</option>
-          </select>
+
+
+          <ng-select placeholder="Chọn nhân viên tiếp xúc"  bindValue="empId"
+              [(ngModel)]="leadSelect"  [items]="dataLead" bindLabel="name" formControlName="userRecipientId" >
+             </ng-select>
         </div>
        </div>
 

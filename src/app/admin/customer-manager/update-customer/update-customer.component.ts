@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from '../../service/customer.service';
 import Swal from 'sweetalert2'
+import { NgSelectConfig } from '@ng-select/ng-select';
 @Component({
   selector: 'app-update-customer',
   templateUrl: './update-customer.component.html',
@@ -94,7 +95,9 @@ export class UpdateCustomerComponent implements OnInit {
     }
 
 
-  constructor(private fb: FormBuilder, private customerService: CustomerService, private toastr: ToastrService,private route: Router) {
+  constructor(private fb: FormBuilder, private customerService: CustomerService, private config: NgSelectConfig) {
+    this.config.appendTo = 'body';
+    this.config.bindValue = 'value';
 
     this.getAllCity();
     this.createForm();

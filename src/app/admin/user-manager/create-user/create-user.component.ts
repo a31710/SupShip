@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../service/user.service';
 import Swal from 'sweetalert2'
+import { NgSelectConfig } from '@ng-select/ng-select';
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
@@ -15,7 +16,9 @@ export class CreateUserComponent implements OnInit {
   roleSelect='NV';
   createUserForm: FormGroup | any;
 
-  constructor(private userService: UserService, private fb: FormBuilder ) {
+  constructor(private userService: UserService, private fb: FormBuilder,private config: NgSelectConfig ) {
+    this.config.appendTo = 'body';
+    this.config.bindValue = 'value';
     this.getAllDeptCode();
     this.createForm();
    }

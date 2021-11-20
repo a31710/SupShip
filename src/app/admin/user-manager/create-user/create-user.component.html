@@ -33,11 +33,11 @@
                           <div  class="z-vlayout-inner" style="padding-bottom:0">
                               <div  class="z-div"> <span  class="z-label">DeptCode</span> </div>
                           </div>
-                          <select [(ngModel)]="deptCodeSelect" (change)="getPostCode(deptCodeSelect)"  class="form-control"  formControlName="deptCode" >
-                            <option  [ngValue]="null" [disabled]="true" >Chọn DeptCode</option>
-                            <option *ngFor="let d of dataDept" [ngValue]="d.deptCode"> {{d.deptName}}</option>
 
-                          </select>
+
+                          <ng-select   bindValue="deptCode" [(ngModel)]="deptCodeSelect" (change)="getPostCode(deptCodeSelect)"
+                           [items]="dataDept" bindLabel="deptName" formControlName="deptCode" >
+                          </ng-select>
                       </div>
                   </div>
               </div>
@@ -48,10 +48,11 @@
                         <div class="z-vlayout-inner" style="padding-bottom:0">
                             <div  class="z-div"> <span  class="z-label">PostCode</span> </div>
                         </div>
-                        <select [(ngModel)]="postCodeSelect" class="form-control"  formControlName="postCode">
-                          <option [ngValue]="null" [disabled]="true">Chọn PostCode</option>
-                          <option *ngFor="let d of dataPost" [ngValue]="d.postCode"> {{d.postName}}</option>
-                        </select>
+
+
+                        <ng-select   bindValue="postCode" [(ngModel)]="postCodeSelect"
+                        [items]="dataPost" bindLabel="postName" formControlName="postCode" >
+                       </ng-select>
                 </div>
             </div>
 
@@ -60,11 +61,11 @@
                     <div  class="z-vlayout-inner" style="padding-bottom:0">
                         <div  class="z-div"> <span  class="z-label">Role</span> </div>
                     </div>
-                    <select [(ngModel)]="roleSelect" class="form-control"   formControlName="roles">
-                      <option  [ngValue]="null" [disabled]="true" >Chọn role</option>
-                      <option *ngFor="let d of roleData" [ngValue]="d.value"> {{d.name}}</option>
 
-                    </select>
+
+                    <ng-select   bindValue="value" [(ngModel)]="roleSelect"
+                    [items]="roleData" bindLabel="name" formControlName="roles" >
+                   </ng-select>
                 </div>
             </div>
         </div>
@@ -74,7 +75,7 @@
                       <div id="w1uPhg4" class="col-md-12 z-div">
                           <div id="w1uPig4" style="float:right;" class="z-hlayout">
 
-                              <div id="w1uPkg4-chdex" class="z-hlayout-inner" ><button type="submit"  class="btn btn-success btn-sm">Đăng ký </button></div>
+                              <div id="w1uPkg4-chdex" class="z-hlayout-inner" ><button type="submit" [disabled]="createUserForm.invalid"  class="btn btn-success btn-sm">Đăng ký </button></div>
                           </div>
                       </div>
                   </div>

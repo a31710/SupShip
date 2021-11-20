@@ -5,6 +5,7 @@ import { CustomerService } from '../../service/customer.service';
 import { UserService } from '../../service/user.service';
 import Swal from 'sweetalert2'
 import { environment } from 'src/environments/environment';
+import { NgSelectConfig } from '@ng-select/ng-select';
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',
@@ -42,8 +43,11 @@ leadSelect:any
 idUpdate:any;
 isSearch:Boolean = false;
 
-  constructor(private customerService: CustomerService, private route: Router,
+  constructor(private customerService: CustomerService, private route: Router,private config: NgSelectConfig,
      private toastr: ToastrService, private fb: FormBuilder,private userService: UserService) {
+      this.config.appendTo = 'body';
+      this.config.bindValue = 'value';
+
       this.fromDate =  new Date(this.toDate.getFullYear(), this.toDate.getMonth(), 1);
 
     // this.customerService.getAllCustomer().subscribe(data=>{

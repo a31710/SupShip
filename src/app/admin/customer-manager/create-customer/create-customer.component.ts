@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from '../../service/customer.service';
 import Swal from 'sweetalert2';
+import { NgSelectConfig } from '@ng-select/ng-select';
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
@@ -105,7 +106,10 @@ export class CreateCustomerComponent implements OnInit {
       return this.insertCustomerForm.get('phone') as FormArray;
     }
 
-  constructor(private fb: FormBuilder, private customerService: CustomerService, private toastr: ToastrService) {
+  constructor(private fb: FormBuilder, private customerService: CustomerService, private config: NgSelectConfig) {
+    this.config.appendTo = 'body';
+    this.config.bindValue = 'value';
+
     this.getAllCity();
     this.createForm();
     this.addIndustrysControls();
