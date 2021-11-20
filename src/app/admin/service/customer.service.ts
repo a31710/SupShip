@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { timeThursdays } from 'd3-time';
 import { post } from 'jquery';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -64,5 +65,11 @@ constructor(private http: HttpClient) { }
 
   searchLeadPagi(fromDate:any,toDate:any,status:any,page:any,size:any):Observable<any>{
     return this.http.get<any>(`${this.url}/api/lead/filter?from=${fromDate}&to=${toDate}&status=${status}&page=${page}&size=${size}`);
+  }
+  excelHistory():Observable<any>{
+    return this.http.get<any>(`${this.url}/api/lead-assigns/history`);
+  }
+  detailHIstory(id:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/lead-assigns/import/${id}`)
   }
 }
