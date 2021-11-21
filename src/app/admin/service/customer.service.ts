@@ -80,4 +80,7 @@ constructor(private http: HttpClient) { }
     };
     return this.http.get(`${this.url}/api/lead-assigns/templates/download`,{...options, responseType: 'blob'} );
   }
+  LeadAssign(body:any):Observable<any>{
+    return this.http.post<any>(`${this.url}/api/lead-assigns`,body)
+  }
 }

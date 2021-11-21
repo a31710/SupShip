@@ -42,11 +42,13 @@ postCodeSelect:any;
 leadSelect:any
 idUpdate:any;
 isSearch:Boolean = false;
-
+empSystemId:any;
   constructor(private customerService: CustomerService, private route: Router,private config: NgSelectConfig,
      private toastr: ToastrService, private fb: FormBuilder,private userService: UserService) {
       this.config.appendTo = 'body';
       this.config.bindValue = 'value';
+      const cos:any = localStorage.getItem('empSystemId');
+      this.empSystemId = parseInt(cos);
 
       this.fromDate =  new Date(this.toDate.getFullYear(), this.toDate.getMonth(), 1);
 
@@ -71,7 +73,7 @@ isSearch:Boolean = false;
 
   createForm(){
     this.tranferForm = this.fb.group({
-      userAssigneeId: ['',Validators.required],
+      userAssigneeId: [this.empSystemId,Validators.required],
       userRecipientId: ['',Validators.required],
       leadIds:['',],
       deptCode: ['',Validators.required],
@@ -84,8 +86,14 @@ isSearch:Boolean = false;
     return this.tranferForm.get('leadIds') as FormArray;
   }
   onSubmit(){
+
     this.leadIdArray.setValue(this.idArray);
     console.log(this.tranferForm.value);
+    this.customerService.LeadAssign(this.tranferForm.value).subscribe(data=>{
+      this.tranferData = [];
+      console.log(data);
+    })
+    // const resetArr = this.tranferData.filter((d:any) => d.id == -1)
   }
   onSearch(){
     this.customerService.searchLead(this.datePipe(this.fromDate),this.datePipe(this.toDate),this.status)
@@ -258,16 +266,16 @@ isSearch:Boolean = false;
 
   }
 
-  allTranfer(){
-      const resetArr = this.tranferData.filter((d:any) => d.id == -1)
-      this.tranferData = resetArr
-
+   allTranfer(){
+    console.log(this.tranferData);
      this.idArray.forEach((d)=>{
        const data = this.listCustomer.filter((data:any)=> data.id == d)
       this.tranferData.push(data[0]);
       })
-      console.log(this.tranferData);
+  }
 
+  clearTranferData(){
+    this.tranferData = [];
   }
 
 

@@ -120,7 +120,7 @@
           <td>{{item?.companyName}}<br>{{item?.address?.homeNo}}</td>
           <td>{{item?.representation}}</td>
           <td>{{item?.statusDescription}}</td>
-          <td>{{item?.statusDescription}}</td>
+          <td>{{item?.statusDescLa}}</td>
           <td>{{item?.leadAssigns[0]?.deptCode}}</td>
           <td>{{item?.leadAssigns[0]?.postCode}}</td>
           <td>{{item?.leadAssigns[0]?.assigneeName}}</td>
@@ -175,7 +175,7 @@ aria-hidden="true">
     <div class="modal-header">
         <h3 class="modal-title" id="exampleModalLabel">Giao tiếp xúc {{tranferData?.length}} khách hàng</h3>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
+            <span (click)="clearTranferData()" aria-hidden="true">×</span>
         </button>
     </div>
     <div class="modal-body">
@@ -238,7 +238,7 @@ aria-hidden="true">
 </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+        <button class="btn btn-sm btn-secondary" type="button" (click)="clearTranferData()" data-dismiss="modal">Hủy</button>
         <button class="btn btn-sm btn-success" (click)="onSubmit()" type="button"  data-dismiss="modal" aria-label="Close">
          Giao
       </button>
