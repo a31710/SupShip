@@ -130,3 +130,22 @@
   overflow-y: hidden; /* Hide vertical scrollbar */
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
+.tbhov:hover {
+  background-color: rgb(231, 235, 243);
+  cursor: pointer;
+}
+.fas:hover{
+  color: #4e73df;
+}
+
+
+.ng-select.custom ::ng-deep .ng-select-container  {
+  border: 1px solid rgb(153, 152, 152);
+  min-height: 0px;
+  border-radius: 5px;
+  height: 46px;
+}
+
+.ng-select.custom ::ng-deep .ng-select-container:hover{
+  border: 1px solid rgb(82, 80, 80);
+}

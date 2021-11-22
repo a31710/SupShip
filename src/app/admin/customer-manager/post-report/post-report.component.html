@@ -64,18 +64,18 @@
     <div class="row col-5 mb-4">
       <div class="col-4">
         <div class="md-form md-outline input-with-post-icon datepicker">
-          <input placeholder="Select date" type="date" id="example" class="form-control">
-        </div>
+          <p-calendar [(ngModel)]="fromDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
+      </div>
       </div>
       <div class="col-4">
         <div class="md-form md-outline input-with-post-icon datepicker">
-          <input placeholder="Select date" type="date" id="example" class="form-control">
-        </div>
+          <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
       </div>
-      <div class="col-4">
+      </div>
+      <div class="col-4 mt-2">
         <div class="md-form md-outline input-with-post-icon datepicker">
           <a  class="btn btn-sm btn-success"><i
-            class="fas fa-download fa-sm text-white-50"></i> Tìm kiếm</a>
+            class="fas fa-search fa-sm text-white-50"></i> Tìm kiếm</a>
         </div>
       </div>
 
@@ -109,26 +109,27 @@
         </tr>
       </thead>
       <tbody>
-        <tr >
-          <th >3</th>
-          <td>Sit</td>
-          <td>Amet</td>
-          <td>Sit</td>
-          <td>Amet</td>
-          <td>Sit</td>
-          <td>Amet</td>
-          <td>Sit</td>
-          <td>Amet</td>
-          <td>Amet</td>
+        <tr *ngFor="let item of postReportData,let index = index">
+          <th >{{index + 1}}</th>
+          <td>{{item?.empSystemId}}</td>
+          <td>{{item?.fullName}}</td>
+          <td>{{item?.totalAssigns}}</td>
+          <td>{{item?.totalAssigns}}</td>
+          <td>{{item?.totalAssigns}}</td>
+          <td>{{item?.totalAssigns}}</td>
+          <td>{{item?.totalAssigns}}</td>
+          <td>{{item?.totalAssigns}}</td>
+          <td>{{item?.expectedRevenue}}</td>
 
           <td>
-            <a type="button"  class="btn btn-success btn-sm px-3 mr-2"  data-toggle="modal" data-target="#tranfer">
-                Giao TX
-            </a>
             <i class="fas fa-eye px-3"  style="cursor: pointer;" ></i>
           </td>
         </tr>
+
       </tbody>
+
+
+
     </table>
 
 

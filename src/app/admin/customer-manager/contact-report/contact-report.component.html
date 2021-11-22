@@ -70,28 +70,25 @@
     <div class="row col-10 mb-4">
       <div class="col-2">
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-          <input placeholder="Mã chi nhánh" type="text" id="example" class="form-control">
-        </div>
-      </div>
-      <div class="col-2">
-        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-          <input placeholder="Mã bưu cục" type="text" id="example" class="form-control">
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="md-form md-outline input-with-post-icon datepicker">
-          <input placeholder="Select date" type="date" id="example" class="form-control">
+          <ng-select class="custom" placeholder="Chọn mã chi nhánh"  bindValue="deptCode"
+          [(ngModel)]="deptCodeSelect"  [items]="dataDept" bindLabel="deptName"  >
+         </ng-select>
         </div>
       </div>
       <div class="col-2">
         <div class="md-form md-outline input-with-post-icon datepicker">
-          <input placeholder="Select date" type="date" id="example" class="form-control">
-        </div>
+          <p-calendar [(ngModel)]="fromDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
+      </div>
       </div>
       <div class="col-2">
         <div class="md-form md-outline input-with-post-icon datepicker">
-          <a  class="btn btn-sm btn-success"><i
-            class="fas fa-download fa-sm text-white-50"></i> Tìm kiếm</a>
+          <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
+      </div>
+      </div>
+      <div class="col-2 mt-2">
+        <div class="md-form md-outline input-with-post-icon datepicker">
+          <a (click)="onSearch()"  class="btn btn-sm btn-success"><i
+            class="fas fa-search fa-sm text-white-50"  ></i> Tìm kiếm</a>
         </div>
       </div>
 
@@ -125,25 +122,27 @@
         </tr>
       </thead>
       <tbody>
-        <tr >
-          <th ></th>
-          <td>Sit</td>
-          <td>Amet</td>
-          <td>Sit</td>
-          <td>Amet</td>
-          <td>Sit</td>
-          <td>Amet</td>
-          <td>Sit</td>
-          <td>Amet</td>
+
+        <tr *ngFor="let item of ReportAllCompany" class="tbhov">
+              <td ><a style="cursor: pointer;" (click)="toogleData(item?.deptCode)"><i *ngIf="item?.deptCode" class="fas fa-caret-right mr-2"></i> {{item?.deptCode}}</a></td>
+              <td>{{item?.postCode?item?.postCode:item?.reportMonthlyPostOfficeDtos.length}}</td>
+              <td>{{item?.totalEmployees?item?.totalEmployees:345}}</td>
+              <td>{{item?.totalAssigns?item?.totalAssigns:0}}</td>
+              <td>{{item?.assigned?item?.assigned:0}} ({{item?.assigned?item?.assigned:0}} - {{item?.contacting?item?.contacting:0}} - {{item?.fails?item?.fails:0}})</td>
+              <td>{{item?.employeeNotAssigned?item?.employeeNotAssigned:0}}</td>
+              <td>{{item?.fails}}</td>
+              <td>100%</td>
+              <td>0%</td>
+              <td>
+
+               <ng-container  *ngIf="!item.deptCode">
+                <i class="fas fa-eye px-3" (click)="postReport(item?.postCode)" style="cursor: pointer;" ></i>
+               </ng-container>
+              </td>
 
 
-          <td>
-            <a type="button"  class="btn btn-success btn-sm px-3 mr-2"  data-toggle="modal" data-target="#tranfer">
-                Giao TX
-            </a>
-            <i class="fas fa-eye px-3" (click)="postReport()" style="cursor: pointer;" ></i>
-          </td>
         </tr>
+
       </tbody>
     </table>
 

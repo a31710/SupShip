@@ -83,4 +83,11 @@ constructor(private http: HttpClient) { }
   LeadAssign(body:any):Observable<any>{
     return this.http.post<any>(`${this.url}/api/lead-assigns`,body)
   }
+
+  ReportAllCompany(from:any, to:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/report?from=${from}&to=${to}`);
+  }
+  reportPostCode(from:any, to:any, postCode:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/report/post?from=${from}&to=${to}&post=${postCode}`);
+  }
 }

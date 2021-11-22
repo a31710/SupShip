@@ -12,6 +12,7 @@ import { NgSelectConfig } from '@ng-select/ng-select';
   styleUrls: ['./view-customer.component.css']
 })
 export class ViewCustomerComponent implements OnInit {
+postCodeReport:any
 req:any;
 fromDate:any;
 toDate: Date = new Date;
@@ -180,12 +181,13 @@ empSystemId:any;
   }
 
   addPostReport(event:any){
-    const postReport = {title:'Bưu cục lồn', value:6};
+    const postReport = {title:`Bưu cục ${event}`, value:6};
     const oldData = this.tabs.filter(data => data.value == 6)
     if(oldData[0]?.value == 6){
       console.log('bị trùng, trở về tab cũ');
       this.tabs.forEach((d,i)=>{
         if(d.value == 6){
+          this.tabs[i].title = `Bưu cục ${event}`;
           this.selected.setValue(i);
         }
       })
@@ -195,6 +197,7 @@ empSystemId:any;
       this.selected.setValue(this.tabs.length - 1);
     }
     console.log(event);
+    this.postCodeReport = event;
   }
   addUpdateTab(id:any){
     const updateCustomer = {title:'Cập nhật khách hàng', value:4}
