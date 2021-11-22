@@ -16,7 +16,10 @@ export class ContactReportComponent implements OnInit {
   deptCodeSelect:any
   fromDate:any;
   toDate: Date = new Date;
-
+  offset: number = 0;
+  limit: number = 15;
+  size:any
+  pagiData:any
   @Output() onPostChange: EventEmitter<any>;
   constructor(private customerService: CustomerService,private userService: UserService) {
     this.onPostChange = new EventEmitter<any>();
@@ -25,10 +28,20 @@ export class ContactReportComponent implements OnInit {
     this.customerService.ReportAllCompany(this.datePipe(this.fromDate),this.datePipe(this.toDate)).subscribe(data=>{
       console.log(data);
       this.ReportAllCompany = data?.data;
+      this.size = this.ReportAllCompany.length;
+      this.pagiData = this.paginate(this.ReportAllCompany,15,1);
     })
+
+
   }
 
-
+  paginate(array:any, page_size:any, page_number:any) {
+    return array.slice((page_number - 1) * page_size, page_number * page_size);
+  }
+  onPageChange(offset:any){
+    this.offset = offset;
+    this.pagiData = this.paginate(this.ReportAllCompany,this.limit,(this.offset/this.limit)+1);
+  }
 
 
   toogleData(deptCode:any){
@@ -40,6 +53,9 @@ export class ContactReportComponent implements OnInit {
       }
       this.listPostCode.map((d:any)=>{
        this.ReportAllCompany = this.ReportAllCompany.filter((i:any)=> i.postCode == d.postcode);
+       this.pagiData = this.ReportAllCompany.filter((i:any)=> i.postCode == d.postcode);
+       this.pagiData = this.paginate(this.ReportAllCompany,this.limit,(this.offset/this.limit)+1);
+       this.size = this.ReportAllCompany.length;
       })
       this.listPostCode = [];
 
@@ -50,7 +66,10 @@ export class ContactReportComponent implements OnInit {
         const deptCodeData = this.ReportAllCompany.filter((d:any)=> d.deptCode == deptCode);
         deptCodeData[0]?.reportMonthlyPostOfficeDtos.map((d:any)=>{
           this.listPostCode.push(d.postCode);
-          this.ReportAllCompany.splice(i+1,0,d)
+          this.ReportAllCompany.splice(i+1,0,d);
+          this.pagiData.splice(i+1,0,d);
+          this.pagiData = this.paginate(this.ReportAllCompany,this.limit,(this.offset/this.limit)+1);
+          this.size = this.ReportAllCompany.length;
         })
       }
     })
