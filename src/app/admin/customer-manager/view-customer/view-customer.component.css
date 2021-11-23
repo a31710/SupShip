@@ -17,3 +17,6 @@
   display: inline-block;
   margin-right: 20px;
 }
+.mh{
+  min-height: 500px;
+}

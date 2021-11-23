@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from '../../service/customer.service';
@@ -22,6 +22,8 @@ export class CreateCustomerComponent implements OnInit {
   selectedIndustryValues:String[] = [];
   industryError: Boolean = true;
   bodyApi: any;
+
+  @Output() createCus: EventEmitter<any>;
 
   insertCustomerMessage = {
     'title': [
@@ -59,6 +61,9 @@ export class CreateCustomerComponent implements OnInit {
     'phone': [
       { type: 'required', message: 'Bạn chưa nhập ô này' },
       { type: 'pattern', message: 'Sai định dạng số điện thoại' },
+    ],
+    'leadSource': [
+      { type: 'required', message: 'Bạn vẫn chưa tích vào trường này' },
     ],
 
     }
@@ -107,6 +112,7 @@ export class CreateCustomerComponent implements OnInit {
     }
 
   constructor(private fb: FormBuilder, private customerService: CustomerService, private config: NgSelectConfig) {
+    this.createCus = new EventEmitter<any>();
     this.config.appendTo = 'body';
     this.config.bindValue = 'value';
 
@@ -131,7 +137,7 @@ export class CreateCustomerComponent implements OnInit {
         quantityMonth:['', [Validators.required, Validators.min(1)]], //
         weight: ['', [Validators.required,Validators.min(1)]], //
         expectedRevenue: ['', [Validators.required,Validators.min(1)]], //
-        leadSource:['', ],
+        leadSource:['', [Validators.required,] ],
         address: this.fb.array([this.addAddressGroup()]),
         industry: this.fb.array([]),
     })
@@ -223,13 +229,26 @@ export class CreateCustomerComponent implements OnInit {
   this.insertCustomerForm.reset();
   this.customerService.insertCustomer(this.bodyApi).subscribe(data=>{
     console.log(data);
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'Cập nhật thành công',
-      showConfirmButton: false,
-      timer: 3000
-    })
+    if(data?.error == 'true'){
+      Swal.fire({
+        title: 'Thêm mới thất bại',
+        text: data?.message,
+        icon: 'error',
+        confirmButtonColor: '#4e73df',
+        confirmButtonText: 'Chấp nhận'
+      })
+    }else{
+      Swal.fire({
+        title: 'Thêm mới khách hàng thành công',
+        icon: 'success',
+        confirmButtonColor: '#4e73df',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.createCus.emit('thành công rồi');
+        }
+      })
+    }
   })
   }
 

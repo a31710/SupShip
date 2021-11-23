@@ -33,6 +33,7 @@ tabs = [{
   value: 5
 }
 ];
+isCTX:boolean = false;
 isdb:boolean = false;
 status:any = 'ALL';
 selected = new FormControl(0);
@@ -96,21 +97,26 @@ empSystemId:any;
       console.log(data);
       if(data?.error == "true"){
         Swal.fire({
-          position: 'top-end',
+          title: 'Giao tiếp xúc thất bại',
+          text: data?.message,
           icon: 'error',
-          title: data?.message,
-          showConfirmButton: true,
-          timer: 10000
-
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
         })
       }else{
-        window.location.reload();
         Swal.fire({
-          position: 'top-end',
+          title: 'Giao tiếp xúc thành công',
           icon: 'success',
-          title: 'giao tiếp xúc thành công',
-          showConfirmButton: false,
-          timer: 3000
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
         })
       }
 
@@ -127,11 +133,10 @@ empSystemId:any;
       this.isSearch = true;
       if(data?.error == 'true'){
         Swal.fire({
-          position: 'top-end',
           icon: 'error',
           title: data?.message,
           showConfirmButton: true,
-          timer: 10000
+          confirmButtonText: 'Chấp nhận'
         })
       }
     })
@@ -177,6 +182,27 @@ empSystemId:any;
 
     this.idArray = [];
   }
+
+  createCus(data:any){
+    this.customerService.getLeadStatus(1,15,'ALL').subscribe((data)=>{
+      this.status = 'ALL';
+      this.listCustomer = data.data
+      console.log(data.data);
+      this.size = data.totalItem;
+      this.isSearch = false;
+    })
+
+    this.tabs.map((d,i)=>{
+      if(d.value == 2){
+        this.tabs.splice(i, 1);
+      }
+    })
+    this.selected.setValue(0);
+    console.log(data);
+
+
+  }
+
   onDelete(id:any){
 
     this.customerService.deleteCustomer(id).subscribe((data)=>{
@@ -308,7 +334,12 @@ empSystemId:any;
     this.tabs.splice(index, 1);
     this.selected.setValue(0);
   }
-  singleTranfer(id:any){
+  singleTranfer(id:any, stt:any){
+    if(stt == 'CONTACTING'){
+      this.isCTX = true;
+    }else{
+      this.isCTX = false;
+    }
     this.idArray.push(id);
     const data  = this.listCustomer.filter((data:any)=> data.id === id);
     this.tranferData= data;

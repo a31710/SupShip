@@ -11,29 +11,29 @@ export class MoneyDirective {
 
   @HostListener('input',['$event'])
   inputChange(){
-    let newVal = this.eleRef.nativeElement.value.replace(/\D/g, '');
-  if ( newVal.length <= 6) {
-    this.eleRef.nativeElement.value = newVal.substring(0, newVal.length - 1);
+    let newVal = this.eleRef?.nativeElement?.value?.replace(/\D/g, '');
+  if ( newVal?.length <= 6) {
+    this.eleRef.nativeElement.value = newVal?.substring(0, newVal.length - 1);
   }
   if (newVal.length === 0) {
     this.eleRef.nativeElement.value = '';
-  } else if (newVal.length <= 3) {
-    this.eleRef.nativeElement.value = newVal.replace(/^(\d{0,3})/, '$1');
-  } else if (newVal.length <= 4) {
-    this.eleRef.nativeElement.value = newVal.replace(/^(\d{0,1})(\d{0,3})/, '$1.$2');
-  } else if (newVal.length <= 5) {
-    this.eleRef.nativeElement.value = newVal.replace(/^(\d{0,2})(\d{0,3})/, '$1.$2');
-  } else if (newVal.length <= 6) {
-    this.eleRef.nativeElement.value = newVal.replace(/^(\d{0,3})(\d{0,3})/, '$1.$2');
-  } else if (newVal.length <= 7) {
-    this.eleRef.nativeElement.value = newVal.replace(/^(\d{0,1})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
-  } else if (newVal.length <= 8) {
-    this.eleRef.nativeElement.value = newVal.replace(/^(\d{0,2})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
-  } else if (newVal.length <= 9) {
-    this.eleRef.nativeElement.value = newVal.replace(/^(\d{0,3})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
+  } else if (newVal?.length <= 3) {
+    this.eleRef.nativeElement.value = newVal?.replace(/^(\d{0,3})/, '$1');
+  } else if (newVal?.length <= 4) {
+    this.eleRef.nativeElement.value = newVal?.replace(/^(\d{0,1})(\d{0,3})/, '$1.$2');
+  } else if (newVal?.length <= 5) {
+    this.eleRef.nativeElement.value = newVal?.replace(/^(\d{0,2})(\d{0,3})/, '$1.$2');
+  } else if (newVal?.length <= 6) {
+    this.eleRef.nativeElement.value = newVal?.replace(/^(\d{0,3})(\d{0,3})/, '$1.$2');
+  } else if (newVal?.length <= 7) {
+    this.eleRef.nativeElement.value = newVal?.replace(/^(\d{0,1})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
+  } else if (newVal?.length <= 8) {
+    this.eleRef.nativeElement.value = newVal?.replace(/^(\d{0,2})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
+  } else if (newVal?.length <= 9) {
+    this.eleRef.nativeElement.value = newVal?.replace(/^(\d{0,3})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
   } else {
-    newVal = newVal.substring(0, 10);
-    this.eleRef.nativeElement.value = newVal.replace(
+    newVal = newVal?.substring(0, 10);
+    this.eleRef.nativeElement.value = newVal?.replace(
       /^(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,4})/,
       '$1.$2.$3.$4'
     );
@@ -56,28 +56,28 @@ export class MoneyDirective {
 
  onInputChange(event:any, backspace:any) {
   let newVal = event.replace(/\D/g, '');
-  if (backspace && newVal.length <= 6) {
-    newVal = newVal.substring(0, newVal.length - 1);
+  if (backspace && newVal?.length <= 6) {
+    newVal = newVal?.substring(0, newVal?.length - 1);
   }
-  if (newVal.length === 0) {
+  if (newVal?.length === 0) {
     newVal = '';
-  } else if (newVal.length <= 3) {
-    newVal = newVal.replace(/^(\d{0,3})/, '$1');
-  } else if (newVal.length <= 4) {
-    newVal = newVal.replace(/^(\d{0,1})(\d{0,3})/, '$1.$2');
-  } else if (newVal.length <= 5) {
-    newVal = newVal.replace(/^(\d{0,2})(\d{0,3})/, '$1.$2');
-  } else if (newVal.length <= 6) {
-    newVal = newVal.replace(/^(\d{0,3})(\d{0,3})/, '$1.$2');
-  } else if (newVal.length <= 7) {
-    newVal = newVal.replace(/^(\d{0,1})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
-  } else if (newVal.length <= 8) {
-    newVal = newVal.replace(/^(\d{0,2})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
-  } else if (newVal.length <= 9) {
-    newVal = newVal.replace(/^(\d{0,3})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
+  } else if (newVal?.length <= 3) {
+    newVal = newVal?.replace(/^(\d{0,3})/, '$1');
+  } else if (newVal?.length <= 4) {
+    newVal = newVal?.replace(/^(\d{0,1})(\d{0,3})/, '$1.$2');
+  } else if (newVal?.length <= 5) {
+    newVal = newVal?.replace(/^(\d{0,2})(\d{0,3})/, '$1.$2');
+  } else if (newVal?.length <= 6) {
+    newVal = newVal?.replace(/^(\d{0,3})(\d{0,3})/, '$1.$2');
+  } else if (newVal?.length <= 7) {
+    newVal = newVal?.replace(/^(\d{0,1})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
+  } else if (newVal?.length <= 8) {
+    newVal = newVal?.replace(/^(\d{0,2})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
+  } else if (newVal?.length <= 9) {
+    newVal = newVal?.replace(/^(\d{0,3})(\d{0,3})(\d{0,4})/, '$1.$2.$3');
   } else {
-    newVal = newVal.substring(0, 10);
-    newVal = newVal.replace(
+    newVal = newVal?.substring(0, 10);
+    newVal = newVal?.replace(
       /^(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,4})/,
       '$1.$2.$3.$4'
     );
