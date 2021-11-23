@@ -23,7 +23,7 @@ export class DetailCustomerComponent implements OnInit,OnChanges {
   }
   ngOnChanges(){
     this.customerSerivce.getDetailCustomer(this.idUpdate).subscribe((data)=>{
-      this.infoCusomter = data;
+      this.infoCusomter = [data];
       console.log(data)
     })
   }

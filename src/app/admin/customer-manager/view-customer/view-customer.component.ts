@@ -33,6 +33,7 @@ tabs = [{
   value: 5
 }
 ];
+isdb:boolean = false;
 status:any = 'ALL';
 selected = new FormControl(0);
 dataPost:any
@@ -79,7 +80,7 @@ empSystemId:any;
       leadIds:['',],
       deptCode: ['',Validators.required],
       postCode: ['',Validators.required],
-
+      note:['',],
     })
   }
 
@@ -93,8 +94,30 @@ empSystemId:any;
     this.customerService.LeadAssign(this.tranferForm.value).subscribe(data=>{
       this.tranferData = [];
       console.log(data);
+      if(data?.error == "true"){
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: data?.message,
+          showConfirmButton: true,
+          timer: 10000
+
+        })
+      }else{
+        window.location.reload();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'giao tiếp xúc thành công',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      }
+
     })
-    // const resetArr = this.tranferData.filter((d:any) => d.id == -1)
+
+
+
   }
   onSearch(){
     this.customerService.searchLead(this.datePipe(this.fromDate),this.datePipe(this.toDate),this.status)
@@ -102,6 +125,15 @@ empSystemId:any;
       this.listCustomer = data.data
       this.size = data.totalItem;
       this.isSearch = true;
+      if(data?.error == 'true'){
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: data?.message,
+          showConfirmButton: true,
+          timer: 10000
+        })
+      }
     })
 
   }
@@ -146,20 +178,41 @@ empSystemId:any;
     this.idArray = [];
   }
   onDelete(id:any){
-    this.tabs.map((d,i)=>{
-      if(d.value == 3){
-        this.tabs.splice(i, 1);
+
+    this.customerService.deleteCustomer(id).subscribe((data)=>{
+      if(data?.error =='true'){
+        Swal.fire({
+          title: 'Xóa không thành công ?',
+          text: data?.message,
+          icon: 'error',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'Chấp nhận'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.tabs.map((d,i)=>{
+              if(d.value == 3){
+                this.tabs.splice(i, 1);
+              }
+            })
+            this.selected.setValue(0);
+          }
+        })
+
+      }else{
+        Swal.fire({
+          title: 'Xóa thành công',
+          icon: 'success',
+          timer: 3000
+        })
+        this.listCustomer = this.listCustomer.filter((data:any) => data.id !== id);
+        this.tabs.map((d,i)=>{
+          if(d.value == 3){
+            this.tabs.splice(i, 1);
+          }
+        })
+        this.selected.setValue(0);
       }
-    })
-     this.listCustomer = this.listCustomer.filter((data:any) => data.id !== id);
-    this.customerService.deleteCustomer(id).subscribe(()=>{
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Xóa thành công',
-        showConfirmButton: false,
-        timer: 3000
-      })
+
     })
   }
 
@@ -253,8 +306,10 @@ empSystemId:any;
 
   removeTab(index: number) {
     this.tabs.splice(index, 1);
+    this.selected.setValue(0);
   }
   singleTranfer(id:any){
+    this.idArray.push(id);
     const data  = this.listCustomer.filter((data:any)=> data.id === id);
     this.tranferData= data;
   }
@@ -266,18 +321,45 @@ empSystemId:any;
       this.idArray.push(id);
     }
     console.log(this.idArray);
-
+    if(this.idArray.length>0){
+      this.isdb = true;
+    }else{
+      this.isdb = false;
+    }
   }
 
    allTranfer(){
-    console.log(this.tranferData);
      this.idArray.forEach((d)=>{
        const data = this.listCustomer.filter((data:any)=> data.id == d)
+      data.map((d:any)=>{
+        if(d?.status == 'CONTACTING'){
+
+          Swal.fire({
+            title: 'Chuyển tiếp xúc lỗi ?',
+            text: "Không được chuyển tiếp xúc nhiều khách hàng, hoặc vừa chuyển tiếp xúc, vừa giao tiếp xúc",
+            icon: 'error',
+            confirmButtonColor: '#4e73df',
+            confirmButtonText: 'Chấp nhận'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
+          })
+
+        }
+      })
       this.tranferData.push(data[0]);
       })
+      console.log(this.tranferData);
   }
 
   clearTranferData(){
+    if(this.isdb == false){
+      this.idArray = [];
+    }
+    if(this.idArray.length>0){
+      this.isdb == true
+    }
     this.tranferData = [];
   }
 

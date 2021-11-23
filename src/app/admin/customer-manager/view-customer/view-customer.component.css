@@ -1,1 +1,19 @@
 
+.tbhov:hover {
+  background-color: rgb(231, 235, 243);
+  cursor: pointer;
+}
+.fas:hover{
+  color: #4e73df;
+}
+#switcher {
+  text-align: right;
+}
+
+
+
+
+.button {
+  display: inline-block;
+  margin-right: 20px;
+}

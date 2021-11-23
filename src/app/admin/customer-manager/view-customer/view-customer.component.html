@@ -14,7 +14,7 @@
   </div>
   <!-- Earnings (Monthly) Card Example -->
   <div class="row col-12">
-    <div class="row col-xl-6 col-md-6 mb-4">
+    <div class="row col-xl-8 col-md-8 mb-4">
       <div class="col-3">
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
           <input [(ngModel)]="req" placeholder="Id hoặc tên khách hàng" type="text" id="example" class="form-control" style="border: 1px solid rgb(160, 154, 154); padding: 22px;">
@@ -46,7 +46,7 @@
 
 
   <div class="row col-12">
-    <div class="row col-xl-6 col-md-6 mb-4">
+    <div class="row col-6 mb-4">
       <div class="mb-4">
         <a  (click)="getListAll()" class="btn btn-sm btn-secondary mr-2">Tất cả</a>
         <a  (click)="getListNew()" class="btn btn-sm btn-primary mr-2">Mới</a>
@@ -57,39 +57,27 @@
       </div>
     </div>
 
-    <div class="row col-xl-6 col-md-6 mb-4">
-
-
-      <div class="col-lg-2 col-sm-1 pt-1">
+    <div class="row col-6 mb-4" >
+      <div class="mb-4">
+        <div id="switcher">
+          <div class="button selected" id="switcher-default">
+            <button  (click)="addCreateTab()" class="btn btn-sm btn-success mr-2"><i
+              class="fas fa-user-plus fa-sm text-white-50" ></i>Thêm mới</button>
+          </div>
+          <div class="button" id="switcher-narrow">
+            <button  (click)="addContactExcel()" class="btn btn-sm btn-success mr-2">Giao TX Excel</button>
+          </div>
+          <div class="button" id="switcher-narrow">
+            <button  (click)="allTranfer()" data-toggle="modal" data-target="#tranfer" class="btn btn-sm btn-success mr-2" [disabled]="!isdb" >Giao tiếp xúc</button>
+          </div>
+          <div class="button" id="switcher-narrow">
+            <button  [disabled]="idArray.length<1" class="btn btn-sm btn-dark mr-2">Xóa bản ghi</button>
+          </div>
 
       </div>
-      <div class="col-lg-1 col-sm-1 pt-1">
 
       </div>
-
-
-      <div class="col-lg-2 pt-1">
-        <button  class="btn btn-sm btn-success" (click)="addCreateTab()"><i
-          class="fas fa-user-plus fa-sm text-white-50" ></i> Thêm mới</button>
-      </div>
-
-      <div class="col-lg-3  col-sm-1 pt-1">
-        <button  class="btn btn-sm btn-success" (click)="addContactExcel()"> Giao khách hàng Excel</button>
-      </div>
-
-      <div class="col-lg-2 col-md-4  pt-1">
-        <button [disabled]="idArray.length<1" class="btn btn-sm btn-success">
-          <span class="text" (click)="allTranfer()" data-toggle="modal" data-target="#tranfer">Giao tiếp xúc</span>
-        </button>
-      </div>
-      <div class="col-lg-2 pt-1">
-        <button [disabled]="idArray.length<1" class="btn btn-sm btn-dark">Xóa bản ghi</button>
-      </div>
-
-
-
     </div>
-
   </div>
 
 
@@ -113,11 +101,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of listCustomer, let i = index" [ngClass]="'toogle'+i">
+        <tr *ngFor="let item of listCustomer, let i = index" [ngClass]="'toogle'+i" class="tbhov">
           <th scope="col"><input (click)="toggle(i)" type="checkbox" (change)="getIdArray(item.id)"></th>
           <th scope="row">KH{{item.id}}</th>
           <td>{{item?.leadSource=='PRIVATE'?'Cá nhân':'Doanh nghiệp'}}</td>
-          <td>{{item?.companyName}}<br>{{item?.address?.homeNo}}</td>
+          <td>{{item?.companyName}}<br>{{item?.address?.fomatAddress}}</td>
           <td>{{item?.representation}}</td>
           <td>{{item?.statusDescription}}</td>
           <td>{{item?.statusDescLa}}</td>
@@ -128,9 +116,12 @@
           <td>{{item?.leadAssigns[0]?.createdDate | date: 'dd/MM/yyyy'}}</td>
 
           <td>
-            <a type="button"  class="btn btn-success btn-sm px-3 mr-2" (click)="singleTranfer(item.id)" data-toggle="modal" data-target="#tranfer">
+            <button type="button" *ngIf="item?.status != 'CONTACTING'" class="btn btn-success btn-sm px-3 mr-2" [disabled]="isdb" (click)="singleTranfer(item.id)" data-toggle="modal" data-target="#tranfer">
                 Giao TX
-            </a>
+            </button>
+            <button type="button" *ngIf="item?.status != 'NEW' && item?.status != 'SUCCESS'"  class="btn btn-success btn-sm px-3 mr-2" [disabled]="isdb" (click)="singleTranfer(item.id)" data-toggle="modal" data-target="#tranfer">
+              Chuyển TX
+          </button>
             <i class="fas fa-eye px-3" style="cursor: pointer;" (click)="addDetailTab(item.id)"></i>
           </td>
         </tr>
@@ -225,9 +216,9 @@ aria-hidden="true">
             <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                     KH{{item?.id}}</div>
-                <div class="h5 mb-0 text-gray-800 mt-2"><i class="fas fa-home mr-2"></i>Test Cảnh bánh 05.11 C3</div>
-                <div class="h5 mb-0 text-gray-800 mt-2"><i class="fas fa-map-marker-alt mr-2 ml-1"></i>***, , {{item?.address?.district}}, {{item?.address?.province}}</div>
-                <div class="h5 mb-0 text-gray-800 mt-2"><i class="fas fa-user mr-2 ml-1"></i>{{item?.fullName}}/****.***.113</div>
+                <div class="h5 mb-0 text-gray-800 mt-2"><i class="fas fa-home mr-2"></i>{{item?.companyName}}</div>
+                <div class="h5 mb-0 text-gray-800 mt-2"><i class="fas fa-map-marker-alt mr-2 ml-1"></i>{{item?.address?.fomatAddress}}, ***</div>
+                <div class="h5 mb-0 text-gray-800 mt-2"><i class="fas fa-user mr-2 ml-1"></i>{{item?.representation}}</div>
             </div>
             <div class="col-auto">
                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -239,7 +230,7 @@ aria-hidden="true">
     </div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-secondary" type="button" (click)="clearTranferData()" data-dismiss="modal">Hủy</button>
-        <button class="btn btn-sm btn-success" (click)="onSubmit()" type="button"  data-dismiss="modal" aria-label="Close">
+        <button class="btn btn-sm btn-success" [disabled]="tranferForm.invalid" (click)="onSubmit()" type="button"  data-dismiss="modal" aria-label="Close">
          Giao
       </button>
     </div>
@@ -265,7 +256,7 @@ aria-hidden="true">
           </angular-file-uploader>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">OK</button>
         </div>
     </div>
 </div>
