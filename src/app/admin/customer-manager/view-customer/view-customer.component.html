@@ -140,7 +140,7 @@
   <app-detail-customer [idUpdate]="idUpdate" (deleteId)="onDelete($event)" (updateId)="addUpdateTab($event)"></app-detail-customer>
 </div>
 <div *ngIf="tab.value == 4">
-  <app-update-customer [idUpdate]="idUpdate"></app-update-customer>
+  <app-update-customer [idUpdate]="idUpdate" (updateCus)="updateCus($event)"></app-update-customer>
 </div>
 <div *ngIf="tab.value == 5">
   <app-contact-report (onPostChange)="addPostReport($event)"></app-contact-report>

@@ -203,6 +203,25 @@ empSystemId:any;
 
   }
 
+  updateCus(data:any){
+    this.customerService.getLeadStatus(1,15,'ALL').subscribe((data)=>{
+      this.status = 'ALL';
+      this.listCustomer = data.data
+      console.log(data.data);
+      this.size = data.totalItem;
+      this.isSearch = false;
+    })
+
+    this.tabs.map((d,i)=>{
+      if(d.value == 4){
+        this.tabs.splice(i, 1);
+      }
+    })
+    this.selected.setValue(0);
+    console.log(data);
+
+  }
+
   onDelete(id:any){
 
     this.customerService.deleteCustomer(id).subscribe((data)=>{

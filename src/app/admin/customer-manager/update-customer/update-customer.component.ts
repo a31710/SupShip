@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -24,7 +24,7 @@ export class UpdateCustomerComponent implements OnInit {
   industryError: Boolean = true;
   bodyApi: any;
   customerData:any
-
+  @Output() updateCus: EventEmitter<any>;
   updateCustomerMessage = {
     'title': [
       { type: 'required', message: 'Bạn chưa nhập ô này' },
@@ -96,6 +96,7 @@ export class UpdateCustomerComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private customerService: CustomerService, private config: NgSelectConfig) {
+    this.updateCus = new EventEmitter<any>();
     this.config.appendTo = 'body';
     this.config.bindValue = 'value';
 
@@ -256,13 +257,26 @@ export class UpdateCustomerComponent implements OnInit {
   console.log(this.bodyApi);
 
   this.customerService.updateCustomer(this.idUpdate,this.bodyApi).subscribe(data=>{
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'Cập nhật thành công',
-      showConfirmButton: false,
-      timer: 3000
-    })
+    if(data?.error == 'true'){
+      Swal.fire({
+        title: 'Cập nhật thất bại',
+        text: data?.message,
+        icon: 'error',
+        confirmButtonColor: '#4e73df',
+        confirmButtonText: 'Chấp nhận'
+      })
+    }else{
+      Swal.fire({
+        title: 'Cập nhật khách hàng thành công',
+        icon: 'success',
+        confirmButtonColor: '#4e73df',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.updateCus.emit('thành công rồi');
+        }
+      })
+    }
 
   })
   }
