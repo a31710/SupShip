@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   Token: "",
-  url: "http://159.223.105.240:8085",
+  url: "http://localhost:8085",
   url1:'http://localhost:8085',
   url2:'http://159.223.105.240:8085'
 };

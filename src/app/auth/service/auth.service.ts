@@ -57,6 +57,10 @@ checkEmail(email: string): Observable<any>{
   }));
 }
 
+refreshToken():Observable<any>{
+  return this.http.get<any>(`${this.url}/user/refresh-token`);
+}
+
 
 forgotPassword(email:string):Observable<any>{
   return this.http.post<any>(`${this.url}/user/password/forgot`, email)
@@ -100,6 +104,9 @@ isLoggedIn(): boolean {
 }
 getUpdate(){
   return localStorage.getItem("isUpdate");
+}
+getJwtToken(){
+  return localStorage.getItem('token');
 }
 
 }

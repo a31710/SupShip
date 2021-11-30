@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-checkemail',
@@ -28,9 +28,20 @@ export class CheckemailComponent implements OnInit {
   }
   checkEmail(){
     localStorage.setItem('email', JSON.stringify(this.checkForm.get('email').value));
-    this.authService.checkEmail(this.checkForm.value).subscribe(()=>{
-      this.router.navigateByUrl('auth/login')
-      console.log(this.authService.getCheck());
+    this.authService.checkEmail(this.checkForm.value).subscribe((data)=>{
+      console.log(data);
+      if(data?.error == 'true'){
+        Swal.fire({
+          title: 'Nhập Email thất bại?',
+          text: data?.message,
+          icon: 'error',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'Chấp nhận'
+        })
+      }else{
+        this.router.navigateByUrl('auth/login');
+      }
+
 
     })
   }

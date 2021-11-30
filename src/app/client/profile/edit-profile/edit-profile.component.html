@@ -21,7 +21,8 @@
                               <div  class="z-div"> <span  class="z-label">Họ và tên</span> </div>
                           </div>
                           <div  class="z-vlayout-inner" ><input formControlName="fullName" class="form-control" value="" type="text" maxlength="100"  ></div>
-
+                          <small class="text-danger"   *ngIf="userForm.get('fullName')?.hasError('required') && userForm.get('fullName')?.touched">
+                            Bạn chưa nhập ô này</small>
                       </div>
                   </div>
                   <div  class="z-vlayout-inner" >
@@ -47,7 +48,8 @@
                           <div  class="z-div"> <span  class="z-label">Số điện thoại</span> </div>
                       </div>
                       <div  class="z-vlayout-inner" ><input appPhoneNumber formControlName="mobile" maxlength="12" class="form-control" value="" type="text" id="phone-number"   ></div>
-
+                      <small class="text-danger"   *ngIf="userForm.get('mobile')?.hasError('required') && userForm.get('mobile')?.touched">
+                        Bạn chưa nhập ô này</small>
                     </div>
               </div>
               <div  class="col-md-6 z-div">
@@ -56,7 +58,8 @@
                         <div  class="z-div"> <span  class="z-label"> Ngày sinh  (Ngày/tháng/năm) </span> </div>
                     </div>
                     <div  class="z-vlayout-inner" ><input formControlName="birthday"  class="form-control" appDate value="" type="text" maxlength="100"  ></div>
-
+                    <small class="text-danger"   *ngIf="userForm.get('birthday')?.hasError('required') && userForm.get('birthday')?.touched">
+                      Bạn chưa nhập ô này</small>
                   </div>
             </div>
               </div>
@@ -73,6 +76,8 @@
                           </div>
                           <ng-select   bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
                           </ng-select>
+                          <small class="text-danger"   *ngIf="userForm.get('province')?.hasError('required') && userForm.get('province')?.touched">
+                            Bạn chưa nhập ô này</small>
                   </div>
               </div>
 
@@ -85,6 +90,8 @@
                       </div>
                       <ng-select   bindValue="districtCode" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" [items]="dataDistrict" bindLabel="districtName" formControlName="district" >
                       </ng-select>
+                      <small class="text-danger"   *ngIf="userForm.get('district')?.hasError('required') && userForm.get('district')?.touched">
+                        Bạn chưa nhập ô này</small>
                   </div>
               </div>
           </div>
@@ -99,6 +106,8 @@
                       </div>
                       <ng-select   bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
                       </ng-select>
+                      <small class="text-danger"   *ngIf="userForm.get('ward')?.hasError('required') && userForm.get('ward')?.touched">
+                        Bạn chưa nhập ô này</small>
                   </div>
               </div>
               <div  class="col-md-6 z-div">
@@ -107,7 +116,8 @@
                         <div  class="z-div"> <span  class="z-label">Địa chỉ</span> </div>
                     </div>
                     <div  class="z-vlayout-inner" ><input formControlName="homeNo"  class="form-control" value="" type="text" maxlength="100"  ></div>
-
+                    <small class="text-danger"   *ngIf="userForm.get('homeNo')?.hasError('required') && userForm.get('homeNo')?.touched">
+                      Bạn chưa nhập ô này</small>
                   </div>
             </div>
           </div>
@@ -118,7 +128,7 @@
                     <div  class="row z-div">
                       <div  class="col-md-12 z-div">
                           <div  style="float:right;" class="z-hlayout">
-                              <div ><button type="submit"  class="btn btn-sm btn-success">Cập nhật</button></div>
+                              <div ><button type="submit"  [disabled]="userForm.invalid" class="btn btn-sm btn-success">Cập nhật</button></div>
                           </div>
                       </div>
                   </div>

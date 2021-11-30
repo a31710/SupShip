@@ -3,7 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from '../service/auth.service';
-
+import Swal from 'sweetalert2';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,8 +22,15 @@ export class AuthGuard implements CanActivate {
     if (isAuthenticated) {
         return true;
     } else {
-        this.toastr.error("Bạn cần đăng nhập để có quyền truy cập trang này");
-        this.router.navigateByUrl('/auth/checkemail');
+      this.router.navigateByUrl('/auth/checkemail');
+      Swal.fire({
+        title: 'Truy cập không thành công? ',
+        text: "Bạn cần đăng nhập để có thể truy cập trang này",
+        icon: 'error',
+        confirmButtonColor: '#4e73df',
+        confirmButtonText: 'Chấp nhận'
+      })
+
     }
 
     return true;

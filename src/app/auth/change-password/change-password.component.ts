@@ -28,6 +28,9 @@ export class ChangePasswordComponent implements OnInit {
       { type: 'required', message: 'Bạn chưa nhập mật khẩu' },
       { type: 'minlength', message: 'mật khẩu phải có phải có ít nhất 6 kí tự' },
       { type: 'pattern', message: 'Mật khẩu của bạn phải chứa ít nhất, một chữ hoa, một chữ thường và một số' },
+    ],
+    'tokenCode': [
+      { type: 'required', message: 'Bạn chưa nhập mã OTP' },
     ]
 
     }

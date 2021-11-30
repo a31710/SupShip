@@ -62,7 +62,7 @@ export class EditProfileComponent implements OnInit {
         mobile:['', [Validators.required]],
         address: this.fb.array([this.addAddressGroup()]),
         gender:['', [Validators.required,]],
-        birthday:['', [Validators.required, Validators.pattern("")]],
+        birthday:['', [Validators.required,]],
     })
   }
 
