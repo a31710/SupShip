@@ -23,7 +23,7 @@
   </div>
   <br>
   <ng-container  *ngFor="let item of scheduleData">
-    <div (click)="detailSchedule(item.id)" class="tp-event ">
+    <div (click)="detailSchedule(item.id)" class="tp-event mt-2">
       <div class="tp-event-calendar">
         <div class="tp-event-month">{{item?.fromDate | date:'MMMM' }}  </div>
         <div class="tp-event-day">{{item?.fromDate | date:'dd' }}</div>
@@ -47,10 +47,10 @@
 
 
 
-    <div class="icon-botton">
-      <a [routerLink]="['/client/create-schedule']"   class="btn btn-primary btn-circle btn-lg">
+    <!-- <div class="icon-botton">
+      <a [routerLink]="['/client/customer']"   class="btn btn-primary btn-circle btn-lg">
         <i class="fas fa-calendar-plus"></i></a>
-    </div>
+    </div> -->
 </div>
 
 

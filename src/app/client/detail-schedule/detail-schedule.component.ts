@@ -30,10 +30,38 @@ export class DetailScheduleComponent implements OnInit {
   {
     value:1, name:'Gửi báo giá'
   }
-]
-time1:any
-time2:any
-day: Date  = new Date;
+  ]
+
+
+
+  updateFormMessage = {
+    'inProvincePercent': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'min', message: 'Số phải lớn hơn 0' },
+    ],
+    'outProvincePercent': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'min', message: 'Số phải lớn hơn 0' },
+    ],
+    'discount': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'min', message: 'Số phải lớn hơn 0' },
+    ],
+    'quantityMonth': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'min', message: 'Số phải lớn hơn 0' },
+    ],
+    'reason': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'minlength', message: 'phải có ít nhất 5 kí tự' },
+    ],
+    }
+
+  time1Validate:boolean = true;
+  time2Validate:boolean = true;
+  time1:any
+  time2:any
+  day: Date  = new Date;
   constructor(private profileSerivce: ProfileService, private fb: FormBuilder,private config: NgSelectConfig,
      private scheduleService: ScheduleService, private activatedRoute: ActivatedRoute) {
    this.activatedRoute.params.subscribe(params=>{
@@ -64,8 +92,10 @@ day: Date  = new Date;
   onSubmit(){
     const form:any = `${this.datePipe(this.day)} ${this.time1}:00`
     const to:any = `${this.datePipe(this.day)} ${this.time2}:00`
-    this.fromArr.setValue(form);
-    this.toArr.setValue(to);
+    if (this.time1 != undefined || this.time2 != undefined){
+      this.fromArr.setValue(form);
+      this.toArr.setValue(to);
+    }
     this.bodyApi = this.updateForm.value;
     this.bodyApi.pickupAddress = this.addressArray.value[0];
     this.bodyApi.discount = parseInt(this.discountArr.value);
@@ -74,13 +104,27 @@ day: Date  = new Date;
     console.log(this.bodyApi);
 
     this.scheduleService.updateSchedule(this.bodyApi).subscribe(data=>{
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Cập nhật thành công',
-        showConfirmButton: false,
-        timer: 3000
-      })
+      console.log(data);
+      if(data?.error == 'true'){
+        Swal.fire({
+          title: 'Cập nhật lịch thất bại?',
+          text: data?.message,
+          icon: 'error',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'Chấp nhận'
+        })
+      }else{
+        Swal.fire({
+          title: 'Cập nhật lịch thành công',
+          icon: 'success',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+          }
+        })
+      }
     })
   }
 
@@ -98,6 +142,10 @@ day: Date  = new Date;
 
   get discountArr(){
     return this.updateForm.get('discount') as FormArray;
+  }
+
+  get reasonArr(){
+    return this.updateForm.get('reason') as FormArray;
   }
 
   get inProvincePercentArr(){
@@ -121,16 +169,17 @@ day: Date  = new Date;
   get scheduleIdArr(){
     return this.updateForm.get('scheduleId') as FormArray;
   }
+
+  get proposalArr(){
+    return this.updateForm.get('proposal') as FormArray;
+  }
   createForm(){
     this.updateForm = this.fb.group({
       scheduleId: ['',[Validators.required]],
       status: [3,[Validators.required]],
-      customerCode: ['',[Validators.required]],
-      districtPercent: ['',[Validators.required]],
       inProvincePercent: ['',[Validators.required]],
       outProvincePercent: ['',[Validators.required]],
       discount: ['',[Validators.required]],
-      refundPercent: ['',[Validators.required]],
       reason: ['',[Validators.required]],
       proposal: ['',[Validators.required]],
       pickupAddress: this.fb.array([this.addAddressGroup()]),
@@ -174,6 +223,37 @@ day: Date  = new Date;
     const month = time.getMonth()+1<10?`0${time.getMonth()+1}`:time.getMonth()+1;
     const year = time.getYear().toString().substring(1,3);
     return `${day}-${month}-20${year}`
+  }
+
+  changeTime1(time:any){
+    if(time == '00:00'){
+      this.time1Validate = false;
+    }else{
+      this.time1Validate = true;
+    }
+
+  }
+  changeTime2(time:any){
+    if(time == '00:00'){
+      this.time2Validate = false
+    }else{
+      this.time2Validate = true;
+    }
+  }
+  onChange(value:any){
+    this.resetForm();
+    console.log(value, this.updateForm.value);
+  }
+
+  resetForm(){
+    const empty:any = ""
+    this.discountArr.setValue(empty);
+    this.toArr.setValue(empty);
+    this.fromArr.setValue(empty);
+    this.reasonArr.setValue(empty);
+    this.proposalArr.setValue(empty);
+    this.inProvincePercentArr.setValue(empty);
+    this.outProvincePercentArr.setValue(empty);
   }
 
 }

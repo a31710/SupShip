@@ -1,6 +1,10 @@
+<a routerLink="/client/customer" class="text-primary" ><i class="fas fa-arrow-left"></i>  Quay lại</a>
+<br>
 <form [formGroup]="insertCustomerForm" (ngSubmit)="onSubmit()">
+
 <div class="row">
   <mat-stepper labelPosition="bottom" #stepper>
+
     <mat-step >
 
         <ng-template matStepLabel>Phân loại</ng-template>

@@ -4,18 +4,14 @@
     <div
         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h3 class="m-0 text-primary"><span class="p-1">KH{{item?.lead?.id}}</span></h3>
-        <div class="dropdown no-arrow">
-            <a class="dropdown-toggle" href="#" role="button" >
-                <h5 class="m-0 font-weight-bold text-gray-100 bg-gradient-info" style="border: 2px; border-radius: 5px;"><span class="p-1">Được giao</span></h5>
-            </a>
-        </div>
     </div>
     <!-- Card Body -->
     <div class="card-body">
       <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-home mr-2"></i>{{item?.lead?.companyName}}</h4></div>
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1"></i>P, Liêu Giai,Văn Cao, Ba Đình, Hà Nội</h4> </div>
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="far fa-clock mr-2 ml-1"></i>{{item?.fromDate | date:'shortTime'}} - {{item?.toDate | date:'shortTime'}}</h4></div>
-
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1"></i>{{item?.lead?.address?.fomatAddress}}</h4> </div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="far fa-clock mr-2 ml-1"></i>{{item?.fromDate | date:'shortTime'}} - {{item?.toDate | date:'shortTime'}}, {{item?.fromDate | date:'dd/MM/yyyy'}}</h4></div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-user mr-2 ml-1"></i>{{item?.lead?.representation}}</h3></div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h3>{{item?.lead?.phone}}</h3></div>
     </div>
   </div>
 </ng-container>
@@ -30,34 +26,25 @@
     <!-- Card Body -->
     <div class="card-body">
       <div class="row">
-        <div class="h5 mb-0 text-gray-800"><h4>Kết quả</h4></div>
-        <div class="input-group">
-          <select class="combobox form-control" [(ngModel)]="resultSelect" formControlName="status">
+        <div class="h5 mb-0 text-gray-800"><h4 style="margin: 0px !important; ">Kết quả</h4></div>
+        <div class="input-group" >
+          <select class="combobox form-control"  (change)="onChange(resultSelect)" [(ngModel)]="resultSelect" formControlName="status">
             <option *ngFor="let d of result" [ngValue]="d.value"> {{d.name}}</option>
           </select>
         </div>
       </div>
 
-     <ng-container *ngIf="resultSelect == 3;">
-      <div class="row">
-        <div class="h5 mb-0 text-gray-800 mt-2"><h4>Mã khách hàng</h4></div>
-        <div class="input-group">
-          <input class="form-control" placeholder=""  formControlName="customerCode">
-        </div>
-      </div>
-     </ng-container>
-
    <ng-container *ngIf="resultSelect == 3;" formArrayName="pickupAddress" >
     <div class="row" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4>Địa chỉ lấy hàng</h4></div>
+      <div class="h5 mb-0 text-gray-800 mt-1"><h4 style="margin: 0px !important; ">Địa chỉ lấy hàng</h4></div>
       <div class="col-6">
-       <div class="mt-2">
+       <div class="mt-1">
         <ng-select  placeholder="Chọn Tỉnh/Thành phố"  bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
         </ng-select>
        </div>
       </div>
       <div class="col-6">
-        <div class="mt-2">
+        <div class="mt-1">
           <ng-select placeholder="Chọn Quận/Huyện"  bindValue="districtCode" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" [items]="dataDistrict" bindLabel="districtName" formControlName="district" >
           </ng-select>
          </div>
@@ -78,16 +65,20 @@
 
   <ng-container *ngIf="resultSelect == 5;">
     <div class="row">
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4>lý do</h4></div>
+      <div class="h5 mb-0 text-gray-800 mt-2" ><h4 style="margin: 0px !important; ">lý do</h4></div>
       <div class="input-group">
         <input class="form-control"  formControlName="reason">
+      </div>
+      <div *ngFor="let validation of updateFormMessage.reason">
+        <small class="text-danger"   *ngIf="updateForm.get('reason')?.hasError(validation.type) && updateForm.get('reason').touched">
+         {{validation.message}}</small>
       </div>
     </div>
   </ng-container>
 
   <ng-container *ngIf="resultSelect == 5 || resultSelect == 1;">
     <div class="row">
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4>Đề xuất ( không bắt buộc)</h4></div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4 style="margin: 0px !important; ">Đề xuất ( không bắt buộc)</h4></div>
       <div class="input-group">
         <input class="form-control" placeholder="" style="height: 70px;" formControlName="proposal">
       </div>
@@ -109,7 +100,7 @@
       <div class="card-body">
 
         <div class="row">
-          <div class="h5 mb-0 text-gray-800"><h4>Giá áp dụng</h4></div>
+          <div class="h5 mb-0 text-gray-800"><h4 style="margin: 0px !important; ">Giá áp dụng</h4></div>
           <div class="input-group">
             <select class="combobox form-control"  >
               <option  [selected]="true">Giá thỏa thuận riêng</option>
@@ -117,33 +108,71 @@
           </div>
         </div>
 
+
+
+
         <div class="row">
-          <div class="col-6">
-            <div class="h5 mb-0 text-gray-800 mt-2"><h4>Giá nội tỉnh</h4></div>
-            <input class="form-control" appMoney  type="text" formControlName="inProvincePercent">
-          </div>
-          <div class="col-6">
-            <div class="h5 mb-0 text-gray-800 mt-2"><h4>Giá liên tỉnh</h4></div>
-            <input class="form-control" appMoney  type="text" formControlName="outProvincePercent">
+          <div class="h5 mb-0 text-gray-800 mt-1"><h4 style="margin: 0px !important; ">Giá nội tỉnh</h4></div>
+          <div class="input-group">
+
+            <div class="input-group ">
+              <input class="form-control" appMoney  type="text" formControlName="inProvincePercent">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">VNĐ</span>
+              </div>
+            </div>
+            <div *ngFor="let validation of updateFormMessage.inProvincePercent">
+              <small class="text-danger"   *ngIf="updateForm.get('inProvincePercent')?.hasError(validation.type) && updateForm.get('inProvincePercent').touched">
+               {{validation.message}}</small>
+            </div>
           </div>
         </div>
 
 
+        <!-- <div class="row">
+          <div class="h5 mb-0 text-gray-800 mt-2"><h4>Giá liên tỉnh</h4></div>
+          <input class="form-control" appMoney  type="text" formControlName="outProvincePercent">
+        </div> -->
+
+
         <div class="row">
-          <div class="h5 mb-0 text-gray-800 mt-2"><h4>Chiết khấu</h4></div>
+          <div class="h5 mb-0 text-gray-800"><h4 style="margin: 0px !important; ">Giá liên tỉnh</h4></div>
           <div class="input-group">
 
-            <div class="input-group mb-3">
+            <div class="input-group">
+              <input class="form-control" appMoney  type="text" formControlName="outProvincePercent">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">VNĐ</span>
+              </div>
+            </div>
+            <div *ngFor="let validation of updateFormMessage.outProvincePercent">
+              <small class="text-danger"   *ngIf="updateForm.get('outProvincePercent')?.hasError(validation.type) && updateForm.get('outProvincePercent').touched">
+               {{validation.message}}</small>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="h5 mb-0 text-gray-800 mt-1"><h4 style="margin: 0px !important; ">Chiết khấu</h4></div>
+          <div class="input-group">
+
+            <div class="input-group">
               <input type="text" class="form-control" placeholder="0%" formControlName="discount" maxlength="2">
               <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">%</span>
               </div>
             </div>
+            <div *ngFor="let validation of updateFormMessage.discount">
+              <small class="text-danger"   *ngIf="updateForm.get('discount')?.hasError(validation.type) && updateForm.get('discount').touched">
+               {{validation.message}}</small>
+            </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="h5 mb-0 text-gray-800 mt-2"><h4>Đề xuất ( không bắt buộc)</h4></div>
+          <div class="h5 mb-0 text-gray-800 "><h4 style="margin: 0px !important; ">Đề xuất ( không bắt buộc)</h4></div>
           <div class="input-group">
             <input class="form-control" placeholder="" style="height: 70px;">
           </div>
@@ -154,11 +183,20 @@
     </div>
   </ng-container>
 
-  <div class="fixed" style="margin-left: -10px;">
-    <div class="row col-12" >
-      <button type="submit" class="btn btn-sm btn-primary p-2" >Cập nhật</button>
+  <ng-container *ngIf="resultSelect == 3;">
+    <div class="fixed" style="margin-left: -10px;">
+      <div class="row col-12" >
+        <button type="submit" [disabled]="inProvincePercentArr.invalid || outProvincePercentArr.invalid || discountArr.invalid" class="btn btn-sm btn-primary p-2" >Cập nhật</button>
+      </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-container *ngIf="resultSelect == 5;">
+    <div class="fixed" style="margin-left: -10px;">
+      <div class="row col-12" >
+        <button type="submit" [disabled]="reasonArr.invalid" class="btn btn-sm btn-primary p-2" >Cập nhật</button>
+      </div>
+    </div>
+  </ng-container>
 </form>
 <ng-container *ngIf="resultSelect == 1;">
 
@@ -180,17 +218,19 @@
 
       <div class="p-fluid row mt-2 mb-4">
         <div class="p-field col-6">
-          <span class="text-gray-900">thời gian từ </span>
+          <span class="text-gray-900" style="margin: 0px !important; ">thời gian từ </span>
           <span class="p-input-icon-right">
           <i class="far fa-clock"></i>
-          <p-inputMask [(ngModel)]="time1"  class="p-inputtext-sm" mask="99:99"></p-inputMask>
+          <p-inputMask [(ngModel)]="time1" class="p-inputtext-sm" (change)="changeTime1(time1)" mask="99:99" name="stopTime" tabindex="4"
+          placeholder="00:00" slotChar="00:00"></p-inputMask>
         </span>
       </div>
         <div class="p-field col-6">
-          <span class="text-gray-900">Đến</span>
+          <span class="text-gray-900" style="margin: 0px !important; ">Đến</span>
           <span class="p-input-icon-right">
           <i class="far fa-clock"></i>
-          <p-inputMask [(ngModel)]="time2"  class="p-inputtext-sm" mask="99:99"></p-inputMask>
+          <p-inputMask [(ngModel)]="time2"  class="p-inputtext-sm" (change)="changeTime2(time2)" mask="99:99" name="stopTime" tabindex="4"
+    placeholder="00:00" slotChar="00:00"></p-inputMask>
         </span>
       </div>
       </div>
@@ -201,7 +241,16 @@
 
 
  </ng-container>
-
+<ng-container *ngIf="resultSelect == 1;">
+  <div class="fixed" style="margin-left: -10px;">
+    <div class="row col-12" >
+      <button type="button" (click)="onSubmit()" [disabled]="!day || time1Validate == false || time2Validate == false || !time1 || !time2" class="btn btn-sm btn-primary p-2" >Cập nhật</button>
+    </div>
+  </div>
+</ng-container>
+ <br>
+ <br>
+ <br>
 <ng-template #footerTemplate>
   <hr class="my-0">
   <button class="btn btn-primary btn-sm m-2 float-left" (click)="model = today; d.close()">Today</button>

@@ -21,10 +21,10 @@ export class CreateScheduleComponent implements OnInit {
   today = this.calendar.getToday();
 
   constructor(private calendar: NgbCalendar, private fb: FormBuilder, private router:Router,
-     private activateRoute: ActivatedRoute,private customerService:CustomerService, private scheduleService: ScheduleService) {
+     private activateRoute: ActivatedRoute,private customerService:CustomerService) {
       this.activateRoute.params.subscribe(params=>{
         const id = params['id'];
-        this.scheduleService.detailSchedule(id).subscribe(data=>{
+        this.customerService.getDetailCustomer(id).subscribe(data=>{
           this.scheduleData = [data]
           console.log(data);
         })
@@ -63,16 +63,28 @@ export class CreateScheduleComponent implements OnInit {
     this.toArr.setValue(to);
     console.log(this.scheduleForm.value);
     this.customerService.createSchedule(this.scheduleForm.value).subscribe(data=>{
+      console.log(data);
+    if(data?.error == 'true'){
+      Swal.fire({
+        title: 'Đặt lịch thất bại?',
+        text: data?.message,
+        icon: 'error',
+        confirmButtonColor: '#4e73df',
+        confirmButtonText: 'Chấp nhận'
+      })
+    }else{
       this.scheduleForm.reset();
       Swal.fire({
-        position: 'top-end',
-        icon: 'success',
         title: 'Đặt lịch thành công',
-        showConfirmButton: false,
-        timer: 3000
+        icon: 'success',
+        confirmButtonColor: '#4e73df',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl('/client/customer')
+        }
       })
-      this.router.navigateByUrl('/client/customer')
-
+    }
     })
   }
 

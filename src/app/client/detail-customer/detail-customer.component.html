@@ -4,7 +4,7 @@
     <div
         class="card-header bg-gradient-primary d-flex flex-row align-items-center justify-content-between">
         <i style="font-size: 20px;" [routerLink]="['/client/customer']"   class="text-gray-100 fas fa-arrow-left"></i>
-        <h3 class="m-0 text-gray-100 mr-2">KH{{leadData?.id}}</h3>
+        <h3 class="m-0 text-gray-100 mr-2">KH{{item?.id}}</h3>
         <div class="dropdown no-arrow">
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,21 +19,12 @@
     </div>
 
 
-    <div class="card shadow mb-4 mt-2">
+    <div class="card shadow mb-4 mt-4">
       <!-- Card Header - Dropdown -->
-      <div
-          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h5 class="m-0 font-weight-bold text-gray-100 bg-gradient-primary" style="border: 2px; border-radius: 5px;"><span class="p-1">Gửi báo giá</span></h5>
-          <div class="dropdown no-arrow">
-              <a class="dropdown-toggle" href="#" role="button" >
-                  <h5 class="m-0 font-weight-bold text-gray-100 bg-gradient-success" style="border: 2px; border-radius: 5px;"><span class="p-1">Được giao</span></h5>
-              </a>
-          </div>
-      </div>
       <!-- Card Body -->
       <div class="card-body">
         <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-home mr-2"></i>{{item?.companyName}}</h3></div>
-        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1"></i>P, Liêu Giai,Văn Cao, Ba Đình, Hà Nội</h3> </div>
+        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1"></i>{{item?.address?.fomatAddress}}</h3> </div>
         <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-user mr-2 ml-1"></i>{{item?.representation}}</h3></div>
         <div class="h5 mb-0 text-gray-800 mt-2"><h3>+{{item?.phone}}</h3></div>
       </div>

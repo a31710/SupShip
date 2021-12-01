@@ -12,19 +12,17 @@ export class ContactComponent implements OnInit {
   day: Date = new Date;
   dateValue: Date = new Date;
   constructor(private router: Router,private scheduleService: ScheduleService) {
-    this.scheduleService.listSchedule(this.datePipe(this.day)).subscribe((data)=>{
+    this.scheduleService.listScheduleMonth(this.datePipe(this.day)).subscribe(data=>{
       this.scheduleData = data.content;
-    })
+      console.log(data);
+     })
    }
 
    onChangeMonth(date:any){
      this.scheduleService.listScheduleMonth(this.datePipe(date)).subscribe(data=>{
       this.scheduleData = data.content;
       console.log(data);
-
-     }
-     )
-
+     })
    }
 
   //  onChangeDay(day:any){
