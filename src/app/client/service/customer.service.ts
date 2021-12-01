@@ -17,6 +17,11 @@ createCustomer(body:any):Observable<any>{
 getLeadByUser():Observable<any>{
   return this.http.get<any>(`${this.url}/api/lead?status=ALL`);
 }
+
+getLeadByStatus(status:any):Observable<any>{
+  return this.http.get<any>(`${this.url}/api/lead?status=${status}`);
+}
+
 getDetailCustomer(id:any):Observable<any>{
   return this.http.get<any>(`${this.url}/api/lead/evtp/${id}`);
 }

@@ -31,10 +31,11 @@
                                             *ngIf="email?.errors?.email && email?.touched">
                                             Email chưa đúng định dạng</small>
                                     </div>
-                                    <button [disabled]="checkForm.invalid" type="submit" class="btn btn-primary btn-user btn-block">
-                                        Tiếp theo
+                                    <button [disabled]="checkForm.invalid" type="button" (click)="checkEmail()" class="btn btn-primary btn-user btn-block">
+                                      Tiếp theo
                                     </button>
                                 </form>
+
                                 <hr>
 
                             </div>

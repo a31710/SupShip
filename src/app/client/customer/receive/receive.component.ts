@@ -20,6 +20,48 @@ export class ReceiveComponent implements OnInit {
     })
   }
 
+  getLeadNew(){
+    this.customerService.getLeadByStatus('NEW').subscribe(data=>{
+      this.leadData = data.data
+      this.totalLead = data.totalItem;
+    })
+  }
+
+  getLeadAll(){
+    this.customerService.getLeadByStatus('ALL').subscribe(data=>{
+      this.leadData = data.data
+      this.totalLead = data.totalItem;
+    })
+  }
+
+  getLeadContacting(){
+    this.customerService.getLeadByStatus('CONTACTING').subscribe(data=>{
+      this.leadData = data.data
+      this.totalLead = data.totalItem;
+    })
+  }
+
+  getLeadSuccess(){
+    this.customerService.getLeadByStatus('SUCCESS').subscribe(data=>{
+      this.leadData = data.data
+      this.totalLead = data.totalItem;
+    })
+  }
+
+  getLeadFailed(){
+    this.customerService.getLeadByStatus('FAILED').subscribe(data=>{
+      this.leadData = data.data
+      this.totalLead = data.totalItem;
+    })
+  }
+
+  getLeadNotContacting(){
+    this.customerService.getLeadByStatus('NOT_CONTACTED').subscribe(data=>{
+      this.leadData = data.data
+      this.totalLead = data.totalItem;
+    })
+  }
+
   ngOnInit() {
   }
   detailCustomer(id:any){
