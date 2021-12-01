@@ -212,15 +212,29 @@ export class CreateCustomerComponent implements OnInit {
 
   this.customerService.createCustomer(this.bodyApi).subscribe((data)=>{
     console.log(data);
-    this.insertCustomerForm.reset();
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'Thêm mới thành công',
-      showConfirmButton: false,
-      timer: 3000
-    })
-    this.router.navigateByUrl('/client/customer')
+
+    if(data?.error == 'true'){
+      Swal.fire({
+        title: 'Thêm mới thất bại',
+        text: data?.message,
+        icon: 'error',
+        confirmButtonColor: '#4e73df',
+        confirmButtonText: 'Chấp nhận'
+      })
+    }else{
+      Swal.fire({
+        title: 'Thêm mới khách hàng thành công',
+        icon: 'success',
+        confirmButtonColor: '#4e73df',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.insertCustomerForm.reset();
+          this.router.navigateByUrl('/client/customer')
+        }
+      })
+    }
+
   })
 
 

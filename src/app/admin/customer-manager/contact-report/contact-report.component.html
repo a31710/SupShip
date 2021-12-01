@@ -125,7 +125,7 @@
 
         <tr *ngFor="let item of pagiData" class="tbhov">
               <td ><a style="cursor: pointer;" (click)="toogleData(item?.deptCode)"><i *ngIf="item?.deptCode" class="fas fa-caret-right mr-2"></i> {{item?.deptCode}}</a></td>
-              <td>{{item?.postCode?item?.postCode:item?.reportMonthlyPostOfficeDtos.length}}</td>
+              <td>{{item?.postCode?item?.postCode:item?.reportMonthlyPostOfficeDtos.length + ' Bưu cục'}}</td>
               <td>{{item?.totalEmployees?item?.totalEmployees:345}}</td>
               <td>{{item?.totalAssigns?item?.totalAssigns:0}}</td>
               <td>{{item?.assigned?item?.assigned:0}} ({{item?.assigned?item?.assigned:0}} - {{item?.contacting?item?.contacting:0}} - {{item?.fails?item?.fails:0}})</td>

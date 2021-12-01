@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PhoneNumberDirective } from './phone-number.directive';
 import { DateDirective } from './date.directive';
 import { MoneyDirective } from './money.directive';
+import { TimeDirective } from './time.directive';
 
 
 
@@ -10,11 +11,12 @@ import { MoneyDirective } from './money.directive';
   declarations: [
     PhoneNumberDirective,
     DateDirective,
-    MoneyDirective
-  ],
+    MoneyDirective,
+      TimeDirective
+   ],
   imports: [
     CommonModule
   ],
-  exports:[PhoneNumberDirective,DateDirective,MoneyDirective]
+  exports:[PhoneNumberDirective,DateDirective,MoneyDirective,TimeDirective]
 })
 export class DirectiveModule { }

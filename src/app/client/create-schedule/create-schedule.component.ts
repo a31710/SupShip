@@ -4,12 +4,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { CustomerService } from '../service/customer.service';
+import { ScheduleService } from '../service/schedule.service';
 @Component({
   selector: 'app-create-schedule',
   templateUrl: './create-schedule.component.html',
   styleUrls: ['./create-schedule.component.css']
 })
 export class CreateScheduleComponent implements OnInit {
+  scheduleData:any
+  time1Validate:boolean = true;
+  time2Validate:boolean = true;
   time1:any
   time2:any
   day: Date | any;
@@ -17,7 +21,15 @@ export class CreateScheduleComponent implements OnInit {
   today = this.calendar.getToday();
 
   constructor(private calendar: NgbCalendar, private fb: FormBuilder, private router:Router,
-     private activateRoute: ActivatedRoute,private customerService:CustomerService) {
+     private activateRoute: ActivatedRoute,private customerService:CustomerService, private scheduleService: ScheduleService) {
+      this.activateRoute.params.subscribe(params=>{
+        const id = params['id'];
+        this.scheduleService.detailSchedule(id).subscribe(data=>{
+          this.scheduleData = [data]
+          console.log(data);
+        })
+
+      })
     this.createForm()
    }
   scheduleForm: FormGroup | any;
@@ -69,5 +81,20 @@ export class CreateScheduleComponent implements OnInit {
     const month = time.getMonth()+1<10?`0${time.getMonth()+1}`:time.getMonth()+1;
     const year = time.getYear().toString().substring(1,3);
     return `${day}-${month}-20${year}`
+  }
+  changeTime1(time:any){
+    if(time == '00:00'){
+      this.time1Validate = false;
+    }else{
+      this.time1Validate = true;
+    }
+
+  }
+  changeTime2(time:any){
+    if(time == '00:00'){
+      this.time2Validate = false
+    }else{
+      this.time2Validate = true;
+    }
   }
 }

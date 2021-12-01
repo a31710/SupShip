@@ -1,3 +1,3 @@
-.sidebar{
-  min-height: 1430px;
+.body{
+  position: sticky;
 }

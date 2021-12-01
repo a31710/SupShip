@@ -27,12 +27,12 @@ export class ContactComponent implements OnInit {
 
    }
 
-   onChangeDay(day:any){
-    this.scheduleService.listSchedule(this.datePipe(day)).subscribe((data)=>{
-      this.scheduleData = data.content;
-      console.log(data?.content[0]?.fromDate);
-    })
-   }
+  //  onChangeDay(day:any){
+  //   this.scheduleService.listSchedule(this.datePipe(day)).subscribe((data)=>{
+  //     this.scheduleData = data.content;
+  //     console.log(data?.content[0]?.fromDate);
+  //   })
+  //  }
 
   ngOnInit() {
   }

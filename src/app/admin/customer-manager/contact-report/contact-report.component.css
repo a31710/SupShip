@@ -129,6 +129,7 @@
 .body{
   overflow-y: hidden; /* Hide vertical scrollbar */
   overflow-x: hidden; /* Hide horizontal scrollbar */
+  min-height: 800px;
 }
 .tbhov:hover {
   background-color: rgb(231, 235, 243);

@@ -226,7 +226,7 @@ export class CreateCustomerComponent implements OnInit {
   this.bodyApi.quantityMonth = parseInt(this.quantityMonthArr.value)
   this.bodyApi.expectedRevenue = this.toNumber(this.expectedRevenueArr.value);
   console.log(this.bodyApi);
-  this.insertCustomerForm.reset();
+
   this.customerService.insertCustomer(this.bodyApi).subscribe(data=>{
     console.log(data);
     if(data?.error == 'true'){
@@ -238,6 +238,7 @@ export class CreateCustomerComponent implements OnInit {
         confirmButtonText: 'Chấp nhận'
       })
     }else{
+      this.insertCustomerForm.reset();
       Swal.fire({
         title: 'Thêm mới khách hàng thành công',
         icon: 'success',

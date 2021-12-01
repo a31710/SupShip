@@ -12,6 +12,7 @@ import { ReportComponent } from './report/report.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {ProgressBarModule} from 'primeng/progressbar';
 import { PipeModule } from 'src/app/pipe/pipe.module';
+import { DirectiveModule } from 'src/app/directive/directive.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { PipeModule } from 'src/app/pipe/pipe.module';
     NgxChartsModule,
     ProgressBarModule,
     PipeModule,
+    DirectiveModule,
   ],
   declarations: [CustomerComponent,ReceiveComponent, ContactComponent,ReportComponent]
 })

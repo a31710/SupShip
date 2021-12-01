@@ -26,14 +26,16 @@
     <span class="text-gray-900">thời gian từ </span>
     <span class="p-input-icon-right">
     <i class="far fa-clock"></i>
-    <p-inputMask [(ngModel)]="time1"  class="p-inputtext-sm" mask="99:99"></p-inputMask>
+    <p-inputMask [(ngModel)]="time1" class="p-inputtext-sm" (change)="changeTime1(time1)" mask="99:99" name="stopTime" tabindex="4"
+    placeholder="00:00" slotChar="00:00"></p-inputMask>
   </span>
 </div>
   <div class="p-field col-6">
     <span class="text-gray-900">Đến</span>
     <span class="p-input-icon-right">
     <i class="far fa-clock"></i>
-    <p-inputMask [(ngModel)]="time2"  class="p-inputtext-sm" mask="99:99"></p-inputMask>
+    <p-inputMask [(ngModel)]="time2"  class="p-inputtext-sm" (change)="changeTime2(time2)" mask="99:99" name="stopTime" tabindex="4"
+    placeholder="00:00" slotChar="00:00"></p-inputMask>
   </span>
 </div>
 </div>
@@ -47,30 +49,32 @@
 <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
 
 
-<div class=" row">
-  <div class="col-12">
-    <div class="card mb-4" style="border: 1px solid rgb(179, 177, 177);">
-      <!-- Card Header - Dropdown -->
-      <div
-          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h3 class="m-0 text-primary">KH0010001</h3>
-      </div>
-      <!-- Card Body -->
-      <div class="card-body">
-        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-home mr-2"></i>Công ty CP Thương mại Toàn Thắng</h3></div>
-        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1"></i>P, Liêu Giai,Văn Cao, Ba Đình, Hà Nội</h3> </div>
-        <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-user mr-2 ml-1"></i>Nguyễn Thị Ngân</h3></div>
-        <div class="h5 mb-0 text-gray-800 mt-2"><h3>0961565015</h3></div>
-      </div>
+<ng-container  *ngFor="let item of scheduleData">
+  <div class=" row">
+    <div class="col-12">
+      <div class="card mb-4" style="border: 1px solid rgb(179, 177, 177);">
+        <!-- Card Header - Dropdown -->
+        <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h3 class="m-0 text-primary">KH0010001</h3>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-home mr-2"></i>Công ty CP Thương mại Toàn Thắng</h3></div>
+          <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1"></i>P, Liêu Giai,Văn Cao, Ba Đình, Hà Nội</h3> </div>
+          <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-user mr-2 ml-1"></i>Nguyễn Thị Ngân</h3></div>
+          <div class="h5 mb-0 text-gray-800 mt-2"><h3>0961565015</h3></div>
+        </div>
 
+    </div>
+    </div>
   </div>
-  </div>
-</div>
+</ng-container>
 
 <div class="fixed" style="margin-left: -10px;">
 
     <div class="row col-12" >
-      <button class="btn btn-sm btn-primary p-2" >Tạo mới</button>
+      <button [disabled]="!day || time1Validate == false || time2Validate == false || !time1 || !time2" class="btn btn-sm btn-primary p-2" >Tạo mới</button>
     </div>
 </div>
 

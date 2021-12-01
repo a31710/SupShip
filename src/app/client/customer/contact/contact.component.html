@@ -1,77 +1,57 @@
 
 
 
-
+<!--
 <div class="p-fluid mt-4 body">
   <div class="p-field">
     <span class="text-gray-900">Lọc theo ngày</span>
       <p-calendar  [(ngModel)]="day" showButtonBar="true" (onSelect)="onChangeDay($event)" ></p-calendar>
   </div>
 
-</div>
+</div> -->
 
-<div class="p-fluid row mt-4 mb-1">
-  <span class="text-gray-900">Lọc theo tháng</span>
-  <div class="p-field col-6">
+<div class="body" >
+  <div class="p-fluid row mt-4 mb-1">
+    <span class="text-gray-900">Lọc theo tháng</span>
+    <div class="p-field col-6">
 
-    <p-calendar (onSelect)="onChangeMonth($event)" [(ngModel)]="dateValue" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030"></p-calendar>
-</div>
-<div class="p-field col-6 mt-2">
-  <h4 > 4/12 chưa hoàn thành</h4>
-</div>
-</div>
-<br>
-<ng-container  *ngFor="let item of scheduleData">
-  <div (click)="detailSchedule(item.id)" class="tp-event ">
-    <div class="tp-event-calendar">
-      <div class="tp-event-month">{{item?.fromDate | date:'MMMM' }}  </div>
-      <div class="tp-event-day">{{item?.fromDate | date:'dd' }}</div>
-    </div>
-    <div class="tp-event-details">
-      <div class="tp-event-title">
-        {{item?.lead?.companyName}}
-      </div>
-      <div class="tp-event-info" >
-        <span class="glyphicon glyphicon-map-marker"></span>
-        {{item?.lead?.statusDescription}}
-        <span class="glyphicon glyphicon-time"></span>
-        {{item?.fromDate | date:'hh:mm' }} - {{item?.toDate | date:'hh:mm' }}
-      </div>
-    </div>
+      <p-calendar (onSelect)="onChangeMonth($event)" [(ngModel)]="dateValue" view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030"></p-calendar>
   </div>
-</ng-container>
-
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-  <div class="icon-botton">
-    <a [routerLink]="['/client/create-schedule']"   class="btn btn-primary btn-circle btn-lg">
-      <i class="fas fa-calendar-plus"></i></a>
+  <div class="p-field col-6 mt-2">
+    <h4 > 4/12 chưa hoàn thành</h4>
   </div>
+  </div>
+  <br>
+  <ng-container  *ngFor="let item of scheduleData">
+    <div (click)="detailSchedule(item.id)" class="tp-event ">
+      <div class="tp-event-calendar">
+        <div class="tp-event-month">{{item?.fromDate | date:'MMMM' }}  </div>
+        <div class="tp-event-day">{{item?.fromDate | date:'dd' }}</div>
+      </div>
+      <div class="tp-event-details">
+        <div class="tp-event-title">
+          {{item?.lead?.companyName}}
+        </div>
+        <div class="tp-event-info" >
+          <span class="glyphicon glyphicon-map-marker"></span>
+          {{item?.lead?.statusDescription}}
+          <span class="glyphicon glyphicon-time"></span>
+          {{item?.fromDate | date:'hh:mm' }} - {{item?.toDate | date:'hh:mm' }}
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+
+
+
+
+    <div class="icon-botton">
+      <a [routerLink]="['/client/create-schedule']"   class="btn btn-primary btn-circle btn-lg">
+        <i class="fas fa-calendar-plus"></i></a>
+    </div>
+</div>
 
 
 
