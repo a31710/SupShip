@@ -34,14 +34,13 @@ login(loginModel: LoginModel): Observable<any>{
     console.log(data);
 
     localStorage.setItem("isLogin",data.success);
-    localStorage.setItem("token",data.data.token);
     localStorage.setItem("userId",data.data.userUid)
     this.cookieService.set('token', data.data.token);
-    this.cookieService.set('userId', data.data.userUid);
     this.userInfo(data.data.userUid).subscribe(data=>{
       localStorage.setItem('empSystemId',data.data.empSystemId);
-      localStorage.setItem('roles',data.data.roles);
-      localStorage.setItem('username',data.data.fullName);
+      this.cookieService.set('empSystemId', data.data.empSystemId);
+      this.cookieService.set('roles', data.data.roles);
+      localStorage.setItem("username",data.data.fullName);
     })
     this.userId.emit(data.data.userUid);
     this.loggedIn.emit(true);
@@ -106,7 +105,7 @@ getUpdate(){
   return localStorage.getItem("isUpdate");
 }
 getJwtToken(){
-  return localStorage.getItem('token');
+  return this.cookieService.get('token');
 }
 
 }

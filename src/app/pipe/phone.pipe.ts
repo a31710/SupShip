@@ -6,7 +6,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PhonePipe implements PipeTransform {
 
   transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+    return this.formatPhone(value);
+  }
+
+  formatPhone(x:any) {
+    return x?.toString().replace(/^(\d{0,3})(\d{0,3})(\d{0,4})/, '$1 $2 $3');
   }
 
 }

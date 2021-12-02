@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 import { environment } from 'src/environments/environment';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { LoaderService } from 'src/app/service/loader.service';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',
@@ -49,11 +50,11 @@ isSearch:Boolean = false;
 empSystemId:any;
 
 loadExcel: any = 1;
-  constructor(private customerService: CustomerService, private route: Router,private config: NgSelectConfig,
+  constructor(private customerService: CustomerService, private cookieService: CookieService,private config: NgSelectConfig,
      public loaderService: LoaderService , private fb: FormBuilder,private userService: UserService) {
       this.config.appendTo = 'body';
       this.config.bindValue = 'value';
-      const cos:any = localStorage.getItem('empSystemId');
+      const cos:any = this.cookieService.get('empSystemId');
       this.empSystemId = parseInt(cos);
 
       this.fromDate =  new Date(this.toDate.getFullYear(), this.toDate.getMonth(), 1);
@@ -534,7 +535,7 @@ loadExcel: any = 1;
       url:`${this.url}/api/lead-assigns/import`,
       method:"POST",
       headers: {
-     "Authorization": `Bearer ${localStorage.getItem('token')}`
+     "Authorization": `Bearer ${this.cookieService.get('token')}`
       },
       responseType: 'blob',
       withCredentials: false,

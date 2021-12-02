@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { DetailScheduleComponent } from './detail-schedule/detail-schedule.component';
 import { DirectiveModule } from '../directive/directive.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { PipeModule } from '../pipe/pipe.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,6 +39,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     InputMaskModule,
     DirectiveModule,
     NgSelectModule,
+    PipeModule,
   ],
   declarations: [ClientComponent,HeaderComponent,SideBarComponent,CreateScheduleComponent,CreateCustomerComponent, DetailCustomerComponent,HomeComponent,DetailScheduleComponent]
 })

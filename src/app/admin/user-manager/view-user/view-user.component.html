@@ -51,7 +51,7 @@
         <tr *ngFor="let item of dataUser">
           <th >{{item.uid}}</th>
           <td>{{item.fullName}}</td>
-          <td>{{item.mobile}}</td>
+          <td>{{item.mobile | phone}}</td>
           <td>
             <container-element [ngSwitch]="item.roles">
               <some-element *ngSwitchCase="1">Nhân viên</some-element>
@@ -74,24 +74,7 @@
       </tbody>
     </table>
 
-    <div class="modal fade" id="unluckModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn mở khóa tài khoản này</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">chọn "Chập nhận" Nếu bạn chắc chắn muốn mở khóa tài khoản này</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-                <button class="btn btn-primary"  type="button" data-dismiss="modal">Chấp nhận</button>
-            </div>
-        </div>
-    </div>
-   </div>
+
 
 
 
@@ -128,7 +111,24 @@ aria-hidden="true">
 </div>
 </div>
 
-
+<div class="modal fade" id="unluckModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn mở khóa tài khoản này</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">chọn "Chập nhận" Nếu bạn chắc chắn muốn mở khóa tài khoản này</div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+            <button class="btn btn-primary"  type="button" data-dismiss="modal">Chấp nhận</button>
+        </div>
+    </div>
+</div>
+</div>
 
 
 

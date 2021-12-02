@@ -32,10 +32,13 @@
                                   </div>
                                 </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
+                                     <span class="icon text-primary"> <i (click)="onClick()" class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                                      <i (click)="onClick()" class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i></span>
+                                        <input [type]="passwords" class="form-control form-control-user"
                                             id="exampleInputEmail" aria-describedby="emailHelp"
                                             formControlName="password"
                                             placeholder="Nhập mật khẩu">
+
                                             <small class="text-danger"
                                             *ngIf="password?.errors?.minlength  && password?.touched">
                                             Mật khẩu phải trên 5 kí tự</small><br>

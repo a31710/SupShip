@@ -4,26 +4,27 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from '../service/auth.service';
 import Swal from 'sweetalert2';
+import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) { }
+  constructor(private authService: AuthService, private router: Router, private cookieService: CookieService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-   const role = localStorage.getItem('roles');
+   const role = this.cookieService.get('roles');
    console.log(role);
 
    if (role == 'NV') {
     Swal.fire({
-      position: 'top-end',
+      title: 'Truy cập không thành công? ',
+      text: "Bạn không có quyền truy cập vào trang này",
       icon: 'error',
-      title: 'Bạn không có quyền đang nhập vào trang này',
-      showConfirmButton: false,
-      timer: 3000
+      confirmButtonColor: '#4e73df',
+      confirmButtonText: 'Chấp nhận'
     })
     this.router.navigateByUrl('/client');
     return false;

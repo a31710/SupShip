@@ -13,6 +13,8 @@ import { LoaderService } from 'src/app/service/loader.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  passwords:any;
+  show = false;
   loginForm: FormGroup | any
   loginModel: LoginModel | any;
   vertifyEmail: VertifyEmail | any;
@@ -32,7 +34,19 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.passwords = 'password';
   }
+
+  onClick() {
+    if (this.passwords === 'password') {
+      this.passwords = 'text';
+      this.show = true;
+    } else {
+      this.passwords = 'password';
+      this.show = false;
+    }
+  }
+
   createForm() {
     this.loginForm = this.fb.group({
       email: [this.username, Validators.required],

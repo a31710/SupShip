@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
@@ -8,8 +9,8 @@ import * as $ from 'jquery';
 export class SideBarComponent implements OnInit {
 
   isAdmin:Boolean = false;
-  constructor() {
-    const roles = localStorage.getItem('roles');
+  constructor(private cookieService: CookieService) {
+    const roles = this.cookieService.get('roles');
     if(roles == "NV"){
       this.isAdmin = false;
     }else{

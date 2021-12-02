@@ -100,7 +100,7 @@
                     <div  class="col-md-6 z-div">
                       <div  class="z-vlayout" >
                           <div  class="z-vlayout-inner" style="padding-bottom:0">
-                              <div  class="z-div"> <span  class="z-label text-gray-900">Số điện thoại <span class="text-primary ml-3">{{item?.phone}}</span></span> </div>
+                              <div  class="z-div"> <span  class="z-label text-gray-900">Số điện thoại <span class="text-primary ml-3">{{item?.phone | phone}}</span></span> </div>
                           </div>
 
                         </div>
@@ -202,7 +202,9 @@
               <div  class="col-md-12 z-div">
 
                   <div  class="row z-div"  *ngFor="let item of infoCusomter">
-                    <div  class="z-div"> <span  class="z-label text-primary ">- {{item?.statusDescription}}</span> </div>
+                    <div  class="z-div"> <span  class="z-label"
+                      [ngClass]="{'text-info': item?.status === 'NEW', 'text-success' : item?.status === 'SUCCESS','text-danger' : step === 'FAILED','text-warning': item?.status === 'CONTACTING'
+                     }">- {{item?.statusDescription}}</span> </div>
                     <ng-container *ngFor="let i of item?.leadAssigns">
                       <div  class="z-div"> <span  class="z-label text-gray-900"> {{i?.createdDate | date:'dd/MM/yyyy hh:mm a'}}</span> </div>
                     </ng-container>

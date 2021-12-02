@@ -8,6 +8,7 @@ import { ViewUserComponent } from './view-user/view-user.component';
 import { SharedModule } from 'src/app/shared/share.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { PipeModule } from 'src/app/pipe/pipe.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +17,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     SharedModule,
     MatTabsModule,
-    NgSelectModule
+    NgSelectModule,
+    PipeModule,
 
 
   ],
