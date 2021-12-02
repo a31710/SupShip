@@ -1,4 +1,6 @@
-
+<ng-container *ngIf="loaderService.isLoading | async">
+  <div class="lds-ripple"><div></div><div></div></div>
+ </ng-container>
 <section>
   <div class="example-button-row">
         <button mat-raised-button class="text-gray-100" style="background-color: #858796;" (click)="getLeadAll()">Tất cả</button>

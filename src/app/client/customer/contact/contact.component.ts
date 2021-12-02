@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/service/loader.service';
 import { ScheduleService } from '../../service/schedule.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ContactComponent implements OnInit {
   scheduleData:any;
   day: Date = new Date;
   dateValue: Date = new Date;
-  constructor(private router: Router,private scheduleService: ScheduleService) {
+  constructor(private router: Router,private scheduleService: ScheduleService, public loaderService: LoaderService) {
     this.scheduleService.listScheduleMonth(this.datePipe(this.day)).subscribe(data=>{
       this.scheduleData = data.content;
       console.log(data);

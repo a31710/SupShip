@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoaderService } from 'src/app/service/loader.service';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class ForgotPasswordComponent implements OnInit {
 
   forgotForm: FormGroup | any;
 
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private router: Router,
+     private activatedRoute: ActivatedRoute, private fb: FormBuilder, public loaderService: LoaderService) {
     this.createForm();
   }
 

@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import Swal from 'sweetalert2';
+import { LoaderService } from 'src/app/service/loader.service';
 
 @Component({
   selector: 'app-checkemail',
@@ -13,7 +14,8 @@ export class CheckemailComponent implements OnInit {
 
   checkForm: FormGroup | any;
 
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private router: Router,
+     private activatedRoute: ActivatedRoute, private fb: FormBuilder,public loaderService: LoaderService) {
     this.createForm();
   }
 

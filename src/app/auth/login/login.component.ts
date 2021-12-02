@@ -5,6 +5,7 @@ import { AuthService } from '../service/auth.service';
 import { LoginModel } from './model/login-model';
 import { VertifyEmail } from './model/vertify-email';
 import Swal from 'sweetalert2'
+import { LoaderService } from 'src/app/service/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   isVertify:any ='false'
 
   email:any
-  constructor(private authService: AuthService, private fb: FormBuilder,private router: Router) {
+  constructor(private authService: AuthService, private fb: FormBuilder,private router: Router,public loaderService: LoaderService) {
     this.isCheck = this.authService.getCheck();
     this.username = localStorage.getItem('email')?.slice(1, -1);
     this.email = {email: this.username}

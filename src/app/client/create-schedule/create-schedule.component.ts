@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { LoaderService } from 'src/app/service/loader.service';
 import Swal from 'sweetalert2';
 import { CustomerService } from '../service/customer.service';
 import { ScheduleService } from '../service/schedule.service';
@@ -21,7 +22,7 @@ export class CreateScheduleComponent implements OnInit {
   today = this.calendar.getToday();
 
   constructor(private calendar: NgbCalendar, private fb: FormBuilder, private router:Router,
-     private activateRoute: ActivatedRoute,private customerService:CustomerService) {
+     private activateRoute: ActivatedRoute,private customerService:CustomerService, public loaderService: LoaderService) {
       this.activateRoute.params.subscribe(params=>{
         const id = params['id'];
         this.customerService.getDetailCustomer(id).subscribe(data=>{

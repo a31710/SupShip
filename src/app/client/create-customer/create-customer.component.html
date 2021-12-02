@@ -1,3 +1,9 @@
+
+<ng-container *ngIf="loaderService.isLoading | async">
+  <div class="lds-ripple"><div></div><div></div></div>
+ </ng-container>
+
+
 <a routerLink="/client/customer" class="text-primary" ><i class="fas fa-arrow-left"></i>  Quay lại</a>
 <br>
 <form [formGroup]="insertCustomerForm" (ngSubmit)="onSubmit()">

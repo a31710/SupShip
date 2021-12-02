@@ -1,3 +1,8 @@
+
+<ng-container *ngIf="loaderService.isLoading | async">
+  <div class="lds-ripple"><div></div><div></div></div>
+ </ng-container>
+
 <div class="row" *ngFor="let item of leadData">
 
     <!-- Card Header - Dropdown -->

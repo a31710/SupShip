@@ -5,6 +5,7 @@ import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { NgSelectConfig } from '@ng-select/ng-select';
+import { LoaderService } from 'src/app/service/loader.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -22,7 +23,7 @@ export class EditProfileComponent implements OnInit {
   userForm: FormGroup | any
   userId:any
   constructor(private profileService: ProfileService, private fb: FormBuilder, private config: NgSelectConfig,
-    private route: Router,private cookieService: CookieService) {
+    private route: Router,private cookieService: CookieService, public loaderService: LoaderService) {
       this.config.appendTo = 'body';
       this.config.bindValue = 'value';
     this.userId =  localStorage.getItem('userId');

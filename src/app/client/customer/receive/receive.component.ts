@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/service/loader.service';
 import { CustomerService } from '../../service/customer.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ReceiveComponent implements OnInit {
   tien = 3000000;
   totalLead:any
   leadData:any
-  constructor(private customerService: CustomerService, private router:Router) {
+  constructor(private customerService: CustomerService, private router:Router,public loaderService: LoaderService) {
     this.customerService.getLeadByUser().subscribe(data=>{
       this.leadData = data.data
       this.totalLead = data.totalItem;

@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileService } from '../../service/profile.service';
 import Swal from 'sweetalert2'
+import { LoaderService } from 'src/app/service/loader.service';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -13,7 +14,7 @@ export class ChangePasswordComponent implements OnInit {
   username:any
   password:any
   rePassword:any
-  constructor( private fb: FormBuilder,private router: Router, private profileService: ProfileService) {
+  constructor( private fb: FormBuilder,private router: Router, private profileService: ProfileService,public loaderService: LoaderService) {
     this.username = localStorage.getItem('email')?.slice(1, -1);
     this.createForm();
   }

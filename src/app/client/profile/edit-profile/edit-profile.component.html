@@ -1,4 +1,7 @@
 
+<ng-container *ngIf="loaderService.isLoading | async">
+  <div class="lds-ripple"><div></div><div></div></div>
+ </ng-container>
 <form [formGroup]="userForm" (ngSubmit)="updateUser();">
   <!-- Page Heading -->
 

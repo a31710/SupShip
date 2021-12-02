@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../service/customer.service';
 import { PrimeIcons } from "primeng/api";
+import { LoaderService } from 'src/app/service/loader.service';
 @Component({
   selector: 'app-detail-customer',
   templateUrl: './detail-customer.component.html',
@@ -11,7 +12,7 @@ export class DetailCustomerComponent implements OnInit {
   events1: any[] |any;
   events2: any[] |any;
   leadData:any
-  constructor(private customerService: CustomerService, private activateRoute: ActivatedRoute) {
+  constructor(private customerService: CustomerService, private activateRoute: ActivatedRoute,public loaderService: LoaderService) {
     this.activateRoute.params.subscribe(param=>{
       const id = param['id']
       this.customerService.getDetailCustomer(id).subscribe(data=>{
