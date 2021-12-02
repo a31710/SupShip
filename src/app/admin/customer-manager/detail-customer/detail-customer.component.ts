@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 import { CustomerService } from '../../service/customer.service';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/service/loader.service';
 
 @Component({
   selector: 'app-detail-customer',
@@ -13,7 +14,7 @@ export class DetailCustomerComponent implements OnInit,OnChanges {
   @Input() idUpdate:any;
   @Output() deleteId: EventEmitter<any>;
   @Output() updateId: EventEmitter<any>;
-  constructor(private customerSerivce: CustomerService) {
+  constructor(private customerSerivce: CustomerService, public loaderService: LoaderService) {
     this.deleteId = new EventEmitter<any>();
     this.updateId = new EventEmitter<any>();
    }

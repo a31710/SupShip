@@ -1,3 +1,7 @@
+<ng-container *ngIf="loaderService.isLoading | async">
+  <div class="lds-ripple"><div></div><div></div></div>
+ </ng-container>
+
 <div class="mt-4 body">
 
   <div style="padding-bottom:25px;" class="row z-div">

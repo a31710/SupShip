@@ -9,7 +9,9 @@
   </ng-template>
 
 <div *ngIf="tab.value == 1" class="mh">
-  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+ <ng-container *ngIf="loaderService.isLoading | async">
+  <div class="lds-ripple"><div></div><div></div></div>
+ </ng-container>
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
   </div>
   <!-- Earnings (Monthly) Card Example -->
@@ -116,10 +118,10 @@
           <td>{{item?.leadAssigns[0]?.createdDate | date: 'dd/MM/yyyy'}}</td>
 
           <td>
-            <button type="button" *ngIf="item?.status != 'CONTACTING'" class="btn btn-success btn-sm px-3 mr-2" [disabled]="isdb" (click)="singleTranfer(item.id)" data-toggle="modal" data-target="#tranfer">
+            <button type="button" *ngIf="item?.status != 'CONTACTING'" class="btn btn-success btn-sm px-3 mr-3" [disabled]="isdb" (click)="singleTranfer(item.id)" data-toggle="modal" data-target="#tranfer">
                 Giao TX
             </button>
-            <button type="button" *ngIf="item?.status != 'NEW' && item?.status != 'SUCCESS'"  class="btn btn-success btn-sm px-3 mr-2" [disabled]="isdb" (click)="singleTranfer(item.id, item.status)" data-toggle="modal" data-target="#tranfer">
+            <button type="button" *ngIf="item?.status != 'NEW' && item?.status != 'SUCCESS'"  class="btn btn-success btn-sm px-3 " [disabled]="isdb" (click)="singleTranfer(item.id, item.status)" data-toggle="modal" data-target="#tranfer">
               Chuyển TX
           </button>
             <i class="fas fa-eye px-3" style="cursor: pointer;" (click)="addDetailTab(item.id)"></i>
@@ -149,7 +151,7 @@
   <app-post-report [postCode]="postCodeReport"></app-post-report>
 </div>
 <div *ngIf="tab.value == 7">
-  <app-contact-excel></app-contact-excel>
+  <app-contact-excel [loadExcel]="loadExcel"></app-contact-excel>
 </div>
 
 
@@ -161,7 +163,11 @@
 
 <div class="modal fade" id="tranfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
+
 <div class="modal-dialog modal-lg" role="document">
+  <ng-container *ngIf="loaderService.isLoading | async">
+    <div class="lds-ripple2"><div></div><div></div></div>
+   </ng-container>
  <form [formGroup]="tranferForm" >
   <div class="modal-content">
     <div class="modal-header">
@@ -265,7 +271,7 @@ aria-hidden="true">
           </angular-file-uploader>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">OK</button>
+            <button class="btn btn-secondary" type="button" (click)="fetchExcel()" data-dismiss="modal">OK</button>
         </div>
     </div>
 </div>

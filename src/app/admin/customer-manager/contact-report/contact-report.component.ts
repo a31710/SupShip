@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { utcThursdays } from 'd3-time';
+import { LoaderService } from 'src/app/service/loader.service';
 import { CustomerService } from '../../service/customer.service';
 import { UserService } from '../../service/user.service';
 
@@ -21,7 +22,7 @@ export class ContactReportComponent implements OnInit {
   size:any
   pagiData:any
   @Output() onPostChange: EventEmitter<any>;
-  constructor(private customerService: CustomerService,private userService: UserService) {
+  constructor(private customerService: CustomerService,private userService: UserService,public loaderService: LoaderService) {
     this.onPostChange = new EventEmitter<any>();
     this.fromDate =  new Date(this.toDate.getFullYear(), this.toDate.getMonth(), 1);
     this.getAllDeptCode();

@@ -9,16 +9,17 @@ import {
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, filter, switchMap, take } from 'rxjs/operators';
+import { catchError, filter, finalize, switchMap, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { AuthService } from './auth/service/auth.service';
+import { LoaderService } from './service/loader.service';
 @Injectable({
   providedIn: 'root',
 })
 export class InterceptorService implements HttpInterceptor {
 
-  constructor(private cookieService: CookieService, private authService: AuthService){
+  constructor(private cookieService: CookieService, private authService: AuthService, public loaderService: LoaderService){
 
   }
   // intercept(
@@ -49,10 +50,15 @@ export class InterceptorService implements HttpInterceptor {
 
   // }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.loaderService.isLoading.next(true)
     const token:any = this.authService.getJwtToken();
     request = this.addToken(request, token);
 
-    return next.handle(request).pipe(catchError(error => {
+    return next.handle(request).pipe(
+      finalize(()=>{
+        this.loaderService.isLoading.next(false)
+      }),
+      catchError(error => {
       if (error instanceof HttpErrorResponse && error.status === 401) {
         console.log("Token hết hạn, đang làm mới Token");
 
@@ -94,6 +100,9 @@ private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
         this.isRefreshing = true;
         this.refreshTokenSubject.next(null);
         return this.authService.refreshToken().pipe(
+            finalize(()=>{
+              this.loaderService.isLoading.next(false)
+            }),
             switchMap((token: any) => {
                 console.log(token?.data?.token);
                 this.isRefreshing = false;
@@ -103,6 +112,9 @@ private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
         );
     } else {
         return this.refreshTokenSubject.pipe(
+          finalize(()=>{
+            this.loaderService.isLoading.next(false)
+          }),
         filter(token => token != null),
         take(1),
         switchMap(jwt => {

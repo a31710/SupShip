@@ -2,14 +2,18 @@
 
 <br>
 <br>
+<ng-container *ngIf="loaderService.isLoading | async">
+  <div class="lds-ripple"><div></div><div></div></div>
+ </ng-container>
+  <div class="container-fluid" >
 
-  <div class="container-fluid">
     <div class="row">
 
       <!-- Grow In Utility -->
       <div class="col-lg-6">
 
           <div class="card position-relative">
+
               <div class="card-header py-3" style="background-color: #4e73df;">
                   <h2 class="m-0 " style="color: white;"> <i class="fas fa-user mr-2" ></i> Thông tin khách hàng</h2>
               </div>
@@ -198,7 +202,10 @@
               <div  class="col-md-12 z-div">
 
                   <div  class="row z-div"  *ngFor="let item of infoCusomter">
-                    <div  class="z-div"> <span  class="z-label text-gray-900">{{item?.statusDescription}}</span> </div>
+                    <div  class="z-div"> <span  class="z-label text-primary ">- {{item?.statusDescription}}</span> </div>
+                    <ng-container *ngFor="let i of item?.leadAssigns">
+                      <div  class="z-div"> <span  class="z-label text-gray-900"> {{i?.createdDate | date:'dd/MM/yyyy hh:mm a'}}</span> </div>
+                    </ng-container>
                   </div>
               </div>
           </div>

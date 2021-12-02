@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from '../../service/customer.service';
 import Swal from 'sweetalert2'
 import { NgSelectConfig } from '@ng-select/ng-select';
+import { LoaderService } from 'src/app/service/loader.service';
 @Component({
   selector: 'app-update-customer',
   templateUrl: './update-customer.component.html',
@@ -95,7 +96,7 @@ export class UpdateCustomerComponent implements OnInit {
     }
 
 
-  constructor(private fb: FormBuilder, private customerService: CustomerService, private config: NgSelectConfig) {
+  constructor(private fb: FormBuilder, private customerService: CustomerService, private config: NgSelectConfig, public loaderService: LoaderService) {
     this.updateCus = new EventEmitter<any>();
     this.config.appendTo = 'body';
     this.config.bindValue = 'value';

@@ -6,6 +6,7 @@ import { UserService } from '../../service/user.service';
 import Swal from 'sweetalert2'
 import { environment } from 'src/environments/environment';
 import { NgSelectConfig } from '@ng-select/ng-select';
+import { LoaderService } from 'src/app/service/loader.service';
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',
@@ -46,8 +47,10 @@ leadSelect:any
 idUpdate:any;
 isSearch:Boolean = false;
 empSystemId:any;
+
+loadExcel: any = 1;
   constructor(private customerService: CustomerService, private route: Router,private config: NgSelectConfig,
-     private toastr: ToastrService, private fb: FormBuilder,private userService: UserService) {
+     public loaderService: LoaderService , private fb: FormBuilder,private userService: UserService) {
       this.config.appendTo = 'body';
       this.config.bindValue = 'value';
       const cos:any = localStorage.getItem('empSystemId');
@@ -74,6 +77,16 @@ empSystemId:any;
 
   }
 
+  fetchAPi(){
+    this.customerService.getLeadStatus(1,15,'ALL').subscribe((data)=>{
+      this.status = 'ALL';
+      this.listCustomer = data.data
+      console.log(data.data);
+      this.size = data.totalItem;
+      this.isSearch = false;
+    })
+  }
+
   createForm(){
     this.tranferForm = this.fb.group({
       userAssigneeId: [this.empSystemId,Validators.required],
@@ -94,6 +107,7 @@ empSystemId:any;
     console.log(this.tranferForm.value);
     this.customerService.LeadAssign(this.tranferForm.value).subscribe(data=>{
       this.tranferData = [];
+      this.idArray = [];
       console.log(data);
       if(data?.error == "true"){
         Swal.fire({
@@ -104,7 +118,7 @@ empSystemId:any;
           confirmButtonText: 'OK'
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.reload();
+            this.fetchAPi();
           }
         })
       }else{
@@ -115,7 +129,7 @@ empSystemId:any;
           confirmButtonText: 'OK'
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.reload();
+            this.fetchAPi();
           }
         })
       }
@@ -482,6 +496,11 @@ empSystemId:any;
 
   toggle(i:any){
     $(`.toogle${i}`).toggleClass("bg-gradient-light");
+  }
+
+
+  fetchExcel(){
+    this.loadExcel +=1;
   }
 
   // Upload File excel

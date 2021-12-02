@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { timeThursdays } from 'd3-time';
 import { CustomerService } from '../../service/customer.service';
 import * as fileSaver from 'file-saver';
+import { LoaderService } from 'src/app/service/loader.service';
 @Component({
   selector: 'app-contact-excel',
   templateUrl: './contact-excel.component.html',
   styleUrls: ['./contact-excel.component.css']
 })
-export class ContactExcelComponent implements OnInit {
+export class ContactExcelComponent implements OnInit, OnChanges {
+  @Input() loadExcel:any;
   offset: number = 0;
   limit: number = 15;
   size:any
@@ -39,7 +41,7 @@ export class ContactExcelComponent implements OnInit {
   secondSelected = new FormControl(0);
 
 
-  constructor(private customerService: CustomerService) {
+  constructor(private customerService: CustomerService,public loaderService: LoaderService) {
     this.customerService.excelHistory().subscribe(data=>{
       this.historyData = data.data
       this.size = data.totalItem;
@@ -47,6 +49,17 @@ export class ContactExcelComponent implements OnInit {
    }
 
   ngOnInit() {
+  }
+  ngOnChanges(){
+      this.customerService.excelHistory().subscribe(data=>{
+        this.historyData = data.data
+        this.size = data.totalItem;
+      })
+  }
+
+  fetchExcel(value:any){
+    console.log(value);
+
   }
 
   onPageChange(offset: number) {

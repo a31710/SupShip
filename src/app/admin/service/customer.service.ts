@@ -34,7 +34,7 @@ constructor(private http: HttpClient) { }
   }
 
   getDetailCustomer(id:any):Observable<any>{
-    return this.http.get<any>(`${this.url}/api/lead/evtp/${id}`);
+    return this.http.get<any>(`${this.url}/api/lead/${id}`);
   }
 
   updateCustomer(id:any, body:any):Observable<any>{

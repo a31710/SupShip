@@ -1,7 +1,12 @@
+
+
 <div class="mt-4 body">
 
   <div style="padding-bottom:25px;" class="row z-div">
     <div  class="col-md-1 z-div">
+      <ng-container *ngIf="loaderService.isLoading | async">
+        <div class="lds-ripple"><div></div><div></div></div>
+       </ng-container>
       <div  class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Bưu cục</h3></span></div>
         <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">4836</span></div>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { LoaderService } from 'src/app/service/loader.service';
 import { CustomerService } from '../../service/customer.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class PostReportComponent implements OnInit {
   toDate: Date = new Date;
   @Input() postCodeReport:any;
   postReportData:any
-  constructor(private customerService: CustomerService) {
+  constructor(private customerService: CustomerService, public loaderService: LoaderService) {
     this.fromDate =  new Date(this.toDate.getFullYear(), this.toDate.getMonth(), 1);
   }
 

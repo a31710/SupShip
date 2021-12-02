@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { LoaderService } from 'src/app/service/loader.service';
 import { UserService } from '../../service/user.service';
 
 @Component({
@@ -28,7 +29,7 @@ export class ViewUserComponent implements OnInit {
   size: number = 70;
   totalPage:number = 3;
   searchForm: FormGroup | any;
-  constructor(private userService: UserService, private fb: FormBuilder) {
+  constructor(private userService: UserService, private fb: FormBuilder,public loaderService: LoaderService) {
     this.userService.getListUser().subscribe(data=>{
       this.size = data.totalItem;
       this.dataUser = data.content;
@@ -53,7 +54,11 @@ export class ViewUserComponent implements OnInit {
   }
   onSearch(){
     console.log(this.req.value);
-    this.userService.searchUser(this.req.value).subscribe(data=>console.log(data)
+    this.userService.searchUser(this.req.value).subscribe(data=>{
+      this.size = data.totalItem;
+      this.dataUser = data.content;
+      console.log(data.content);
+    }
     )
   }
   addTab(){
