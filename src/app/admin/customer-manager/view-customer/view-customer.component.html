@@ -1,4 +1,6 @@
-
+<ng-container *ngIf="loaderService.isLoading | async">
+  <div class="lds-ripple"><div></div><div></div></div>
+ </ng-container>
 <mat-tab-group [selectedIndex]="selected.value"
 (selectedIndexChange)="selected.setValue($event)">
 
@@ -9,9 +11,7 @@
   </ng-template>
 
 <div *ngIf="tab.value == 1" class="mh">
- <ng-container *ngIf="loaderService.isLoading | async">
-  <div class="lds-ripple"><div></div><div></div></div>
- </ng-container>
+
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
   </div>
   <!-- Earnings (Monthly) Card Example -->

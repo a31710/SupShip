@@ -36,7 +36,8 @@
         </div>
         <div class="tp-event-info" >
           <span class="glyphicon glyphicon-map-marker"></span>
-          {{item?.lead?.statusDescription}}
+        <span [ngClass]="{'text-warning': item?.status === 'NEW', 'text-success' : item?.status === 'SUCCESS','text-danger' : step === 'FAILED' }">
+            {{item?.lead?.statusDescription}}</span>
           <span class="glyphicon glyphicon-time"></span>
           {{item?.fromDate | date:'hh:mm' }} - {{item?.toDate | date:'hh:mm' }}
         </div>

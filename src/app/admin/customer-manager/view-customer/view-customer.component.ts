@@ -140,6 +140,23 @@ loadExcel: any = 1;
 
   }
   onSearch(){
+    if(this.req != undefined && this.req){
+      this.customerService.searchIdLead(this.req).subscribe(data=>{
+
+        if(data?.error == 'true'){
+          Swal.fire({
+            icon: 'error',
+            title: data?.message,
+            showConfirmButton: true,
+            confirmButtonText: 'Chấp nhận'
+          })
+        }else{
+          this.listCustomer = data.data
+        this.size = data.totalItem;
+        this.isSearch = true;
+        }
+      })
+    }
     this.customerService.searchLead(this.datePipe(this.fromDate),this.datePipe(this.toDate),this.status)
     .subscribe(data=>{
       this.listCustomer = data.data
@@ -152,6 +169,10 @@ loadExcel: any = 1;
           showConfirmButton: true,
           confirmButtonText: 'Chấp nhận'
         })
+      }else{
+        this.listCustomer = data.data
+        this.size = data.totalItem;
+        this.isSearch = true;
       }
     })
 

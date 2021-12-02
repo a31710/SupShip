@@ -90,4 +90,8 @@ constructor(private http: HttpClient) { }
   reportPostCode(from:any, to:any, postCode:any):Observable<any>{
     return this.http.get<any>(`${this.url}/api/report/post?from=${from}&to=${to}&post=${postCode}`);
   }
+
+  searchIdLead(req:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/lead/search?key=${req}`)
+  }
 }
