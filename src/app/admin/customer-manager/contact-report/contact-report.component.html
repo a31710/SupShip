@@ -41,7 +41,7 @@
         <div  class="z-vlayout-inner" ><span style="font-size: 20px; color:green;" class="z-label">0</span></div>
       </div>
     </div>
-    <div  class="col-md-2 z-div">
+    <div  class="col-md-1 z-div">
       <div  class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Đang tiếp xúc</h3></span></div>
         <div  class="z-vlayout-inner" ><span  style="font-size: 20px; color:orange;" class="z-label">0</span></div>
@@ -53,16 +53,16 @@
         <div  class="z-vlayout-inner" ><span style="font-size: 20px; color:red;" class="z-label">0</span></div>
       </div>
     </div>
-    <div  class="col-md-2 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">TL hoàn thành KH</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">100%</span></div>
-      </div>
-    </div>
     <div  class="col-md-1 z-div">
       <div class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">TL tiếp xúc</h3></span></div>
         <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">0%</span></div>
+      </div>
+    </div>
+    <div  class="col-md-2 z-div">
+      <div  class="z-vlayout">
+        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">TL hoàn thành KH</h3></span></div>
+        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">100%</span></div>
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@
     <div class="row col-10 mb-4">
       <div class="col-2">
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-          <ng-select class="custom" placeholder="Chọn mã chi nhánh"  bindValue="deptCode"
+          <ng-select class="custom" placeholder="Chọn chi nhánh"  bindValue="deptCode"
           [(ngModel)]="deptCodeSelect"  [items]="dataDept" bindLabel="deptName"  >
          </ng-select>
         </div>
@@ -128,11 +128,11 @@
       <tbody>
 
         <tr *ngFor="let item of pagiData" class="tbhov">
-              <td ><a style="cursor: pointer;" (click)="toogleData(item?.deptCode)"><i *ngIf="item?.deptCode" class="fas fa-caret-right mr-2"></i> {{item?.deptCode}}</a></td>
-              <td>{{item?.postCode?item?.postCode:item?.reportMonthlyPostOfficeDtos.length + ' Bưu cục'}}</td>
+              <td class="text-primary"><a style="cursor: pointer;" (click)="toogleData(item?.deptCode)"><i *ngIf="item?.deptCode" class="fas fa-caret-right mr-2 text-primary"></i> {{item?.deptCode}}</a></td>
+              <td class="text-info">{{item?.postCode?item?.postCode:item?.reportMonthlyPostOfficeDtos.length + ' Bưu cục'}}</td>
               <td>{{item?.totalEmployees?item?.totalEmployees:345}}</td>
               <td>{{item?.totalAssigns?item?.totalAssigns:0}}</td>
-              <td>{{item?.assigned?item?.assigned:0}} ({{item?.assigned?item?.assigned:0}} - {{item?.contacting?item?.contacting:0}} - {{item?.fails?item?.fails:0}})</td>
+              <td><span class="text-primary">{{item?.assigned?item?.assigned:0}}</span> (<span class="text-success">{{item?.assigned?item?.assigned:0}}</span> - <span class="text-warning">{{item?.contacting?item?.contacting:0}}</span> - <span class="text-danger">{{item?.fails?item?.fails:0}}</span>)</td>
               <td>{{item?.employeeNotAssigned?item?.employeeNotAssigned:0}}</td>
               <td>{{item?.fails}}</td>
               <td>100%</td>

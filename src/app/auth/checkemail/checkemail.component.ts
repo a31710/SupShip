@@ -28,14 +28,14 @@ export class CheckemailComponent implements OnInit {
 
     });
   }
+
+
   checkEmail(){
     localStorage.setItem('email', JSON.stringify(this.checkForm.get('email').value));
     this.authService.checkEmail(this.checkForm.value).subscribe((data)=>{
-      console.log(data);
       if(data?.error == 'true'){
         Swal.fire({
-          title: 'Nhập Email thất bại?',
-          text: data?.message,
+          title: data?.message,
           icon: 'error',
           confirmButtonColor: '#4e73df',
           confirmButtonText: 'Chấp nhận'

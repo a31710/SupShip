@@ -10,5 +10,6 @@ export interface LoginResponse {
   description: String;
   message: String;
   data: DataLogin;
+  error:string
 }
 

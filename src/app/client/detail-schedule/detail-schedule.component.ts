@@ -6,6 +6,7 @@ import { ScheduleService } from '../service/schedule.service';
 import Swal from 'sweetalert2';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { LoaderService } from 'src/app/service/loader.service';
+import { CustomerService } from '../service/customer.service';
 @Component({
   selector: 'app-detail-schedule',
   templateUrl: './detail-schedule.component.html',
@@ -57,19 +58,20 @@ export class DetailScheduleComponent implements OnInit {
       { type: 'minlength', message: 'phải có ít nhất 5 kí tự' },
     ],
     }
-
+  customerData:any
   time1Validate:boolean = true;
   time2Validate:boolean = true;
   time1:any
   time2:any
   day: Date  = new Date;
-  constructor(private profileSerivce: ProfileService, private fb: FormBuilder,private config: NgSelectConfig,
+  constructor(private profileSerivce: ProfileService, private fb: FormBuilder,private config: NgSelectConfig,private customerService:CustomerService,
      private scheduleService: ScheduleService, private activatedRoute: ActivatedRoute,public loaderService: LoaderService) {
    this.activatedRoute.params.subscribe(params=>{
      const id = params['id'];
      this.scheduleService.detailSchedule(id).subscribe(data=>{
        this.scheduleData = [data]
-       console.log(data);
+       console.log(data?.lead?.id);
+       this.customerService.getDetailCustomer(data?.lead?.id).subscribe(data=>this.customerData = [data])
        this.uploadForm(data.lead)
        this.scheduleIdArr.setValue(data?.id);
      })

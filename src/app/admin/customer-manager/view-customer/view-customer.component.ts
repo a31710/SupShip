@@ -141,6 +141,7 @@ loadExcel: any = 1;
 
   }
   onSearch(){
+
     if(this.req != undefined && this.req){
       this.customerService.searchIdLead(this.req).subscribe(data=>{
 
@@ -152,30 +153,34 @@ loadExcel: any = 1;
             confirmButtonText: 'Chấp nhận'
           })
         }else{
-          this.listCustomer = data.data
-        this.size = data.totalItem;
-        this.isSearch = true;
+          console.log(data);
+          this.listCustomer = [data]
+          this.size = data.totalItem;
+          this.isSearch = true;
+
         }
       })
-    }
-    this.customerService.searchLead(this.datePipe(this.fromDate),this.datePipe(this.toDate),this.status)
-    .subscribe(data=>{
-      this.listCustomer = data.data
-      this.size = data.totalItem;
-      this.isSearch = true;
-      if(data?.error == 'true'){
-        Swal.fire({
-          icon: 'error',
-          title: data?.message,
-          showConfirmButton: true,
-          confirmButtonText: 'Chấp nhận'
-        })
-      }else{
+    }else{
+      this.customerService.searchLead(this.datePipe(this.fromDate),this.datePipe(this.toDate),this.status)
+      .subscribe(data=>{
         this.listCustomer = data.data
         this.size = data.totalItem;
         this.isSearch = true;
-      }
-    })
+        if(data?.error == 'true'){
+          Swal.fire({
+            icon: 'error',
+            title: data?.message,
+            showConfirmButton: true,
+            confirmButtonText: 'Chấp nhận'
+          })
+        }else{
+          this.listCustomer = data.data
+          this.size = data.totalItem;
+          this.isSearch = true;
+        }
+      })
+    }
+
 
   }
 

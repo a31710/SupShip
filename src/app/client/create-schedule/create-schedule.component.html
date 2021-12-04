@@ -55,24 +55,32 @@
 <ng-container  *ngFor="let item of scheduleData">
   <div class=" row">
     <div class="col-12">
-      <div class="card mb-4" style="border: 1px solid rgb(179, 177, 177);">
+      <div class="card mb-4" style="border: 1px solid rgb(168, 167, 167)">
         <!-- Card Header - Dropdown -->
         <div
-            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(168, 167, 167)">
             <h3 class="m-0 text-primary">KH{{item?.id}}</h3>
         </div>
         <!-- Card Body -->
         <div class="card-body">
-          <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-home mr-2"></i>{{item?.companyName}}</h3></div>
-          <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1"></i>{{item?.address?.fomatAddress}}, {{item?.address?.homeNo}}</h3> </div>
-          <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-user mr-2 ml-1"></i>{{item?.representation}}</h3></div>
-          <div class="h5 mb-0 text-gray-800 mt-2"><h3>{{item?.phone}}</h3></div>
+          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-home mr-2 text-primary"></i>{{item?.companyName}}</h4></div>
+          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h4> </div>
+          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item?.representation}}</h4></div>
+          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-phone-square-alt mr-2 ml-1 text-primary"></i>{{item?.phone | phone}}</h4></div>
+          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-money-bill-wave mr-2 ml-1 text-primary"></i>Doanh thu dự kiến: <span style="font-size: 15px;" class="text-success">{{item?.expectedRevenue | money}}</span></h4></div>
+          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-bullseye mr-2 ml-1 text-primary"></i>Sản phẩm kinh doanh: </h4></div>
+          <ng-container *ngFor="let i of item?.industries">
+            <div class="h5 mb-0 text-info mt-2"><h4> {{i?.name}}</h4></div>
+          </ng-container>
         </div>
 
     </div>
     </div>
   </div>
 </ng-container>
+
+<br>
+<br>
 
 <div class="fixed" style="margin-left: -10px;">
 

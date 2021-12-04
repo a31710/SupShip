@@ -201,14 +201,28 @@
             <div  class="row z-div">
               <div  class="col-md-12 z-div">
 
-                  <div  class="row z-div"  *ngFor="let item of infoCusomter">
-                    <div  class="z-div"> <span  class="z-label"
-                      [ngClass]="{'text-info': item?.status === 'NEW', 'text-success' : item?.status === 'SUCCESS','text-danger' : step === 'FAILED','text-warning': item?.status === 'CONTACTING'
-                     }">- {{item?.statusDescription}}</span> </div>
-                    <ng-container *ngFor="let i of item?.leadAssigns">
-                      <div  class="z-div"> <span  class="z-label text-gray-900"> {{i?.createdDate | date:'dd/MM/yyyy hh:mm a'}}</span> </div>
-                    </ng-container>
-                  </div>
+                <div class="mt-3 mb-3">
+
+                  <p-timeline [value]="events1" align="alternate" styleClass="customized-timeline">
+                    <ng-template pTemplate="marker" let-event>
+                        <span class="custom-marker p-shadow-2" [style.backgroundColor]="event.color">
+                        </span>
+                    </ng-template>
+                    <ng-template pTemplate="content" let-event>
+                      <small class="text-primary">{{event.status}}</small> -
+                      <small class="text-primary">{{event.date}}</small>
+                      <br>
+                      <br>
+                      <small class="mt-2"
+                       [ngClass]="{'text-danger': event.result == 1, 'text-success' : event.result == 3,'text-info' : event.result == 5 }"
+                       >{{event.result == 1?'Thất bại': event.result == 3?'Thành công':event.result == 5?'Gửi báo giá':''}}</small>
+
+                  </ng-template>
+
+                </p-timeline>
+
+
+                </div>
               </div>
           </div>
           </div>

@@ -17,7 +17,7 @@ export class CreateScheduleComponent implements OnInit {
   time2Validate:boolean = true;
   time1:any
   time2:any
-  day: Date | any;
+  day: Date | any = new Date;
   model: NgbDateStruct | any;
   today = this.calendar.getToday();
 

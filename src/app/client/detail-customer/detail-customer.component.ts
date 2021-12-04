@@ -3,52 +3,43 @@ import { ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../service/customer.service';
 import { PrimeIcons } from "primeng/api";
 import { LoaderService } from 'src/app/service/loader.service';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-detail-customer',
   templateUrl: './detail-customer.component.html',
   styleUrls: ['./detail-customer.component.css']
 })
 export class DetailCustomerComponent implements OnInit {
-  events1: any[] |any;
-  events2: any[] |any;
+  events1: any[] |any = [];
   leadData:any
-  constructor(private customerService: CustomerService, private activateRoute: ActivatedRoute,public loaderService: LoaderService) {
+  constructor(private customerService: CustomerService, private activateRoute: ActivatedRoute,public loaderService: LoaderService, private datePipe: DatePipe) {
     this.activateRoute.params.subscribe(param=>{
       const id = param['id']
       this.customerService.getDetailCustomer(id).subscribe(data=>{
         this.leadData = [data];
         console.log(data);
 
-      }
-      )
+        if(data.schedules){
+          this.events1.push({status:'Ngày cập nhật kết quả',
+          date:  this.datePipe.transform( data.schedules[data.schedules.length-1]?.result?.createdDate,'dd/MM - hh:mm a '),
+          color:'#858796',
+          result: data.schedules[data.schedules.length-1]?.result?.status
+         })
+          this.events1.push({status:'Ngày đặt lịch tiếp xúc', date:  this.datePipe.transform( data.schedules[data.schedules.length-1]?.createDate,'dd/MM - hh:mm a '),color:'#858796'})
 
+        }
+        if(data.leadAssigns){
+          this.events1.push({status:'Ngày giao tiếp xúc', date:  this.datePipe.transform( data.leadAssigns[data.leadAssigns.length-1]?.createdDate,'dd/MM - hh:mm a '),color:'#858796'})
+        }
+        this.events1.push({status:'Ngày tạo khách hàng', date: this.datePipe.transform(data?.createDate,'dd/MM - hh:mm a') ,color:'#858796' })
+        this.events1[0].color = '#4e73df'
+      })
     })
    }
 
   ngOnInit() {
-    this.events1 = [
-      {
-        status: "Gửi báo giá",
-        date: "10:30 15/10/2020 ",
-        color: "#4e73df",
-        danger:'Chưa cập nhật kết quả'
-      },
-      {
-        status: "Đang đàm phán",
-        date: "15/10/2020 14:00",
-        color: "#858796"
-      },
-      {
-        status: "Gửi báo giá",
-        date: "15/10/2020 16:15",
-        color: "#858796"
-      },
-      {
-        status: "Thêm mới khách hàng",
-        date: "16/10/2020 10:00",
-        color: "#858796"
-      }
-    ];
+
+
   }
 
 

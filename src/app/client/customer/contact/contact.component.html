@@ -25,7 +25,7 @@
   </div>
   <br>
   <ng-container  *ngFor="let item of scheduleData">
-    <div (click)="detailSchedule(item.id)" class="tp-event mt-2">
+    <div (click)="detailSchedule(item.id)" class="tp-event mt-2" style="border-radius: 10px;">
       <div class="tp-event-calendar">
         <div class="tp-event-month">{{item?.fromDate | date:'MMMM' }}  </div>
         <div class="tp-event-day">{{item?.fromDate | date:'dd' }}</div>

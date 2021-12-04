@@ -18,41 +18,40 @@ export class AuthService {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() userId: EventEmitter<String> = new EventEmitter();
   url = environment.url
-constructor(private http: HttpClient,private cookieService: CookieService, ) { }
+constructor(private http: HttpClient,private cookieService: CookieService, ) {
+}
 
 vertifyEmail(vertifyEmail: VertifyEmail): Observable<any>{
   return this.http.post<VertifyResponse>(`${this.url}/user/verify`, vertifyEmail)
-  .pipe(map(data =>{
-      localStorage.setItem("isVertify",data.success);
-      return true;
-  }));
-
 }
 login(loginModel: LoginModel): Observable<any>{
   return this.http.post<LoginResponse>(`${this.url}/user/login`, loginModel)
   .pipe(map(data =>{
     console.log(data);
-
-    localStorage.setItem("isLogin",data.success);
-    localStorage.setItem("userId",data.data.userUid)
-    this.cookieService.set('token', data.data.token);
-    this.userInfo(data.data.userUid).subscribe(data=>{
-      localStorage.setItem('empSystemId',data.data.empSystemId);
-      this.cookieService.set('empSystemId', data.data.empSystemId);
-      this.cookieService.set('roles', data.data.roles);
-      localStorage.setItem("username",data.data.fullName);
-    })
-    this.userId.emit(data.data.userUid);
+    localStorage.setItem("isLogin",data?.error);
+    localStorage.setItem("userId",data?.data?.userUid)
+    this.cookieService.set('token', data?.data?.token);
+    if(data?.error == 'false'){
+      this.userInfo(data.data.userUid).subscribe(data=>{
+        localStorage.setItem('empSystemId',data?.data?.empSystemId);
+        this.cookieService.set('empSystemId', data?.data?.empSystemId);
+        this.cookieService.set('roles', data?.data?.roles);
+        localStorage.setItem("username",data?.data?.fullName);
+      })
+    }
+    this.userId.emit(data?.data?.userUid);
     this.loggedIn.emit(true);
-    return true;
+    return data;
   }));
 }
 
 checkEmail(email: string): Observable<any>{
   return this.http.post<CheckResponse>(`${this.url}/user/check-email`, email)
   .pipe(map(data =>{
-    localStorage.setItem("isCheck",data.success);
-    return true;
+    console.log(data);
+
+    localStorage.setItem("isVertify",data.data == 1?'true':'false');
+    return data;
   }));
 }
 
@@ -71,6 +70,7 @@ changePassword(changeModel: ChangePassword):Observable<any>{
 checkUpdate(email: string): Observable<any>{
   return this.http.post<any>(`${this.url}/user/check-update`, email)
   .pipe(map(data =>{
+    console.log(data);
     localStorage.setItem("isUpdate",data.success);
     return true;
   }));
@@ -99,7 +99,7 @@ getCheck(){
 }
 
 isLoggedIn(): boolean {
-  return this.getLogin() == 'true';
+  return this.getLogin() == 'false';
 }
 getUpdate(){
   return localStorage.getItem("isUpdate");

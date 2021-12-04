@@ -3,7 +3,7 @@
   <div class="lds-ripple"><div></div><div></div></div>
  </ng-container>
 
-<ng-container *ngFor="let item of scheduleData">
+<ng-container *ngFor="let item of customerData">
   <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
     <!-- Card Header - Dropdown -->
     <div
@@ -12,11 +12,15 @@
     </div>
     <!-- Card Body -->
     <div class="card-body">
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-home mr-2"></i>{{item?.lead?.companyName}}</h4></div>
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1"></i>{{item?.lead?.address?.fomatAddress}}</h4> </div>
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="far fa-clock mr-2 ml-1"></i>{{item?.fromDate | date:'shortTime'}} - {{item?.toDate | date:'shortTime'}}, {{item?.fromDate | date:'dd/MM/yyyy'}}</h4></div>
-      <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-user mr-2 ml-1"></i>{{item?.lead?.representation}}</h3></div>
-      <div class="h5 mb-0 text-gray-800 mt-2"><h3>{{item?.lead?.phone}}</h3></div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-home mr-2 text-primary"></i>{{item?.companyName}}</h4></div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h4> </div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item?.representation}}</h4></div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-phone-square-alt mr-2 ml-1 text-primary"></i>{{item?.phone | phone}}</h4></div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-money-bill-wave mr-2 ml-1 text-primary"></i>Doanh thu dự kiến: <span style="font-size: 15px;" class="text-success">{{item?.expectedRevenue | money}}</span></h4></div>
+      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-bullseye mr-2 ml-1 text-primary"></i>Sản phẩm kinh doanh: </h4></div>
+      <ng-container *ngFor="let i of item?.industries">
+        <div class="h5 mb-0 text-info mt-2"><h4> {{i?.name}}</h4></div>
+      </ng-container>
     </div>
   </div>
 </ng-container>
@@ -33,8 +37,8 @@
       <div class="row">
         <div class="h5 mb-0 text-gray-800"><h4 style="margin: 0px !important; ">Kết quả</h4></div>
         <div class="input-group" >
-          <select class="combobox form-control"  (change)="onChange(resultSelect)" [(ngModel)]="resultSelect" formControlName="status">
-            <option *ngFor="let d of result" [ngValue]="d.value"> {{d.name}}</option>
+          <select  class="combobox form-control"  (change)="onChange(resultSelect)" [(ngModel)]="resultSelect" formControlName="status">
+            <option class="text-primary" *ngFor="let d of result" [ngValue]="d.value"> {{d.name}}</option>
           </select>
         </div>
       </div>
@@ -42,25 +46,25 @@
    <ng-container *ngIf="resultSelect == 3;" formArrayName="pickupAddress" >
     <div class="row" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
       <div class="h5 mb-0 text-gray-800 mt-1"><h4 style="margin: 0px !important; ">Địa chỉ lấy hàng</h4></div>
-      <div class="col-6">
-       <div class="mt-1">
+      <div class="col-12">
+       <div class="mt-2">
         <ng-select  placeholder="Chọn Tỉnh/Thành phố"  bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
         </ng-select>
        </div>
       </div>
-      <div class="col-6">
-        <div class="mt-1">
+      <div class="col-12">
+        <div class="mt-2">
           <ng-select placeholder="Chọn Quận/Huyện"  bindValue="districtCode" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" [items]="dataDistrict" bindLabel="districtName" formControlName="district" >
           </ng-select>
          </div>
       </div>
-      <div class="col-6 mt-2">
+      <div class="col-12">
         <div class="mt-2">
           <ng-select placeholder="Chọn Phường/xã"  bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
           </ng-select>
          </div>
       </div>
-      <div class="col-6 mt-3">
+      <div class="col-12 mt-2">
         <div class="input-group">
           <input class="form-control" placeholder="Nhập số nhà" formControlName="homeNo">
         </div>
@@ -107,9 +111,7 @@
         <div class="row">
           <div class="h5 mb-0 text-gray-800"><h4 style="margin: 0px !important; ">Giá áp dụng</h4></div>
           <div class="input-group">
-            <select class="combobox form-control"  >
-              <option  [selected]="true">Giá thỏa thuận riêng</option>
-            </select>
+            <h3 class="m-0 text-success"><i class="fas fa-money-bill-wave mr-2 ml-1 text-success"></i><span class="p-1">Giá thỏa thuận riêng</span></h3>
           </div>
         </div>
 

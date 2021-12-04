@@ -12,6 +12,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
 import { SharedModule } from '../shared/share.module';
 import {MatTabsModule} from '@angular/material/tabs';
+import { TimelineModule } from 'primeng/timeline';
 @NgModule({
   imports: [
     CommonModule,
@@ -23,6 +24,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     FormsModule,
     SharedModule,
     MatTabsModule,
+    TimelineModule,
   ],
   declarations: [AdminComponent,RegisterUserComponent,HeaderComponent,SideBarComponent],
 

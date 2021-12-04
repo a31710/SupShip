@@ -19,7 +19,7 @@
     <div class="row col-xl-8 col-md-8 mb-4">
       <div class="col-3">
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-          <input [(ngModel)]="req" placeholder="Id hoặc tên khách hàng" type="text" id="example" class="form-control" style="border: 1px solid rgb(160, 154, 154); padding: 22px;">
+          <input [(ngModel)]="req" placeholder="ID hoặc SĐT" type="text" id="example" class="form-control" style="border: 1px solid rgb(160, 154, 154); padding: 22px;">
         </div>
       </div>
       <div class="col-3">
@@ -106,19 +106,21 @@
         <tr *ngFor="let item of listCustomer, let i = index" [ngClass]="'toogle'+i" class="tbhov">
           <th scope="col"><input (click)="toggle(i)" type="checkbox" (change)="getIdArray(item.id)"></th>
           <th scope="row">KH{{item.id}}</th>
-          <td>{{item?.leadSource=='PRIVATE'?'Cá nhân':'Doanh nghiệp'}}</td>
-          <td>{{item?.companyName}}<br><h5>{{item?.address?.fomatAddress}}</h5></td>
-          <td>{{item?.representation}}</td>
-          <td>{{item?.statusDescription}}</td>
-          <td>{{item?.statusDescLa}}</td>
+          <td class="text-primary">{{item?.leadSource=='PRIVATE'?'Cá nhân':'Doanh nghiệp'}}</td>
+          <td>{{item?.companyName}}<br><h5 class="text-primary">{{item?.address?.fomatAddress}}</h5></td>
+          <td>{{item?.representation}}<br><h5 class="text-primary">{{item?.phone | phone}}</h5></td>
+          <td [ngClass]="{'text-info': item?.status == 'NEW', 'text-warning' : item?.status == 'CONTACTING','text-success' : item?.status == 'SUCCESS','text-danger' : item?.status == 'FAILED','text-gray' : item?.status == 'NOT_CONTACTED' }"
+          >{{item?.statusDescription}}</td>
+          <td [ngClass]="{'text-info': item?.statusLa == 'NEW', 'text-warning' : item?.statusLa == 'CONTACTING','text-success' : item?.statusLa == 'SUCCESS','text-danger' : item?.statusLa == 'FAILED','text-gray' : item?.statusLa == 'NOT_CONTACTED' }"
+          >{{item?.statusDescLa}}</td>
           <td>{{item?.leadAssigns[0]?.deptCode}}</td>
           <td>{{item?.leadAssigns[0]?.postCode}}</td>
           <td>{{item?.leadAssigns[0]?.assigneeName}}</td>
           <td>{{item?.createdDate | date: 'dd/MM/yyyy'}}</td>
-          <td>{{item?.leadAssigns[0]?.createdDate | date: 'dd/MM/yyyy'}}</td>
+          <td>{{item?.impactDate | date: 'dd/MM/yyyy'}}</td>
 
           <td>
-            <button type="button" *ngIf="item?.status != 'CONTACTING'" class="btn btn-success btn-sm px-3 mr-3" [disabled]="isdb" (click)="singleTranfer(item.id)" data-toggle="modal" data-target="#tranfer">
+            <button type="button" style="width:100px" *ngIf="item?.status != 'CONTACTING'" class="btn btn-success btn-sm px-3 mr-3" [disabled]="isdb" (click)="singleTranfer(item.id)" data-toggle="modal" data-target="#tranfer">
                 Giao TX
             </button>
             <button type="button" *ngIf="item?.status != 'NEW' && item?.status != 'SUCCESS'"  class="btn btn-success btn-sm px-3 " [disabled]="isdb" (click)="singleTranfer(item.id, item.status)" data-toggle="modal" data-target="#tranfer">
@@ -148,7 +150,7 @@
   <app-contact-report (onPostChange)="addPostReport($event)"></app-contact-report>
 </div>
 <div *ngIf="tab.value == 6">
-  <app-post-report [postCode]="postCodeReport"></app-post-report>
+  <app-post-report [postCodeReport]="postCodeReport"></app-post-report>
 </div>
 <div *ngIf="tab.value == 7">
   <app-contact-excel [loadExcel]="loadExcel"></app-contact-excel>
@@ -165,9 +167,7 @@
 aria-hidden="true">
 
 <div class="modal-dialog modal-lg" role="document">
-  <ng-container *ngIf="loaderService.isLoading | async">
-    <div class="lds-ripple2"><div></div><div></div></div>
-   </ng-container>
+
  <form [formGroup]="tranferForm" >
   <div class="modal-content">
     <div class="modal-header">

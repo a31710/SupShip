@@ -22,6 +22,7 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
 import {CalendarModule} from 'primeng/calendar';
 import { PipeModule } from 'src/app/pipe/pipe.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { TimelineModule } from 'primeng/timeline';
 @NgModule({
   imports: [
     CommonModule,
@@ -40,6 +41,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CalendarModule,
     PipeModule,
     NgSelectModule,
+    TimelineModule,
 
   ],
   declarations: [CustomerManagerComponent,ViewCustomerComponent,UpdateCustomerComponent,ContactExcelComponent,

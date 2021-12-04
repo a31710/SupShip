@@ -18,16 +18,21 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup | any
   loginModel: LoginModel | any;
   vertifyEmail: VertifyEmail | any;
+
+
   messsage: any
   username:any
-  isCheck:any ='false'
+
   isLogin:any ='false'
   isUpdate:any ='false'
   isVertify:any ='false'
 
+  emaiModel:any;
+
+
   email:any
   constructor(private authService: AuthService, private fb: FormBuilder,private router: Router,public loaderService: LoaderService) {
-    this.isCheck = this.authService.getCheck();
+    this.isVertify = this.authService.getVertify();
     this.username = localStorage.getItem('email')?.slice(1, -1);
     this.email = {email: this.username}
     this.createForm();
@@ -59,62 +64,91 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password') as FormArray;
   }
 
+  get emailArr(){
+    return this.loginForm.get('email') as FormArray;
+  }
+
+  get tokenArr(){
+    return this.loginForm.get('tokenCode') as FormArray;
+  }
+
+
+
 
   login(){
-    this.loginModel={
-      email: this.loginForm.get('email').value,
-      password: this.loginForm.get('password').value
-    }
-    this.vertifyEmail = {
-      email: this.loginForm.get('email').value,
-      tokenCode: this.loginForm.get('tokenCode').value
+    this.emaiModel={
+      email: this.emailArr.value
     }
 
-    if(this.isCheck == 'true'){
-      this.authService.login(this.loginModel).subscribe(()=>{
-        this.isLogin = this.authService.getLogin();
-        if(this.isLogin == 'true'){
-         this.authService.checkUpdate(this.email).subscribe(()=>{
-           this.isUpdate = this.authService.getUpdate();
-           if(this.isUpdate == 'false'){
-              Swal.fire('You need to update profile')
-              this.router.navigateByUrl('/client/profile/edit-profile');
-           }else{
-            Swal.fire(
-              'Đăng nhập thành công!',
-              '',
-              'success'
-            )
-            this.router.navigateByUrl('/client');
-           }
-         })
-        }else{
+    this.loginModel={
+      email: this.emailArr.value,
+      password: this.password.value
+    }
+    this.vertifyEmail = {
+      email: this.emailArr.value,
+      tokenCode: this.tokenArr.value
+    }
+
+
+    if(this.isVertify == 'true'){
+      this.postLogin();
+    }else{
+      this.authService.vertifyEmail(this.vertifyEmail).subscribe(data=>{
+        console.log(data);
+        if(data?.error == 'true'){
           Swal.fire({
+            text: data?.message,
             icon: 'error',
+            confirmButtonColor: '#4e73df',
+            confirmButtonText: 'Chấp nhận'
+          })
+        }else{
+          this.postLogin();
+        }
+
+      })
+    }
+
+    }
+
+    postLogin(){
+      this.authService.login(this.loginModel).subscribe((data)=>{
+        console.log(data);
+        if(data?.error == 'true'){
+          Swal.fire({
             title: 'Đăng nhập thất bại',
-            text: 'mật khẩu sai',
+            text: data?.message,
+            icon: 'error',
+            confirmButtonColor: '#4e73df',
+            confirmButtonText: 'Chấp nhận'
+          })
+        }else{
+          this.authService.checkUpdate(this.emaiModel).subscribe(data=>{
+            console.log(data);
+            if(data.error == 'true'){
+              Swal.fire({
+                title: 'Bạn chưa cập nhật thông tin cá nhân',
+                text: 'Vui lòng cập nhật thông tin',
+                icon: 'error',
+                confirmButtonColor: '#4e73df',
+                confirmButtonText: 'Chấp nhận'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.router.navigateByUrl('/client/profile/edit-profile');
+                }
+              })
+            }else{
+              Swal.fire({
+                title: 'Đăng nhập thành công',
+                icon: 'success',
+                confirmButtonColor: '#4e73df',
+                confirmButtonText: 'OK'
+              })
+              this.router.navigateByUrl('/client');
+            }
           })
         }
       })
-    }else{
-      this.authService.vertifyEmail(this.vertifyEmail).subscribe(()=>{
-        this.isVertify = this.authService.getVertify();
-        if(this.isVertify == 'true'){
-          this.authService.login(this.loginModel).subscribe(()=>{
-            this.isLogin = this.authService.getLogin();
-            if(this.isLogin == 'true'){
-              Swal.fire('You need to update profile')
-              this.router.navigateByUrl('/client/profile/edit-profile');
-            }else{
-              this.messsage ="Dang nhap that bai";
-            }
-          })
-        }else{
-          this.messsage = "TokenCode sai";
-        }
-      }
-      )
-    }
     }
   }
 

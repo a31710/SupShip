@@ -1,7 +1,7 @@
 export interface CheckResponse {
   code: number;
-  success: string;
+  error: string;
   description: string;
   message: string;
-  data: string;
+  data: number;
 }
