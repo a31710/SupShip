@@ -38,10 +38,10 @@
           <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">KH{{item.id}}</h6>
         </div>
         <div class="card-body" style="padding-bottom: 0px !important;">
-          <div class="h5 mb-0 text-gray-800 "><h3><i class="fas fa-home mr-2 text-primary"></i>{{item.companyName}}</h3></div>
-          <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h3> </div>
-          <div class="h5 mb-0 text-gray-800 mt-2"><h3><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item.representation}}</h3></div>
-          <div class="h5 mb-0 text-gray-800 mt-2"><h3 style="margin-bottom: 5px;"><i class="fas fa-phone-square-alt mr-2 ml-1 text-primary"></i>{{item.phone | phone}}</h3></div>
+          <div class="h5 mb-0 text-gray-900 "><h3><i class="fas fa-home mr-2 text-primary"></i>{{item.companyName}}</h3></div>
+          <div class="h5 mb-0 text-gray-900 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h3> </div>
+          <div class="h5 mb-0 text-gray-900 mt-2"><h3><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item.representation}}</h3></div>
+          <div class="h5 mb-0 text-gray-900 mt-2"><h3 style="margin-bottom: 5px;"><i class="fas fa-phone-square-alt mr-2 ml-1 text-primary"></i>{{item.phone | phone}}</h3></div>
           <hr class="text-primary" style="margin: 0px !important;">
           <div style="text-align: center; ; " class="h5 mb-0 text-primary" ><a (click)="createSchedule(item.id)"><h3 style="margin: 5px;"><i class="far fa-calendar-alt mr-2 text-primary"></i>Đặt lịch</h3></a></div>
         </div>
@@ -50,7 +50,9 @@
 
     </div>
 
-
+<br>
+<br>
+<br>
 </div>
 <div class="icon-botton">
   <a [routerLink]="['/client/create-customer']"   class="btn btn-primary btn-circle btn-lg">

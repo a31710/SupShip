@@ -33,3 +33,25 @@
     opacity: 0;
   }
 }
+
+
+
+.form-control{
+  font-size: 14px;
+  border: 1px solid #ccc;
+  color: #333;
+  background-color: #fff;
+  border-radius: 4px;
+  min-height: 36px;
+  align-items: center;
+}
+
+.input-group-text{
+  font-size: 14px;
+  border: 1px solid #ccc;
+  color: #333;
+  background-color: #fff;
+  border-radius: 4px;
+  min-height: 36px;
+  align-items: center;
+}

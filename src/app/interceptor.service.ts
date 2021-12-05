@@ -7,6 +7,8 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Route, Router } from '@angular/router';
+import { timeThursdays } from 'd3-time';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, finalize, switchMap, take } from 'rxjs/operators';
@@ -19,7 +21,7 @@ import { LoaderService } from './service/loader.service';
 })
 export class InterceptorService implements HttpInterceptor {
 
-  constructor(private cookieService: CookieService, private authService: AuthService, public loaderService: LoaderService){
+  constructor(private cookieService: CookieService, private authService: AuthService, public loaderService: LoaderService, private router: Router){
 
   }
   // intercept(
@@ -104,6 +106,20 @@ private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
               this.loaderService.isLoading.next(false)
             }),
             switchMap((token: any) => {
+                if(token?.success == false){
+                  Swal.fire({
+                    title: 'Bạn đã hết phiên làm việc',
+                    text:'Mời bạn đăng nhập để tiếp tục phiên làm việc',
+                    icon: 'error',
+                    confirmButtonColor: '#4e73df',
+                    confirmButtonText: 'OK'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      this.authService.logOut();
+                      this.router.navigateByUrl("/client/checkEmail")
+                    }
+                  })
+                }
                 console.log(token?.data?.token);
                 this.isRefreshing = false;
                 this.refreshTokenSubject.next(token?.data?.token);

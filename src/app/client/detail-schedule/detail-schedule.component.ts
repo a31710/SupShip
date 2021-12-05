@@ -71,7 +71,11 @@ export class DetailScheduleComponent implements OnInit {
      this.scheduleService.detailSchedule(id).subscribe(data=>{
        this.scheduleData = [data]
        console.log(data?.lead?.id);
-       this.customerService.getDetailCustomer(data?.lead?.id).subscribe(data=>this.customerData = [data])
+       this.customerService.getDetailCustomer(data?.lead?.id).subscribe(data=>{
+         console.log(data);
+
+        this.customerData = [data]
+       })
        this.uploadForm(data.lead)
        this.scheduleIdArr.setValue(data?.id);
      })

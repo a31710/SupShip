@@ -13,7 +13,7 @@ import { LoaderService } from 'src/app/service/loader.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  passwords:any;
+  passwords:any = 'password';
   show = false;
   loginForm: FormGroup | any
   loginModel: LoginModel | any;

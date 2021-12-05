@@ -14,8 +14,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item " routerLink="/client"  routerLinkActive="active" style="cursor: pointer;">
+        <a class="nav-link "  >
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Trang Chủ</span></a>
     </li>
@@ -26,15 +26,15 @@
 
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item" *ngIf="isAdmin == true">
-        <a class="nav-link collapsed" routerLink="/admin/customer">
+    <li class="nav-item" *ngIf="isAdmin == true" routerLink="/admin/customer" routerLinkActive="active" style="cursor: pointer;">
+        <a class="nav-link collapsed" >
             <i class="fas fa-fw fa-cog"></i>
             <span>Quản lý khách hàng</span>
         </a>
     </li>
 
-    <li class="nav-item" *ngIf="isAdmin == true">
-      <a class="nav-link collapsed" routerLink="/admin/user">
+    <li class="nav-item" *ngIf="isAdmin == true" routerLink="/admin/user" routerLinkActive="active" style="cursor: pointer;">
+      <a class="nav-link collapsed" >
           <i class="fas fa-fw fa-cog"></i>
           <span>Quản lý Tài khoản</span>
       </a>
@@ -42,9 +42,9 @@
 
 
 
-    <li class="nav-item ">
+    <li class="nav-item " routerLink="/client/customer" routerLinkActive="active" style="cursor: pointer;">
       <a class="nav-link" >
-          <i class="fas fa-fw fa-wrench" routerLink="/client/customer"></i>
+          <i class="fas fa-fw fa-wrench" ></i>
           <span>Đặt lịch</span>
       </a>
 

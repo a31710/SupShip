@@ -1,6 +1,6 @@
-<ng-container *ngIf="loaderService.isLoading | async">
+<!-- <ng-container *ngIf="loaderService.isLoading | async">
   <div class="lds-ripple"><div></div><div></div></div>
- </ng-container>
+ </ng-container> -->
 
 <div class="mt-4 body">
 
@@ -8,61 +8,61 @@
     <div  class="col-md-1 z-div">
       <div  class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary"> Chi nhánh</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">115</span></div>
+        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalDept}}</span></div>
       </div>
     </div>
     <div  class="col-md-1 z-div">
       <div  class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Bưu cục</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">4836</span></div>
+        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalPost}}</span></div>
       </div>
     </div>
     <div  class="col-md-1 z-div">
       <div  class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span class="z-label"><h3 class="text-primary">Nhân viên</h3></span></div>
-        <div class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">31603</span></div>
+        <div class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalCountEmp}}</span></div>
       </div>
     </div>
     <div  class="col-md-1 z-div">
       <div  class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Kế hoạch</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">0</span></div>
+        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigns}}</span></div>
       </div>
     </div>
     <div  class="col-md-1 z-div">
       <div  class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Đã tiếp xúc</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">0</span></div>
+        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigned}}</span></div>
       </div>
     </div>
     <div  class="col-md-1 z-div">
       <div  class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span class="z-label"><h3 class="text-primary">Thành công</h3></span></div>
-        <div  class="z-vlayout-inner" ><span style="font-size: 20px; color:green;" class="z-label">0</span></div>
+        <div  class="z-vlayout-inner" ><span style="font-size: 20px; color:green;" class="z-label">{{reportData?.totalSuccesses}}</span></div>
       </div>
     </div>
     <div  class="col-md-1 z-div">
       <div  class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Đang tiếp xúc</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px; color:orange;" class="z-label">0</span></div>
+        <div  class="z-vlayout-inner" ><span  style="font-size: 20px; color:orange;" class="z-label">{{reportData?.totalContacting}}</span></div>
       </div>
     </div>
     <div  class="col-md-1 z-div">
       <div  class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span class="z-label"><h3 class="text-primary">Thất bại</h3></span></div>
-        <div  class="z-vlayout-inner" ><span style="font-size: 20px; color:red;" class="z-label">0</span></div>
+        <div  class="z-vlayout-inner" ><span style="font-size: 20px; color:red;" class="z-label">{{reportData?.totalFails}}</span></div>
       </div>
     </div>
     <div  class="col-md-1 z-div">
       <div class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">TL tiếp xúc</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">0%</span></div>
+        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigned}}</span></div>
       </div>
     </div>
     <div  class="col-md-2 z-div">
       <div  class="z-vlayout">
         <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">TL hoàn thành KH</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">100%</span></div>
+        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigned}}</span></div>
       </div>
     </div>
   </div>
@@ -133,9 +133,9 @@
               <td>{{item?.totalEmployees?item?.totalEmployees:345}}</td>
               <td>{{item?.totalAssigns?item?.totalAssigns:0}}</td>
               <td><span class="text-primary">{{item?.assigned?item?.assigned:0}}</span> (<span class="text-success">{{item?.assigned?item?.assigned:0}}</span> - <span class="text-warning">{{item?.contacting?item?.contacting:0}}</span> - <span class="text-danger">{{item?.fails?item?.fails:0}}</span>)</td>
-              <td>{{item?.employeeNotAssigned?item?.employeeNotAssigned:0}}</td>
-              <td>{{item?.fails}}</td>
-              <td>100%</td>
+              <td class="text-danger">{{item?.employeeNotAssigned?item?.employeeNotAssigned:0}}</td>
+              <td class="text-success">0%</td>
+              <td class="text-warning">0</td>
               <td>0%</td>
               <td>
 

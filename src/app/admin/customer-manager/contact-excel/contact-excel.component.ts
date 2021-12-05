@@ -74,6 +74,8 @@ export class ContactExcelComponent implements OnInit, OnChanges {
       }
     })
     this.customerService.detailHIstory(id).subscribe(data=>{
+      console.log(data);
+
       this.detailData = [data]
       const d = data?.leadsAssignByExcel;
       d.map((item:any)=>{

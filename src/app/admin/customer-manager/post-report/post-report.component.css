@@ -131,6 +131,14 @@
   overflow-y: hidden; /* Hide vertical scrollbar */
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
+
+.tbhov:hover {
+  background-color: rgb(231, 235, 243);
+  cursor: pointer;
+}
+.fas:hover{
+  color: #4e73df;
+}
 .lds-ripple {
   z-index: 2;
   display: inline-block;

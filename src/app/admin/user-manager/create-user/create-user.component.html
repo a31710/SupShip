@@ -1,4 +1,4 @@
-<div class="container mt-5" >
+<div class="container mt-5" style="width:700px">
 
 
 <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()" >
@@ -8,7 +8,7 @@
       <!-- Grow In Utility -->
 
 
-          <div class="card position-relative">
+          <div class="card position-relative" >
             <div class="card-header py-3" style="background-color: #4e73df;">
               <h2 class="m-0 " style="color: white;">Tạo tài khoản</h2>
               </div>
@@ -16,26 +16,26 @@
 
                 <div  class="row z-div" >
 
-                  <div  class="col-md-6 z-div">
+                  <div  class="col-md-6 z-div mt-2">
                     <div  class="z-vlayout" >
                         <div  class="z-vlayout-inner" style="padding-bottom:0">
-                            <div  class="z-div"> <span  class="z-label">Email</span> </div>
+                            <div  class="z-div"> <span  class="z-label text-gray-900">Email</span> </div>
                         </div>
-                        <div  class="z-vlayout-inner" ><input formControlName="email" class="form-control" value="" type="text" maxlength="100" ></div>
+                        <div  class="z-vlayout-inner" ><input placeholder="Nhập địa chỉ email" formControlName="email" class="form-control" value="" type="text" maxlength="100" ></div>
                         <div *ngFor="let validation of insertUserMessage.email">
                           <small class="text-danger"   *ngIf="createUserForm.get('email')?.hasError(validation.type) && createUserForm.get('email').touched">
                            {{validation.message}}</small>
                         </div>
                     </div>
                     </div>
-                  <div class="col-md-6 z-div">
+                  <div class="col-md-6 z-div mt-2">
                       <div  class="z-vlayout" >
                           <div  class="z-vlayout-inner" style="padding-bottom:0">
-                              <div  class="z-div"> <span  class="z-label">DeptCode</span> </div>
+                              <div  class="z-div"> <span  class="z-label text-gray-900">Chi nhánh</span> </div>
                           </div>
 
 
-                          <ng-select   bindValue="deptCode" [(ngModel)]="deptCodeSelect" (change)="getPostCode(deptCodeSelect)"
+                          <ng-select  placeholder="Chọn chi nhánh"  bindValue="deptCode" [(ngModel)]="deptCodeSelect" (change)="getPostCode(deptCodeSelect)"
                            [items]="dataDept" bindLabel="deptName" formControlName="deptCode" >
                           </ng-select>
                       </div>
@@ -43,23 +43,23 @@
               </div>
 
               <div  class="row z-div">
-                <div  class="col-md-6 z-div">
+                <div  class="col-md-6 z-div mt-2">
                     <div  class="z-vlayout" >
                         <div class="z-vlayout-inner" style="padding-bottom:0">
-                            <div  class="z-div"> <span  class="z-label">PostCode</span> </div>
+                            <div  class="z-div"> <span  class="z-label text-gray-900">Bưu cục</span> </div>
                         </div>
 
 
-                        <ng-select   bindValue="postCode" [(ngModel)]="postCodeSelect"
+                        <ng-select  placeholder="Chọn bưu cục" bindValue="postCode" [(ngModel)]="postCodeSelect"
                         [items]="dataPost" bindLabel="postName" formControlName="postCode" >
                        </ng-select>
                 </div>
             </div>
 
-            <div  class="col-md-6 z-div">
+            <div  class="col-md-6 z-div mt-2">
                 <div  class="z-vlayout" >
                     <div  class="z-vlayout-inner" style="padding-bottom:0">
-                        <div  class="z-div"> <span  class="z-label">Role</span> </div>
+                        <div  class="z-div"> <span  class="z-label text-gray-900">Quyền</span> </div>
                     </div>
 
 

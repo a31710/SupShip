@@ -10,6 +10,7 @@ import { UserService } from '../../service/user.service';
   styleUrls: ['./contact-report.component.css']
 })
 export class ContactReportComponent implements OnInit {
+  reportData:any;
   isToggle:any =[];
   ReportAllCompany:any;
   listPostCode:any[] = [];
@@ -28,6 +29,7 @@ export class ContactReportComponent implements OnInit {
     this.getAllDeptCode();
     this.customerService.ReportAllCompany(this.datePipe(this.fromDate),this.datePipe(this.toDate)).subscribe(data=>{
       console.log(data);
+      this.reportData = data;
       this.ReportAllCompany = data?.data;
       this.size = this.ReportAllCompany.length;
       this.pagiData = this.paginate(this.ReportAllCompany,15,1);
@@ -87,9 +89,19 @@ export class ContactReportComponent implements OnInit {
 
 
   onSearch(){
+    this.isToggle = [];
+    this.listPostCode = [];
+    this.offset = 0;
     const fromDate = this.datePipe(this.fromDate);
     const toDate = this.datePipe(this.toDate);
     console.log(`${fromDate} ${toDate} ${this.deptCodeSelect}`);
+    this.customerService.searchDeptcodeReport(fromDate,toDate,this.deptCodeSelect).subscribe(data=>{
+      console.log(data);
+      this.reportData = data;
+      this.ReportAllCompany = data?.data;
+      this.size = this.ReportAllCompany.length;
+      this.pagiData = this.paginate(this.ReportAllCompany,15,1);
+    });
 
   }
 

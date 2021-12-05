@@ -18,25 +18,25 @@
               </div>
               <div class="card-body">
                 <div  class="row z-div">
-                  <div  class="col-md-6 z-div">
+                  <div  class="col-md-6 z-div mt-2">
                       <div  class="z-vlayout" >
                           <div  class="z-vlayout-inner" style="padding-bottom:0">
-                              <div  class="z-div"> <span  class="z-label">Họ và tên</span> </div>
+                              <div  class="z-div"> <span  class="z-label text-gray-900">Họ và tên</span> </div>
                           </div>
                           <div  class="z-vlayout-inner" ><input formControlName="fullName" class="form-control" value="" type="text" maxlength="100"  ></div>
                           <small class="text-danger"   *ngIf="userForm.get('fullName')?.hasError('required') && userForm.get('fullName')?.touched">
                             Bạn chưa nhập ô này</small>
                       </div>
                   </div>
-                  <div  class="z-vlayout-inner" >
-                    <div  class="z-div"> <span  class="z-label">Giới Tính</span> </div>
+                  <div  class="z-vlayout-inner mt-2" >
+                    <div  class="z-div"> <span  class="z-label text-gray-900">Giới Tính</span> </div>
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="gender" formControlName="gender" value="1" id="flexRadioDefault1">
-                      <label class="form-check-label mt-1" for="flexRadioDefault1">
+                      <label class="form-check-label text-gray-900 mt-1" for="flexRadioDefault1">
                         Nam
                       </label>
                       <input class="form-check-input ml-2" type="radio" name="gender" formControlName="gender" value="0" id="flexRadioDefault2" checked>
-                      <label class="form-check-label ml-4 mt-1" for="flexRadioDefault2">
+                      <label class="form-check-label text-gray-900 ml-4 mt-1" for="flexRadioDefault2">
                         Nữ
                       </label>
                     </div>
@@ -45,20 +45,20 @@
               </div>
 
               <div  class="row z-div">
-                <div  class="col-md-6 z-div">
+                <div  class="col-md-6 z-div mt-2">
                   <div  class="z-vlayout" >
                       <div  class="z-vlayout-inner" style="padding-bottom:0">
-                          <div  class="z-div"> <span  class="z-label">Số điện thoại</span> </div>
+                          <div  class="z-div"> <span  class="z-label text-gray-900">Số điện thoại</span> </div>
                       </div>
                       <div  class="z-vlayout-inner" ><input appPhoneNumber formControlName="mobile" maxlength="12" class="form-control" value="" type="text" id="phone-number"   ></div>
                       <small class="text-danger"   *ngIf="userForm.get('mobile')?.hasError('required') && userForm.get('mobile')?.touched">
                         Bạn chưa nhập ô này</small>
                     </div>
               </div>
-              <div  class="col-md-6 z-div">
+              <div  class="col-md-6 z-div mt-2">
                 <div  class="z-vlayout" >
                     <div  class="z-vlayout-inner" style="padding-bottom:0">
-                        <div  class="z-div"> <span  class="z-label"> Ngày sinh  (Ngày/tháng/năm) </span> </div>
+                        <div  class="z-div"> <span  class="z-label text-gray-900"> Ngày sinh  (Ngày/tháng/năm) </span> </div>
                     </div>
                     <div  class="z-vlayout-inner" ><input formControlName="birthday"  class="form-control" appDate value="" type="text" maxlength="100"  ></div>
                     <small class="text-danger"   *ngIf="userForm.get('birthday')?.hasError('required') && userForm.get('birthday')?.touched">
@@ -72,10 +72,10 @@
 
               <ng-container formArrayName="address">
                 <div  class="row z-div" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
-                  <div  class="col-md-6 z-div">
+                  <div  class="col-md-6 z-div mt-2">
                       <div  class="z-vlayout" >
                           <div class="z-vlayout-inner" style="padding-bottom:0">
-                              <div  class="z-div"> <span  class="z-label">Tỉnh/Thành phố</span></div>
+                              <div  class="z-div"> <span  class="z-label text-gray-900">Tỉnh/Thành phố</span></div>
                           </div>
                           <ng-select   bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
                           </ng-select>
@@ -86,10 +86,10 @@
 
 
 
-              <div  class="col-md-6 z-div">
+              <div  class="col-md-6 z-div mt-2">
                   <div  class="z-vlayout" >
                       <div  class="z-vlayout-inner" style="padding-bottom:0">
-                          <div  class="z-div"> <span  class="z-label">Quận/Huyện</span> </div>
+                          <div  class="z-div"> <span  class="z-label text-gray-900">Quận/Huyện</span> </div>
                       </div>
                       <ng-select   bindValue="districtCode" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" [items]="dataDistrict" bindLabel="districtName" formControlName="district" >
                       </ng-select>
@@ -102,10 +102,10 @@
 
 
           <div  class="row z-div" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
-              <div class="col-md-6 z-div">
+              <div class="col-md-6 z-div mt-2">
                   <div  class="z-vlayout" >
                       <div  class="z-vlayout-inner" style="padding-bottom:0">
-                          <div  class="z-div"> <span  class="z-label">Phường/xã</span></div>
+                          <div  class="z-div"> <span  class="z-label text-gray-900">Phường/xã</span></div>
                       </div>
                       <ng-select   bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
                       </ng-select>
@@ -113,10 +113,10 @@
                         Bạn chưa nhập ô này</small>
                   </div>
               </div>
-              <div  class="col-md-6 z-div">
+              <div  class="col-md-6 z-div mt-2">
                 <div  class="z-vlayout" >
                     <div  class="z-vlayout-inner" style="padding-bottom:0">
-                        <div  class="z-div"> <span  class="z-label">Địa chỉ</span> </div>
+                        <div  class="z-div"> <span  class="z-label text-gray-900">Địa chỉ</span> </div>
                     </div>
                     <div  class="z-vlayout-inner" ><input formControlName="homeNo"  class="form-control" value="" type="text" maxlength="100"  ></div>
                     <small class="text-danger"   *ngIf="userForm.get('homeNo')?.hasError('required') && userForm.get('homeNo')?.touched">

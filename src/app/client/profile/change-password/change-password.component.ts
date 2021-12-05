@@ -14,6 +14,12 @@ export class ChangePasswordComponent implements OnInit {
   username:any
   password:any
   rePassword:any
+  password1:any = 'password';
+  password2:any = 'password';
+  password3:any = 'password';
+  show1 = false;
+  show2 = false;
+  show3 = false;
   constructor( private fb: FormBuilder,private router: Router, private profileService: ProfileService,public loaderService: LoaderService) {
     this.username = localStorage.getItem('email')?.slice(1, -1);
     this.createForm();
@@ -76,6 +82,36 @@ export class ChangePasswordComponent implements OnInit {
     })
 
 
+  }
+
+  onClick1() {
+    if (this.password1 === 'password') {
+      this.password1 = 'text';
+      this.show1 = true;
+    } else {
+      this.password1 = 'password';
+      this.show1 = false;
+    }
+  }
+
+  onClick2() {
+    if (this.password2 === 'password') {
+      this.password2 = 'text';
+      this.show2 = true;
+    } else {
+      this.password2 = 'password';
+      this.show2 = false;
+    }
+  }
+
+  onClick3() {
+    if (this.password3 === 'password') {
+      this.password3 = 'text';
+      this.show3 = true;
+    } else {
+      this.password3 = 'password';
+      this.show3 = false;
+    }
   }
 
 }

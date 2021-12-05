@@ -10,6 +10,7 @@ import { CheckResponse } from '../login/model/check-response';
 import { ChangePassword } from '../login/model/change-password';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
+import { Route } from '@angular/compiler/src/core';
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +85,7 @@ userInfo(id:any):Observable<any>{
 logOut(){
   localStorage.clear();
   this.cookieService.deleteAll();
+
 }
 
 

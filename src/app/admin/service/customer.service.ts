@@ -94,4 +94,8 @@ constructor(private http: HttpClient) { }
   searchIdLead(req:any):Observable<any>{
     return this.http.get<any>(`${this.url}/api/lead/search?key=${req}`)
   }
+
+  searchDeptcodeReport(from:any, to:any, dept:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/report?from=${from}&to=${to}&dept=${dept}`);
+  }
 }

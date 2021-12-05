@@ -7,17 +7,17 @@
   <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
     <!-- Card Header - Dropdown -->
     <div
-        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h3 class="m-0 text-primary"><span class="p-1">KH{{item?.lead?.id}}</span></h3>
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between"style="border-bottom: 1px solid rgb(179, 177, 177);">
+        <h3 class="m-0 text-primary"><span class="p-1">KH{{item?.id}}</span></h3>
     </div>
     <!-- Card Body -->
     <div class="card-body">
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-home mr-2 text-primary"></i>{{item?.companyName}}</h4></div>
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h4> </div>
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item?.representation}}</h4></div>
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-phone-square-alt mr-2 ml-1 text-primary"></i>{{item?.phone | phone}}</h4></div>
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-money-bill-wave mr-2 ml-1 text-primary"></i>Doanh thu dự kiến: <span style="font-size: 15px;" class="text-success">{{item?.expectedRevenue | money}}</span></h4></div>
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-bullseye mr-2 ml-1 text-primary"></i>Sản phẩm kinh doanh: </h4></div>
+      <div class="h5 mb-0 text-gray-900 mt-2"><h4><i class="fas fa-home mr-2 text-primary"></i>{{item?.companyName}}</h4></div>
+      <div class="h5 mb-0 text-gray-900 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h4> </div>
+      <div class="h5 mb-0 text-gray-900 mt-2"><h4><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item?.representation}}</h4></div>
+      <div class="h5 mb-0 text-gray-900 mt-2"><h4><i class="fas fa-phone-square-alt mr-2 ml-1 text-primary"></i>{{item?.phone | phone}}</h4></div>
+      <div class="h5 mb-0 text-gray-900 mt-2"><h4><i class="fas fa-money-bill-wave mr-2 ml-1 text-primary"></i>Doanh thu dự kiến: <span style="font-size: 15px;" class="text-success">{{item?.expectedRevenue | money}}</span></h4></div>
+      <div class="h5 mb-0 text-gray-900 mt-2"><h4><i class="fas fa-bullseye mr-2 ml-1 text-primary"></i>Sản phẩm kinh doanh: </h4></div>
       <ng-container *ngFor="let i of item?.industries">
         <div class="h5 mb-0 text-info mt-2"><h4> {{i?.name}}</h4></div>
       </ng-container>
@@ -29,13 +29,13 @@
   <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
     <!-- Card Header - Dropdown -->
     <div
-        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(179, 177, 177);">
         <h3 class="m-0 text-primary"><span class="p-1">Kết quả tiếp xúc</span></h3>
     </div>
     <!-- Card Body -->
     <div class="card-body">
       <div class="row">
-        <div class="h5 mb-0 text-gray-800"><h4 style="margin: 0px !important; ">Kết quả</h4></div>
+        <div class="h5 mb-0 text-gray-900"><h4 style="margin: 0px !important; ">Kết quả</h4></div>
         <div class="input-group" >
           <select  class="combobox form-control"  (change)="onChange(resultSelect)" [(ngModel)]="resultSelect" formControlName="status">
             <option class="text-primary" *ngFor="let d of result" [ngValue]="d.value"> {{d.name}}</option>
@@ -45,7 +45,7 @@
 
    <ng-container *ngIf="resultSelect == 3;" formArrayName="pickupAddress" >
     <div class="row" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
-      <div class="h5 mb-0 text-gray-800 mt-1"><h4 style="margin: 0px !important; ">Địa chỉ lấy hàng</h4></div>
+      <div class="h5 mb-0 text-gray-900 mt-1"><h4 style="margin: 0px !important; ">Địa chỉ lấy hàng</h4></div>
       <div class="col-12">
        <div class="mt-2">
         <ng-select  placeholder="Chọn Tỉnh/Thành phố"  bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
@@ -74,7 +74,7 @@
 
   <ng-container *ngIf="resultSelect == 5;">
     <div class="row">
-      <div class="h5 mb-0 text-gray-800 mt-2" ><h4 style="margin: 0px !important; ">lý do</h4></div>
+      <div class="h5 mb-0 text-gray-900 mt-2" ><h4 style="margin: 0px !important; ">lý do</h4></div>
       <div class="input-group">
         <input class="form-control"  formControlName="reason">
       </div>
@@ -87,7 +87,7 @@
 
   <ng-container *ngIf="resultSelect == 5 || resultSelect == 1;">
     <div class="row">
-      <div class="h5 mb-0 text-gray-800 mt-2"><h4 style="margin: 0px !important; ">Đề xuất ( không bắt buộc)</h4></div>
+      <div class="h5 mb-0 text-gray-900 mt-2"><h4 style="margin: 0px !important; ">Đề xuất ( không bắt buộc)</h4></div>
       <div class="input-group">
         <input class="form-control" placeholder="" style="height: 70px;" formControlName="proposal">
       </div>
@@ -102,14 +102,14 @@
     <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
       <!-- Card Header - Dropdown -->
       <div
-          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(179, 177, 177);">
           <h3 class="m-0 text-primary"><span class="p-1">Chính sách áp dụng</span></h3>
       </div>
       <!-- Card Body -->
       <div class="card-body">
 
         <div class="row">
-          <div class="h5 mb-0 text-gray-800"><h4 style="margin: 0px !important; ">Giá áp dụng</h4></div>
+          <div class="h5 mb-0 text-gray-900"><h4 style="margin: 0px !important; ">Giá áp dụng</h4></div>
           <div class="input-group">
             <h3 class="m-0 text-success"><i class="fas fa-money-bill-wave mr-2 ml-1 text-success"></i><span class="p-1">Giá thỏa thuận riêng</span></h3>
           </div>
@@ -119,7 +119,7 @@
 
 
         <div class="row">
-          <div class="h5 mb-0 text-gray-800 mt-1"><h4 style="margin: 0px !important; ">Giá nội tỉnh</h4></div>
+          <div class="h5 mb-0 text-gray-900 mt-1"><h4 style="margin: 0px !important; ">Giá nội tỉnh</h4></div>
           <div class="input-group">
 
             <div class="input-group ">
@@ -137,13 +137,13 @@
 
 
         <!-- <div class="row">
-          <div class="h5 mb-0 text-gray-800 mt-2"><h4>Giá liên tỉnh</h4></div>
+          <div class="h5 mb-0 text-gray-900 mt-2"><h4>Giá liên tỉnh</h4></div>
           <input class="form-control" appMoney  type="text" formControlName="outProvincePercent">
         </div> -->
 
 
         <div class="row">
-          <div class="h5 mb-0 text-gray-800"><h4 style="margin: 0px !important; ">Giá liên tỉnh</h4></div>
+          <div class="h5 mb-0 text-gray-900"><h4 style="margin: 0px !important; ">Giá liên tỉnh</h4></div>
           <div class="input-group">
 
             <div class="input-group">
@@ -162,7 +162,7 @@
 
 
         <div class="row">
-          <div class="h5 mb-0 text-gray-800 mt-1"><h4 style="margin: 0px !important; ">Chiết khấu</h4></div>
+          <div class="h5 mb-0 text-gray-900 mt-1"><h4 style="margin: 0px !important; ">Chiết khấu</h4></div>
           <div class="input-group">
 
             <div class="input-group">
@@ -179,7 +179,7 @@
         </div>
 
         <div class="row">
-          <div class="h5 mb-0 text-gray-800 "><h4 style="margin: 0px !important; ">Đề xuất ( không bắt buộc)</h4></div>
+          <div class="h5 mb-0 text-gray-900 "><h4 style="margin: 0px !important; ">Đề xuất ( không bắt buộc)</h4></div>
           <div class="input-group">
             <input class="form-control" placeholder="" style="height: 70px;">
           </div>
@@ -210,7 +210,7 @@
   <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
     <!-- Card Header - Dropdown -->
     <div
-        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(179, 177, 177);">
         <h3 class="m-0 text-primary"><span class="p-1">Tiếp xúc</span></h3>
     </div>
     <!-- Card Body -->
