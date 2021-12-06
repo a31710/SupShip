@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import * as fileSaver from 'file-saver';
 import { CustomerService } from '../../service/customer.service';
 import { UserService } from '../../service/user.service';
 import Swal from 'sweetalert2'
@@ -48,6 +49,7 @@ leadSelect:any
 idUpdate:any;
 isSearch:Boolean = false;
 empSystemId:any;
+fileName='Bao-cao-tiep-xuc.xlsx'
 
 loadExcel: any = 1;
   constructor(private customerService: CustomerService, private cookieService: CookieService,private config: NgSelectConfig,
@@ -528,6 +530,23 @@ loadExcel: any = 1;
 
   fetchExcel(){
     this.loadExcel +=1;
+  }
+
+
+
+
+  returnBlob(res:any) : Blob {
+    console.log('file Downloaded');
+    return new Blob([res], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  });
+  }
+  exportExcel(){
+    this.customerService.exportExcelReport(this.fileName).subscribe( res =>{
+      if(res){
+        fileSaver.saveAs(this.returnBlob(res),this.fileName);
+      }
+    })
   }
 
   // Upload File excel

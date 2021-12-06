@@ -98,4 +98,34 @@ constructor(private http: HttpClient) { }
   searchDeptcodeReport(from:any, to:any, dept:any):Observable<any>{
     return this.http.get<any>(`${this.url}/api/report?from=${from}&to=${to}&dept=${dept}`);
   }
+
+  exportExcelReport(x: string):Observable<any>{
+    const param = new HttpParams().set('filename',x);
+    const options = {
+      params: param
+    };
+    return this.http.get(`${this.url}/api/report/export-excel`,{...options, responseType: 'blob'});
+  }
+
+  exportExcelTuyen(x: string):Observable<any>{
+    const param = new HttpParams().set('filename',x);
+    const options = {
+      params: param
+    };
+    return this.http.get(`${this.url}/api/report/export-route`,{...options, responseType: 'blob'});
+  }
+  exportExcelCN(x: string):Observable<any>{
+    const param = new HttpParams().set('filename',x);
+    const options = {
+      params: param
+    };
+    return this.http.get(`${this.url}/api/report/export-cn`,{...options, responseType: 'blob'});
+  }
+  exportExcelBC(x: string):Observable<any>{
+    const param = new HttpParams().set('filename',x);
+    const options = {
+      params: param
+    };
+    return this.http.get(`${this.url}/api/report/export-bc`,{...options, responseType: 'blob'});
+  }
 }

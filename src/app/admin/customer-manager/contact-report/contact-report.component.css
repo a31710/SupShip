@@ -138,6 +138,39 @@
 .fas:hover{
   color: #4e73df;
 }
+#switcher {
+  text-align: right;
+}
+
+#left-switcher{
+  text-align: left;
+}
+
+#myDIV {
+  padding-top: 0px;
+  padding-bottom: 70px;
+  position: relative;
+}
+#left {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+#right {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+
+
+
+.button {
+  display: inline-block;
+  margin-right: 20px;
+}
 
 
 .ng-select.custom ::ng-deep .ng-select-container  {

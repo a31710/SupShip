@@ -3,7 +3,7 @@ import { utcThursdays } from 'd3-time';
 import { LoaderService } from 'src/app/service/loader.service';
 import { CustomerService } from '../../service/customer.service';
 import { UserService } from '../../service/user.service';
-
+import * as fileSaver from 'file-saver';
 @Component({
   selector: 'app-contact-report',
   templateUrl: './contact-report.component.html',
@@ -114,5 +114,33 @@ export class ContactReportComponent implements OnInit {
   }
   postReport(postCode:any){
     this.onPostChange.emit(postCode);
+  }
+
+  returnBlob(res:any) : Blob {
+    console.log('file Downloaded');
+    return new Blob([res], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  });
+  }
+  exportExcelTuyen(){
+    this.customerService.exportExcelTuyen('bao-cao-excel-theo-tuyen.xlsx').subscribe( res =>{
+      if(res){
+        fileSaver.saveAs(this.returnBlob(res),'bao-cao-excel-theo-tuyen.xlsx');
+      }
+    })
+  }
+  exportExcelCN(){
+    this.customerService.exportExcelCN('bao-cao-excel-theo-chi-nhanh.xlsx').subscribe( res =>{
+      if(res){
+        fileSaver.saveAs(this.returnBlob(res),'bao-cao-excel-theo-chi-nhanh.xlsx');
+      }
+    })
+  }
+  exportExcelBC(){
+    this.customerService.exportExcelBC('bao-cao-excel-theo-buu-cuc.xlsx').subscribe( res =>{
+      if(res){
+        fileSaver.saveAs(this.returnBlob(res),'bao-cao-excel-theo-buu-cuc.xlsx');
+      }
+    })
   }
 }

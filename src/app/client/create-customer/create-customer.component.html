@@ -77,6 +77,21 @@
           </div>
         </div>
 
+        <div class="row mt-2">
+          <div class="col-12">
+            <div class="form-group">
+              <span class="text-gray-900">Người liên hệ</span>
+              <div class="input-group mt-1">
+                <input class="form-control" placeholder="Nhập tên người liên hệ" formControlName="representation">
+              </div>
+              <div *ngFor="let validation of insertCustomerMessage.representation">
+                <small class="text-danger"   *ngIf="insertCustomerForm.get('representation')?.hasError(validation.type) && insertCustomerForm.get('representation').touched">
+                 {{validation.message}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <ng-container formArrayName="address">
           <div class="row mt-2" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
             <div class="col-12">
@@ -116,20 +131,7 @@
           </div>
         </ng-container>
 
-        <div class="row mt-2">
-          <div class="col-12">
-            <div class="form-group">
-              <span class="text-gray-900">Người liên hệ</span>
-              <div class="input-group mt-1">
-                <input class="form-control" placeholder="Nhập tên người liên hệ" formControlName="representation">
-              </div>
-              <div *ngFor="let validation of insertCustomerMessage.representation">
-                <small class="text-danger"   *ngIf="insertCustomerForm.get('representation')?.hasError(validation.type) && insertCustomerForm.get('representation').touched">
-                 {{validation.message}}</small>
-              </div>
-            </div>
-          </div>
-        </div>
+
 
         <div class="row mt-2">
           <div class="col-12">
