@@ -32,7 +32,13 @@ constructor(private http: HttpClient) { }
   searchLead(key:any):Observable<any>{
     return this.http.get<any>(`${this.url}/api/lead?status=ALL&key=${key}`);
   }
+  updateCustomer(id:any, body:any):Observable<any>{
+    return this.http.put<any>(`${this.url}/api/lead/evtp/${id}`,body)
+  }
 
+  deleteCustomer(id:any):Observable<any>{
+    return this.http.delete<any>(`${this.url}/api/lead/evtp/${id}`);
+  }
 
 
 }

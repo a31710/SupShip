@@ -292,7 +292,13 @@ loadExcel: any = 1;
           icon: 'success',
           timer: 3000
         })
-        this.listCustomer = this.listCustomer.filter((data:any) => data.id !== id);
+        this.customerService.getLeadStatus(1,15,'ALL').subscribe((data)=>{
+          this.status = 'ALL';
+          this.listCustomer = data.data
+          console.log(data.data);
+          this.size = data.totalItem;
+          this.isSearch = false;
+        })
         this.tabs.map((d,i)=>{
           if(d.value == 3){
             this.tabs.splice(i, 1);

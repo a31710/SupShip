@@ -22,6 +22,7 @@ import { DetailScheduleComponent } from './detail-schedule/detail-schedule.compo
 import { DirectiveModule } from '../directive/directive.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PipeModule } from '../pipe/pipe.module';
+import { UpdateCustomerComponent } from './update-customer/update-customer.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -41,6 +42,8 @@ import { PipeModule } from '../pipe/pipe.module';
     NgSelectModule,
     PipeModule,
   ],
-  declarations: [ClientComponent,HeaderComponent,SideBarComponent,CreateScheduleComponent,CreateCustomerComponent, DetailCustomerComponent,HomeComponent,DetailScheduleComponent]
+  declarations: [ClientComponent,HeaderComponent,SideBarComponent,CreateScheduleComponent,
+    CreateCustomerComponent, DetailCustomerComponent,HomeComponent,DetailScheduleComponent,
+    UpdateCustomerComponent]
 })
 export class ClientModule { }

@@ -7,6 +7,7 @@ import { CreateScheduleComponent } from './create-schedule/create-schedule.compo
 import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
 import { DetailScheduleComponent } from './detail-schedule/detail-schedule.component';
 import { HomeComponent } from './home/home.component';
+import { UpdateCustomerComponent } from './update-customer/update-customer.component';
 
 
 
@@ -38,6 +39,9 @@ const routes: Routes = [{
     },
     {
       path: 'schedule/:id', component: DetailScheduleComponent,
+    },
+    {
+      path: 'update-customer/:id', component: UpdateCustomerComponent,
     },
 
     { path: '**', redirectTo: '' },
