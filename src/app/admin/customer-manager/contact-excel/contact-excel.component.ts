@@ -106,12 +106,7 @@ export class ContactExcelComponent implements OnInit, OnChanges {
   }
 
   detailTab(id:any){
-    this.leadsAssignByExcel = [];
-    this.leadAssignSuccess = [];
-    this.leadAssignFailed = [];
-    this.offsetDetail = 0;
-    this.offsetSuccess = 0;
-    this.offsetFailed = 0;
+
     this.tabs.forEach((d,i)=>{
       if(d.value == 2){
         this.selected.setValue(i);
@@ -119,6 +114,15 @@ export class ContactExcelComponent implements OnInit, OnChanges {
     })
     this.customerService.detailHIstory(id).subscribe(data=>{
       console.log(data);
+      this.leadsAssignByExcel = [];
+      this.leadAssignSuccess = [];
+      this.leadAssignFailed = [];
+      this.pagiDetail = [];
+      this.pagiSuccess = [];
+      this.pagiFailed = [];
+      this.offsetDetail = 0;
+      this.offsetSuccess = 0;
+      this.offsetFailed = 0;
 
       this.detailData = [data]
 
