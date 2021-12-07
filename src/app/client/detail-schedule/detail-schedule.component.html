@@ -6,9 +6,14 @@
 <ng-container *ngFor="let item of customerData">
   <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
     <!-- Card Header - Dropdown -->
-    <div
-        class="card-header py-3 d-flex flex-row align-items-center justify-content-between"style="border-bottom: 1px solid rgb(179, 177, 177);">
-        <h3 class="m-0 text-primary"><span class="p-1">KH{{item?.id}}</span></h3>
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid  rgb(189, 188, 188); padding: 0 20px !important;">
+      <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">KH{{item.id}}</h6>
+      <div class="dropdown no-arrow">
+        <a class="dropdown-toggle"  role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <h5  class="mt-2" [ngClass]="{'text-info': item?.type == 'DUOC_GIAO', 'text-success' : item?.type == 'TU_NHAP' }" >{{item?.type == 'DUOC_GIAO'? 'Được giao':'Tự nhập'}}</h5>
+        </a>
+    </div>
     </div>
     <!-- Card Body -->
     <div class="card-body">
@@ -28,9 +33,9 @@
 <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
   <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
     <!-- Card Header - Dropdown -->
-    <div
-        class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(179, 177, 177);">
-        <h3 class="m-0 text-primary"><span class="p-1">Kết quả tiếp xúc</span></h3>
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid  rgb(189, 188, 188); padding: 10px 20px !important;">
+      <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">Kết quả tiếp xúc</h6>
+
     </div>
     <!-- Card Body -->
     <div class="card-body">
@@ -101,9 +106,9 @@
   <ng-container *ngIf="resultSelect == 3;">
     <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
       <!-- Card Header - Dropdown -->
-      <div
-          class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(179, 177, 177);">
-          <h3 class="m-0 text-primary"><span class="p-1">Chính sách áp dụng</span></h3>
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid  rgb(189, 188, 188); padding: 10px 20px !important;">
+        <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">Chính sách áp dụng</h6>
+
       </div>
       <!-- Card Body -->
       <div class="card-body">
@@ -209,9 +214,9 @@
 
   <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
     <!-- Card Header - Dropdown -->
-    <div
-        class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(179, 177, 177);">
-        <h3 class="m-0 text-primary"><span class="p-1">Tiếp xúc</span></h3>
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid  rgb(189, 188, 188); padding: 10px 20px !important;">
+      <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">Tiếp xúc</h6>
+
     </div>
     <!-- Card Body -->
     <div class="card-body">

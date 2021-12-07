@@ -50,7 +50,7 @@ idUpdate:any;
 isSearch:Boolean = false;
 empSystemId:any;
 fileName='Bao-cao-tiep-xuc.xlsx'
-
+loadUpdate: any = 1;
 loadExcel: any = 1;
   constructor(private customerService: CustomerService, private cookieService: CookieService,private config: NgSelectConfig,
      public loaderService: LoaderService , private fb: FormBuilder,private userService: UserService) {
@@ -262,7 +262,7 @@ loadExcel: any = 1;
     })
     this.selected.setValue(0);
     console.log(data);
-
+    this.loadUpdate+=1;
   }
 
   onDelete(id:any){
@@ -389,6 +389,7 @@ loadExcel: any = 1;
       this.tabs.push(createDetail);
       this.selected.setValue(this.tabs.length - 1);
     }
+
     this.idUpdate = id;
   }
 
@@ -407,11 +408,17 @@ loadExcel: any = 1;
     this.tranferData= data;
   }
   getIdArray(id:any){
+
     if(this.idArray.includes(id)){
       const newArr = this.idArray.filter(d => d !== id)
       this.idArray = newArr
     }else{
       this.idArray.push(id);
+      if(this.idArray.length>0){
+        this.isdb = true;
+      }else{
+        this.isdb = false;
+      }
     }
     console.log(this.idArray);
     if(this.idArray.length>0){
@@ -419,13 +426,14 @@ loadExcel: any = 1;
     }else{
       this.isdb = false;
     }
+
   }
 
    allTranfer(){
      this.idArray.forEach((d)=>{
        const data = this.listCustomer.filter((data:any)=> data.id == d)
       data.map((d:any)=>{
-        if(d?.status == 'CONTACTING'){
+        if(d?.status == 'CONTACTING' || d?.status == 'FAILED'){
 
           Swal.fire({
             title: 'Chuyển tiếp xúc lỗi ?',

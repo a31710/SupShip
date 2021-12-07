@@ -12,19 +12,17 @@
   </div>
 </section>
 
-<div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-  <form class="form-inline mr-auto w-100 navbar-search">
+<div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker mt-2" inline="true">
+  <div class="form-inline mr-auto w-100 navbar-search">
     <div class="input-group">
-        <input type="text" class="form-control  border-0 small"
-            placeholder="Search for..." aria-label="Search"
-            aria-describedby="basic-addon2">
+      <input [(ngModel)]="req" placeholder="ID hoặc SĐT" type="text" id="example" class="form-control" style="border: 1px solid rgb(196, 190, 190); padding: 22px;">
         <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
+            <button (click)="onSearch()" class="btn btn-primary" type="button">
                 <i class="fas fa-search fa-sm"></i>
             </button>
         </div>
     </div>
-</form>
+  </div>
 </div>
 <br>
 <h2 class=" mb-0 text-800" style="color: #4e73df;">{{totalLead}} khách hàng</h2>
@@ -32,11 +30,19 @@
 
   <div class="row">
 
+
     <div class="col-lg-6">
       <div class="card  mb-4 " style="border: 1px solid  rgb(189, 188, 188);padding-bottom: 0 !important;" *ngFor="let item of leadData" (click)="detailCustomer(item.id)" >
-        <div class="card-header py-3 " style="border-bottom: 1px solid  rgb(189, 188, 188);">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid  rgb(189, 188, 188); padding: 0 20px !important;">
           <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">KH{{item.id}}</h6>
+          <div class="dropdown no-arrow">
+            <a class="dropdown-toggle"  role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <h5  class="mt-2" [ngClass]="{'text-info': item?.type == 'DUOC_GIAO', 'text-success' : item?.type == 'TU_NHAP' }" >{{item?.type == 'DUOC_GIAO'? 'Được giao':'Tự nhập'}}</h5>
+            </a>
         </div>
+        </div>
+
         <div class="card-body" style="padding-bottom: 0px !important;">
           <div class="h5 mb-0 text-gray-900 "><h3><i class="fas fa-home mr-2 text-primary"></i>{{item.companyName}}</h3></div>
           <div class="h5 mb-0 text-gray-900 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h3> </div>

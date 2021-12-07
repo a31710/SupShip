@@ -58,8 +58,14 @@
       <div class="card mb-4" style="border: 1px solid rgb(168, 167, 167)">
         <!-- Card Header - Dropdown -->
         <div
-            class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(168, 167, 167)">
-            <h3 class="m-0 text-primary">KH{{item?.id}}</h3>
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(168, 167, 167); padding: 0 20px !important;" >
+            <h3 class="m-0 text-primary font-weight-bold">KH{{item?.id}}</h3>
+            <div class="dropdown no-arrow">
+              <a class="dropdown-toggle"  role="button" id="dropdownMenuLink"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <h5  class="mt-2" [ngClass]="{'text-info': item?.type == 'DUOC_GIAO', 'text-success' : item?.type == 'TU_NHAP' }" >{{item?.type == 'DUOC_GIAO'? 'Được giao':'Tự nhập'}}</h5>
+              </a>
+          </div>
         </div>
         <!-- Card Body -->
         <div class="card-body">

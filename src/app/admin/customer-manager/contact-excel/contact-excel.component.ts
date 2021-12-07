@@ -15,9 +15,28 @@ export class ContactExcelComponent implements OnInit, OnChanges {
   limit: number = 15;
   size:any
   fileName='Giao-tiep-xuc-khach-hang-mau.xlsx'
-  detailData:any
+  detailData:any[] = [];
   historyData:any
   leadsAssignByExcel:any[] = [];
+  leadAssignSuccess:any[] = [];
+  leadAssignFailed:any[] = [];
+  pagiHistoryData:any
+
+  offsetDetail: number = 0;
+  limitDetail: number = 15;
+  sizeDetail:any
+  pagiDetail:any
+
+  offsetSuccess: number = 0;
+  limitSuccess: number = 15;
+  sizeSuccess:any
+  pagiSuccess:any
+
+  offsetFailed: number = 0;
+  limitFailed: number = 15;
+  sizeFailed:any
+  pagiFailed:any
+
   tabs = [{
     value:1, name:'Lịch sử Upload'
   },
@@ -33,7 +52,7 @@ export class ContactExcelComponent implements OnInit, OnChanges {
     value:2,name:'Danh sách hợp lệ'
   },
   {
-    value:1,name:'Danh sách lỗi'
+    value:3,name:'Danh sách lỗi'
   },
 
   ]
@@ -45,16 +64,17 @@ export class ContactExcelComponent implements OnInit, OnChanges {
     this.customerService.excelHistory().subscribe(data=>{
       this.historyData = data.data
       this.size = data.totalItem;
+      this.pagiHistoryData = this.paginate(this.historyData,15,1);
     })
    }
 
   ngOnInit() {
   }
   ngOnChanges(){
-      this.customerService.excelHistory().subscribe(data=>{
-        this.historyData = data.data
-        this.size = data.totalItem;
-      })
+      // this.customerService.excelHistory().subscribe(data=>{
+      //   this.historyData = data.data
+      //   this.size = data.totalItem;
+      // })
   }
 
   fetchExcel(value:any){
@@ -62,12 +82,36 @@ export class ContactExcelComponent implements OnInit, OnChanges {
 
   }
 
-  onPageChange(offset: number) {
-      console.log(offset);
+  paginate(array:any, page_size:any, page_number:any) {
+    return array.slice((page_number - 1) * page_size, page_number * page_size);
+  }
+  onPageChange(offset:any){
+    this.offset = offset;
+    this.pagiHistoryData = this.paginate(this.historyData,this.limit,(this.offset/this.limit)+1);
+  }
 
+  onPageChangeDetail(offset:any){
+    this.offsetDetail = offset;
+    this.pagiDetail = this.paginate(this.leadsAssignByExcel,this.limitDetail,(this.offsetDetail/this.limitDetail)+1);
+  }
+
+  onPageChangeSuccess(offset:any){
+    this.offsetSuccess = offset;
+    this.pagiSuccess = this.paginate(this.leadAssignSuccess,this.limitSuccess,(this.offsetSuccess/this.limitSuccess)+1);
+  }
+
+  onPageChangeFailed(offset:any){
+    this.offsetFailed = offset;
+    this.pagiFailed = this.paginate(this.leadAssignFailed,this.limitFailed,(this.offsetFailed/this.limitFailed)+1);
   }
 
   detailTab(id:any){
+    this.leadsAssignByExcel = [];
+    this.leadAssignSuccess = [];
+    this.leadAssignFailed = [];
+    this.offsetDetail = 0;
+    this.offsetSuccess = 0;
+    this.offsetFailed = 0;
     this.tabs.forEach((d,i)=>{
       if(d.value == 2){
         this.selected.setValue(i);
@@ -77,10 +121,21 @@ export class ContactExcelComponent implements OnInit, OnChanges {
       console.log(data);
 
       this.detailData = [data]
+
       const d = data?.leadsAssignByExcel;
       d.map((item:any)=>{
-        this.leadsAssignByExcel = [];
+        if(item?.status == 0){
+          this.leadAssignSuccess.push(item);
+          this.pagiSuccess = this.paginate(this.leadAssignSuccess,15,1);
+          this.sizeSuccess = this.leadAssignSuccess?.length;
+        }else{
+          this.leadAssignFailed.push(item);
+          this.pagiFailed = this.paginate(this.leadAssignFailed,15,1);
+          this.sizeFailed = this.leadAssignFailed?.length;
+        }
         this.leadsAssignByExcel.push(item);
+        this.pagiDetail = this.paginate(this.leadsAssignByExcel,15,1);
+        this.sizeDetail = this.leadsAssignByExcel?.length;
       })
 
     })

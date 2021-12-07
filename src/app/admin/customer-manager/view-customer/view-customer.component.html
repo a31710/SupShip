@@ -132,7 +132,7 @@
           <td>{{item?.impactDate | date: 'dd/MM/yyyy'}}</td>
 
           <td>
-            <button type="button" style="width:100px" *ngIf="item?.status != 'CONTACTING' && item?.status !='FAILED' " class="btn btn-success btn-sm px-3 mr-3" [disabled]="isdb" (click)="singleTranfer(item.id)" data-toggle="modal" data-target="#tranfer">
+            <button type="button" style="width:100px" *ngIf="item?.status != 'CONTACTING' && item?.status !='FAILED' " class="btn btn-success btn-sm px-3 " [disabled]="isdb" (click)="singleTranfer(item.id)" data-toggle="modal" data-target="#tranfer">
                 Giao TX
             </button>
             <button type="button" *ngIf="item?.status != 'NEW' && item?.status != 'SUCCESS'"  class="btn btn-success btn-sm px-3 " [disabled]="isdb" (click)="singleTranfer(item.id, item.status)" data-toggle="modal" data-target="#tranfer">
@@ -153,10 +153,10 @@
 <app-create-customer (createCus)="createCus($event)"></app-create-customer>
 </div>
 <div *ngIf="tab.value == 3">
-  <app-detail-customer [idUpdate]="idUpdate" (deleteId)="onDelete($event)" (updateId)="addUpdateTab($event)"></app-detail-customer>
+  <app-detail-customer [idUpdate]="idUpdate" [loadUpdate]="loadUpdate" (deleteId)="onDelete($event)" (updateId)="addUpdateTab($event)"></app-detail-customer>
 </div>
 <div *ngIf="tab.value == 4">
-  <app-update-customer [idUpdate]="idUpdate" (updateCus)="updateCus($event)"></app-update-customer>
+  <app-update-customer [idUpdate]="idUpdate"  (updateCus)="updateCus($event)"></app-update-customer>
 </div>
 <div *ngIf="tab.value == 5">
   <app-contact-report (onPostChange)="addPostReport($event)"></app-contact-report>

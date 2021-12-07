@@ -2,23 +2,50 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
 import { CustomerService } from '../../service/customer.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-receive',
   templateUrl: './receive.component.html',
   styleUrls: ['./receive.component.css']
 })
 export class ReceiveComponent implements OnInit {
-  tien = 3000000;
   totalLead:any
-  leadData:any
+  leadData:any;
+  req:any = '';
+  data:any;
   constructor(private customerService: CustomerService, private router:Router,public loaderService: LoaderService) {
     this.customerService.getLeadByUser().subscribe(data=>{
       this.leadData = data.data
       this.totalLead = data.totalItem;
       console.log(data);
-
     })
+  }
+
+  onSearch(){
+    console.log(this.req);
+    if(this.req != undefined && this.req){
+      this.customerService.searchLead(this.req).subscribe(data=>{
+
+        if(data?.error == 'true'){
+          Swal.fire({
+            icon: 'error',
+            title: data?.message,
+            showConfirmButton: true,
+            confirmButtonText: 'Chấp nhận'
+          })
+        }else{
+          console.log(data);
+          this.leadData = data.data
+          this.totalLead = data.totalItem;
+        }
+      })
+    }else{
+      this.customerService.getLeadByUser().subscribe(data=>{
+        this.leadData = data.data
+        this.totalLead = data.totalItem;
+        console.log(data);
+      })
+    }
   }
 
   getLeadNew(){

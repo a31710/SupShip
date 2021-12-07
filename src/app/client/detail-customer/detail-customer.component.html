@@ -27,7 +27,18 @@
     <div class="card shadow mb-4 mt-4">
       <!-- Card Header - Dropdown -->
       <!-- Card Body -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="background-color: white ;padding: 0 20px !important;">
+        <h6 class="m-0 font-weight-bold" [ngClass]="{'text-warning': item?.status == 'CONTACTING' || item?.status == 'NEW'  , 'text-success' : item?.status == 'SUCCESS', 'text-danger' : item?.status == 'FAILED'}"
+         style="font-size: 15px;">{{item?.statusDescription}}</h6>
+        <div class="dropdown no-arrow">
+          <a class="dropdown-toggle"  role="button" id="dropdownMenuLink"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <h5  class="mt-2" [ngClass]="{'text-info': item?.type == 'DUOC_GIAO', 'text-success' : item?.type == 'TU_NHAP' }" >{{item?.type == 'DUOC_GIAO'? 'Được giao':'Tự nhập'}}</h5>
+          </a>
+      </div>
+      </div>
       <div class="card-body">
+
         <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-home mr-2 text-primary"></i>{{item?.companyName}}</h4></div>
         <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h4> </div>
         <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item?.representation}}</h4></div>
