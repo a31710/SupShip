@@ -61,7 +61,7 @@ export class UpdateCustomerComponent implements OnInit {
     ],
     'phone': [
       { type: 'required', message: 'Bạn chưa nhập ô này' },
-      { type: 'pattern', message: 'Sai định dạng số điện thoại' },
+      { type: 'minlength', message: 'Sai định dạng số điện thoại' },
     ],
 
     }
@@ -173,7 +173,7 @@ export class UpdateCustomerComponent implements OnInit {
       title:['', [Validators.required,Validators.minLength(5)  ]],
       companyName: ['', [Validators.required,Validators.minLength(5)]],
       representation: ['', [Validators.required ,Validators.minLength(5)]],
-      phone:['', [Validators.required,]],
+      phone:['', [Validators.required,Validators.minLength(12)]],
       quantityMonth:['', [Validators.required,]], //
       weight: ['', [Validators.required]], //
       expectedRevenue: ['', [Validators.required]], //

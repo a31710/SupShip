@@ -21,7 +21,7 @@ export class CreateCustomerComponent implements OnInit {
   dataWard: "" | any
   insertCustomerForm: FormGroup | any;
   selectedIndustryValues:String[] = [];
-  industryError: Boolean = true;
+  industryError: Boolean = false;
   bodyApi: any;
 
   @Output() createCus: EventEmitter<any>;
@@ -61,7 +61,7 @@ export class CreateCustomerComponent implements OnInit {
     ],
     'phone': [
       { type: 'required', message: 'Bạn chưa nhập ô này' },
-      { type: 'pattern', message: 'Sai định dạng số điện thoại' },
+      { type: 'minlength', message: 'Sai định dạng số điện thoại' },
     ],
     'leadSource': [
       { type: 'required', message: 'Bạn vẫn chưa tích vào trường này' },
@@ -112,6 +112,30 @@ export class CreateCustomerComponent implements OnInit {
       return this.insertCustomerForm.get('phone') as FormArray;
     }
 
+    get companyNameArray() {
+      return this.insertCustomerForm.get('companyName') as FormArray;
+    }
+
+    get representationArray(){
+      return this.insertCustomerForm.get('representation') as FormArray;
+    }
+
+    get titleArray(){
+      return this.insertCustomerForm.get('title') as FormArray;
+    }
+
+    get quantityMonthArray(){
+      return this.insertCustomerForm.get('quantityMonth') as FormArray;
+    }
+
+    get weightArray(){
+      return this.insertCustomerForm.get('weight') as FormArray;
+    }
+
+    get expectedRevenueArray(){
+      return this.insertCustomerForm.get('expectedRevenue') as FormArray;
+    }
+
   constructor(private fb: FormBuilder, private customerService: CustomerService, private config: NgSelectConfig, public loaderService: LoaderService) {
     this.createCus = new EventEmitter<any>();
     this.config.appendTo = 'body';
@@ -134,7 +158,7 @@ export class CreateCustomerComponent implements OnInit {
         title:['', [Validators.required,Validators.minLength(2)  ]],
         companyName: ['', [Validators.required,Validators.minLength(5)]],
         representation: ['', [Validators.required ,Validators.minLength(5)]],
-        phone:['', [Validators.required,]],
+        phone:['', [Validators.required,Validators.minLength(12)]],
         quantityMonth:['', [Validators.required, Validators.min(1)]], //
         weight: ['', [Validators.required,Validators.min(1)]], //
         expectedRevenue: ['', [Validators.required,Validators.min(1)]], //
@@ -163,7 +187,7 @@ export class CreateCustomerComponent implements OnInit {
       }
 
     });
-    this.industryError =  this.selectedIndustryValues.length > 0 ? false : true;
+    this.industryError =  this.selectedIndustryValues.length > 0 ? true : false;
   }
   // checkleadSourceTouched(){
   //   let flg = false;

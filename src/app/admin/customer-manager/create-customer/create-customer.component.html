@@ -44,7 +44,7 @@
                           <input  type="checkbox" [formControl]="b" (change)="getSelectedIndustryValue()" >
                           <label  class="text-gray-900 ml-2"> {{industryData[index].name}}</label></div>
                           <small class="text-danger"
-                          *ngIf="industryError && checkIndustryControlsTouched()">
+                          *ngIf="!industryError ">
                               Chọn ít nhất 1 sản phẩm kinh doanh</small>
                       </ng-container>
                     </div>
@@ -75,7 +75,9 @@
                         <div  class="z-vlayout-inner" style="padding-bottom:0">
                             <div  class="z-div"> <span  class="z-label text-gray-900">Tên cửa hàng/ công ty</span> </div>
                         </div>
-                        <div  class="z-vlayout-inner" ><input formControlName="companyName" class="form-control"  type="text" placeholder="Nhập tên cửa hàng" ></div>
+                        <div  class="z-vlayout-inner" >
+                          <input [ngClass]="{'is-valid': !companyNameArray.errors?.['required'] && !companyNameArray.errors?.['minlength']}"
+                          formControlName="companyName" class="form-control"  type="text" placeholder="Nhập tên cửa hàng" ></div>
                         <div *ngFor="let validation of insertCustomerMessage.companyName">
                           <small class="text-danger"   *ngIf="insertCustomerForm.get('companyName')?.hasError(validation.type) && insertCustomerForm.get('companyName').touched">
                            {{validation.message}}</small>
@@ -87,7 +89,9 @@
                         <div  class="z-vlayout-inner" style="padding-bottom:0">
                             <div  class="z-div"> <span  class="z-label text-gray-900">Chức danh</span> </div>
                         </div>
-                        <div  class="z-vlayout-inner" ><input formControlName="title"  class="form-control"  type="text" placeholder="Nhập chức danh" ></div>
+                        <div  class="z-vlayout-inner" >
+                          <input [ngClass]="{'is-valid': !titleArray.errors?.['required'] && !titleArray.errors?.['minlength']}"
+                           formControlName="title"  class="form-control"  type="text" placeholder="Nhập chức danh" ></div>
                         <div *ngFor="let validation of insertCustomerMessage.title">
                           <small class="text-danger"   *ngIf="insertCustomerForm.get('title')?.hasError(validation.type) && insertCustomerForm.get('title').touched">
                            {{validation.message}}</small>
@@ -102,7 +106,9 @@
                       <div  class="z-vlayout-inner" style="padding-bottom:0">
                           <div  class="z-div"> <span  class="z-label text-gray-900">Họ và tên</span> </div>
                       </div>
-                      <div class="z-vlayout-inner" ><input formControlName="representation"  class="form-control" value="" type="text" maxlength="100" placeholder="Nhập người liên hệ" ></div>
+                      <div class="z-vlayout-inner" >
+                        <input [ngClass]="{'is-valid': !representationArray.errors?.['required'] && !representationArray.errors?.['minlength']}"
+                         formControlName="representation"  class="form-control" value="" type="text" maxlength="100" placeholder="Nhập người liên hệ" ></div>
                       <div *ngFor="let validation of insertCustomerMessage.representation">
                         <small class="text-danger"   *ngIf="insertCustomerForm.get('representation')?.hasError(validation.type) && insertCustomerForm.get('representation').touched">
                          {{validation.message}}</small>
@@ -115,7 +121,8 @@
                           <div  class="z-div"> <span  class="z-label text-gray-900">Số điện thoại</span> </div>
                       </div>
                       <div  class="z-vlayout-inner" >
-                        <input formControlName="phone" class="form-control" appPhoneNumber value="" type="text" maxlength="12" placeholder="Nhập số điện thoại" ></div>
+                        <input [ngClass]="{'is-valid': !phoneArray.errors?.['required'] && !phoneArray.errors?.['minlength']}"
+                         formControlName="phone" class="form-control" appPhoneNumber value="" type="text" maxlength="12" placeholder="Nhập số điện thoại" ></div>
                       <div *ngFor="let validation of insertCustomerMessage.phone">
                         <small class="text-danger"   *ngIf="insertCustomerForm.get('phone')?.hasError(validation.type) && insertCustomerForm.get('phone').touched">
                          {{validation.message}}</small>
@@ -132,7 +139,8 @@
                     </div>
                     <div class="z-vlayout-inner" >
                       <div class="input-group mb-3">
-                        <input type="text"  formControlName="quantityMonth" class="form-control"  maxlength="3">
+                        <input class="form-control" [ngClass]="{'is-valid': !quantityMonthArray.errors?.['required'] && !quantityMonthArray.errors?.['minlength']}"
+                        type="text"  formControlName="quantityMonth" class="form-control"  maxlength="3">
                         <div class="input-group-append">
                           <span class="input-group-text" id="basic-addon2">Đơn</span>
                         </div>
@@ -154,7 +162,8 @@
                     <div  class="z-vlayout-inner" >
 
                       <div class="input-group mb-3">
-                        <input type="text" formControlName="weight"   class="form-control" maxlength="3">
+                        <input [ngClass]="{'is-valid': !weightArray.errors?.['required'] && !weightArray.errors?.['minlength']}"
+                        type="text" formControlName="weight"   class="form-control" maxlength="3">
                         <div class="input-group-append">
                           <span class="input-group-text" id="basic-addon2">Kg</span>
                         </div>
@@ -177,7 +186,8 @@
                   </div>
                   <div class="z-vlayout-inner" >
                     <div class="input-group mb-3">
-                      <input  formControlName="expectedRevenue" class="form-control" type="text" appMoney >
+                      <input [ngClass]="{'is-valid': !expectedRevenueArray.errors?.['required'] && !expectedRevenueArray.errors?.['minlength']}"
+                       formControlName="expectedRevenue" class="form-control" type="text" appMoney >
                       <div class="input-group-append">
                         <span class="input-group-text" id="basic-addon2" >VNĐ</span>
                       </div>
@@ -201,6 +211,7 @@
 
                       <ng-select  placeholder="Chọn Tỉnh/Thành phố"  bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
                       </ng-select>
+                      <i *ngIf="!addressArray.controls[i]?.get('province')?.hasError('required')" class="fas fa-check check" ></i>
               </div>
           </div>
 
@@ -212,6 +223,7 @@
 
                   <ng-select placeholder="Chọn Quận/Huyện"  bindValue="districtCode" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" [items]="dataDistrict" bindLabel="districtName" formControlName="district" >
                   </ng-select>
+                  <span *ngIf="!addressArray.controls[i]?.get('district')?.hasError('required')"><i class="fas fa-check check" ></i></span>
               </div>
           </div>
       </div>
@@ -226,6 +238,7 @@
                   </div>
                   <ng-select placeholder="Chọn Phường/xã"  bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
                   </ng-select>
+                  <span *ngIf="!addressArray.controls[i]?.get('ward')?.hasError('required')"><i class="fas fa-check check" ></i></span>
               </div>
           </div>
           <div class="col-md-6 z-div">
@@ -233,7 +246,8 @@
                 <div  class="z-vlayout-inner" style="padding-bottom:0">
                   <div class="z-div"> <span  class="z-label text-gray-900">Địa chỉ</span> </div>
                 </div>
-                <div class="z-vlayout-inner" ><input  formControlName="homeNo" class="form-control"  type="text" maxlength="100" placeholder="Nhập địa chỉ" ></div>
+                <div class="z-vlayout-inner" ><input [ngClass]="{'is-valid': !addressArray.controls[i]?.get('homeNo')?.hasError('required') && !addressArray.controls[i]?.get('homeNo')?.hasError('minlength')}"
+                    formControlName="homeNo" class="form-control"  type="text" maxlength="100" placeholder="Nhập địa chỉ" ></div>
                 <div *ngFor="let validation of insertCustomerMessage.homeNo">
                   <small class="text-danger"   *ngIf="addressArray.controls[i]?.get('homeNo')?.hasError(validation.type) && addressArray.controls[i]?.get('homeNo')?.touched">
                    {{validation.message}}</small>
@@ -251,7 +265,7 @@
       <div id="w1uPgg4" class="row z-div  mt-3">
         <div id="w1uPhg4" class="col-md-12 z-div">
             <div id="w1uPig4" style="float:right;" class="z-hlayout">
-                <div id="w1uPkg4-chdex" class="z-hlayout-inner" ><button [disabled]="insertCustomerForm.invalid" type="submit"  class="btn btn-sm btn-success z-button">Tạo mới</button></div>
+                <div id="w1uPkg4-chdex" class="z-hlayout-inner" ><button [disabled]="insertCustomerForm.invalid || !industryError" type="submit"  class="btn btn-sm btn-success z-button">Tạo mới</button></div>
             </div>
         </div>
     </div>

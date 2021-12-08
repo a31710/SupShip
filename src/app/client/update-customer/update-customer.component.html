@@ -44,6 +44,9 @@
                     </div>
                   </div>
                 </ng-container>
+                <small class="text-danger"
+                *ngIf="industryError && checkIndustryControlsTouched()">
+                    Chọn ít nhất 1 sản phẩm kinh doanh</small>
                 <br>
                 <br>
 
@@ -67,7 +70,8 @@
             <div class="form-group">
               <span class="text-gray-900">Tên cửa hàng/công ty</span>
               <div class="input-group mt-1">
-                <input class="form-control" placeholder="Nhập tên cửa hàng" formControlName="companyName">
+                <input class="form-control" [ngClass]="{'is-valid': !companyNameArray.errors?.['required'] && !companyNameArray.errors?.['minlength']}"
+                 placeholder="Nhập tên cửa hàng" formControlName="companyName">
               </div>
               <div *ngFor="let validation of updateCustomerMessage.companyName">
                 <small class="text-danger"   *ngIf="updateCustomerForm.get('companyName')?.hasError(validation.type) && updateCustomerForm.get('companyName').touched">
@@ -82,7 +86,8 @@
             <div class="form-group">
               <span class="text-gray-900">Người liên hệ</span>
               <div class="input-group mt-1">
-                <input class="form-control" placeholder="Nhập tên người liên hệ" formControlName="representation">
+                <input class="form-control" [ngClass]="{'is-valid': !representationArray.errors?.['required'] && !representationArray.errors?.['minlength']}"
+                 placeholder="Nhập tên người liên hệ" formControlName="representation">
               </div>
               <div *ngFor="let validation of updateCustomerMessage.representation">
                 <small class="text-danger"   *ngIf="updateCustomerForm.get('representation')?.hasError(validation.type) && updateCustomerForm.get('representation').touched">
@@ -97,11 +102,11 @@
             <div class="col-12">
               <div class="row form-group">
                 <span class="text-gray-900">Địa chỉ</span>
-
                 <div class="col-12">
                   <div class="mt-2">
-                    <ng-select  placeholder="Chọn Tỉnh/Thành Phố" bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
+                    <ng-select   placeholder="Chọn Tỉnh/Thành Phố" bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
                     </ng-select>
+                   <i *ngIf="!addressArray.controls[i]?.get('province')?.hasError('required')" class="fas fa-check check" ></i>
                   </div>
                 </div>
 
@@ -109,6 +114,7 @@
                   <div class="mt-2">
                     <ng-select placeholder="Chọn Quận/Huyện"  bindValue="districtCode" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" [items]="dataDistrict" bindLabel="districtName" formControlName="district" >
                     </ng-select>
+                    <span *ngIf="!addressArray.controls[i]?.get('district')?.hasError('required')"><i class="fas fa-check check" ></i></span>
                   </div>
                 </div>
 
@@ -116,6 +122,7 @@
                   <div class="mt-2">
                     <ng-select  placeholder="Chọn xã" bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
                     </ng-select>
+                    <span *ngIf="!addressArray.controls[i]?.get('ward')?.hasError('required')"><i class="fas fa-check check" ></i></span>
                   </div>
                 </div>
 
@@ -123,7 +130,12 @@
 
                 <div class="col-12">
                   <div class="input-group mt-2">
-                    <input class="form-control" placeholder="Nhập số nhà" formControlName="homeNo">
+                    <input class="form-control" [ngClass]="{'is-valid': !addressArray.controls[i]?.get('homeNo')?.hasError('required') && !addressArray.controls[i]?.get('homeNo')?.hasError('minlength')}"
+                     placeholder="Nhập số nhà" formControlName="homeNo">
+                  </div>
+                  <div *ngFor="let validation of updateCustomerMessage.homeNo">
+                    <small class="text-danger"   *ngIf="addressArray.controls[i]?.get('homeNo')?.hasError(validation.type) && addressArray.controls[i]?.get('homeNo')?.touched">
+                     {{validation.message}}</small>
                   </div>
                 </div>
               </div>
@@ -138,7 +150,8 @@
             <div class="form-group">
               <span class="text-gray-900">Chức danh</span>
               <div class="input-group mt-1">
-                <input class="form-control" placeholder="Nhập chức danh" formControlName="title">
+                <input class="form-control" [ngClass]="{'is-valid': !titleArray.errors?.['required'] && !titleArray.errors?.['minlength']}"
+                placeholder="Nhập chức danh" formControlName="title">
               </div>
               <div *ngFor="let validation of updateCustomerMessage.title">
                 <small class="text-danger"   *ngIf="updateCustomerForm.get('title')?.hasError(validation.type) && updateCustomerForm.get('title').touched">
@@ -153,7 +166,8 @@
             <div class="form-group">
               <span class="text-gray-900">Số điện thoại</span>
               <div class="input-group mt-1">
-                <input class="form-control" appPhoneNumber placeholder="Nhập số điện thoại" maxlength="12" formControlName="phone">
+                <input class="form-control" [ngClass]="{'is-valid': !phoneArray.errors?.['required'] && !phoneArray.errors?.['minlength']}"
+                appPhoneNumber placeholder="Nhập số điện thoại" maxlength="12" formControlName="phone">
               </div>
               <div *ngFor="let validation of updateCustomerMessage.phone">
                 <small class="text-danger"   *ngIf="updateCustomerForm.get('phone')?.hasError(validation.type) && updateCustomerForm.get('phone').touched">
@@ -186,7 +200,8 @@
             <span class="text-gray-900">Số lượng đơn trên tháng</span>
             <div class="input-group mt-1">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" formControlName="quantityMonth" maxlength="3">
+                <input type="text" [ngClass]="{'is-valid': !quantityMonthArray.errors?.['required'] && !quantityMonthArray.errors?.['minlength']}"
+                class="form-control" formControlName="quantityMonth" maxlength="3">
                 <div class="input-group-append">
                   <span class="input-group-text" id="basic-addon2">Đơn</span>
                 </div>
@@ -206,7 +221,8 @@
             <span class="text-gray-900">Trọng lượng/Bưu phẩm</span>
             <div class="input-group mt-1">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" formControlName="weight" maxlength="3">
+                <input type="text" [ngClass]="{'is-valid': !weightArray.errors?.['required'] && !weightArray.errors?.['minlength']}"
+                 class="form-control" formControlName="weight" maxlength="3">
                 <div class="input-group-append">
                   <span class="input-group-text" id="basic-addon2">Kg</span>
                 </div>
@@ -228,7 +244,8 @@
             <div class="input-group mt-1">
 
               <div class="input-group mb-3">
-                <input type="text" class="form-control" appMoney formControlName="expectedRevenue" >
+                <input type="text" [ngClass]="{'is-valid': !expectedRevenueArray.errors?.['required'] && !expectedRevenueArray.errors?.['minlength']}"
+                 class="form-control" appMoney formControlName="expectedRevenue" >
                 <div class="input-group-append">
                   <span  class="input-group-text" id="basic-addon2">VNĐ</span>
                 </div>
@@ -248,7 +265,7 @@
 
       <div class="fixed" style="margin-left: -35px;">
         <div class="row col-12" >
-          <button [disabled]="updateCustomerForm.invalid" class="btn btn-sm btn-primary p-2" type="submit" >Cập nhật khách hàng</button>
+          <button [disabled]="updateCustomerForm.invalid || industryError" class="btn btn-sm btn-primary p-2" type="submit" >Cập nhật khách hàng</button>
         </div>
     </div>
     </mat-step>

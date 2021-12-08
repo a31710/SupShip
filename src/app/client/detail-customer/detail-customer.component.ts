@@ -19,7 +19,20 @@ export class DetailCustomerComponent implements OnInit {
     this.activateRoute.params.subscribe(param=>{
       const id = param['id']
       this.customerService.getDetailCustomer(id).subscribe(data=>{
-        this.type = data?.type;
+        if(data?.error == 'true'){
+          Swal.fire({
+            title: 'Lỗi ?',
+            text: data?.message,
+            icon: 'error',
+            confirmButtonColor: '#4e73df',
+            confirmButtonText: 'Chấp nhận'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigateByUrl('/client/customer')
+            }
+          })
+        }else{
+          this.type = data?.type;
         console.log(data?.type);
 
         this.leadData = [data];
@@ -41,6 +54,7 @@ export class DetailCustomerComponent implements OnInit {
         }
         this.events1.push({status:'Ngày tạo khách hàng', date: this.datePipe.transform(data?.createDate,'dd/MM - hh:mm a') ,color:'#858796' })
         this.events1[0].color = '#4e73df'
+        }
       })
     })
    }
