@@ -23,25 +23,31 @@
                           <div  class="z-vlayout-inner" style="padding-bottom:0">
                               <div  class="z-div"> <span  class="z-label text-gray-900">Họ và tên</span> </div>
                           </div>
-                          <div  class="z-vlayout-inner" ><input formControlName="fullName" class="form-control" value="" type="text" maxlength="100"  ></div>
-                          <small class="text-danger"   *ngIf="userForm.get('fullName')?.hasError('required') && userForm.get('fullName')?.touched">
-                            Bạn chưa nhập ô này</small>
+                          <div  class="z-vlayout-inner" ><input [ngClass]="{'is-valid': !fullNameArray?.errors?.['required'] && !fullNameArray?.errors?.['minlength']}"
+                             formControlName="fullName" class="form-control" value="" type="text" maxlength="100"  ></div>
+                             <div *ngFor="let validation of editProfileMessage.fullName">
+                              <small class="text-danger"  *ngIf="userForm.get('fullName')?.hasError(validation.type) && userForm.get('fullName').touched">
+                               {{validation.message}}</small>
+                              </div>
                       </div>
                   </div>
-                  <div  class="z-vlayout-inner mt-2" >
-                    <div  class="z-div"> <span  class="z-label text-gray-900">Giới Tính</span> </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gender" formControlName="gender" value="1" id="flexRadioDefault1">
-                      <label class="form-check-label text-gray-900 mt-1" for="flexRadioDefault1">
-                        Nam
-                      </label>
-                      <input class="form-check-input ml-2" type="radio" name="gender" formControlName="gender" value="0" id="flexRadioDefault2" checked>
-                      <label class="form-check-label text-gray-900 ml-4 mt-1" for="flexRadioDefault2">
-                        Nữ
-                      </label>
-                    </div>
-
-                </div>
+                  <div class="col-md-6 z-div mt-2">
+                    <div  class="z-vlayout" >
+                    <div  class="z-vlayout-inner" >
+                      <div  class="z-div"> <span  class="z-label text-gray-900">Giới Tính</span> </div>
+                      <div class="form-check mt-1">
+                        <input class="form-check-input" type="radio" name="gender" formControlName="gender" value="1" id="flexRadioDefault1">
+                        <label class="form-check-label text-gray-900 mt-1" for="flexRadioDefault1">
+                          Nam
+                        </label>
+                        <input class="form-check-input ml-2" type="radio" name="gender" formControlName="gender" value="0" id="flexRadioDefault2" checked>
+                        <label class="form-check-label text-gray-900 ml-4 mt-1" for="flexRadioDefault2">
+                          Nữ
+                        </label>
+                      </div>
+                      </div>
+                  </div>
+                  </div>
               </div>
 
               <div  class="row z-div">
@@ -50,9 +56,12 @@
                       <div  class="z-vlayout-inner" style="padding-bottom:0">
                           <div  class="z-div"> <span  class="z-label text-gray-900">Số điện thoại</span> </div>
                       </div>
-                      <div  class="z-vlayout-inner" ><input appPhoneNumber formControlName="mobile" maxlength="12" class="form-control" value="" type="text" id="phone-number"   ></div>
-                      <small class="text-danger"   *ngIf="userForm.get('mobile')?.hasError('required') && userForm.get('mobile')?.touched">
-                        Bạn chưa nhập ô này</small>
+                      <div  class="z-vlayout-inner" ><input [ngClass]="{'is-valid': !mobileArray?.errors?.['required'] && !mobileArray?.errors?.['minlength']}"
+                         appPhoneNumber formControlName="mobile" maxlength="12" class="form-control" value="" type="text" id="phone-number"   ></div>
+                         <div *ngFor="let validation of editProfileMessage.mobile">
+                          <small class="text-danger"  *ngIf="userForm.get('mobile')?.hasError(validation.type) && userForm.get('mobile').touched">
+                           {{validation.message}}</small>
+                          </div>
                     </div>
               </div>
               <div  class="col-md-6 z-div mt-2">
@@ -60,9 +69,12 @@
                     <div  class="z-vlayout-inner" style="padding-bottom:0">
                         <div  class="z-div"> <span  class="z-label text-gray-900"> Ngày sinh  (Ngày/tháng/năm) </span> </div>
                     </div>
-                    <div  class="z-vlayout-inner" ><input formControlName="birthday"  class="form-control" appDate value="" type="text" maxlength="100"  ></div>
-                    <small class="text-danger"   *ngIf="userForm.get('birthday')?.hasError('required') && userForm.get('birthday')?.touched">
-                      Bạn chưa nhập ô này</small>
+                    <div  class="z-vlayout-inner" ><input [ngClass]="{'is-valid': !birthDayArray?.errors?.['required'] && !birthDayArray?.errors?.['minlength']}"
+                       formControlName="birthday"  class="form-control" appDate value="" type="text" maxlength="100"  ></div>
+                       <div *ngFor="let validation of editProfileMessage.birthday">
+                        <small class="text-danger"  *ngIf="userForm.get('birthday')?.hasError(validation.type) && userForm.get('birthday').touched">
+                         {{validation.message}}</small>
+                        </div>
                   </div>
             </div>
               </div>
@@ -79,8 +91,8 @@
                           </div>
                           <ng-select   bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
                           </ng-select>
-                          <small class="text-danger"   *ngIf="userForm.get('province')?.hasError('required') && userForm.get('province')?.touched">
-                            Bạn chưa nhập ô này</small>
+                          <i *ngIf="!addressArray.controls[i]?.get('province')?.hasError('required')" class="fas fa-check check" ></i>
+                          <i *ngIf="addressArray.controls[i]?.get('province')?.hasError('required') && addressArray.controls[i]?.get('province').touched" class="fas fa-exclamation-circle check2" ></i>
                   </div>
               </div>
 
@@ -93,8 +105,8 @@
                       </div>
                       <ng-select   bindValue="districtCode" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" [items]="dataDistrict" bindLabel="districtName" formControlName="district" >
                       </ng-select>
-                      <small class="text-danger"   *ngIf="userForm.get('district')?.hasError('required') && userForm.get('district')?.touched">
-                        Bạn chưa nhập ô này</small>
+                      <span *ngIf="!addressArray.controls[i]?.get('district')?.hasError('required')"><i class="fas fa-check check" ></i></span>
+                      <i *ngIf="addressArray.controls[i]?.get('district')?.hasError('required') && addressArray.controls[i]?.get('district').touched" class="fas fa-exclamation-circle check2" ></i>
                   </div>
               </div>
           </div>
@@ -107,10 +119,10 @@
                       <div  class="z-vlayout-inner" style="padding-bottom:0">
                           <div  class="z-div"> <span  class="z-label text-gray-900">Phường/xã</span></div>
                       </div>
-                      <ng-select   bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
+                      <ng-select  bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
                       </ng-select>
-                      <small class="text-danger"   *ngIf="userForm.get('ward')?.hasError('required') && userForm.get('ward')?.touched">
-                        Bạn chưa nhập ô này</small>
+                      <span *ngIf="!addressArray.controls[i]?.get('ward')?.hasError('required')"><i class="fas fa-check check" ></i></span>
+                      <i *ngIf="addressArray.controls[i]?.get('ward')?.hasError('required') && addressArray.controls[i]?.get('ward').touched" class="fas fa-exclamation-circle check2" ></i>
                   </div>
               </div>
               <div  class="col-md-6 z-div mt-2">
@@ -118,9 +130,12 @@
                     <div  class="z-vlayout-inner" style="padding-bottom:0">
                         <div  class="z-div"> <span  class="z-label text-gray-900">Địa chỉ</span> </div>
                     </div>
-                    <div  class="z-vlayout-inner" ><input formControlName="homeNo"  class="form-control" value="" type="text" maxlength="100"  ></div>
-                    <small class="text-danger"   *ngIf="userForm.get('homeNo')?.hasError('required') && userForm.get('homeNo')?.touched">
-                      Bạn chưa nhập ô này</small>
+                    <div  class="z-vlayout-inner" ><input [ngClass]="{'is-valid': !addressArray.controls[i]?.get('homeNo')?.hasError('required') && !addressArray.controls[i]?.get('homeNo')?.hasError('minlength')}"
+                       formControlName="homeNo"  class="form-control" value="" type="text" maxlength="100"  ></div>
+                    <div *ngFor="let validation of editProfileMessage.homeNo">
+                      <small class="text-danger"   *ngIf="addressArray.controls[i]?.get('homeNo')?.hasError(validation.type) && addressArray.controls[i]?.get('homeNo')?.touched">
+                       {{validation.message}}</small>
+                    </div>
                   </div>
             </div>
           </div>
@@ -128,13 +143,22 @@
               </ng-container>
                     <!-- BUTTON -->
                     <br>
-                    <div  class="row z-div">
+                    <!-- <div  class="row z-div">
                       <div  class="col-md-12 z-div">
                           <div  style="float:right;" class="z-hlayout">
                               <div ><button type="submit"  [disabled]="userForm.invalid" class="btn btn-sm btn-success">Cập nhật</button></div>
                           </div>
                       </div>
-                  </div>
+                  </div> -->
+                  <div id="switcher">
+                    <div class="button selected" id="switcher-default">
+                      <button (click)="changePassword()" class="btn btn-sm btn-primary">Đổi mật khẩu</button>
+                    </div>
+                    <div class="button" id="switcher-narrow">
+                      <button type="submit"  [disabled]="userForm.invalid" class="btn btn-sm btn-success" >Cập nhật</button>
+                    </div>
+                </div>
+
 
 
 

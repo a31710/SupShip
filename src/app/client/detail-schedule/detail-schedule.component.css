@@ -2,6 +2,7 @@ div.fixed {
   position: fixed;
   width: 100%;
   bottom: 10px;
+  z-index: 4;
 
 }
 
@@ -59,4 +60,24 @@ div.fixed {
   border-radius: 4px;
   min-height: 36px;
   align-items: center;
+}
+
+
+.check{
+  position: absolute;
+  bottom:14px;
+  right:20px;
+  z-index: 2;
+  color: #1cc88a;
+  padding: 0px !important;
+}
+
+
+.check2{
+  position: absolute;
+  bottom:12px;
+  right:40px;
+  z-index: 2;
+  color: #e74a3b;
+  padding: 0px !important;
 }

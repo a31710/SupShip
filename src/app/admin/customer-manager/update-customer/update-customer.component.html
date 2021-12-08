@@ -137,7 +137,7 @@
                         <div  class="z-div"> <span  class="z-label text-gray-900" >Số lương đơn / tháng</span> </div>
                     </div>
                     <div class="input-group mb-3">
-                      <input [ngClass]="{'is-valid': !quantityMonthArray.errors?.['required'] && !quantityMonthArray.errors?.['minlength']}"
+                      <input [ngClass]="{'is-valid': !quantityMonthArray.errors?.['required'] && !quantityMonthArray.errors?.['min']}"
                       type="text"  formControlName="quantityMonth" class="form-control"  maxlength="3">
                       <div class="input-group-append">
                         <span class="input-group-text" id="basic-addon2">Đơn</span>
@@ -155,7 +155,7 @@
                         <div  class="z-div"> <span  class="z-label text-gray-900">Trọng lượng</span></div>
                     </div>
                     <div class="input-group mb-3">
-                      <input [ngClass]="{'is-valid': !weightArray.errors?.['required'] && !weightArray.errors?.['minlength']}"
+                      <input [ngClass]="{'is-valid': !weightArray.errors?.['required'] && !weightArray.errors?.['min']}"
                       type="text" formControlName="weight"   class="form-control" maxlength="3">
                       <div class="input-group-append">
                         <span class="input-group-text" id="basic-addon2">Kg</span>
@@ -177,7 +177,7 @@
                       <div  class="z-div"> <span  class="z-label text-gray-900">Doanh thu dự kiến</span> </div>
                   </div>
                   <div class="input-group mb-3">
-                    <input [ngClass]="{'is-valid': !expectedRevenueArray.errors?.['required'] && !expectedRevenueArray.errors?.['minlength']}"
+                    <input [ngClass]="{'is-valid': !expectedRevenueArray.errors?.['required'] && !expectedRevenueArray.errors?.['min']}"
                      formControlName="expectedRevenue" class="form-control" type="text" appMoney >
                     <div class="input-group-append">
                       <span class="input-group-text" id="basic-addon2" >VNĐ</span>
@@ -201,6 +201,7 @@
                       <ng-select   bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
                       </ng-select>
                       <i *ngIf="!addressArray.controls[i]?.get('province')?.hasError('required')" class="fas fa-check check" ></i>
+                      <i *ngIf="addressArray.controls[i]?.get('province')?.hasError('required') && addressArray.controls[i]?.get('province').touched" class="fas fa-exclamation-circle check2" ></i>
               </div>
           </div>
 
@@ -212,6 +213,7 @@
                   <ng-select   bindValue="districtCode" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" [items]="dataDistrict" bindLabel="districtName" formControlName="district" >
                   </ng-select>
                   <span *ngIf="!addressArray.controls[i]?.get('district')?.hasError('required')"><i class="fas fa-check check" ></i></span>
+                  <i *ngIf="addressArray.controls[i]?.get('district')?.hasError('required') && addressArray.controls[i]?.get('district').touched" class="fas fa-exclamation-circle check2" ></i>
 
               </div>
           </div>
@@ -228,6 +230,7 @@
                   <ng-select   bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
                   </ng-select>
                   <span *ngIf="!addressArray.controls[i]?.get('ward')?.hasError('required')"><i class="fas fa-check check" ></i></span>
+                  <i *ngIf="addressArray.controls[i]?.get('ward')?.hasError('required') && addressArray.controls[i]?.get('ward').touched" class="fas fa-exclamation-circle check2" ></i>
               </div>
           </div>
           <div class="col-md-6 z-div">

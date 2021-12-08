@@ -55,23 +55,34 @@
        <div class="mt-2">
         <ng-select  placeholder="Chọn Tỉnh/Thành phố"  bindValue="provinceCode" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" [items]="dataProvince" bindLabel="provinceName" formControlName="province" >
         </ng-select>
+        <span *ngIf="!addressArray.controls[i]?.get('province')?.hasError('required')"><i class="fas fa-check check" ></i></span>
+        <i *ngIf="addressArray.controls[i]?.get('province')?.hasError('required') && addressArray.controls[i]?.get('province').touched" class="fas fa-exclamation-circle check2" ></i>
        </div>
       </div>
       <div class="col-12">
         <div class="mt-2">
           <ng-select placeholder="Chọn Quận/Huyện"  bindValue="districtCode" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" [items]="dataDistrict" bindLabel="districtName" formControlName="district" >
           </ng-select>
+          <span *ngIf="!addressArray.controls[i]?.get('district')?.hasError('required')"><i class="fas fa-check check" ></i></span>
+          <i *ngIf="addressArray.controls[i]?.get('district')?.hasError('required') && addressArray.controls[i]?.get('district').touched" class="fas fa-exclamation-circle check2" ></i>
          </div>
       </div>
       <div class="col-12">
         <div class="mt-2">
           <ng-select placeholder="Chọn Phường/xã"  bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
           </ng-select>
+          <span *ngIf="!addressArray.controls[i]?.get('ward')?.hasError('required')"><i class="fas fa-check check" ></i></span>
+          <i *ngIf="addressArray.controls[i]?.get('ward')?.hasError('required') && addressArray.controls[i]?.get('ward').touched" class="fas fa-exclamation-circle check2" ></i>
          </div>
       </div>
       <div class="col-12 mt-2">
         <div class="input-group">
-          <input class="form-control" placeholder="Nhập số nhà" formControlName="homeNo">
+          <input [ngClass]="{'is-valid': !addressArray.controls[i]?.get('homeNo')?.hasError('required') && !addressArray.controls[i]?.get('homeNo')?.hasError('minlength')}"
+           class="form-control" placeholder="Nhập số nhà" formControlName="homeNo">
+        </div>
+        <div *ngFor="let validation of updateFormMessage.homeNo">
+          <small class="text-danger"   *ngIf="addressArray.controls[i]?.get('homeNo')?.hasError(validation.type) && addressArray.controls[i]?.get('homeNo')?.touched">
+           {{validation.message}}</small>
         </div>
       </div>
     </div>
@@ -81,7 +92,8 @@
     <div class="row">
       <div class="h5 mb-0 text-gray-900 mt-2" ><h4 style="margin: 0px !important; ">lý do</h4></div>
       <div class="input-group">
-        <input class="form-control"  formControlName="reason">
+        <input [ngClass]="{'is-valid': !reasonArr?.errors?.['required']}"
+         class="form-control"  formControlName="reason">
       </div>
       <div *ngFor="let validation of updateFormMessage.reason">
         <small class="text-danger"   *ngIf="updateForm.get('reason')?.hasError(validation.type) && updateForm.get('reason').touched">
@@ -94,7 +106,8 @@
     <div class="row">
       <div class="h5 mb-0 text-gray-900 mt-2"><h4 style="margin: 0px !important; ">Đề xuất ( không bắt buộc)</h4></div>
       <div class="input-group">
-        <input class="form-control" placeholder="" style="height: 70px;" formControlName="proposal">
+        <input [ngClass]="{'is-valid': !proposalArr?.errors?.['required']}"
+        class="form-control" placeholder="" formControlName="proposal" style="height: 70px;">
       </div>
     </div>
   </ng-container>
@@ -128,7 +141,8 @@
           <div class="input-group">
 
             <div class="input-group ">
-              <input class="form-control" appMoney  type="text" formControlName="inProvincePercent">
+              <input [ngClass]="{'is-valid': !inProvincePercentArr?.errors?.['required'] && !inProvincePercentArr?.errors?.['minlength']}"
+              class="form-control" appMoney  type="text" formControlName="inProvincePercent">
               <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">VNĐ</span>
               </div>
@@ -152,7 +166,8 @@
           <div class="input-group">
 
             <div class="input-group">
-              <input class="form-control" appMoney  type="text" formControlName="outProvincePercent">
+              <input [ngClass]="{'is-valid': !outProvincePercentArr?.errors?.['required'] && !outProvincePercentArr?.errors?.['minlength']}"
+               class="form-control" appMoney  type="text" formControlName="outProvincePercent">
               <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">VNĐ</span>
               </div>
@@ -171,7 +186,8 @@
           <div class="input-group">
 
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="0%" formControlName="discount" maxlength="2">
+              <input [ngClass]="{'is-valid': !discountArr?.errors?.['required'] && !discountArr?.errors?.['minlength']}"
+              type="text" class="form-control" placeholder="0%" formControlName="discount" maxlength="2">
               <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">%</span>
               </div>
@@ -186,7 +202,8 @@
         <div class="row">
           <div class="h5 mb-0 text-gray-900 "><h4 style="margin: 0px !important; ">Đề xuất ( không bắt buộc)</h4></div>
           <div class="input-group">
-            <input class="form-control" placeholder="" style="height: 70px;">
+            <input [ngClass]="{'is-valid': !proposalArr?.errors?.['required']}"
+             class="form-control" placeholder="" formControlName="proposal" style="height: 70px;">
           </div>
         </div>
 

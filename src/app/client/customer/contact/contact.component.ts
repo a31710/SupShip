@@ -12,16 +12,25 @@ export class ContactComponent implements OnInit {
   scheduleData:any;
   day: Date = new Date;
   dateValue: Date = new Date;
+  ratioComplete:any
   constructor(private router: Router,private scheduleService: ScheduleService, public loaderService: LoaderService) {
     this.scheduleService.listScheduleMonth(this.datePipe(this.day)).subscribe(data=>{
       this.scheduleData = data.content;
+      this.getNotComplete(data.content)
       console.log(data);
      })
    }
 
+
+   getNotComplete(data:any){
+    const success = data.filter((d:any) => d.status == 'SUCCESS');
+    const failed = data.filter((d:any) => d.status == 'FAILED');
+    this.ratioComplete = `${(data.length - success.length - failed.length)}/${(data.length - failed.length)} Chưa hoàn thành`;
+  }
    onChangeMonth(date:any){
      this.scheduleService.listScheduleMonth(this.datePipe(date)).subscribe(data=>{
       this.scheduleData = data.content;
+      this.getNotComplete(data.content)
       console.log(data);
      })
    }

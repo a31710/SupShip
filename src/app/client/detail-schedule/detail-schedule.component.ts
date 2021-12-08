@@ -57,6 +57,10 @@ export class DetailScheduleComponent implements OnInit {
       { type: 'required', message: 'Bạn chưa nhập ô này' },
       { type: 'minlength', message: 'phải có ít nhất 5 kí tự' },
     ],
+    'homeNo': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'minlength', message: 'phải có ít nhất 10 kí tự' },
+    ],
     }
   customerData:any
   time1Validate:boolean = true;
@@ -73,7 +77,6 @@ export class DetailScheduleComponent implements OnInit {
        console.log(data?.lead?.id);
        this.customerService.getDetailCustomer(data?.lead?.id).subscribe(data=>{
          console.log(data);
-
         this.customerData = [data]
        })
        this.uploadForm(data.lead)
@@ -87,6 +90,8 @@ export class DetailScheduleComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
 
   toNumber(val:any) {
     let valArr = val.split('');

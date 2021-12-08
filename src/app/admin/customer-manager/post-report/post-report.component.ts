@@ -57,4 +57,16 @@ export class PostReportComponent implements OnInit, OnChanges {
     + date.getFullYear();
   }
 
+  onSearch(){
+    this.customerService.reportPostCode(this.datePipe(this.fromDate),this.datePipe(this.toDate),this.postCodeReport)
+    .subscribe((data)=>{
+      this.reportData = data;
+      this.postReportData = data?.data;
+      console.log(data);
+      this.size = this.postReportData.length;
+      this.pagiData = this.paginate(this.postReportData,15,1);
+
+    })
+  }
+
 }

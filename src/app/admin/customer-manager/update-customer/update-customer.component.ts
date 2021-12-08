@@ -159,6 +159,8 @@ export class UpdateCustomerComponent implements OnInit {
       this.setindustryValue(indexCode)
       })
 
+      this.industryError = false;
+
   }
   setindustryValue(indexCode:any){
     this.industryFormArray.controls.map((control,i)=>{

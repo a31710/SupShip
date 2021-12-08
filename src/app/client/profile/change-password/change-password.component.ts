@@ -51,6 +51,11 @@ export class ChangePasswordComponent implements OnInit {
       reNewPassword:[null, [Validators.required, Validators.minLength(6),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,255}$')]],
     });
   }
+
+  get passwordArr() {
+    return this.changeForm.get('password') as FormArray;
+  }
+
   get newPassword() {
     return this.changeForm.get('newPassword') as FormArray;
   }
@@ -60,8 +65,6 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit() {
   }
   checkMatch(){
-    console.log(this.password + '' + this.rePassword);
-    console.log(this.password == this.rePassword);
     let flg = false;
     if(this.password == this.rePassword){
       flg = true
@@ -71,14 +74,29 @@ export class ChangePasswordComponent implements OnInit {
   onSubmit(){
 
     this.profileService.changePassword(this.changeForm.value).subscribe((data)=>{
-      Swal.fire(
-        'Đổi mật khẩu thành công!',
-        '',
-        'success'
-      )
-      console.log(data);
+      if(data.error == 'true'){
+        Swal.fire({
+          title: 'Đổi mật khẩu không thành công',
+          text: data.message,
+          icon: 'error',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'OK'
+        })
+      }else{
+        Swal.fire({
+          title: data.message,
+          icon: 'success',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigateByUrl('client/profile/edit-profile');
+          }
+        })
 
-      this.router.navigateByUrl('client/profile/edit-profile');
+      }
+
+
     })
 
 

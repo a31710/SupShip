@@ -21,7 +21,8 @@
                         <div  class="z-vlayout-inner" style="padding-bottom:0">
                             <div  class="z-div"> <span  class="z-label text-gray-900">Email</span> </div>
                         </div>
-                        <div  class="z-vlayout-inner" ><input placeholder="Nhập địa chỉ email" formControlName="email" class="form-control" value="" type="text" maxlength="100" ></div>
+                        <div  class="z-vlayout-inner" ><input [ngClass]="{'is-valid': !emailArr.errors?.['required'] && !emailArr.errors?.['email']}"
+                           placeholder="Nhập địa chỉ email" formControlName="email" class="form-control" value="" type="text" maxlength="100" ></div>
                         <div *ngFor="let validation of insertUserMessage.email">
                           <small class="text-danger"   *ngIf="createUserForm.get('email')?.hasError(validation.type) && createUserForm.get('email').touched">
                            {{validation.message}}</small>
@@ -38,6 +39,8 @@
                           <ng-select  placeholder="Chọn chi nhánh"  bindValue="deptCode" [(ngModel)]="deptCodeSelect" (change)="getPostCode(deptCodeSelect)"
                            [items]="dataDept" bindLabel="deptName" formControlName="deptCode" >
                           </ng-select>
+                          <span *ngIf="!deptCodeArr?.hasError('required')"><i class="fas fa-check check" ></i></span>
+                          <i *ngIf="deptCodeArr?.hasError('required') && deptCodeArr.touched" class="fas fa-exclamation-circle check2" ></i>
                       </div>
                   </div>
               </div>
@@ -53,6 +56,8 @@
                         <ng-select  placeholder="Chọn bưu cục" bindValue="postCode" [(ngModel)]="postCodeSelect"
                         [items]="dataPost" bindLabel="postName" formControlName="postCode" >
                        </ng-select>
+                       <span *ngIf="!postCodeArr?.hasError('required')"><i class="fas fa-check check" ></i></span>
+                       <i *ngIf="postCodeArr?.hasError('required') && postCodeArr.touched" class="fas fa-exclamation-circle check2" ></i>
                 </div>
             </div>
 
@@ -66,6 +71,8 @@
                     <ng-select   bindValue="value" [(ngModel)]="roleSelect"
                     [items]="roleData" bindLabel="name" formControlName="roles" >
                    </ng-select>
+                   <span *ngIf="!rolesArr?.hasError('required')"><i class="fas fa-check check" ></i></span>
+                   <i *ngIf="rolesArr?.hasError('required') && rolesArr.touched" class="fas fa-exclamation-circle check2" ></i>
                 </div>
             </div>
         </div>

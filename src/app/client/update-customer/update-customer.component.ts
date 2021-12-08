@@ -166,6 +166,7 @@ export class UpdateCustomerComponent implements OnInit {
       this.setindustryValue(indexCode)
       })
 
+      this.industryError = false;
   }
   setindustryValue(indexCode:any){
     this.industryFormArray.controls.map((control,i)=>{
@@ -181,7 +182,7 @@ export class UpdateCustomerComponent implements OnInit {
     this.updateCustomerForm = this.fb.group({
         title:['', [Validators.required,Validators.minLength(5)  ]],
         companyName: ['', [Validators.required,Validators.minLength(5)]],
-        representation: ['', [Validators.required ,Validators.minLength(5)]],
+        representation: ['', [Validators.required,Validators.minLength(5)]],
         phone:['', [Validators.required,Validators.minLength(12)]],
         quantityMonth:['', [Validators.required, Validators.min(1)]], //
         weight: ['', [Validators.required,Validators.min(1)]], //
@@ -211,6 +212,8 @@ export class UpdateCustomerComponent implements OnInit {
 
     });
     this.industryError =  this.selectedIndustryValues.length > 0 ? false : true;
+    console.log(this.industryError);
+
   }
   checkIndustryControlsTouched() {
     let flg = false;

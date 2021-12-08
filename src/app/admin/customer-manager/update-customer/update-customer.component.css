@@ -66,4 +66,12 @@
   padding: 0px !important;
 
 }
+.check2{
+  position: absolute;
+  bottom:12px;
+  right:40px;
+  z-index: 2;
+  color: #e74a3b;
+  padding: 0px !important;
+}
 

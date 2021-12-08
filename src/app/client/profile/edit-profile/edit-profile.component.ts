@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../service/profile.service';
 import Swal from 'sweetalert2'
-import { Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { LoaderService } from 'src/app/service/loader.service';
@@ -23,7 +23,7 @@ export class EditProfileComponent implements OnInit {
   userForm: FormGroup | any
   userId:any
   constructor(private profileService: ProfileService, private fb: FormBuilder, private config: NgSelectConfig,
-    private route: Router,private cookieService: CookieService, public loaderService: LoaderService) {
+    private route: Router,private cookieService: CookieService, public loaderService: LoaderService, private router: Router) {
       this.config.appendTo = 'body';
       this.config.bindValue = 'value';
     this.userId =  localStorage.getItem('userId');
@@ -57,13 +57,40 @@ export class EditProfileComponent implements OnInit {
 
 
   }
+
+  editProfileMessage = {
+    'fullName': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'minlength', message: 'phải có ít nhất 5 kí tự' },
+    ],
+    'companyName': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'minlength', message: 'phải có ít nhất 5 kí tự' },
+    ],
+    'birthday': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'minlength', message: 'Sai định dạng ngày sinh'},
+    ],
+    'homeNo': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'minlength', message: 'phải có ít nhất 10 kí tự' },
+    ],
+    'mobile': [
+      { type: 'required', message: 'Bạn chưa nhập ô này' },
+      { type: 'minlength', message: 'Sai định dạng số điện thoại' },
+    ],
+
+    }
+
+
+
   createForm(){
     this.userForm = this.fb.group({
-        fullName:['', [Validators.required]],
-        mobile:['', [Validators.required]],
+        fullName:['', [Validators.required, Validators.minLength(5)]],
+        mobile:['', [Validators.required,Validators.minLength(12)]],
         address: this.fb.array([this.addAddressGroup()]),
         gender:['', [Validators.required,]],
-        birthday:['', [Validators.required,]],
+        birthday:['', [Validators.required,Validators.minLength(10)]],
     })
   }
 
@@ -150,13 +177,28 @@ export class EditProfileComponent implements OnInit {
 
     this.profileService.updateUser(this.bodyUpdate,this.userId).subscribe((data)=>{
       console.log(data);
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Cập nhật thông tin cá nhân thành công',
-        showConfirmButton: false,
-        timer: 3000
-      })
+      if(data.error == 'true'){
+        Swal.fire({
+          title: 'Cập nhật không thành công',
+          text: data.message,
+          icon: 'error',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'OK'
+        })
+      }else{
+        Swal.fire({
+          title: data.message,
+          icon: 'success',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+              localStorage.setItem("username",this.fullNameArray.value);
+              window.location.reload();
+          }
+        })
+
+      }
     }
     )
   }

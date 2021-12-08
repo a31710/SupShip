@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../service/user.service';
 import Swal from 'sweetalert2'
 import { NgSelectConfig } from '@ng-select/ng-select';
@@ -47,6 +47,23 @@ export class CreateUserComponent implements OnInit {
       roles: ['', Validators.required],
     })
   }
+
+  get emailArr(){
+    return this.createUserForm.get('email') as FormArray;
+  }
+
+  get deptCodeArr(){
+    return this.createUserForm.get('deptCode') as FormArray;
+  }
+
+  get postCodeArr(){
+    return this.createUserForm.get('postCode') as FormArray;
+  }
+
+  get rolesArr(){
+    return this.createUserForm.get('roles') as FormArray;
+  }
+
 
   getAllDeptCode(){
     this.userService.getDeptCode().subscribe(data=>this.dataDept=data)

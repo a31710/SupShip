@@ -1,3 +1,5 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 .lds-ripple {
   z-index: 2;
   display: inline-block;
@@ -66,4 +68,34 @@
   border-radius: 4px;
   min-height: 36px;
   align-items: center;
+
+}
+
+
+
+.check{
+  position: absolute;
+  bottom:14px;
+  right:20px;
+  z-index: 2;
+  color: #1cc88a;
+  padding: 0px !important;
+}
+
+
+.check2{
+  position: absolute;
+  bottom:12px;
+  right:40px;
+  z-index: 2;
+  color: #e74a3b;
+  padding: 0px !important;
+}
+#switcher {
+  padding-top: 10px;
+  text-align: right;
+}
+.button {
+  display: inline-block;
+  margin-left: 20px;
 }

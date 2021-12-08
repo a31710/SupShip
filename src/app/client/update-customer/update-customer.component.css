@@ -2,7 +2,7 @@ div.fixed {
   position: fixed;
   width: 100%;
   bottom: 10px;
-  z-index: 2;
+  z-index: 4;
 
 }
 .switch-field {
@@ -125,4 +125,14 @@ h2 {
   color: #1cc88a;
   padding: 0px !important;
 
+}
+
+
+.check2{
+  position: absolute;
+  bottom:12px;
+  right:40px;
+  z-index: 2;
+  color: #e74a3b;
+  padding: 0px !important;
 }
