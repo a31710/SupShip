@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
 import { AuthService } from '../service/auth.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -32,8 +32,17 @@ export class ForgotPasswordComponent implements OnInit {
   }
   onSubmit(){
     localStorage.setItem('email', JSON.stringify(this.forgotForm.get('email').value));
-    this.authService.forgotPassword(this.forgotForm.value).subscribe(()=>{
-      this.router.navigateByUrl('auth/change-password')
+    this.authService.forgotPassword(this.forgotForm.value).subscribe((data)=>{
+      if(data?.error == 'true'){
+        Swal.fire({
+          text: data?.message,
+          icon: 'error',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'Chấp nhận'
+        })
+      }else{
+        this.router.navigateByUrl('auth/change-password')
+      }
     })
   }
 }

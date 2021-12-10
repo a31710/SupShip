@@ -43,7 +43,7 @@
                           <input  type="checkbox" [formControl]="b" (change)="getSelectedIndustryValue()" >
                           <label  class="text-gray-900 ml-2"> {{industryData[index].name}}</label></div>
                           <small class="text-danger"
-                          *ngIf="industryError && checkIndustryControlsTouched()">
+                          *ngIf="industryError ">
                               Chọn ít nhất 1 sản phẩm kinh doanh</small>
                       </ng-container>
                     </div>

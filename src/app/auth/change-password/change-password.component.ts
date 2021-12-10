@@ -57,13 +57,28 @@ export class ChangePasswordComponent implements OnInit {
 
   onSubmit(){
 
-    this.authService.changePassword(this.changeForm.value).subscribe(()=>{
-      Swal.fire(
-        'Đổi mật khẩu thành công!',
-        '',
-        'success'
-      )
-      this.router.navigateByUrl('auth/checkemail');
+    this.authService.changePassword(this.changeForm.value).subscribe((data)=>{
+      if(data?.error == 'true'){
+        Swal.fire({
+          title: data?.message,
+          icon: 'error',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'Chấp nhận'
+        })
+      }else{
+        Swal.fire({
+          title: 'Đổi mật khẩu thành công',
+          icon: 'success',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigateByUrl('auth/checkemail');
+          }
+        })
+
+      }
+
     })
 
 

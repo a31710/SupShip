@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../service/user.service';
 import Swal from 'sweetalert2'
@@ -15,8 +15,10 @@ export class CreateUserComponent implements OnInit {
   postCodeSelect:any;
   roleSelect='NV';
   createUserForm: FormGroup | any;
+  @Output() createUser: EventEmitter<any>;
 
   constructor(private userService: UserService, private fb: FormBuilder,private config: NgSelectConfig ) {
+    this.createUser =  new EventEmitter<any>();
     this.config.appendTo = 'body';
     this.config.bindValue = 'value';
     this.getAllDeptCode();
@@ -75,14 +77,26 @@ export class CreateUserComponent implements OnInit {
   onSubmit(){
     console.log(this.createUserForm.value);
     this.userService.registerUser(this.createUserForm.value).subscribe((data)=>{
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Đăng ký thành công',
-        showConfirmButton: false,
-        timer: 3000
-      })
-      this.createUserForm.reset();
+      if(data?.error == 'true'){
+        Swal.fire({
+          title: 'Tạo tài khoản thất bại',
+          text: data?.message,
+          icon: 'error',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'Chấp nhận'
+        })
+      }else{
+        Swal.fire({
+          title: 'Tạo mới tài khoản thành công',
+          icon: 'success',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+              this.createUser.emit(data);
+          }
+        })
+      }
     })
   }
 

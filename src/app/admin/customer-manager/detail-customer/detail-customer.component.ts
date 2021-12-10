@@ -53,17 +53,19 @@ export class DetailCustomerComponent implements OnInit,OnChanges {
       this.infoCusomter = [data];
       this.events1 = [
       ];
-      if(data.schedules){
+      if(data?.schedules && data?.schedules[0]?.result){
         this.events1.push({status:'Ngày cập nhật kết quả',
-        date:  this.datePipe.transform( data.schedules[data.schedules.length-1]?.result?.createdDate,'dd/MM - hh:mm a '),
+        date:  this.datePipe.transform( data?.schedules[data?.schedules.length-1]?.result?.createdDate,'dd/MM - hh:mm a '),
         color:'#858796',
-        result: data.schedules[data.schedules.length-1]?.result?.status
+        result: data?.schedules[data?.schedules.length-1]?.result?.status
        })
-        this.events1.push({status:'Ngày đặt lịch tiếp xúc', date:  this.datePipe.transform( data.schedules[data.schedules.length-1]?.createDate,'dd/MM - hh:mm a '),color:'#858796'})
+      }
 
+      if(data.schedules){
+        this.events1.push({status:'Ngày đặt lịch tiếp xúc', date:  this.datePipe.transform( data?.schedules[data?.schedules.length-1]?.createDate,'dd/MM - hh:mm a '),color:'#858796'})
       }
       if(data.leadAssigns){
-        this.events1.push({status:'Ngày giao tiếp xúc', date:  this.datePipe.transform( data.leadAssigns[data.leadAssigns.length-1]?.createdDate,'dd/MM - hh:mm a '),color:'#858796'})
+        this.events1.push({status:'Ngày giao tiếp xúc', date:  this.datePipe.transform( data.leadAssigns[data?.leadAssigns.length-1]?.createdDate,'dd/MM - hh:mm a '),color:'#858796'})
       }
       this.events1.push({status:'Ngày tạo khách hàng', date: this.datePipe.transform(data?.createDate,'dd/MM - hh:mm a') ,color:'#858796' })
       this.events1[0].color = '#4e73df'

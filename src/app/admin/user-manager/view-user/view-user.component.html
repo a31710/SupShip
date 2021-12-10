@@ -63,10 +63,10 @@
           </td>
           <td   class="success" [class.active]="item.isActive == 0">{{item.isActive == 1? 'Bình thường': 'Bị khóa'}}</td>
           <td>
-            <a type="button"  class="btn btn-danger btn-sm px-3 mr-2" data-toggle="modal" data-target="#banModal">
+            <a type="button" (click)="getIdUser(item.uid)" class="btn btn-danger btn-sm px-3 mr-2" data-toggle="modal" data-target="#banModal">
               <i class="fas fa-lock mr-2"></i><span>Khóa</span>
             </a>
-            <a type="button" class="btn btn-success btn-sm px-3" data-toggle="modal" data-target="#unluckModal">
+            <a type="button" (click)="getIdUser(item.uid)" class="btn btn-success btn-sm px-3" data-toggle="modal" data-target="#unluckModal">
               <i class="fas fa-key mr-2"></i><span>Mở khóa</span>
             </a>
           </td>
@@ -83,7 +83,7 @@
 
 </div>
 <div *ngIf="tab.value == 2">
-  <app-create-user></app-create-user>
+  <app-create-user (createUser)="onCreateUser()"></app-create-user>
 </div>
 
 
@@ -105,7 +105,7 @@ aria-hidden="true">
        <div class="modal-body">chọn "Chập nhận" Nếu bạn chắc chắn muốn khóa tài khoản này</div>
        <div class="modal-footer">
            <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-           <button class="btn btn-primary"  type="button" data-dismiss="modal">Chấp nhận</button>
+           <button (click)="banUser()" class="btn btn-primary"  type="button" data-dismiss="modal">Chấp nhận</button>
        </div>
    </div>
 </div>
@@ -124,7 +124,7 @@ aria-hidden="true">
         <div class="modal-body">chọn "Chập nhận" Nếu bạn chắc chắn muốn mở khóa tài khoản này</div>
         <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-            <button class="btn btn-primary"  type="button" data-dismiss="modal">Chấp nhận</button>
+            <button (click)="unLockUser()" class="btn btn-primary"  type="button" data-dismiss="modal">Chấp nhận</button>
         </div>
     </div>
 </div>
