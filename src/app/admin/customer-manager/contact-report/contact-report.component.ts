@@ -89,19 +89,30 @@ export class ContactReportComponent implements OnInit {
 
 
   onSearch(){
-    this.isToggle = [];
-    this.listPostCode = [];
-    this.offset = 0;
-    const fromDate = this.datePipe(this.fromDate);
-    const toDate = this.datePipe(this.toDate);
-    console.log(`${fromDate} ${toDate} ${this.deptCodeSelect}`);
-    this.customerService.searchDeptcodeReport(fromDate,toDate,this.deptCodeSelect).subscribe(data=>{
-      console.log(data);
-      this.reportData = data;
-      this.ReportAllCompany = data?.data;
-      this.size = this.ReportAllCompany.length;
-      this.pagiData = this.paginate(this.ReportAllCompany,15,1);
-    });
+    if(this.deptCodeSelect != undefined && this.deptCodeSelect){
+      this.isToggle = [];
+      this.listPostCode = [];
+      this.offset = 0;
+      const fromDate = this.datePipe(this.fromDate);
+      const toDate = this.datePipe(this.toDate);
+      console.log(`${fromDate} ${toDate} ${this.deptCodeSelect}`);
+      this.customerService.searchDeptcodeReport(fromDate,toDate,this.deptCodeSelect).subscribe(data=>{
+        console.log(data);
+        this.reportData = data;
+        this.ReportAllCompany = data?.data;
+        this.size = this.ReportAllCompany.length;
+        this.pagiData = this.paginate(this.ReportAllCompany,15,1);
+      });
+    }else{
+      this.customerService.ReportAllCompany(this.datePipe(this.fromDate),this.datePipe(this.toDate)).subscribe(data=>{
+        console.log(data);
+        this.reportData = data;
+        this.ReportAllCompany = data?.data;
+        this.size = this.ReportAllCompany.length;
+        this.pagiData = this.paginate(this.ReportAllCompany,15,1);
+      })
+    }
+
 
   }
 
