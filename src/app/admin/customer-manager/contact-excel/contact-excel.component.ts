@@ -71,15 +71,18 @@ export class ContactExcelComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
   ngOnChanges(){
-      // this.customerService.excelHistory().subscribe(data=>{
-      //   this.historyData = data.data
-      //   this.size = data.totalItem;
-      // })
+    if(this.loadExcel){
+      this.customerService.excelHistory().subscribe(data=>{
+        this.historyData = data.data
+        this.size = data.totalItem;
+        this.pagiHistoryData = this.paginate(this.historyData,15,1);
+      })
+    }
+
   }
 
   fetchExcel(value:any){
     console.log(value);
-
   }
 
   paginate(array:any, page_size:any, page_number:any) {
