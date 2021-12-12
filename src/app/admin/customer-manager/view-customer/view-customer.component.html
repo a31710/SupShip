@@ -132,7 +132,7 @@
           <td>{{item?.impactDate | date: 'dd/MM/yyyy'}}</td>
 
           <td>
-            <button type="button" style="width:100px" *ngIf="item?.status != 'CONTACTING' && item?.status !='FAILED' " class="btn btn-success btn-sm px-3 " [disabled]="isdb" (click)="singleTranfer(item.id)" data-toggle="modal" data-target="#tranfer">
+            <button type="button" style="width:100px" *ngIf="item?.status != 'CONTACTING' && item?.status !='FAILED' && item?.status !='NOT_CONTACTED' " class="btn btn-success btn-sm px-3 " [disabled]="isdb" (click)="singleTranfer(item.id)" data-toggle="modal" data-target="#tranfer">
                 Giao TX
             </button>
             <button type="button" *ngIf="item?.status != 'NEW' && item?.status != 'SUCCESS'"  class="btn btn-success btn-sm px-3 " [disabled]="isdb" (click)="singleTranfer(item.id, item.status)" data-toggle="modal" data-target="#tranfer">

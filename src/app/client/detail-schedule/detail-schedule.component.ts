@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../service/profile.service';
 import { ScheduleService } from '../service/schedule.service';
 import Swal from 'sweetalert2';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { LoaderService } from 'src/app/service/loader.service';
 import { CustomerService } from '../service/customer.service';
+
 @Component({
   selector: 'app-detail-schedule',
   templateUrl: './detail-schedule.component.html',
@@ -62,6 +63,8 @@ export class DetailScheduleComponent implements OnInit {
       { type: 'minlength', message: 'phải có ít nhất 10 kí tự' },
     ],
     }
+
+  @Output() changeTab: EventEmitter<any>;
   customerData:any
   time1Validate:boolean = true;
   time2Validate:boolean = true;
@@ -69,7 +72,8 @@ export class DetailScheduleComponent implements OnInit {
   time2:any
   day: Date  = new Date;
   constructor(private profileSerivce: ProfileService, private fb: FormBuilder,private config: NgSelectConfig,private customerService:CustomerService,
-     private scheduleService: ScheduleService, private activatedRoute: ActivatedRoute,public loaderService: LoaderService) {
+     private scheduleService: ScheduleService, private activatedRoute: ActivatedRoute,public loaderService: LoaderService,private router: Router) {
+    this.changeTab = new EventEmitter<any>();
    this.activatedRoute.params.subscribe(params=>{
      const id = params['id'];
      this.scheduleService.detailSchedule(id).subscribe(data=>{

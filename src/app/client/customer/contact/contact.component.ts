@@ -53,4 +53,6 @@ export class ContactComponent implements OnInit {
     const year = date.getYear().toString().substring(1,3);
     return `${day<10?`0${day}`:day}-${month<10?`0${month}`:month}-20${year}`
   }
+
+
 }

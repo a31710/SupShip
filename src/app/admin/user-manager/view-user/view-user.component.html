@@ -54,10 +54,10 @@
           <td>{{item.mobile | phone}}</td>
           <td>
             <container-element [ngSwitch]="item.roles">
-              <some-element *ngSwitchCase="1">Nhân viên</some-element>
-              <some-element *ngSwitchCase="2">Chi nhánh</some-element>
-              <some-element *ngSwitchCase="3">Tổng bưu cục</some-element>
-              <some-element *ngSwitchCase="4">Tổng công ty</some-element>
+              <some-element *ngSwitchCase="'NV'">Nhân viên</some-element>
+              <some-element *ngSwitchCase="'CN'">Chi nhánh</some-element>
+              <some-element *ngSwitchCase="'TBC'">Tổng bưu cục</some-element>
+              <some-element *ngSwitchCase="'TCT'">Tổng công ty</some-element>
               <some-element *ngSwitchDefault>Nhân viên</some-element>
            </container-element>
           </td>

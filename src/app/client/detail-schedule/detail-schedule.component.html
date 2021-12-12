@@ -2,7 +2,6 @@
 <ng-container *ngIf="loaderService.isLoading | async">
   <div class="lds-ripple"><div></div><div></div></div>
  </ng-container>
-
 <ng-container *ngFor="let item of customerData">
   <div class="card shadow mb-4 mt-2" style="border: 1px solid rgb(179, 177, 177);">
     <!-- Card Header - Dropdown -->
