@@ -311,7 +311,7 @@ loadExcel: any = 1;
   }
 
   addContactExcel(){
-    const contactexcel = {title:'Giao khách hàng excel', value:7};
+    const contactexcel = {title:'Giao tiếp xúc excel', value:7};
     const oldData = this.tabs.filter(data => data.value == 7)
     if(oldData[0]?.value == 7){
       console.log('bị trùng, trở về tab cũ');

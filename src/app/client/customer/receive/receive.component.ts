@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/service/loader.service';
 import { CustomerService } from '../../service/customer.service';
 import Swal from 'sweetalert2';
+import { ScheduleService } from '../../service/schedule.service';
 @Component({
   selector: 'app-receive',
   templateUrl: './receive.component.html',
@@ -13,7 +14,7 @@ export class ReceiveComponent implements OnInit {
   leadData:any;
   req:any = '';
   data:any;
-  constructor(private customerService: CustomerService, private router:Router,public loaderService: LoaderService) {
+  constructor(private customerService: CustomerService, private router:Router,public loaderService: LoaderService, private scheduleService: ScheduleService) {
     this.customerService.getLeadByUser().subscribe(data=>{
       this.leadData = data.data
       this.totalLead = data.totalItem;

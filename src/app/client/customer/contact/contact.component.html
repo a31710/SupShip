@@ -40,7 +40,7 @@
         <span [ngClass]="{'text-warning': item?.lead?.status === 'NEW', 'text-success' : item?.lead?.status === 'SUCCESS','text-danger' : item?.lead?.status === 'FAILED','text-warning': item?.lead?.status === 'CONTACTING' }">
             {{item?.lead?.statusDescription}}</span>
           <span class="glyphicon glyphicon-time"></span>
-          {{item?.fromDate | date:'hh:mm' }} - {{item?.toDate | date:'hh:mm' }}
+          {{item?.fromDate | date:'HH:mm' }} - {{item?.toDate | date:'HH:mm' }}
         </div>
       </div>
     </div>

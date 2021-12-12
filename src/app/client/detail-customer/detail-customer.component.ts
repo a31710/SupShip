@@ -5,6 +5,7 @@ import { PrimeIcons } from "primeng/api";
 import { LoaderService } from 'src/app/service/loader.service';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
+import { ScheduleService } from '../service/schedule.service';
 @Component({
   selector: 'app-detail-customer',
   templateUrl: './detail-customer.component.html',
@@ -15,7 +16,8 @@ export class DetailCustomerComponent implements OnInit {
   events1: any[] |any = [];
   leadData:any
   constructor(private customerService: CustomerService, private activateRoute: ActivatedRoute,
-    public loaderService: LoaderService, private datePipe: DatePipe, private router: Router) {
+    public loaderService: LoaderService, private datePipe: DatePipe, private router: Router,private scheduleService: ScheduleService) {
+      this.scheduleService.indexTab = 0;
     this.activateRoute.params.subscribe(param=>{
       const id = param['id']
       this.customerService.getDetailCustomer(id).subscribe(data=>{

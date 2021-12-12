@@ -64,7 +64,6 @@ export class DetailScheduleComponent implements OnInit {
     ],
     }
 
-  @Output() changeTab: EventEmitter<any>;
   customerData:any
   time1Validate:boolean = true;
   time2Validate:boolean = true;
@@ -73,7 +72,8 @@ export class DetailScheduleComponent implements OnInit {
   day: Date  = new Date;
   constructor(private profileSerivce: ProfileService, private fb: FormBuilder,private config: NgSelectConfig,private customerService:CustomerService,
      private scheduleService: ScheduleService, private activatedRoute: ActivatedRoute,public loaderService: LoaderService,private router: Router) {
-    this.changeTab = new EventEmitter<any>();
+
+       this.scheduleService.indexTab = 1;
    this.activatedRoute.params.subscribe(params=>{
      const id = params['id'];
      this.scheduleService.detailSchedule(id).subscribe(data=>{

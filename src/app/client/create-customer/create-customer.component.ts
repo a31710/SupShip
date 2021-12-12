@@ -6,6 +6,7 @@ import { ProfileService } from '../service/profile.service';
 import Swal from 'sweetalert2'
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { LoaderService } from 'src/app/service/loader.service';
+import { ScheduleService } from '../service/schedule.service';
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
@@ -25,7 +26,8 @@ export class CreateCustomerComponent implements OnInit {
   selectedIndustryValues:String[] = [];
   industryError: Boolean = true;
   constructor(private fb: FormBuilder, private profileSerivce: ProfileService,public loaderService: LoaderService,
-     private customerService: CustomerService, private router: Router,private config: NgSelectConfig) {
+     private customerService: CustomerService, private router: Router,private config: NgSelectConfig, private scheduleService: ScheduleService) {
+      this.scheduleService.indexTab = 0;
     this.getAllCity();
     this.createForm();
     this.addIndustrysControls();

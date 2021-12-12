@@ -1,4 +1,4 @@
-
+<!--
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
   <h1 class="h3 mb-0 text-800" style="color: #4e73df; text-align: center;">Tiếp xúc khách hàng</h1>
@@ -15,5 +15,29 @@
   </mat-tab>
   <mat-tab label="Báo cáo">
     <app-report></app-report>
+  </mat-tab>
+</mat-tab-group> -->
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-800" style="color: #4e73df; text-align: center;">Tiếp xúc khách hàng</h1>
+
+</div>
+
+<mat-tab-group [selectedIndex]="selected.value" [backgroundColor]="'primary'"
+               (selectedIndexChange)="selected.setValue($event)">
+  <mat-tab *ngFor="let tab of tabs; let index = index">
+    <ng-template mat-tab-label >
+      {{tab.title}}
+    </ng-template>
+    <div *ngIf="tab.value == 1" >
+      <app-receive></app-receive>
+    </div>
+    <div *ngIf="tab.value == 2" >
+      <app-contact></app-contact>
+    </div>
+    <div *ngIf="tab.value == 3" >
+      <app-report></app-report>
+    </div>
+
   </mat-tab>
 </mat-tab-group>

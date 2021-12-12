@@ -43,13 +43,28 @@
         </div>
         </div>
 
-        <div class="card-body" style="padding-bottom: 0px !important;">
+        <div class="card-body" style="padding-bottom: 0px !important; ">
           <div class="h5 mb-0 text-gray-900 "><h3><i class="fas fa-home mr-2 text-primary"></i>{{item.companyName}}</h3></div>
           <div class="h5 mb-0 text-gray-900 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h3> </div>
           <div class="h5 mb-0 text-gray-900 mt-2"><h3><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item.representation}}</h3></div>
           <div class="h5 mb-0 text-gray-900 mt-2"><h3 style="margin-bottom: 5px;"><i class="fas fa-phone-square-alt mr-2 ml-1 text-primary"></i>{{item.phone | phone}}</h3></div>
-          <hr class="text-primary" style="margin: 0px !important;">
-          <div style="text-align: center; ; " class="h5 mb-0 text-primary" ><a (click)="createSchedule(item.id)"><h3 style="margin: 5px;"><i class="far fa-calendar-alt mr-2 text-primary"></i>Đặt lịch</h3></a></div>
+
+          <ng-container *ngIf="item.status != 'SUCCESS' && item.status != 'FAILED'">
+            <hr class="text-primary" style="margin: 0px !important;">
+
+            <ng-container *ngIf="item.status == 'CONTACTING'">
+              <div style="text-align: center; ; " class="h5 mb-0 text-primary" ><a (click)="createSchedule(item.id)"><h3 style="margin: 5px;"><i class="far fa-calendar-alt mr-2 text-primary"></i>Đổi lịch</h3></a></div>
+            </ng-container>
+            <ng-container *ngIf="item.status != 'CONTACTING'">
+              <div style="text-align: center; ; " class="h5 mb-0 text-primary" ><a (click)="createSchedule(item.id)"><h3 style="margin: 5px;"><i class="far fa-calendar-alt mr-2 text-primary"></i>Đặt lịch</h3></a></div>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="item.status == 'SUCCESS' || item.status == 'FAILED'">
+            <br>
+          </ng-container>
+
+
         </div>
 
     </div>

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,17 +22,19 @@ export class CreateScheduleComponent implements OnInit {
   model: NgbDateStruct | any;
   today = this.calendar.getToday();
 
-  constructor(private calendar: NgbCalendar, private fb: FormBuilder, private router:Router,
-     private activateRoute: ActivatedRoute,private customerService:CustomerService, public loaderService: LoaderService) {
+  constructor(private calendar: NgbCalendar, private fb: FormBuilder, private router:Router,private datePipe: DatePipe,
+     private activateRoute: ActivatedRoute,private customerService:CustomerService, public loaderService: LoaderService,private scheduleService: ScheduleService) {
+      this.scheduleService.indexTab = 0;
       this.activateRoute.params.subscribe(params=>{
         const id = params['id'];
         this.customerService.getDetailCustomer(id).subscribe(data=>{
           this.scheduleData = [data]
+          this.updateHour(data?.schedules)
           console.log(data);
         })
 
       })
-    this.createForm()
+      this.createForm()
    }
   scheduleForm: FormGroup | any;
   ngOnInit() {
@@ -43,6 +46,15 @@ export class CreateScheduleComponent implements OnInit {
       fromDate: [''],
       toDate: [''],
     })
+  }
+
+  updateHour(data:any){
+    if(data){
+      const fromDate = this.datePipe.transform(data[data.length-1].fromDate,'HH:mm')
+      const toDate = this.datePipe.transform(data[data.length-1].toDate,'HH:mm')
+      this.time1 = fromDate;
+      this.time2 = toDate;
+    }
   }
   get leadIdArr(){
     return this.scheduleForm.get('leadId') as FormArray;
@@ -58,8 +70,8 @@ export class CreateScheduleComponent implements OnInit {
       const id:any = parseInt(params['id']);
       this.leadIdArr.setValue(id);
     })
-    const form:any = `${this.datePipe(this.day)} ${this.time1}:00`
-    const to:any = `${this.datePipe(this.day)} ${this.time2}:00`
+    const form:any = `${this.datePipes(this.day)} ${this.time1}:00`
+    const to:any = `${this.datePipes(this.day)} ${this.time2}:00`
     this.fromArr.setValue(form);
     this.toArr.setValue(to);
     console.log(this.scheduleForm.value);
@@ -89,7 +101,7 @@ export class CreateScheduleComponent implements OnInit {
     })
   }
 
-  datePipe(time:any){
+  datePipes(time:any){
     const day= time.getDate()<10?`0${time.getDate()}`:time.getDate();
     const month = time.getMonth()+1<10?`0${time.getMonth()+1}`:time.getMonth()+1;
     const year = time.getYear().toString().substring(1,3);
