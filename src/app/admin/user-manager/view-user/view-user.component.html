@@ -61,7 +61,7 @@
               <some-element *ngSwitchDefault>Nhân viên</some-element>
            </container-element>
           </td>
-          <td   class="success" [class.active]="item.isActive == 0">{{item.isActive == 1? 'Bình thường': 'Bị khóa'}}</td>
+          <td  [ngClass]="{'text-success': item.isActive == 1, 'text-danger' : item.isActive == 0 }">{{item.isActive == 1? 'Bình thường': 'Bị khóa'}}</td>
           <td>
             <a type="button" (click)="getIdUser(item.uid)" class="btn btn-danger btn-sm px-3 mr-2" data-toggle="modal" data-target="#banModal">
               <i class="fas fa-lock mr-2"></i><span>Khóa</span>
