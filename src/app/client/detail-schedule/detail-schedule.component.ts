@@ -84,6 +84,8 @@ export class DetailScheduleComponent implements OnInit {
         this.customerData = [data]
        })
        this.uploadForm(data.lead)
+       this.uploadResult(data.result)
+
        this.scheduleIdArr.setValue(data?.id);
      })
 
@@ -94,6 +96,8 @@ export class DetailScheduleComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
 
 
 
@@ -154,6 +158,15 @@ export class DetailScheduleComponent implements OnInit {
       ward: data?.address?.ward,
       district: data?.address?.district
     }])
+  }
+
+  uploadResult(data:any){
+  if(data){
+    this.inProvincePercentArr.setValue(data?.inProvincePercent.toString());
+    this.outProvincePercentArr.setValue(data?.outProvincePercent.toString());
+    this.discountArr.setValue(data?.discount.toString());
+  }
+
   }
 
   get discountArr(){

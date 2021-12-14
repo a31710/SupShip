@@ -68,7 +68,7 @@
   display: inline-block;
   position: absolute;
   top: 30vh;
-  right: 35vw;
+  right: 45vw;
   width: 80px;
   height: 80px;
 }
@@ -96,5 +96,12 @@
     width: 72px;
     height: 72px;
     opacity: 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .p-field .text-primary{
+    font-size: 14px;
+    text-align: center;
   }
 }

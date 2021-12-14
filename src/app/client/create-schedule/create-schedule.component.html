@@ -1,106 +1,142 @@
 
+
 <ng-container *ngIf="loaderService.isLoading | async">
   <div class="lds-ripple"><div></div><div></div></div>
  </ng-container>
 <div class="row">
-  <div class="col-12">
-    <div class="card bg-primary text-white shadow">
-        <div class="card-body" style="text-align: center;">
-        Tạo mới tiếp xúc
-        </div>
+
+    <div
+    class="card-header bg-primary d-flex flex-row align-items-center justify-content-between" style="padding: 20px 10px;">
+    <i style="font-size: 20px; cursor: pointer;" [routerLink]="['/client/customer']"   class="text-gray-100 fas fa-arrow-left"></i>
+    <h3 class="m-0 text-gray-100 mr-2">Tạo mới tiếp xúc</h3>
+    <div class="dropdown no-arrow">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+        </a>
     </div>
+
+
 </div>
 </div>
-<a routerLink="/client/customer" class="btn btn-circle btn-primary mb-2 mt-2" ><i class="fas fa-arrow-left"></i></a>
 <br>
 
 
-<div class="p-fluid">
-  <div class="p-field">
-    <span class="text-gray-900">Ngày tiếp xúc</span>
-      <p-calendar  [(ngModel)]="day" showButtonBar="true" dateFormat="dd/mm/yy" ></p-calendar>
+
+
+
+
+
+ <div class="container mt-5" style="width:700px">
+
+
+  <form  >
+
+
+
+        <!-- Grow In Utility -->
+
+
+            <div class="card position-relative" >
+              <div class="all">
+                <div class="p-fluid ">
+                  <div class="p-field">
+                    <span class="text-gray-900 row col-12" >Ngày tiếp xúc</span>
+                      <p-calendar  [(ngModel)]="day" showButtonBar="true" dateFormat="dd/mm/yy" ></p-calendar>
+                  </div>
+
+                </div>
+
+
+                <div class="p-fluid row   mt-2 mb-4 ">
+                  <div class="p-field col-6">
+                    <span class="text-gray-900">thời gian từ </span>
+                    <span class="p-input-icon-right">
+                    <i class="far fa-clock"></i>
+                    <p-inputMask [(ngModel)]="time1" class="p-inputtext-sm" (change)="changeTime1(time1)" mask="99:99" name="stopTime" tabindex="4"
+                    placeholder="00:00" slotChar="00:00"></p-inputMask>
+                  </span>
+                </div>
+                  <div class="p-field col-6">
+                    <span class="text-gray-900">Đến</span>
+                    <span class="p-input-icon-right">
+                    <i class="far fa-clock"></i>
+                    <p-inputMask [(ngModel)]="time2"  class="p-inputtext-sm" (change)="changeTime2(time2)" mask="99:99" name="stopTime" tabindex="4"
+                    placeholder="00:00" slotChar="00:00"></p-inputMask>
+                  </span>
+                </div>
+                </div>
+
+
+
+
+
+
+
+                <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+
+
+                <ng-container  *ngFor="let item of scheduleData">
+                  <div class=" row p-2">
+                    <div class="col-12 " style="padding: 4px;">
+                      <div class="card mb-4" style="border: 1px solid rgb(168, 167, 167)">
+
+                        <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(168, 167, 167); padding: 0 20px !important;" >
+                            <h3 class="m-0 text-primary font-weight-bold">KH{{item?.id}}</h3>
+                            <div class="dropdown no-arrow">
+                              <a class="dropdown-toggle"  role="button" id="dropdownMenuLink"
+                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <h5  class="mt-2" [ngClass]="{'text-info': item?.type == 'DUOC_GIAO', 'text-success' : item?.type == 'TU_NHAP' }" >{{item?.type == 'DUOC_GIAO'? 'Được giao':'Tự nhập'}}</h5>
+                              </a>
+                          </div>
+                        </div>
+
+                        <div class="card-body">
+                          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-home mr-2 text-primary"></i>{{item?.companyName}}</h4></div>
+                          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h4> </div>
+                          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item?.representation}}</h4></div>
+                          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-phone-square-alt mr-2 ml-1 text-primary"></i>{{item?.phone | phone}}</h4></div>
+                          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-money-bill-wave mr-2 ml-1 text-primary"></i>Doanh thu dự kiến: <span style="font-size: 15px;" class="text-success">{{item?.expectedRevenue | money}}</span></h4></div>
+                          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-bullseye mr-2 ml-1 text-primary"></i>Sản phẩm kinh doanh: </h4></div>
+                          <ng-container *ngFor="let i of item?.industries">
+                            <div class="h5 mb-0 text-info mt-2"><h4> {{i?.name}}</h4></div>
+                          </ng-container>
+                        </div>
+
+                    </div>
+                    </div>
+                  </div>
+                </ng-container>
+
+                <br>
+                <br>
+                <br>
+
+
+
+
+                <ng-template #footerTemplate>
+                  <hr class="my-0">
+                  <button class="btn btn-primary btn-sm m-2 float-left" (click)="model = today; d.close()">Today</button>
+                  <button class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">Close</button>
+                </ng-template>
+                </form>
+              </div>
+            </div>
+
+
+
+  </form>
+
+
   </div>
+  <div class="fixed" style="margin-left: -10px;">
 
-</div>
-
-
-<div class="p-fluid row mt-2 mb-4">
-  <div class="p-field col-6">
-    <span class="text-gray-900">thời gian từ </span>
-    <span class="p-input-icon-right">
-    <i class="far fa-clock"></i>
-    <p-inputMask [(ngModel)]="time1" class="p-inputtext-sm" (change)="changeTime1(time1)" mask="99:99" name="stopTime" tabindex="4"
-    placeholder="00:00" slotChar="00:00"></p-inputMask>
-  </span>
-</div>
-  <div class="p-field col-6">
-    <span class="text-gray-900">Đến</span>
-    <span class="p-input-icon-right">
-    <i class="far fa-clock"></i>
-    <p-inputMask [(ngModel)]="time2"  class="p-inputtext-sm" (change)="changeTime2(time2)" mask="99:99" name="stopTime" tabindex="4"
-    placeholder="00:00" slotChar="00:00"></p-inputMask>
-  </span>
-</div>
-</div>
-
-
-
-
-
-
-
-<form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
-
-
-<ng-container  *ngFor="let item of scheduleData">
-  <div class=" row">
-    <div class="col-12">
-      <div class="card mb-4" style="border: 1px solid rgb(168, 167, 167)">
-        <!-- Card Header - Dropdown -->
-        <div
-            class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(168, 167, 167); padding: 0 20px !important;" >
-            <h3 class="m-0 text-primary font-weight-bold">KH{{item?.id}}</h3>
-            <div class="dropdown no-arrow">
-              <a class="dropdown-toggle"  role="button" id="dropdownMenuLink"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <h5  class="mt-2" [ngClass]="{'text-info': item?.type == 'DUOC_GIAO', 'text-success' : item?.type == 'TU_NHAP' }" >{{item?.type == 'DUOC_GIAO'? 'Được giao':'Tự nhập'}}</h5>
-              </a>
-          </div>
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-home mr-2 text-primary"></i>{{item?.companyName}}</h4></div>
-          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h4> </div>
-          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item?.representation}}</h4></div>
-          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-phone-square-alt mr-2 ml-1 text-primary"></i>{{item?.phone | phone}}</h4></div>
-          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-money-bill-wave mr-2 ml-1 text-primary"></i>Doanh thu dự kiến: <span style="font-size: 15px;" class="text-success">{{item?.expectedRevenue | money}}</span></h4></div>
-          <div class="h5 mb-0 text-gray-800 mt-2"><h4><i class="fas fa-bullseye mr-2 ml-1 text-primary"></i>Sản phẩm kinh doanh: </h4></div>
-          <ng-container *ngFor="let i of item?.industries">
-            <div class="h5 mb-0 text-info mt-2"><h4> {{i?.name}}</h4></div>
-          </ng-container>
-        </div>
-
-    </div>
-    </div>
-  </div>
-</ng-container>
-
-<br>
-<br>
-<br>
-
-
-<div class="fixed" style="margin-left: -10px;">
-
-    <div class="row col-12" >
+    <div class="row col-12 col-lg-2" >
       <button [disabled]="!day || time1Validate == false || time2Validate == false || !time1 || !time2" class="btn btn-sm btn-primary p-2" >Tạo mới</button>
     </div>
 </div>
 
-<ng-template #footerTemplate>
-  <hr class="my-0">
-  <button class="btn btn-primary btn-sm m-2 float-left" (click)="model = today; d.close()">Today</button>
-  <button class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">Close</button>
-</ng-template>
-</form>
+
 

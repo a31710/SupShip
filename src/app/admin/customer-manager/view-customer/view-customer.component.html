@@ -119,8 +119,8 @@
           <th scope="col"><input (click)="toggle(i)" type="checkbox" (change)="getIdArray(item.id)"></th>
           <th scope="row">KH{{item.id}}</th>
           <td class="text-primary">{{item?.leadSource=='PRIVATE'?'Cá nhân':'Doanh nghiệp'}}</td>
-          <td>{{item?.companyName}}<br><h5 class="text-primary">{{item?.address?.fomatAddress}}</h5></td>
-          <td>{{item?.representation}}<br><h5 class="text-primary">{{item?.phone | phone}}</h5></td>
+          <td style="padding-bottom: 0;">{{item?.companyName}}<br><h5 style="margin: 0px !important" class="text-primary">{{item?.address?.fomatAddress}}</h5></td>
+          <td>{{item?.representation}}<br><h5 style="margin: 0px !important" class="text-primary">{{item?.phone | phone}}</h5></td>
           <td [ngClass]="{'text-info': item?.status == 'NEW', 'text-warning' : item?.status == 'CONTACTING','text-success' : item?.status == 'SUCCESS','text-danger' : item?.status == 'FAILED','text-gray' : item?.status == 'NOT_CONTACTED' }"
           >{{item?.statusDescription}}</td>
           <td [ngClass]="{'text-info': item?.statusLa == 'NEW', 'text-warning' : item?.statusLa == 'CONTACTING','text-success' : item?.statusLa == 'SUCCESS','text-danger' : item?.statusLa == 'FAILED','text-gray' : item?.statusLa == 'NOT_CONTACTED' }"

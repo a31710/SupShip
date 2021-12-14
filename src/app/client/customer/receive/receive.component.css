@@ -40,7 +40,7 @@ section {
   display: inline-block;
   position: absolute;
   top: 30vh;
-  right: 35vw;
+  right: 45vw;
   width: 80px;
   height: 80px;
 }
@@ -68,5 +68,16 @@ section {
     width: 72px;
     height: 72px;
     opacity: 0;
+  }
+}
+
+
+.example-button-row{
+  width: 100% !important;
+}
+
+@media only screen and (min-width: 1200px) {
+  .card.min{
+    min-height: 296px;
   }
 }

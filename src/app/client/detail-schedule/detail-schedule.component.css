@@ -3,7 +3,7 @@ div.fixed {
   width: 100%;
   bottom: 10px;
   z-index: 4;
-
+  left: 45vw;
 }
 
 
@@ -12,7 +12,7 @@ div.fixed {
   display: inline-block;
   position: absolute;
   top: 50vh;
-  right: 35vw;
+  right: 45vw;
   width: 80px;
   height: 80px;
 }
@@ -66,7 +66,7 @@ div.fixed {
 .check{
   position: absolute;
   bottom:14px;
-  right:20px;
+  right:8px;
   z-index: 2;
   color: #1cc88a;
   padding: 0px !important;
@@ -80,4 +80,16 @@ div.fixed {
   z-index: 2;
   color: #e74a3b;
   padding: 0px !important;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  div.fixed {
+    position: fixed;
+    width: 100%;
+    bottom: 10px;
+    z-index: 4;
+    left: auto;
+  }
+
 }

@@ -31,8 +31,8 @@
   <div class="row">
 
 
-    <div class="col-lg-6">
-      <div class="card  mb-4 " style="border: 1px solid  rgb(189, 188, 188);padding-bottom: 0 !important;" *ngFor="let item of leadData" (click)="detailCustomer(item.id)" >
+    <div class="col-lg-3" *ngFor="let item of leadData" style="cursor: pointer;">
+      <div class="card min mb-4 " style="border: 1px solid  rgb(189, 188, 188);padding-bottom: 0 !important;"  (click)="detailCustomer(item.id)" >
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid  rgb(189, 188, 188); padding: 0 20px !important;">
           <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">KH{{item.id}}</h6>
           <div class="dropdown no-arrow">

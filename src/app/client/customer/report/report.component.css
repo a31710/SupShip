@@ -1,0 +1,36 @@
+@media only screen and (min-width: 1200px) {
+  h5 .text-primary,.span{
+    font-size: large;
+  }
+  .card.bg-danger.text-white{
+    padding: 10px 10px;
+  }
+  .card.bg-success.text-white{
+    padding: 10px 10px;
+  }
+  .txt-box{
+    font-size: 20px;
+  }
+  .prgbar{
+    height: 20px ;
+    margin:10px;
+  }
+  .txt-box.rgt{
+    float: right;
+  }
+  .row.pad{
+    padding-top: 15px;
+  }
+  .card.min{
+    min-height: 219px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .txt-box{
+    font-size: 8.5px;
+  }
+}
+.body{
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}

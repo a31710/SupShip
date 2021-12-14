@@ -194,7 +194,7 @@
           <ng-container formArrayName="address">
             <div  class="row z-div" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
               <div  class="col-md-6 z-div">
-                  <div  class="z-vlayout" >
+                  <div  class="z-vlayout" style="position: relative;" >
                       <div class="z-vlayout-inner" style="padding-bottom:0">
                           <div  class="z-div"> <span  class="z-label text-gray-900">Tỉnh/Thành phố</span> </div>
                       </div>
@@ -206,7 +206,7 @@
           </div>
 
           <div  class="col-md-6 z-div ">
-              <div  class="z-vlayout" >
+              <div  class="z-vlayout " style="position: relative;">
                   <div  class="z-vlayout-inner" style="padding-bottom:0">
                       <div  class="z-div"> <span  class="z-label text-gray-900">Quận/Huyện</span> </div>
                   </div>
@@ -222,10 +222,10 @@
 
 
       <div  class="row z-div  mt-3" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
-          <div class="col-md-6 z-div">
-              <div  class="z-vlayout" >
+          <div class="col-md-6 z-div" >
+              <div  class="z-vlayout" style="position: relative;">
                   <div  class="z-vlayout-inner" style="padding-bottom:0">
-                      <div  class="z-div"> <span  class="z-label text-gray-900">Phường/xã</span></div>
+                      <div  class="z-div" > <span  class="z-label text-gray-900">Phường/xã</span></div>
                   </div>
                   <ng-select   bindValue="wardCode" [(ngModel)]="wardSelect"  [items]="dataWard" bindLabel="wardName" formControlName="ward" >
                   </ng-select>
