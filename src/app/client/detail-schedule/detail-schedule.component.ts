@@ -275,7 +275,9 @@ export class DetailScheduleComponent implements OnInit {
   }
 
   resetForm(){
-    const empty:any = ""
+    const empty:any = "";
+    this.time1 = undefined;
+    this.time2 = undefined;
     this.discountArr.setValue(empty);
     this.toArr.setValue(empty);
     this.fromArr.setValue(empty);

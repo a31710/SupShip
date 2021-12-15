@@ -220,3 +220,17 @@
     opacity: 0;
   }
 }
+
+
+.report-header{
+  margin: 1.3vw;
+  display: inline-block;
+}
+
+.text-header{
+
+}
+.text-desc{
+  padding-top: 10px;
+  font-size: 20px;
+}

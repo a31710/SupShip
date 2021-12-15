@@ -2,70 +2,75 @@
 
 <div class="mt-4 body">
 
-  <div style="padding-bottom:25px;" class="row z-div">
-    <div  class="col-md-1 z-div">
-      <!-- <ng-container *ngIf="loaderService.isLoading | async">
-        <div class="lds-ripple"><div></div><div></div></div>
-       </ng-container> -->
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Bưu cục</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalPost?reportData?.totalPost:0}}</span></div>
-      </div>
-    </div>
 
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span class="z-label"><h3 class="text-primary">Nhân viên</h3></span></div>
-        <div class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalCountEmp?reportData?.totalCountEmp:0}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Kế hoạch</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigns?reportData?.totalAssigns:0}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Đã tiếp xúc</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigned?reportData?.totalAssigns:0}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span class="z-label"><h3 class="text-primary">Thành công</h3></span></div>
-        <div  class="z-vlayout-inner" ><span style="font-size: 20px; color:green;" class="z-label">{{reportData?.totalSuccesses?reportData?.totalAssigns:0}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Đang tiếp xúc</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px; color:orange;" class="z-label">{{reportData?.totalContacting?reportData?.totalAssigns:0}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span class="z-label"><h3 class="text-primary">Thất bại</h3></span></div>
-        <div  class="z-vlayout-inner" ><span style="font-size: 20px; color:red;" class="z-label">{{reportData?.totalFails?reportData?.totalAssigns:0}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">TL tiếp xúc</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigned?reportData?.totalAssigns:0}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-2 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">TL hoàn thành KH</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigned?reportData?.totalAssigns:0}}</span></div>
-      </div>
-    </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Bưu cục</h3>
+    <div class="text-desc ">{{reportData?.totalPost?reportData?.totalPost:0}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Nhân viên</h3>
+    <div class="text-desc ">{{reportData?.totalCountEmp?reportData?.totalCountEmp:0}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Kế hoạch</h3>
+    <div class="text-desc ">{{reportData?.totalAssigns?reportData?.totalAssigns:0}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Đã tiếp xúc</h3>
+    <div class="text-desc ">{{reportData?.totalAssigned?reportData?.totalAssigns:0}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Thành công</h3>
+    <div class="text-desc text-success">{{reportData?.totalSuccesses?reportData?.totalAssigns:0}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Đang tiếp xúc</h3>
+    <div class="text-desc text-warning">{{reportData?.totalContacting?reportData?.totalAssigns:0}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Thất bại</h3>
+    <div class="text-desc text-danger">{{reportData?.totalFails?reportData?.totalAssigns:0}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">TL tiếp xúc</h3>
+    <div class="text-desc ">{{reportData?.totalAssigned?reportData?.totalAssigns:0}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">TL hoàn thành KH</h3>
+    <div class="text-desc ">{{reportData?.totalAssigned?reportData?.totalAssigns:0}}</div>
   </div>
 
+
+
+
+
+  <div id="myDIV" class="">
+
+    <div id="left" >
+      <div  class="button selected" id="left-switcher-default" style="width:200px" id="date-picker-example"  inline="true">
+        <p-calendar [(ngModel)]="fromDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
+      </div>
+
+
+      <div class="button selected" id="left-switcher-default" style="width:200px">
+        <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
+      </div>
+
+    <div class="button selected" id="left-switcher-default">
+      <a  (click)="onSearch()" class="btn btn-sm btn-success"><i
+        class="fas fa-search fa-sm text-white-50" ></i> Tìm kiếm</a>
+    </div>
+
+
+    </div>
+
+
+</div>
+
+<!--
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
   </div>
-  <!-- Earnings (Monthly) Card Example -->
+
   <div class="row col-12">
     <div class="row col-5 mb-4">
       <div class="col-4">
@@ -85,7 +90,7 @@
         </div>
       </div>
 
-    </div>
+    </div> -->
 
 
 

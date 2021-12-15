@@ -97,13 +97,37 @@ loadExcel: any = 1;
       leadIds:['',],
       deptCode: ['',Validators.required],
       postCode: ['',Validators.required],
-      note:['',],
+      note:['',Validators.required],
     })
+  }
+
+  resetTranferForm(){
+    const empty:any ="";
+    this.deptCodeSelect = empty;
+    this.postCodeSelect = empty;
+    this.leadSelect = empty;
+    this.tranferForm.reset();
+  }
+
+
+
+
+  get userRecipientIdArr(){
+    return this.tranferForm.get('userRecipientId') as FormArray;
   }
 
   get leadIdArray(){
     return this.tranferForm.get('leadIds') as FormArray;
   }
+
+  get deptCodeArr(){
+    return this.tranferForm.get('deptCode') as FormArray;
+  }
+
+  get postCodeArr(){
+    return this.tranferForm.get('postCode') as FormArray;
+  }
+
   onSubmit(){
 
     this.leadIdArray.setValue(this.idArray);
@@ -122,6 +146,7 @@ loadExcel: any = 1;
         }).then((result) => {
           if (result.isConfirmed) {
             this.fetchAPi();
+            this.resetTranferForm();
           }
         })
       }else{
@@ -133,11 +158,13 @@ loadExcel: any = 1;
         }).then((result) => {
           if (result.isConfirmed) {
             this.fetchAPi();
+            this.resetTranferForm();
           }
         })
       }
 
     })
+
 
 
 
@@ -403,8 +430,12 @@ loadExcel: any = 1;
     this.tabs.splice(index, 1);
     this.selected.setValue(0);
   }
+  uploadTranferForm(data:any){
+    console.log(data);
+
+  }
   singleTranfer(id:any, stt:any){
-    if(stt == 'CONTACTING'){
+    if(stt == 'CONTACTING' || stt == 'FAILED' || stt == 'NOT_CONTACTED'){
       this.isCTX = true;
     }else{
       this.isCTX = false;
@@ -412,6 +443,7 @@ loadExcel: any = 1;
     this.idArray.push(id);
     const data  = this.listCustomer.filter((data:any)=> data.id === id);
     this.tranferData= data;
+    this.uploadTranferForm(data)
   }
   getIdArray(id:any){
 
@@ -468,6 +500,7 @@ loadExcel: any = 1;
       this.isdb == true
     }
     this.tranferData = [];
+    this.resetTranferForm();
   }
 
 

@@ -14,59 +14,108 @@
 
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
   </div>
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="row col-12">
-    <div class="row col-xl-6 col-md-8 mb-4">
-      <div class="col-3 mt-2">
-        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-          <input [(ngModel)]="req" placeholder="ID hoặc SĐT" type="text" id="example" class="form-control" style="border: 1px solid rgb(160, 154, 154); padding: 22px;">
-        </div>
+
+  <div id="myDIV" class="" >
+
+    <div id="left1" >
+      <div  class="button selected" id="left-switcher-default" style="width:200px" id="date-picker-example"  inline="true">
+        <input [(ngModel)]="req" placeholder="ID hoặc SĐT" type="text" id="example" class="form-control" style="border: 1px solid rgb(160, 154, 154); padding: 22px;">
       </div>
-      <div class="col-3 mt-2">
-        <div class="md-form md-outline input-with-post-icon datepicker">
-            <p-calendar [(ngModel)]="fromDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
-        </div>
+
+
+      <div class="button selected" id="left-switcher-default" style="width:200px;">
+        <p-calendar style="z-index: 99;" [(ngModel)]="fromDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
       </div>
-      <div class="col-3 mt-2">
-        <div class="md-form md-outline input-with-post-icon datepicker">
-            <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
-        </div>
-      </div>
-      <div class="col-3 pt-2 mt-2">
-        <a  class="btn btn-sm btn-success" (click)="onSearch()" ><i
-          class="fas fa-search fa-sm text-white-900 mr-1" ></i> Tìm kiếm</a>
-      </div>
+
+
+      <div class="button selected" id="left-switcher-default" style="width:200px">
+        <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
     </div>
 
-    <div class="row col-6 pt-2" >
-      <div class="mb-4">
-        <div id="switcher">
-          <div class="button selected" id="switcher-default">
-            <button  (click)="addCreateTab()" class="btn btn-sm btn-success mr-2 mt-2"><i
-              class="fas fa-user-plus fa-sm text-white-900 mr-1" ></i>Thêm mới</button>
-          </div>
-          <div class="button" id="switcher-narrow">
-            <button  (click)="addContactExcel()" class="btn btn-sm btn-success mr-2 mt-2">Giao TX Excel</button>
-          </div>
-          <div class="button" id="switcher-narrow">
-            <button (click)="exportExcel()" class="btn btn-sm btn-dark mr-2 mt-2"><i class="fas fa-file-download text-white-900 mr-2"></i>Xuất Excel</button>
-          </div>
 
-      </div>
 
-      </div>
+
+    <div class="button selected" id="left-switcher-default">
+      <a  class="btn btn-sm btn-success" (click)="onSearch()" ><i
+        class="fas fa-search fa-sm text-white-900 mr-1" ></i> Tìm kiếm</a>
     </div>
 
-  </div>
 
-  <div class="row col-12">
-    <hr>
+    </div>
+
+
+    <div id="right">
+      <div class="button selected" id="switcher-default">
+        <button  (click)="addCreateTab()" class="btn btn-sm btn-success  mt-1"><i
+          class="fas fa-user-plus fa-sm text-white-900 mr-1" ></i>Thêm mới</button>
+      </div>
+      <div class="button" id="switcher-narrow">
+        <button  (click)="addContactExcel()" class="btn btn-sm btn-success  mt-1">Giao TX Excel</button>
+      </div>
+      <div class="button" id="switcher-narrow">
+        <button (click)="exportExcel()" class="btn btn-sm btn-dark  mt-1"><i class="fas fa-file-download text-white-900 mr-2"></i>Xuất Excel</button>
+      </div>
+
+
   </div>
 
 
 
+</div>
 
-  <div class="row col-12">
+
+<div id="myDIV" class="">
+
+  <div id="left2" >
+    <div  class="button selected" id="left-switcher-default"  id="date-picker-example"  inline="true">
+      <a  (click)="getListAll()" class="btn btn-sm btn-secondary mt-2">Tất cả</a>
+    </div>
+
+
+    <div class="button selected" id="left-switcher-default" >
+      <a  (click)="getListNew()" class="btn btn-sm btn-primary mt-2">Mới</a>
+    </div>
+
+
+    <div class="button selected" id="left-switcher-default" >
+      <a  (click)="getListNotContacting()" class="btn btn-sm btn-info mt-2">Chưa tiếp xúc</a>
+  </div>
+
+  <div class="button selected" id="left-switcher-default" >
+    <a  (click)="getListContacting()" class="btn btn-sm btn-warning mt-2">Đang tiếp xúc</a>
+  </div>
+
+
+  <div class="button selected" id="left-switcher-default" >
+    <a  (click)="getListSuccess()" class="btn btn-sm btn-success mt-2">Thành công</a>
+  </div>
+
+
+
+
+  <div class="button selected" id="left-switcher-default">
+    <a  (click)="getListFalied()" class="btn btn-sm btn-danger mt-2" >Thất bại</a>
+  </div>
+
+
+  </div>
+
+
+  <div id="right">
+    <div class="button selected" id="switcher-default">
+      <button  (click)="allTranfer()" data-toggle="modal" data-target="#tranfer" class="btn btn-sm btn-success mr-2 mt-2" [disabled]="!isdb" >Giao tiếp xúc</button>
+    </div>
+    <div class="button" id="switcher-narrow">
+      <button  [disabled]="idArray.length<1" class="btn btn-sm btn-dark mr-2 mt-2"><i class="fas fa-trash-alt text-white-900 mr-2"></i>Xóa bản ghi</button>
+    </div>
+
+</div>
+</div>
+
+
+
+
+  <!-- <div class="row col-12">
     <div class="row col-6 mb-4 ">
       <div class="mb-4 ">
         <a  (click)="getListAll()" class="btn btn-sm btn-secondary mr-2 mt-2">Tất cả</a>
@@ -92,7 +141,7 @@
 
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 
@@ -103,9 +152,9 @@
           <th scope="col">Id</th>
           <th scope="col">Nguồn</th>
           <th scope="col">Tên công ty (Cửa hàng)/ Địa chỉ</th>
-          <th scope="col">Người liên hệ/ Số ĐT</th>
-          <th scope="col">Trạng thái</th>
-          <th scope="col">Trạng thái TX</th>
+          <th scope="col">Người liên hệ/SĐT</th>
+          <th scope="col" style=" cursor: pointer;">Trạng thái<i class="fas fa-info-circle ml-2"></i><span class="text-gray-900 tooltiptext">không biết tra google</span></th>
+          <th scope="col" style=" cursor: pointer;">Trạng thái TX<i class="fas fa-info-circle ml-2"></i><span class="text-gray-900 tooltiptext">không biết tra google</span></th>
           <th scope="col">Chi nhánh</th>
           <th scope="col">Bưu cục</th>
           <th scope="col">Nhân viên TX</th>
@@ -183,30 +232,34 @@ aria-hidden="true">
  <form [formGroup]="tranferForm" >
   <div class="modal-content">
     <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">Giao tiếp xúc {{tranferData?.length}} khách hàng</h3>
+        <h3 class="modal-title" id="exampleModalLabel">{{isCTX==true?'Chuyển tiếp xúc':'Giao tiếp xúc'}} {{tranferData?.length}} khách hàng</h3>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span (click)="clearTranferData()" aria-hidden="true">×</span>
         </button>
     </div>
     <div class="modal-body">
       <div class="row col-12">
-          <div class="row col-6 ">
+          <div class="row col-6 " >
             <span>Mã chi nhánh</span>
-            <div  class="md-form md-outline input-with-post-icon " inline="true">
+            <div  class="md-form md-outline input-with-post-icon " inline="true" style="position: relative;">
 
               <ng-select placeholder="Chọn mã chi nhánh"  bindValue="deptCode" (change)="getPostCode(deptCodeSelect)"
                [(ngModel)]="deptCodeSelect"  [items]="dataDept" bindLabel="deptName" formControlName="deptCode" >
               </ng-select>
+              <span *ngIf="!deptCodeArr?.hasError('required')"><i class="fas fa-check check" ></i></span>
+              <i *ngIf="deptCodeArr?.hasError('required') " class="fas fa-exclamation-circle check2" ></i>
             </div>
           </div>
           <div class="row col-6">
             <span>Mã Bưu cục</span>
-            <div  class="md-form md-outline input-with-post-icon " inline="true">
+            <div  class="md-form md-outline input-with-post-icon " inline="true" style="position: relative;">
 
 
               <ng-select placeholder="Chọn mã Bưu cục"   bindValue="postCode" (change)="getListByPostCode(postCodeSelect)"
               [(ngModel)]="postCodeSelect"  [items]="dataPost" bindLabel="postName" formControlName="postCode" >
              </ng-select>
+             <span *ngIf="!postCodeArr?.hasError('required')"><i class="fas fa-check check" ></i></span>
+             <i *ngIf="postCodeArr?.hasError('required') " class="fas fa-exclamation-circle check2" ></i>
             </div>
      </div>
      </div>
@@ -214,21 +267,27 @@ aria-hidden="true">
 
        <div class="row col-6">
         <span>Nhân viên tiếp xúc</span>
-        <div  class="md-form md-outline input-with-post-icon " inline="true">
+        <div  class="md-form md-outline input-with-post-icon " inline="true" style="position: relative;">
 
 
           <ng-select placeholder="Chọn nhân viên tiếp xúc"  bindValue="empId"
               [(ngModel)]="leadSelect"  [items]="dataLead" bindLabel="name" formControlName="userRecipientId" >
              </ng-select>
+
+             <span *ngIf="!userRecipientIdArr?.hasError('required')"><i class="fas fa-check check" ></i></span>
+             <i *ngIf="userRecipientIdArr?.hasError('required')" class="fas fa-exclamation-circle check2" ></i>
         </div>
        </div>
    <ng-container *ngIf="isCTX == true" >
     <div class="row col-6">
       <span>Lí do chuyển tiếp xúc</span>
-      <div  class="md-form md-outline input-with-post-icon " inline="true">
-        <input  class="form-control" formControlName="note" placeholder="Không bắt buộc">
+      <div  class="md-form md-outline input-with-post-icon " inline="true" style="position: relative;">
+        <input [ngClass]="{'is-valid': !tranferForm.get('note')?.hasError('required'), 'is-invalid': tranferForm.get('note')?.hasError('required')}"
+        class="form-control" formControlName="note" placeholder="bắt buộc">
       </div>
+
      </div>
+
    </ng-container>
 
 
@@ -257,9 +316,18 @@ aria-hidden="true">
     </div>
     <div class="modal-footer">
         <button class="btn btn-sm btn-secondary" type="button" (click)="clearTranferData()" data-dismiss="modal">Hủy</button>
+
+
+      <ng-container *ngIf="isCTX==true">
         <button class="btn btn-sm btn-success" [disabled]="tranferForm.invalid" (click)="onSubmit()" type="button"  data-dismiss="modal" aria-label="Close">
-         Giao
+            Chuyển tiếp xúc
       </button>
+      </ng-container>
+      <ng-container *ngIf="isCTX==false">
+        <button class="btn btn-sm btn-success" [disabled]="postCodeArr?.hasError('required') || deptCodeArr?.hasError('required') || userRecipientIdArr?.hasError('required')" (click)="onSubmit()" type="button"  data-dismiss="modal" aria-label="Close">
+            Giao
+      </button>
+      </ng-container>
     </div>
 </div>
  </form>

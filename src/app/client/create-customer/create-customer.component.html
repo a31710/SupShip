@@ -218,11 +218,11 @@
       <div class="row mt-2">
         <div class="col-12">
           <div class="form-group">
-            <span class="text-gray-900">Số lượng đơn trên tháng</span>
+            <span class="text-gray-900">Số lượng đơn / tháng (dự kiến)</span>
             <div class="input-group mt-1">
               <div class="input-group mb-3">
                 <input type="text" class="form-control" [ngClass]="{'is-valid': !quantityMonthArray.errors?.['required'] && !quantityMonthArray.errors?.['min']}"
-                 formControlName="quantityMonth" maxlength="3">
+                 formControlName="quantityMonth" maxlength="4">
                 <div class="input-group-append">
                   <span class="input-group-text" id="basic-addon2">Đơn</span>
                 </div>
@@ -239,7 +239,7 @@
       <div class="row mt-2">
         <div class="col-12">
           <div class="form-group">
-            <span class="text-gray-900">Trọng lượng/Bưu phẩm</span>
+            <span class="text-gray-900">Trọng lượng/Bưu phẩm (dự kiến)</span>
             <div class="input-group mt-1">
               <div class="input-group mb-3">
                 <input type="text" [ngClass]="{'is-valid': !weightArray.errors?.['required'] && !weightArray.errors?.['min']}"

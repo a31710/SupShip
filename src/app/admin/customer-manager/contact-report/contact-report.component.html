@@ -4,70 +4,48 @@
 
 <div class="mt-4 body">
 
-  <div style="padding-bottom:25px;" class="row z-div">
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary"> Chi nhánh</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalDept}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Bưu cục</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalPost}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span class="z-label"><h3 class="text-primary">Nhân viên</h3></span></div>
-        <div class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalCountEmp}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Kế hoạch</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigns}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Đã tiếp xúc</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigned}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span class="z-label"><h3 class="text-primary">Thành công</h3></span></div>
-        <div  class="z-vlayout-inner" ><span style="font-size: 20px; color:green;" class="z-label">{{reportData?.totalSuccesses}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">Đang tiếp xúc</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px; color:orange;" class="z-label">{{reportData?.totalContacting}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span class="z-label"><h3 class="text-primary">Thất bại</h3></span></div>
-        <div  class="z-vlayout-inner" ><span style="font-size: 20px; color:red;" class="z-label">{{reportData?.totalFails}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-1 z-div">
-      <div class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">TL tiếp xúc</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigned}}</span></div>
-      </div>
-    </div>
-    <div  class="col-md-2 z-div">
-      <div  class="z-vlayout">
-        <div  class="z-vlayout-inner" style="padding-bottom:5px"><span  class="z-label"><h3 class="text-primary">TL hoàn thành KH</h3></span></div>
-        <div  class="z-vlayout-inner" ><span  style="font-size: 20px;" class="z-label">{{reportData?.totalAssigned}}</span></div>
-      </div>
-    </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Chi nhánh</h3>
+    <div class="text-desc ">{{reportData?.totalDept}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Bưu cục</h3>
+    <div class="text-desc ">{{reportData?.totalPost}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Nhân viên</h3>
+    <div class="text-desc ">{{reportData?.totalCountEmp}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Kế hoạch</h3>
+    <div class="text-desc ">{{reportData?.totalAssigns}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Đã tiếp xúc</h3>
+    <div class="text-desc ">{{reportData?.totalAssigned}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Thành công</h3>
+    <div class="text-desc text-success">{{reportData?.totalSuccesses}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Đang tiếp xúc</h3>
+    <div class="text-desc text-warning">{{reportData?.totalContacting}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">Thất bại</h3>
+    <div class="text-desc text-danger">{{reportData?.totalFails}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">TL tiếp xúc</h3>
+    <div class="text-desc ">{{reportData?.totalAssigned}}</div>
+  </div>
+  <div class="report-header">
+    <h3 class="text-header text-primary">TL hoàn thành KH</h3>
+    <div class="text-desc ">{{reportData?.totalAssigned}}</div>
   </div>
 
-  <!-- Earnings (Monthly) Card Example -->
+
 
     <div id="myDIV" class="">
 
@@ -92,7 +70,7 @@
 
 
         <div class="button selected" id="left-switcher-default">
-          <button (click)="onSearch()" class="btn btn-sm btn-success mr-2"><i class="fas fa-search fa-sm text-white-900 mr-2"></i>Tìm kiếm</button>
+          <button (click)="onSearch()" class="btn btn-sm btn-success "><i class="fas fa-search fa-sm text-white-900 mr-2"></i>Tìm kiếm</button>
         </div>
 
 
@@ -101,13 +79,13 @@
 
         <div id="right">
           <div class="button selected" id="switcher-default">
-            <button (click)="exportExcelTuyen()" class="btn btn-sm btn-info mr-2"><i class="fas fa-file-download text-white-900 mr-2"></i>Xuất Excel Tuyến</button>
+            <button (click)="exportExcelTuyen()" class="btn btn-sm btn-info "><i class="fas fa-file-download text-white-900 mr-2"></i>Excel Tuyến</button>
           </div>
           <div class="button" id="switcher-narrow">
-            <button (click)="exportExcelCN()" class="btn btn-sm btn-success mr-2"><i class="fas fa-file-download text-white-900 mr-2"></i>Xuất Excel CN</button>
+            <button (click)="exportExcelCN()" class="btn btn-sm btn-success "><i class="fas fa-file-download text-white-900 mr-2"></i>Excel CN</button>
           </div>
           <div class="button" id="switcher-narrow">
-            <button (click)="exportExcelBC()" class="btn btn-sm btn-primary mr-2"><i class="fas fa-file-download text-white-900 mr-2"></i>Xuất Excel BC</button>
+            <button (click)="exportExcelBC()" class="btn btn-sm btn-primary "><i class="fas fa-file-download text-white-900 mr-2"></i>Excel BC</button>
           </div>
 
 
