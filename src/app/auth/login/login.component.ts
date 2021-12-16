@@ -124,7 +124,7 @@ export class LoginComponent implements OnInit {
           })
         }else{
           this.authService.checkUpdate(this.emaiModel).subscribe(data=>{
-            console.log(data);
+            console.log(data + 'checkUpdate');
             if(data.error == 'true'){
               Swal.fire({
                 title: 'Bạn chưa cập nhật thông tin cá nhân',

@@ -67,7 +67,7 @@
               <div  class="col-md-6 z-div mt-2">
                 <div  class="z-vlayout" >
                     <div  class="z-vlayout-inner" style="padding-bottom:0">
-                        <div  class="z-div"> <span  class="z-label text-gray-900"> Ngày sinh  (Ngày/tháng/năm) </span> </div>
+                        <div  class="z-div"> <span  class="z-label text-gray-900"> Ngày sinh </span> </div>
                     </div>
                     <div  class="z-vlayout-inner" ><input [ngClass]="{'is-valid': !birthDayArray?.errors?.['required'] && !birthDayArray?.errors?.['minlength']}"
                        formControlName="birthday"  class="form-control" appDate value="" type="text" maxlength="100"  ></div>
