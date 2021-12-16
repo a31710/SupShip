@@ -31,7 +31,8 @@
   display: inline-block;
   position: absolute;
   top: 50vh;
-  right: 45vw;
+  right: 50vw;
+  transform: translateX(55%);
   width: 80px;
   height: 80px;
 }

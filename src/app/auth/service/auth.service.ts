@@ -38,6 +38,8 @@ login(loginModel: LoginModel): Observable<any>{
         this.cookieService.set('empSystemId', data?.data?.empSystemId);
         this.cookieService.set('roles', data?.data?.roles);
         localStorage.setItem("username",data?.data?.fullName);
+        localStorage.setItem('deptCode', data?.data?.deptCode);
+        localStorage.setItem('postCode', data?.data?.postCode);
       })
     }
     this.userId.emit(data?.data?.userUid);
@@ -49,8 +51,6 @@ login(loginModel: LoginModel): Observable<any>{
 checkEmail(email: string): Observable<any>{
   return this.http.post<CheckResponse>(`${this.url}/user/check-email`, email)
   .pipe(map(data =>{
-    console.log(data);
-
     localStorage.setItem("isVertify",data.data == 1?'true':'false');
     return data;
   }));
@@ -71,7 +71,6 @@ changePassword(changeModel: ChangePassword):Observable<any>{
 checkUpdate(email: string): Observable<any>{
   return this.http.post<any>(`${this.url}/user/check-update`, email)
   .pipe(map(data =>{
-    console.log(data);
     localStorage.setItem("isUpdate",data.success);
     return true;
   }));
@@ -108,6 +107,18 @@ getUpdate(){
 }
 getJwtToken(){
   return this.cookieService.get('token');
+}
+
+getRole(){
+  return this.cookieService.get('roles');
+}
+
+getDeptCode(){
+  return localStorage.getItem('deptCode');
+}
+
+getPostCode(){
+  return localStorage.getItem('postCode');
 }
 
 }

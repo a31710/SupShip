@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { LoaderService } from 'src/app/service/loader.service';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from 'src/app/auth/service/auth.service';
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',
@@ -53,7 +54,8 @@ fileName='Bao-cao-tiep-xuc.xlsx'
 loadUpdate: any = 1;
 loadExcel: any = 1;
   constructor(private customerService: CustomerService, private cookieService: CookieService,private config: NgSelectConfig,
-     public loaderService: LoaderService , private fb: FormBuilder,private userService: UserService) {
+     public loaderService: LoaderService , private fb: FormBuilder,private userService: UserService, private authService: AuthService) {
+      this.roleFunction();
       this.config.appendTo = 'body';
       this.config.bindValue = 'value';
       const cos:any = this.cookieService.get('empSystemId');
@@ -88,6 +90,15 @@ loadExcel: any = 1;
       this.size = data.totalItem;
       this.isSearch = false;
     })
+  }
+
+  roleFunction(){
+    const role = this.authService.getRole();
+    const deptCode = this.authService.getDeptCode();
+    const postCode = this.authService.getPostCode();
+    console.log(role);
+    console.log(deptCode);
+    console.log(postCode);
   }
 
   createForm(){

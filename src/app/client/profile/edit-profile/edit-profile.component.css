@@ -27,7 +27,8 @@
     display: inline-block;
     position: absolute;
     top: 50vh;
-    right: 35vw;
+    right: 50vw;
+    transform: translateX(70%);
     width: 80px;
     height: 80px;
   }

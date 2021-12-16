@@ -18,7 +18,8 @@
   display: inline-block;
   position: absolute;
   top: 30vh;
-  right: 32vw;
+  right: 50vw;
+  transform: translateX(50%);
   width: 150px;
   height: 150px;
 }
@@ -40,7 +41,7 @@
     display: inline-block;
     position: absolute;
     top: 40vh;
-    right: 38vw;
+    right: 50vw;
     width: 80px;
     height: 80px;
   }

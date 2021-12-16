@@ -40,7 +40,8 @@ section {
   display: inline-block;
   position: absolute;
   top: 30vh;
-  right: 45vw;
+  right: 50vw;
+  transform: translateX(100%);
   width: 80px;
   height: 80px;
 }

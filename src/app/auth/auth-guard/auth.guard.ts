@@ -17,8 +17,6 @@ export class AuthGuard implements CanActivate {
 
     // Kiểm tra người dùng đã đăng nhập chưa
     const isAuthenticated = this.authService.isLoggedIn();
-    console.log(this.authService.isLoggedIn());
-
     if (isAuthenticated) {
         return true;
     } else {

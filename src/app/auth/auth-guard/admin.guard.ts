@@ -16,7 +16,6 @@ export class AdminGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
    const role = this.cookieService.get('roles');
-   console.log(role);
 
    if (role == 'NV') {
     Swal.fire({
