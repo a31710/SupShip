@@ -71,7 +71,7 @@ changePassword(changeModel: ChangePassword):Observable<any>{
 checkUpdate(email: string): Observable<any>{
   return this.http.post<any>(`${this.url}/user/check-update`, email)
   .pipe(map(data =>{
-    localStorage.setItem("isUpdate",data.success);
+    localStorage.setItem("isUpdate",data.error);
     return data;
   }));
 
@@ -119,6 +119,10 @@ getDeptCode(){
 
 getPostCode(){
   return localStorage.getItem('postCode');
+}
+
+getIsUpdate(){
+  return localStorage.getItem('isUpdate');
 }
 
 }
