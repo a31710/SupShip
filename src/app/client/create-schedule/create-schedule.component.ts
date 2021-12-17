@@ -47,6 +47,10 @@ export class CreateScheduleComponent implements OnInit {
       toDate: [''],
     })
   }
+  onChaneDay(value:any){
+    this.day = value;
+
+  }
 
   updateHour(data:any){
     if(data){

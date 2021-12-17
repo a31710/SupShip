@@ -42,7 +42,7 @@
                 <div class="p-fluid ">
                   <div class="p-field">
                     <span class="text-gray-900 row col-12" >Ngày tiếp xúc</span>
-                      <p-calendar  [(ngModel)]="day" showButtonBar="true" dateFormat="dd/mm/yy" ></p-calendar>
+                      <p-calendar [showIcon]="true" inputId="icon" (onSelect)="onChaneDay($event)" [(ngModel)]="day" showButtonBar="true" dateFormat="dd/mm/yy" ></p-calendar>
                   </div>
 
                 </div>
@@ -76,8 +76,8 @@
                 <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
 
 
-                <ng-container  *ngFor="let item of scheduleData">
-                  <div class=" row p-2">
+                <ng-container  *ngFor="let item of scheduleData" >
+                  <div class=" row p-2 box" >
                     <div class="col-12 " style="padding: 4px;">
                       <div class="card mb-4" style="border: 1px solid rgb(168, 167, 167)">
 
@@ -134,7 +134,7 @@
   <div class="fixed" style="margin-left: -10px;">
 
     <div class="row col-12 col-lg-2" >
-      <button [disabled]="!day || time1Validate == false || time2Validate == false || !time1 || !time2" class="btn btn-sm btn-primary p-2" >Tạo mới</button>
+      <button type="button" (click)="onSubmit()" [disabled]="!day || time1Validate == false || time2Validate == false || !time1 || !time2" class="btn btn-sm btn-primary p-2" >Tạo mới</button>
     </div>
 </div>
 

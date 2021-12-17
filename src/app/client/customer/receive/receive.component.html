@@ -1,81 +1,84 @@
-<ng-container *ngIf="loaderService.isLoading | async">
-  <div class="lds-ripple"><div></div><div></div></div>
- </ng-container>
-<section>
-  <div class="example-button-row" style="text-align: center;">
-        <button mat-raised-button class="text-gray-100" style="background-color: #858796; padding: 0 20px;" (click)="getLeadAll()">Tất cả</button>
-        <button mat-raised-button class="text-gray-100" style="background-color: #f6c23e;" (click)="getLeadContacting()">Đang tiếp xúc</button>
-        <button mat-raised-button class="text-gray-100" style="background-color: #e74a3b; padding: 0 20px;" (click)="getLeadFailed()">Thất bại</button>
-        <button mat-raised-button class="text-gray-100" style="background-color: #1cc88a;" (click)="getLeadSuccess()">Thành công</button>
-        <button mat-raised-button class="text-gray-100" style="background-color: #36b9cc;" (click)="getLeadNotContacting()">Chưa tiếp xúc</button>
-        <button mat-raised-button class="text-gray-100" style="background-color: #4e73df;" (click)="getLeadNew()">Mới</button>
-  </div>
-</section>
+<div class="body">
+  <ng-container *ngIf="loaderService.isLoading | async">
+    <div class="lds-ripple"><div></div><div></div></div>
+   </ng-container>
+  <section>
+    <div class="example-button-row" style="text-align: center;">
+          <button mat-raised-button class="text-gray-100" style="background-color: #858796; padding: 0 20px;" (click)="getLeadAll()">Tất cả</button>
+          <button mat-raised-button class="text-gray-100" style="background-color: #f6c23e;" (click)="getLeadContacting()">Đang tiếp xúc</button>
+          <button mat-raised-button class="text-gray-100" style="background-color: #e74a3b; padding: 0 20px;" (click)="getLeadFailed()">Thất bại</button>
+          <button mat-raised-button class="text-gray-100" style="background-color: #1cc88a;" (click)="getLeadSuccess()">Thành công</button>
+          <button mat-raised-button class="text-gray-100" style="background-color: #36b9cc;" (click)="getLeadNotContacting()">Chưa tiếp xúc</button>
+          <button mat-raised-button class="text-gray-100" style="background-color: #4e73df;" (click)="getLeadNew()">Mới</button>
+    </div>
+  </section>
 
-<div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker mt-2" inline="true">
-  <div class="form-inline mr-auto w-100 navbar-search">
-    <div class="input-group">
-      <input [(ngModel)]="req" placeholder="ID hoặc SĐT" type="text" id="example" class="form-control" style="border: 1px solid rgb(196, 190, 190); padding: 22px;">
-        <div class="input-group-append">
-            <button (click)="onSearch()" class="btn btn-primary" type="button">
-                <i class="fas fa-search fa-sm"></i>
-            </button>
-        </div>
+  <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker mt-2" inline="true">
+    <div class="form-inline mr-auto w-100 navbar-search">
+      <div class="input-group">
+        <input [(ngModel)]="req" placeholder="ID hoặc SĐT" type="text" id="example" class="form-control" style="border: 1px solid rgb(196, 190, 190); padding: 22px;">
+          <div class="input-group-append">
+              <button (click)="onSearch()" class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+              </button>
+          </div>
+      </div>
     </div>
   </div>
-</div>
-<br>
-<h2 class=" mb-0 text-800" style="color: #4e73df;">{{totalLead}} khách hàng</h2>
+  <br>
+  <h2 class=" mb-0 text-800" style="color: #4e73df;">{{totalLead}} khách hàng</h2>
 
 
-  <div class="row">
+    <div class="row">
 
 
-    <div class="col-lg-3" *ngFor="let item of leadData" style="cursor: pointer;">
-      <div class="card min mb-4 " style="border: 1px solid  rgb(189, 188, 188);padding-bottom: 0 !important;"  (click)="detailCustomer(item.id)" >
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid  rgb(189, 188, 188); padding: 0 20px !important;">
-          <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">KH{{item.id}}</h6>
-          <div class="dropdown no-arrow">
-            <a class="dropdown-toggle"  role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <h5  class="mt-2" [ngClass]="{'text-info': item?.type == 'DUOC_GIAO', 'text-success' : item?.type == 'TU_NHAP' }" >{{item?.type == 'DUOC_GIAO'? 'Được giao':'Tự nhập'}}</h5>
-            </a>
-        </div>
-        </div>
+      <div class="col-lg-3" *ngFor="let item of leadData" style="cursor: pointer;">
+        <div class="card min mb-4 " style="border: 1px solid  rgb(189, 188, 188);padding-bottom: 0 !important;"  (click)="detailCustomer(item.id)" >
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid  rgb(189, 188, 188); padding: 0 20px !important;">
+            <h6 class="m-0 font-weight-bold text-primary" style="font-size: 15px;">KH{{item.id}}</h6>
+            <div class="dropdown no-arrow">
+              <a class="dropdown-toggle"  role="button" id="dropdownMenuLink"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <h5  class="mt-2" [ngClass]="{'text-info': item?.type == 'DUOC_GIAO', 'text-success' : item?.type == 'TU_NHAP' }" >{{item?.type == 'DUOC_GIAO'? 'Được giao':'Tự nhập'}}</h5>
+              </a>
+          </div>
+          </div>
 
-        <div class="card-body" style="padding-bottom: 0px !important; ">
-          <div class="h5 mb-0 text-gray-900 "><h3><i class="fas fa-home mr-2 text-primary"></i>{{item.companyName}}</h3></div>
-          <div class="h5 mb-0 text-gray-900 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h3> </div>
-          <div class="h5 mb-0 text-gray-900 mt-2"><h3><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item.representation}}</h3></div>
-          <div class="h5 mb-0 text-gray-900 mt-2"><h3 style="margin-bottom: 5px;"><i class="fas fa-phone-square-alt mr-2 ml-1 text-primary"></i>{{item.phone | phone}}</h3></div>
+          <div class="card-body" style="padding-bottom: 0px !important; ">
+            <div class="h5 mb-0 text-gray-900 "><h3><i class="fas fa-home mr-2 text-primary"></i>{{item.companyName}}</h3></div>
+            <div class="h5 mb-0 text-gray-900 mt-2"><h3><i class="fas fa-map-marker-alt mr-2 ml-1 text-primary"></i>{{item?.address?.fomatAddress}}</h3> </div>
+            <div class="h5 mb-0 text-gray-900 mt-2"><h3><i class="fas fa-user mr-2 ml-1 text-primary"></i>{{item.representation}}</h3></div>
+            <div class="h5 mb-0 text-gray-900 mt-2"><h3 style="margin-bottom: 5px;"><i class="fas fa-phone-square-alt mr-2 ml-1 text-primary"></i>{{item.phone | phone}}</h3></div>
 
-          <ng-container *ngIf="item.status != 'SUCCESS' && item.status != 'FAILED'">
-            <hr class="text-primary" style="margin: 0px !important;">
+            <ng-container *ngIf="item.status != 'SUCCESS' && item.status != 'FAILED'">
+              <hr class="text-primary" style="margin: 0px !important;">
 
-            <ng-container *ngIf="item.status == 'CONTACTING'">
-              <div style="text-align: center; ; " class="h5 mb-0 text-primary" ><a (click)="createSchedule(item.id)"><h3 style="margin: 5px;"><i class="far fa-calendar-alt mr-2 text-primary"></i>Đổi lịch</h3></a></div>
+              <ng-container *ngIf="item.status == 'CONTACTING'">
+                <div style="text-align: center; ; " class="h5 mb-0 text-primary" ><a (click)="createSchedule(item.id)"><h3 style="margin: 5px;"><i class="far fa-calendar-alt mr-2 text-primary"></i>Đổi lịch</h3></a></div>
+              </ng-container>
+              <ng-container *ngIf="item.status != 'CONTACTING'">
+                <div style="text-align: center; ; " class="h5 mb-0 text-primary" ><a (click)="createSchedule(item.id)"><h3 style="margin: 5px;"><i class="far fa-calendar-alt mr-2 text-primary"></i>Đặt lịch</h3></a></div>
+              </ng-container>
             </ng-container>
-            <ng-container *ngIf="item.status != 'CONTACTING'">
-              <div style="text-align: center; ; " class="h5 mb-0 text-primary" ><a (click)="createSchedule(item.id)"><h3 style="margin: 5px;"><i class="far fa-calendar-alt mr-2 text-primary"></i>Đặt lịch</h3></a></div>
+
+            <ng-container *ngIf="item.status == 'SUCCESS' || item.status == 'FAILED'">
+              <br>
             </ng-container>
-          </ng-container>
-
-          <ng-container *ngIf="item.status == 'SUCCESS' || item.status == 'FAILED'">
-            <br>
-          </ng-container>
 
 
-        </div>
+          </div>
 
-    </div>
+      </div>
 
-    </div>
+      </div>
 
-<br>
-<br>
-<br>
-</div>
-<div class="icon-botton">
-  <a [routerLink]="['/client/create-customer']"   class="btn btn-primary btn-circle btn-lg">
-    <i class="fas fa-user-plus"></i></a>
+  <br>
+  <br>
+  <br>
+  </div>
+  <div class="icon-botton">
+    <a [routerLink]="['/client/create-customer']"   class="btn btn-primary btn-circle btn-lg">
+      <i class="fas fa-user-plus"></i></a>
+  </div>
+
 </div>

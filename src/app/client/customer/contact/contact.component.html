@@ -26,7 +26,7 @@
   </div>
   <br>
 <div class="row">
-  <div *ngFor="let item of scheduleData" class="col-lg-3" style="cursor: pointer;">
+  <div *ngFor="let item of scheduleData" class="col-lg-3 col-md-4" style="cursor: pointer;">
     <div (click)="detailSchedule(item.id)" class="tp-event mt-2" style="border-radius: 10px;">
       <div class="tp-event-calendar">
         <div class="tp-event-month">{{item?.fromDate | date:'MMMM' }}  </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="tp-event-info" >
           <span class="glyphicon glyphicon-map-marker"></span>
-        <span [ngClass]="{'text-warning': item?.lead?.status === 'NEW', 'text-success' : item?.lead?.status === 'SUCCESS','text-danger' : item?.lead?.status === 'FAILED','text-warning': item?.lead?.status === 'CONTACTING' }">
+        <span  [ngClass]="{'text-warning': item?.lead?.status === 'NEW', 'text-success' : item?.lead?.status === 'SUCCESS','text-danger mintext' : item?.lead?.status === 'FAILED','text-warning': item?.lead?.status === 'CONTACTING' }">
             {{item?.lead?.statusDescription}}</span>
           <span class="glyphicon glyphicon-time"></span>
           {{item?.fromDate | date:'HH:mm' }} - {{item?.toDate | date:'HH:mm' }}

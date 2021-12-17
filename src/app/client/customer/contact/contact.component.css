@@ -106,3 +106,8 @@
     text-align: center;
   }
 }
+
+.text-danger.mintext{
+  padding-right: 7px;
+}
+
