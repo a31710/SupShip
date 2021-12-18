@@ -59,6 +59,7 @@ dsbPost:boolean = false;
      public loaderService: LoaderService , private fb: FormBuilder,private userService: UserService, private authService: AuthService) {
       this.reportRole();
       this.roleFunction();
+      this.setTime();
       this.config.appendTo = 'body';
       this.config.bindValue = 'value';
       const cos:any = this.cookieService.get('empSystemId');
@@ -115,6 +116,40 @@ dsbPost:boolean = false;
         this.dsbPost = true;
       })
     }
+  }
+
+  setTime(){
+    setTimeout(()=>{
+      const role = this.authService.getRole();
+      console.log(role);
+      if(role == 'BC'){
+        this.customerService.fillCbx().subscribe(d=>{
+          d.postCode;
+          this.tabs.map((d,i)=>{
+            if(d.value == 5){
+              this.tabs.splice(i, 1);
+            }
+          })
+          const postReport = {title: 'Báo cáo tiếp xúc', value:6};
+          const oldData = this.tabs.filter(data => data.value == 6)
+          if(oldData[0]?.value == 6){
+            console.log('bị trùng, trở về tab cũ');
+            this.tabs.forEach((d,i)=>{
+              if(d.value == 6){
+                this.tabs[i].title ='Báo cáo tiếp xúc';
+                this.selected.setValue(i);
+              }
+            })
+          }else{
+            console.log('tạo mới');
+            this.tabs.push(postReport);
+          }
+          this.postCodeReport = d.postCode;
+        })
+      }else{
+        this.setTime()
+      }
+    })
   }
 
   reportRole(){
