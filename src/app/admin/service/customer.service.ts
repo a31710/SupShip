@@ -128,4 +128,8 @@ constructor(private http: HttpClient) { }
     };
     return this.http.get(`${this.url}/api/report/export-bc`,{...options, responseType: 'blob'});
   }
+
+  fillCbx():Observable<any>{
+    return this.http.get<any>(`${this.url}/fillCbx`)
+  }
 }

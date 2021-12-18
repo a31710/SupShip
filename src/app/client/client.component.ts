@@ -14,13 +14,14 @@ export class ClientComponent implements OnInit {
   ngOnInit() {
   }
   logout(){
+    this.route.navigateByUrl('/auth/checkEmail')
+    this.authService.logOut()
     Swal.fire(
       'Đăng xuất thành công!',
       '',
       'success'
     )
-    this.route.navigateByUrl('/auth/checkEmail')
-    this.authService.logOut()
+
 
   }
 }

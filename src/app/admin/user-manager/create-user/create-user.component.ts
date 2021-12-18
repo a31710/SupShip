@@ -3,12 +3,17 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../service/user.service';
 import Swal from 'sweetalert2'
 import { NgSelectConfig } from '@ng-select/ng-select';
+import { AuthService } from 'src/app/auth/service/auth.service';
+import { CustomerService } from '../../service/customer.service';
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
+  dsbDept:boolean = false;
+  dsbPost:boolean = false;
+  dsbRole:boolean = false;
   dataPost:any
   dataDept:any
   deptCodeSelect:any;
@@ -17,13 +22,39 @@ export class CreateUserComponent implements OnInit {
   createUserForm: FormGroup | any;
   @Output() createUser: EventEmitter<any>;
 
-  constructor(private userService: UserService, private fb: FormBuilder,private config: NgSelectConfig ) {
+  constructor(private userService: UserService, private fb: FormBuilder,private config: NgSelectConfig,
+    private authService: AuthService , private customerService: CustomerService) {
+    this.roleFunction()
     this.createUser =  new EventEmitter<any>();
     this.config.appendTo = 'body';
     this.config.bindValue = 'value';
     this.getAllDeptCode();
     this.createForm();
    }
+
+
+  roleFunction(){
+    const role = this.authService.getRole();
+    if(role == 'CN'){
+      this.customerService.fillCbx().subscribe(data=>{
+        console.log(data);
+        this.deptCodeSelect = data.deptCode
+        this.dsbDept = true;
+        this.getPostCode(data.deptCode);
+        this.roleData = this.roleData.filter((d:any) => d.value == 'NV')
+      })
+    }
+    if(role == 'TBC'){
+      this.customerService.fillCbx().subscribe(data=>{
+        this.deptCodeSelect = data.deptCode;
+        this.getPostCode(data.deptCode);
+        this.postCodeSelect = data.postCode;
+        this.dsbDept = true;
+        this.dsbPost = true;
+        this.roleData = this.roleData.filter((d:any) => d.value == 'NV')
+      })
+    }
+  }
 
   ngOnInit() {
   }
@@ -74,6 +105,7 @@ export class CreateUserComponent implements OnInit {
   getPostCode(value:any){
     this.userService.getPostCode(value).subscribe(data=>this.dataPost=data)
   }
+
   onSubmit(){
     console.log(this.createUserForm.value);
     this.userService.registerUser(this.createUserForm.value).subscribe((data)=>{

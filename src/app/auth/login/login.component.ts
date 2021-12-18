@@ -76,6 +76,7 @@ export class LoginComponent implements OnInit {
 
 
   login(){
+    this.authService.logOut();
     this.emaiModel={
       email: this.emailArr.value
     }
@@ -114,6 +115,7 @@ export class LoginComponent implements OnInit {
     postLogin(){
       this.authService.login(this.loginModel).subscribe((data)=>{
         console.log(data);
+
         if(data?.error == 'true'){
           Swal.fire({
             title: 'Đăng nhập thất bại',
@@ -145,7 +147,16 @@ export class LoginComponent implements OnInit {
                 confirmButtonColor: '#4e73df',
                 confirmButtonText: 'OK'
               })
-              this.router.navigateByUrl('/client');
+
+              const role = this.authService.getRole();
+              console.log(role);
+
+              if(role == 'NV'){
+                this.router.navigateByUrl('/client/customer');
+              }else{
+                this.router.navigateByUrl('/admin/customer');
+              }
+
             }
           })
         }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginModel } from '../login/model/login-model';
 import { LoginResponse } from '../login/model/login-response';
 import { map } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { Route } from '@angular/compiler/src/core';
 })
 export class AuthService {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
-  @Output() userId: EventEmitter<String> = new EventEmitter();
+  public userName: BehaviorSubject<String> = new BehaviorSubject<String>('');
   url = environment.url
 constructor(private http: HttpClient,private cookieService: CookieService, ) {
 }
@@ -26,6 +26,7 @@ vertifyEmail(vertifyEmail: VertifyEmail): Observable<any>{
   return this.http.post<VertifyResponse>(`${this.url}/user/verify`, vertifyEmail)
 }
 login(loginModel: LoginModel): Observable<any>{
+  this.logOut();
   return this.http.post<LoginResponse>(`${this.url}/user/login`, loginModel)
   .pipe(map(data =>{
     console.log(data);
@@ -38,11 +39,10 @@ login(loginModel: LoginModel): Observable<any>{
         this.cookieService.set('empSystemId', data?.data?.empSystemId);
         this.cookieService.set('roles', data?.data?.roles);
         localStorage.setItem("username",data?.data?.fullName);
-        localStorage.setItem('deptCode', data?.data?.deptCode);
-        localStorage.setItem('postCode', data?.data?.postCode);
+        this.userName.next(data?.data?.fullName);
       })
     }
-    this.userId.emit(data?.data?.userUid);
+
     this.loggedIn.emit(true);
     return data;
   }));
@@ -83,8 +83,9 @@ userInfo(id:any):Observable<any>{
 
 logOut(){
   localStorage.clear();
-  this.cookieService.deleteAll();
-
+  this.cookieService.delete('roles');
+  this.cookieService.delete('empSystemId');
+  this.cookieService.delete('token');
 }
 
 

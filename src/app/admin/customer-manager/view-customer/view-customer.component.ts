@@ -53,8 +53,11 @@ empSystemId:any;
 fileName='Bao-cao-tiep-xuc.xlsx'
 loadUpdate: any = 1;
 loadExcel: any = 1;
+dsbDept:boolean = false;
+dsbPost:boolean = false;
   constructor(private customerService: CustomerService, private cookieService: CookieService,private config: NgSelectConfig,
      public loaderService: LoaderService , private fb: FormBuilder,private userService: UserService, private authService: AuthService) {
+      this.reportRole();
       this.roleFunction();
       this.config.appendTo = 'body';
       this.config.bindValue = 'value';
@@ -94,11 +97,53 @@ loadExcel: any = 1;
 
   roleFunction(){
     const role = this.authService.getRole();
-    const deptCode = this.authService.getDeptCode();
-    const postCode = this.authService.getPostCode();
-    console.log(role);
-    console.log(deptCode);
-    console.log(postCode);
+    if(role == 'CN'){
+      this.customerService.fillCbx().subscribe(data=>{
+        console.log(data);
+        this.deptCodeSelect = data.deptCode
+        this.dsbDept = true;
+        this.getPostCode(data.deptCode);
+      })
+    }
+    if(role == 'TBC'){
+      this.customerService.fillCbx().subscribe(data=>{
+        this.deptCodeSelect = data.deptCode;
+        this.getPostCode(data.deptCode);
+        this.postCodeSelect = data.postCode;
+        this.getListByPostCode(data.postCode);
+        this.dsbDept = true;
+        this.dsbPost = true;
+      })
+    }
+  }
+
+  reportRole(){
+    const role = this.authService.getRole();
+    if(role == 'TBC'){
+      this.customerService.fillCbx().subscribe(d=>{
+        d.postCode;
+        this.tabs.map((d,i)=>{
+          if(d.value == 5){
+            this.tabs.splice(i, 1);
+          }
+        })
+        const postReport = {title: 'Báo cáo tiếp xúc', value:6};
+        const oldData = this.tabs.filter(data => data.value == 6)
+        if(oldData[0]?.value == 6){
+          console.log('bị trùng, trở về tab cũ');
+          this.tabs.forEach((d,i)=>{
+            if(d.value == 6){
+              this.tabs[i].title ='Báo cáo tiếp xúc';
+              this.selected.setValue(i);
+            }
+          })
+        }else{
+          console.log('tạo mới');
+          this.tabs.push(postReport);
+        }
+        this.postCodeReport = d.postCode;
+      })
+    }
   }
 
   createForm(){
@@ -111,6 +156,8 @@ loadExcel: any = 1;
       note:['',Validators.required],
     })
   }
+
+
 
   resetTranferForm(){
     const empty:any ="";
@@ -446,6 +493,7 @@ loadExcel: any = 1;
 
   }
   singleTranfer(id:any, stt:any){
+    this.roleFunction();
     if(stt == 'CONTACTING' || stt == 'FAILED' || stt == 'NOT_CONTACTED'){
       this.isCTX = true;
     }else{
@@ -453,6 +501,12 @@ loadExcel: any = 1;
     }
     this.idArray.push(id);
     const data  = this.listCustomer.filter((data:any)=> data.id === id);
+    if(data[0].leadAssigns){
+      this.deptCodeSelect = data[0].leadAssigns[data[0].leadAssigns.length-1].deptCode
+      this.getPostCode(this.deptCodeSelect);
+      this.postCodeSelect = data[0].leadAssigns[data[0].leadAssigns.length-1].postCode
+      this.getListByPostCode(this.postCodeSelect);
+    }
     this.tranferData= data;
     this.uploadTranferForm(data)
   }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { CustomerService } from '../../service/customer.service';
 
 @Component({
   selector: 'app-report',
@@ -31,9 +33,16 @@ export class ReportComponent implements OnInit {
   colorScheme = {
     domain: ['#f6c23e', '#1cc88a', '#e74a3b']
   };
+  empSystemId:any
 
 
-  constructor() {
+  constructor(private cookieService: CookieService, private customerService: CustomerService) {
+    const cos:any = this.cookieService.get('empSystemId');
+      this.empSystemId = parseInt(cos);
+
+  }
+
+  fetchApi(){
 
   }
 
@@ -54,5 +63,7 @@ export class ReportComponent implements OnInit {
   }
   ngOnInit() {
   }
+
+
 
 }

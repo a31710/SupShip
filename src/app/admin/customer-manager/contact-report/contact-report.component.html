@@ -51,7 +51,7 @@
 
         <div id="left" >
           <div  class="button selected" id="left-switcher-default" style="width:200px" id="date-picker-example"  inline="true">
-            <ng-select class="custom" placeholder="Chọn chi nhánh"  bindValue="deptCode"
+            <ng-select class="custom" [readonly]="dsbDept" placeholder="Chọn chi nhánh"  bindValue="deptCode"
             [(ngModel)]="deptCodeSelect"  [items]="dataDept" bindLabel="deptName"  >
            </ng-select>
           </div>

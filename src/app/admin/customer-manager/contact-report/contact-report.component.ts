@@ -4,6 +4,7 @@ import { LoaderService } from 'src/app/service/loader.service';
 import { CustomerService } from '../../service/customer.service';
 import { UserService } from '../../service/user.service';
 import * as fileSaver from 'file-saver';
+import { AuthService } from 'src/app/auth/service/auth.service';
 @Component({
   selector: 'app-contact-report',
   templateUrl: './contact-report.component.html',
@@ -22,11 +23,18 @@ export class ContactReportComponent implements OnInit {
   limit: number = 15;
   size:any
   pagiData:any
+  dsbDept:boolean = false;
   @Output() onPostChange: EventEmitter<any>;
-  constructor(private customerService: CustomerService,private userService: UserService,public loaderService: LoaderService) {
+  constructor(private customerService: CustomerService,private userService: UserService,public loaderService: LoaderService, private authService: AuthService) {
     this.onPostChange = new EventEmitter<any>();
     this.fromDate =  new Date(this.toDate.getFullYear(), this.toDate.getMonth(), 1);
     this.getAllDeptCode();
+    this.fetchApi();
+    this.roleFunction();
+
+  }
+
+  fetchApi(){
     this.customerService.ReportAllCompany(this.datePipe(this.fromDate),this.datePipe(this.toDate)).subscribe(data=>{
       console.log(data);
       this.reportData = data;
@@ -34,8 +42,18 @@ export class ContactReportComponent implements OnInit {
       this.size = this.ReportAllCompany.length;
       this.pagiData = this.paginate(this.ReportAllCompany,15,1);
     })
+  }
 
 
+  roleFunction(){
+    const role = this.authService.getRole();
+    if(role == 'CN'){
+      this.customerService.fillCbx().subscribe(data=>{
+        console.log(data);
+        this.deptCodeSelect = data.deptCode
+        this.dsbDept = true;
+      })
+    }
   }
 
   paginate(array:any, page_size:any, page_number:any) {
@@ -89,7 +107,7 @@ export class ContactReportComponent implements OnInit {
 
 
   onSearch(){
-    if(this.deptCodeSelect != undefined && this.deptCodeSelect){
+    if(this.deptCodeSelect != undefined && this.deptCodeSelect ){
       this.isToggle = [];
       this.listPostCode = [];
       this.offset = 0;
@@ -112,8 +130,6 @@ export class ContactReportComponent implements OnInit {
         this.pagiData = this.paginate(this.ReportAllCompany,15,1);
       })
     }
-
-
   }
 
 

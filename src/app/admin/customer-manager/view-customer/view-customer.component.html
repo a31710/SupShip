@@ -244,7 +244,7 @@ aria-hidden="true">
             <div  class="md-form md-outline input-with-post-icon " inline="true" style="position: relative;">
 
               <ng-select placeholder="Chọn mã chi nhánh"  bindValue="deptCode" (change)="getPostCode(deptCodeSelect)"
-               [(ngModel)]="deptCodeSelect"  [items]="dataDept" bindLabel="deptName" formControlName="deptCode" >
+               [(ngModel)]="deptCodeSelect" [readonly]="dsbDept" [items]="dataDept" bindLabel="deptName" formControlName="deptCode" >
               </ng-select>
               <span *ngIf="!deptCodeArr?.hasError('required')"><i class="fas fa-check check" ></i></span>
               <i *ngIf="deptCodeArr?.hasError('required') " class="fas fa-exclamation-circle check2" ></i>
@@ -253,9 +253,7 @@ aria-hidden="true">
           <div class="row col-6">
             <span>Mã Bưu cục</span>
             <div  class="md-form md-outline input-with-post-icon " inline="true" style="position: relative;">
-
-
-              <ng-select placeholder="Chọn mã Bưu cục"   bindValue="postCode" (change)="getListByPostCode(postCodeSelect)"
+              <ng-select placeholder="Chọn mã Bưu cục"  [readonly]="dsbPost" bindValue="postCode" (change)="getListByPostCode(postCodeSelect)"
               [(ngModel)]="postCodeSelect"  [items]="dataPost" bindLabel="postName" formControlName="postCode" >
              </ng-select>
              <span *ngIf="!postCodeArr?.hasError('required')"><i class="fas fa-check check" ></i></span>

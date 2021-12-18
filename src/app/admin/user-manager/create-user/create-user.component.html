@@ -36,7 +36,7 @@
                           </div>
 
 
-                          <ng-select  placeholder="Chọn chi nhánh"  bindValue="deptCode" [(ngModel)]="deptCodeSelect" (change)="getPostCode(deptCodeSelect)"
+                          <ng-select  placeholder="Chọn chi nhánh" [readonly]="dsbDept"  bindValue="deptCode" [(ngModel)]="deptCodeSelect" (change)="getPostCode(deptCodeSelect)"
                            [items]="dataDept" bindLabel="deptName" formControlName="deptCode" >
                           </ng-select>
                           <span *ngIf="!deptCodeArr?.hasError('required')"><i class="fas fa-check check" ></i></span>
@@ -53,7 +53,7 @@
                         </div>
 
 
-                        <ng-select  placeholder="Chọn bưu cục" bindValue="postCode" [(ngModel)]="postCodeSelect"
+                        <ng-select  placeholder="Chọn bưu cục" bindValue="postCode" [readonly]="dsbPost" [(ngModel)]="postCodeSelect"
                         [items]="dataPost" bindLabel="postName" formControlName="postCode" >
                        </ng-select>
                        <span *ngIf="!postCodeArr?.hasError('required')"><i class="fas fa-check check" ></i></span>
@@ -68,7 +68,7 @@
                     </div>
 
 
-                    <ng-select   bindValue="value" [(ngModel)]="roleSelect"
+                    <ng-select  [readonly]="dsbRole" bindValue="value" [(ngModel)]="roleSelect"
                     [items]="roleData" bindLabel="name" formControlName="roles" >
                    </ng-select>
                    <span *ngIf="!rolesArr?.hasError('required')"><i class="fas fa-check check" ></i></span>
