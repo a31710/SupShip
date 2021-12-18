@@ -24,6 +24,8 @@ export class DetailCustomerComponent implements OnInit,OnChanges {
 
   ngOnChanges(){
     this.customerSerivce.getDetailCustomer(this.idUpdate).subscribe((data)=>{
+      console.log(data);
+
       this.infoCusomter = [data];
       this.events1 = [
       ];

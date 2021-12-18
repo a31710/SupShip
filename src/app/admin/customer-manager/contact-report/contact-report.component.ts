@@ -37,9 +37,7 @@ export class ContactReportComponent implements OnInit {
   setTime(){
     setTimeout(()=>{
       const role = this.authService.getRole();
-      console.log(role);
       if(role){
-        console.log(role);
         if(role == 'CN'){
           this.customerService.fillCbx().subscribe(data=>{
             console.log(data);

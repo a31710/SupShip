@@ -121,7 +121,6 @@ dsbPost:boolean = false;
   setTime(){
     setTimeout(()=>{
       const role = this.authService.getRole();
-      console.log(role);
       if(role == 'BC'){
         this.customerService.fillCbx().subscribe(d=>{
           d.postCode;
@@ -147,7 +146,9 @@ dsbPost:boolean = false;
           this.postCodeReport = d.postCode;
         })
       }else{
-        this.setTime()
+        if(!role){
+          this.setTime()
+        }
       }
     })
   }
