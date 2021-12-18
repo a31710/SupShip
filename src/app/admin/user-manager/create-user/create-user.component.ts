@@ -44,7 +44,7 @@ export class CreateUserComponent implements OnInit {
         this.roleData = this.roleData.filter((d:any) => d.value == 'NV')
       })
     }
-    if(role == 'TBC'){
+    if(role == 'BC'){
       this.customerService.fillCbx().subscribe(data=>{
         this.deptCodeSelect = data.deptCode;
         this.getPostCode(data.deptCode);

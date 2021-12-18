@@ -105,7 +105,7 @@ dsbPost:boolean = false;
         this.getPostCode(data.deptCode);
       })
     }
-    if(role == 'TBC'){
+    if(role == 'BC'){
       this.customerService.fillCbx().subscribe(data=>{
         this.deptCodeSelect = data.deptCode;
         this.getPostCode(data.deptCode);
@@ -119,7 +119,7 @@ dsbPost:boolean = false;
 
   reportRole(){
     const role = this.authService.getRole();
-    if(role == 'TBC'){
+    if(role == 'BC'){
       this.customerService.fillCbx().subscribe(d=>{
         d.postCode;
         this.tabs.map((d,i)=>{
