@@ -112,6 +112,21 @@ export class LoginComponent implements OnInit {
 
     }
 
+    setTime(){
+      setTimeout(()=>{
+        const role = this.authService.getRole();
+        if(role){
+          if(role == 'NV'){
+            this.router.navigateByUrl('/client/customer');
+          }else{
+            this.router.navigateByUrl('/admin/customer');
+          }
+        }else{
+          this.setTime()
+        }
+      })
+    }
+
     postLogin(){
       this.authService.login(this.loginModel).subscribe((data)=>{
         console.log(data);
@@ -148,14 +163,7 @@ export class LoginComponent implements OnInit {
                 confirmButtonText: 'OK'
               })
 
-              const role = this.authService.getRole();
-              console.log(role);
-
-              if(role == 'NV'){
-                this.router.navigateByUrl('/client/customer');
-              }else{
-                this.router.navigateByUrl('/admin/customer');
-              }
+              this.setTime();
 
             }
           })
