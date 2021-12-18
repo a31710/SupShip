@@ -29,20 +29,13 @@
 
  <div class="container mt-5" style="width:700px">
 
-
-  <form  >
-
-
-
         <!-- Grow In Utility -->
-
-
             <div class="card position-relative" >
               <div class="all">
                 <div class="p-fluid ">
                   <div class="p-field">
                     <span class="text-gray-900 row col-12" >Ngày tiếp xúc</span>
-                      <p-calendar [showIcon]="true" inputId="icon" (onSelect)="onChaneDay($event)" [(ngModel)]="day" showButtonBar="true" dateFormat="dd/mm/yy" ></p-calendar>
+                    <p-calendar [(ngModel)]="day" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
                   </div>
 
                 </div>
@@ -66,12 +59,6 @@
                   </span>
                 </div>
                 </div>
-
-
-
-
-
-
 
                 <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
 
@@ -124,12 +111,6 @@
                 </form>
               </div>
             </div>
-
-
-
-  </form>
-
-
   </div>
   <div class="fixed" style="margin-left: -10px;">
 

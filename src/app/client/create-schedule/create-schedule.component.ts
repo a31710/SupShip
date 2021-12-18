@@ -18,7 +18,7 @@ export class CreateScheduleComponent implements OnInit {
   time2Validate:boolean = true;
   time1:any
   time2:any
-  day: Date | any = new Date;
+  day:Date = new Date;
   model: NgbDateStruct | any;
   today = this.calendar.getToday();
 
@@ -49,6 +49,7 @@ export class CreateScheduleComponent implements OnInit {
   }
   onChaneDay(value:any){
     this.day = value;
+    console.log(value);
 
   }
 
@@ -56,6 +57,7 @@ export class CreateScheduleComponent implements OnInit {
     if(data){
       const fromDate = this.datePipe.transform(data[data.length-1].fromDate,'HH:mm')
       const toDate = this.datePipe.transform(data[data.length-1].toDate,'HH:mm')
+      this.day = new Date(data[data.length-1].fromDate);
       this.time1 = fromDate;
       this.time2 = toDate;
     }

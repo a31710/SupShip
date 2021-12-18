@@ -127,7 +127,7 @@ export class DetailScheduleComponent implements OnInit {
       console.log(data);
       if(data?.error == 'true'){
         Swal.fire({
-          title: 'Cập nhật lịch thất bại?',
+          title: 'Cập nhật kết quả thất bại?',
           text: data?.message,
           icon: 'error',
           confirmButtonColor: '#4e73df',
@@ -135,13 +135,13 @@ export class DetailScheduleComponent implements OnInit {
         })
       }else{
         Swal.fire({
-          title: 'Cập nhật lịch thành công',
+          title: 'Cập nhật kết quả thành công',
           icon: 'success',
           confirmButtonColor: '#4e73df',
           confirmButtonText: 'OK'
         }).then((result) => {
           if (result.isConfirmed) {
-
+            this.router.navigateByUrl('/client/customer')
           }
         })
       }
