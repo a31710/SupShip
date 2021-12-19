@@ -82,7 +82,6 @@ userInfo(id:any):Observable<any>{
 logOut(){
   setTimeout(()=>{
     console.log('Đăng xuất');
-
     localStorage.clear();
     this.cookieService.delete('roles');
     this.cookieService.delete('empSystemId');
@@ -90,7 +89,7 @@ logOut(){
     if(this.cookieService.get('token')){
       this.logOut();
     }
-  },1000)
+  })
 
 }
 

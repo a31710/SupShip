@@ -14,21 +14,19 @@ export class ClientComponent implements OnInit {
   ngOnInit() {
   }
   logout(){
-
-    this.authService.logOut()
+    this.authService.logOut();
     this.redirect();
-
-
   }
-
   redirect(){
     setTimeout(()=>{
-      this.route.navigateByUrl('/auth/checkemail')
-      console.log(this.route.url);
-
-      if(this.route.url != '/auth/checkemail'){
+      console.log(this.authService.isLoggedIn());
+      if(!this.authService.isLoggedIn()){
+        this.route.navigateByUrl('/auth/checkemail')
+      }else{
         this.redirect();
       }
-    })
+    },1000)
+
   }
+
 }
