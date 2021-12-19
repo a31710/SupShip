@@ -123,7 +123,7 @@ export class LoginComponent implements OnInit {
         }else{
           this.navigate()
         }
-      })
+      },1000)
     }
 
     postLogin(){
