@@ -8,6 +8,9 @@
   right: 80px;
   top: 225px
 }
+.bg-password-image {
+  background: url(https://firebasestorage.googleapis.com/v0/b/fir-upload-e5fd0.appspot.com/o/image%2Fgiao-hang-buu-dien.png?alt=media&token=da98cc6c-d2cf-4d5e-9062-396346ffcaa8);
+}
 
 
 .atv:active{

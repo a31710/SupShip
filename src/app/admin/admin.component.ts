@@ -16,15 +16,21 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
   logout(){
-    this.route.navigateByUrl('/auth/checkEmail')
+
     this.authService.logOut()
-    Swal.fire(
-      'Đăng xuất thành công!',
-      '',
-      'success'
-    )
+    this.redirect();
 
 
   }
 
+  redirect(){
+    setTimeout(()=>{
+      this.route.navigateByUrl('/auth/checkemail')
+      console.log(this.route.url);
+
+      if(this.route.url != '/auth/checkemail'){
+        this.redirect();
+      }
+    })
+  }
 }

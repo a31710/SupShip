@@ -136,7 +136,6 @@ dsbPost:boolean = false;
             this.tabs.forEach((d,i)=>{
               if(d.value == 6){
                 this.tabs[i].title ='Báo cáo tiếp xúc';
-                this.selected.setValue(i);
               }
             })
           }else{

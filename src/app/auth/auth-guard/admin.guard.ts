@@ -25,7 +25,7 @@ export class AdminGuard implements CanActivate {
       confirmButtonColor: '#4e73df',
       confirmButtonText: 'Chấp nhận'
     })
-    this.router.navigateByUrl('/client');
+    this.router.navigateByUrl('/client/home');
     return false;
   }
   if(role == "TCB" || role == "TCB"){

@@ -76,7 +76,6 @@ export class LoginComponent implements OnInit {
 
 
   login(){
-    this.authService.logOut();
     this.emaiModel={
       email: this.emailArr.value
     }
@@ -156,13 +155,6 @@ export class LoginComponent implements OnInit {
                 }
               })
             }else{
-              Swal.fire({
-                title: 'Đăng nhập thành công',
-                icon: 'success',
-                confirmButtonColor: '#4e73df',
-                confirmButtonText: 'OK'
-              })
-
               this.setTime();
 
             }

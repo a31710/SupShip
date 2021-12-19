@@ -19,18 +19,16 @@ export class AuthService {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   public userName: BehaviorSubject<String> = new BehaviorSubject<String>('');
   url = environment.url
-constructor(private http: HttpClient,private cookieService: CookieService, ) {
+constructor(private http: HttpClient,private cookieService: CookieService,) {
 }
 
 vertifyEmail(vertifyEmail: VertifyEmail): Observable<any>{
   return this.http.post<VertifyResponse>(`${this.url}/user/verify`, vertifyEmail)
 }
 login(loginModel: LoginModel): Observable<any>{
-  this.logOut();
   return this.http.post<LoginResponse>(`${this.url}/user/login`, loginModel)
   .pipe(map(data =>{
     console.log(data);
-    localStorage.setItem("isLogin",data?.error);
     localStorage.setItem("userId",data?.data?.userUid)
     this.cookieService.set('token', data?.data?.token);
     if(data?.error == 'false'){
@@ -82,10 +80,18 @@ userInfo(id:any):Observable<any>{
 }
 
 logOut(){
-  localStorage.clear();
-  this.cookieService.delete('roles');
-  this.cookieService.delete('empSystemId');
-  this.cookieService.delete('token');
+  setTimeout(()=>{
+    console.log('Đăng xuất');
+
+    localStorage.clear();
+    this.cookieService.delete('roles');
+    this.cookieService.delete('empSystemId');
+    this.cookieService.delete('token');
+    if(this.cookieService.get('token')){
+      this.logOut();
+    }
+  },1000)
+
 }
 
 
@@ -93,15 +99,12 @@ getVertify(){
   return localStorage.getItem("isVertify");
 }
 
-getLogin(){
-  return localStorage.getItem("isLogin");
-}
 getCheck(){
   return localStorage.getItem("isCheck");
 }
 
 isLoggedIn(): boolean {
-  return this.getLogin() == 'false';
+  return this.cookieService.get('token')?true:false;
 }
 getUpdate(){
   return localStorage.getItem("isUpdate");

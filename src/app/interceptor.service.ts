@@ -7,11 +7,11 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Route, Router } from '@angular/router';
-import { timeThursdays } from 'd3-time';
+import {  Router } from '@angular/router';
+
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, filter, finalize, switchMap, take } from 'rxjs/operators';
+import { catchError, filter, finalize, switchMap, take, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { AuthService } from './auth/service/auth.service';
@@ -116,7 +116,6 @@ private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
                   }).then((result) => {
                     if (result.isConfirmed) {
                       this.authService.logOut();
-                      this.router.navigateByUrl("/client/checkEmail")
                     }
                   })
                 }

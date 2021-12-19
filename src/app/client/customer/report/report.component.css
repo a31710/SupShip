@@ -28,6 +28,13 @@
 @media only screen and (max-width: 768px) {
   .txt-box{
     font-size: 8.5px;
+    margin: 0;
+  }
+  .col-8.mt-1{
+    margin: 0;
+  }
+  .col-4.mt-1{
+    margin: 0;
   }
 }
 .body{
