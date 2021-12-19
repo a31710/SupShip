@@ -66,7 +66,7 @@
         <!-- Card Header - Dropdown -->
         <div
         class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid  rgb(189, 188, 188); padding: 10px 20px !important;">
-        <h5 class="m-0  text-primary " ><span >Khách hàng đã tiếp xúc</span></h5>
+        <h5 class="m-0 text-primary " ><span >Khách hàng đã tiếp xúc</span></h5>
         <div class="dropdown no-arrow">
             <a class="dropdown-toggle" href="#" role="button" >
 
@@ -77,14 +77,14 @@
         <div class="row">
           <div class="col-10">
             <div class="card-body">
-              <div class="h5 mb-0 text-gray-800 mt-2"><h5><i class="fas fa-square mr-2 text-info" ></i>Được giao</h5></div>
-              <div class="h5 mb-0 text-gray-800 mt-2"><h5><i class="fas fa-square mr-2 text-danger" ></i>Tự nhập</h5> </div>
+              <div class="h5 mb-0 text-gray-800 mt-2"><h5 class="inside"><i class="fas fa-square mr-2 text-info" ></i>Được giao</h5></div>
+              <div class="h5 mb-0 text-gray-800 mt-2"><h5 class="inside"><i class="fas fa-square mr-2 text-danger" ></i>Tự nhập</h5> </div>
 
               </div>
           </div>
           <div class="col-2" style="margin-top:20px">
-              <div class="h5 mb-0 text-info mt-2"><h5>{{item?.duocGiao}} </h5></div>
-              <div class="h5 mb-0 text-danger mt-2"><h5>{{item?.tuNhap}} </h5> </div>
+              <div class="h5 mb-0 text-info mt-2"><h5 class="inside">{{item?.duocGiao}} </h5></div>
+              <div class="h5 mb-0 text-danger mt-2"><h5 class="inside">{{item?.tuNhap}} </h5> </div>
 
 
           </div>
@@ -101,7 +101,7 @@
         <!-- Card Header - Dropdown -->
         <div
           class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid  rgb(189, 188, 188); padding: 10px 20px !important;">
-          <h5 class="m-0  text-primary " ><span >Khách hàng đã tiếp xúc</span></h5>
+          <h5 class="m-0 text-primary " ><span >Khách hàng đã tiếp xúc</span></h5>
           <div class="dropdown no-arrow">
               <a class="dropdown-toggle" href="#" role="button" >
                   <h5 class="m-0 font-weight-bold text-gray-100 bg-gradient-success" style="border: 2px; border-radius: 5px;"><span class="p-1">{{item?.assigned}}</span></h5>
@@ -112,15 +112,15 @@
         <div class="row">
           <div class="col-6 col-lg-5">
             <div class="card-body">
-              <div class="h5 mb-0 text-gray-800 mt-2"><h5><i class="fas fa-circle mr-2" style="color: #1cc88a;"></i>Thành công</h5></div>
-              <div class="h5 mb-0 text-gray-800 mt-2"><h5><i class="fas fa-circle mr-2 " style="color: #f6c23e;"></i>Đang tiếp xúc</h5> </div>
-              <div class="h5 mb-0 text-gray-800 mt-2"><h5><i class="fas fa-circle mr-2 " style="color: #e74a3b;"></i>Thất bại</h5></div>
+              <div class="h5 mb-0 text-gray-800 mt-2"><h5 class="inside"><i class="fas fa-circle mr-2" style="color: #1cc88a;"></i>Thành công</h5></div>
+              <div class="h5 mb-0 text-gray-800 mt-2"><h5 class="inside"><i class="fas fa-circle mr-2 " style="color: #f6c23e;"></i>Đang tiếp xúc</h5> </div>
+              <div class="h5 mb-0 text-gray-800 mt-2"><h5 class="inside"><i class="fas fa-circle mr-2 " style="color: #e74a3b;"></i>Thất bại</h5></div>
               </div>
           </div>
           <div class="col-3 col-lg-5" style="margin-top:20px">
-              <div class="h5 mb-0 text-success mt-2"><h5>{{item?.successes}} ({{successPct}}%)</h5></div>
-              <div class="h5 mb-0 text-warning mt-2"><h5>{{item?.contacting}} ({{contactingPct}}%)</h5> </div>
-              <div class="h5 mb-0 text-danger mt-2"><h5>{{item?.fails}} ({{failPct}}%) </h5></div>
+              <div class="h5 mb-0 text-success mt-2"><h5 class="inside">{{item?.successes}} ({{successPct}}%)</h5></div>
+              <div class="h5 mb-0 text-warning mt-2"><h5 class="inside">{{item?.contacting}} ({{contactingPct}}%)</h5> </div>
+              <div class="h5 mb-0 text-danger mt-2"><h5 class="inside">{{item?.fails}} ({{failPct}}%) </h5></div>
 
           </div>
           <div class="col-3 col-lg-2" style="margin-left: -45px; margin-top:15px ">

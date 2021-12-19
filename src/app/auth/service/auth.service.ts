@@ -81,15 +81,15 @@ userInfo(id:any):Observable<any>{
 
 logOut(){
   setTimeout(()=>{
-    console.log('Đăng xuất');
     localStorage.clear();
     this.cookieService.delete('roles');
     this.cookieService.delete('empSystemId');
     this.cookieService.delete('token');
     if(this.cookieService.get('token')){
       this.logOut();
+      this.cookieService.deleteAll();
     }
-  })
+  },1000)
 
 }
 

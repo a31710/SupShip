@@ -24,6 +24,12 @@
   .card.min{
     min-height: 219px;
   }
+  .m-0.text-primary{
+    font-size: 20px;
+  }
+  .inside{
+    font-size: 15px;
+  }
 }
 @media only screen and (max-width: 768px) {
   .txt-box{

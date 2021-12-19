@@ -3,20 +3,21 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { LoaderService } from 'src/app/service/loader.service';
 import { UserService } from '../../service/user.service';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/auth/service/auth.service';
 @Component({
   selector: 'app-view-user',
   templateUrl: './view-user.component.html',
   styleUrls: ['./view-user.component.css']
 })
 export class ViewUserComponent implements OnInit {
-  idUser:any
+  idUser:boolean = false;
   tabs = [{
     title:'Danh sách tài khoản',
     value: 1
   }
   ];
   selected = new FormControl(0);
-
+  isShow:any
 
 
   removeTab(index: number) {
@@ -29,7 +30,8 @@ export class ViewUserComponent implements OnInit {
   size: number = 70;
   totalPage:number = 3;
   searchForm: FormGroup | any;
-  constructor(private userService: UserService, private fb: FormBuilder,public loaderService: LoaderService) {
+  constructor(private userService: UserService, private fb: FormBuilder,public loaderService: LoaderService,private authService: AuthService) {
+    this.roleFunction();
     this.userService.getListUser().subscribe(data=>{
       this.size = data.content.length;
       this.dataUser = data.content;
@@ -45,6 +47,13 @@ export class ViewUserComponent implements OnInit {
     this.idFrom =this.fb.group({
       userUid:''
     })
+  }
+
+  roleFunction(){
+    const role = this.authService.getRole();
+    if(role == 'TCT'){
+      this.isShow = true;
+    }
   }
   ngOnInit() {
   }

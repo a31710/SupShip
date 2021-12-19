@@ -111,7 +111,7 @@ export class LoginComponent implements OnInit {
 
     }
 
-    setTime(){
+    navigate(){
       setTimeout(()=>{
         const role = this.authService.getRole();
         if(role){
@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('/admin/customer');
           }
         }else{
-          this.setTime()
+          this.navigate()
         }
       })
     }
@@ -155,7 +155,7 @@ export class LoginComponent implements OnInit {
                 }
               })
             }else{
-              this.setTime();
+              this.navigate();
 
             }
           })

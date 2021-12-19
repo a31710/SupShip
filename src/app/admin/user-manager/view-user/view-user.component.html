@@ -55,7 +55,10 @@
           <th scope="col">Trạng thái</th>
           <th scope="col">Chi nhánh</th>
           <th scope="col">Bưu cục</th>
-          <th scope="col">Công cụ</th>
+          <ng-container *ngIf="isShow">
+            <th scope="col">Công cụ</th>
+          </ng-container>
+
         </tr>
       </thead>
       <tbody>
@@ -75,14 +78,18 @@
           <td  [ngClass]="{'text-success': item.isActive == 1, 'text-danger' : item.isActive == 0 }">{{item.isActive == 1? 'Bình thường': 'Bị khóa'}}</td>
           <td>{{item.deptCode}}</td>
           <td>{{item.postCode}}</td>
-          <td>
-            <a type="button" (click)="getIdUser(item.uid)" class="btn btn-danger btn-sm px-3 mr-2" data-toggle="modal" data-target="#banModal">
-              <i class="fas fa-lock mr-2"></i><span>Khóa</span>
-            </a>
-            <a type="button" (click)="getIdUser(item.uid)" class="btn btn-success btn-sm px-3" data-toggle="modal" data-target="#unluckModal">
-              <i class="fas fa-key mr-2"></i><span>Mở khóa</span>
-            </a>
-          </td>
+
+            <ng-container *ngIf="isShow">
+              <td>
+              <a type="button" (click)="getIdUser(item.uid)" class="btn btn-danger btn-sm px-3 mr-2" data-toggle="modal" data-target="#banModal">
+                <i class="fas fa-lock mr-2"></i><span>Khóa</span>
+              </a>
+              <a type="button" (click)="getIdUser(item.uid)" class="btn btn-success btn-sm px-3" data-toggle="modal" data-target="#unluckModal">
+                <i class="fas fa-key mr-2"></i><span>Mở khóa</span>
+              </a>
+            </td>
+            </ng-container>
+
         </tr>
       </tbody>
     </table>
