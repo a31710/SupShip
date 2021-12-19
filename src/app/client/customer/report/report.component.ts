@@ -8,20 +8,11 @@ import { CustomerService } from '../../service/customer.service';
   styleUrls: ['./report.component.css']
 })
 export class ReportComponent implements OnInit {
-  day: Date = new Date;
+  tltx:any;
+  tlht:any;
+  reportData:any
   value = 30;
-  single =[ {
-    "name": "Đang tiếp xúc",
-    "value": 8940000
-  },
-  {
-    "name": "Thành công",
-    "value": 5000000
-  },
-  {
-    "name": "Thất bại",
-    "value": 7200000
-  }];
+  single:any
   view: any[] = [110, 110];
 
   // options
@@ -29,7 +20,10 @@ export class ReportComponent implements OnInit {
   showLegend: boolean = true;
   showLabels: boolean = true;
   isDoughnut: boolean = true;
-
+  dateValue: Date = new Date;
+  successPct:any;
+  contactingPct:any;
+  failPct:any;
   colorScheme = {
     domain: ['#f6c23e', '#1cc88a', '#e74a3b']
   };
@@ -37,13 +31,41 @@ export class ReportComponent implements OnInit {
 
 
   constructor(private cookieService: CookieService, private customerService: CustomerService) {
-    const cos:any = this.cookieService.get('empSystemId');
-      this.empSystemId = parseInt(cos);
+    this.fetchApi(this.dateValue);
 
   }
 
-  fetchApi(){
+  fetchApi(month:any){
+    this.customerService.reportApp(this.datePipe(month)).subscribe(data=>{
+      console.log(data);
+      if(data?.successes + data?.fails == 0){
+        this.tltx = 0;
+      }else{
+        this.tltx = (data?.successes + data?.fails)*100/(data?.totalAssigns);
+      }
+      if(data?.contacting == 0){
+        this.tlht = 0;
+      }else{
+        this.tlht = (data?.contacting)*100/(data?.totalAssigns);
+      }
 
+      data?.successes == 0? this.successPct = 0: this.successPct = data?.successes/(data?.successes +  data?.fails + data?.contacting);
+      data?.fails == 0? this.failPct = 0: this.failPct = data?.fails/(data?.successes +  data?.fails + data?.contacting);
+      data?.contacting == 0? this.contactingPct = 0: this.contactingPct = data?.contacting/(data?.successes +  data?.fails + data?.contacting);
+      this.single=[ {
+        "name": "Đang tiếp xúc",
+        "value": data?.contacting
+      },
+      {
+        "name": "Thành công",
+        "value": data?.successes
+      },
+      {
+        "name": "Thất bại",
+        "value": data?.fails
+      }];
+      this.reportData = [data];
+    })
   }
 
   onChangeDay(day:any){
@@ -63,7 +85,16 @@ export class ReportComponent implements OnInit {
   }
   ngOnInit() {
   }
+  onChangeMonth(date:any){
+   this.fetchApi(date);
+  }
 
+  datePipe(date:any){
+    const day =  date.getDate();
+    const month = date.getMonth()+1;
+    const year = date.getYear().toString().substring(1,3);
+    return `${month<10?`0${month}`:month}-20${year}`
+  }
 
 
 }

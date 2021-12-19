@@ -40,8 +40,8 @@ constructor(private http: HttpClient) { }
     return this.http.delete<any>(`${this.url}/api/lead/evtp/${id}`);
   }
 
-  reportApp(from:any, to:any,id:any):Observable<any>{
-    return this.http.get<any>(`${this.url}/api/report/emp/${id}?from=${from}&to=${to}`)
+  reportApp(date:any):Observable<any>{
+    return this.http.get<any>(`${this.url}/api/report/reportEmp?month=${date}`)
   }
 
 
