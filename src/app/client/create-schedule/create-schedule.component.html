@@ -115,7 +115,7 @@
   <div class="fixed" style="margin-left: -10px;">
 
     <div class="row col-12 col-lg-2" >
-      <button type="button" (click)="onSubmit()" [disabled]="!day || time1Validate == false || time2Validate == false || !time1 || !time2" class="btn btn-sm btn-primary p-2" >Tạo mới</button>
+      <button type="button" (click)="onSubmit()" [disabled]="!day || time1Validate == false || time2Validate == false || !time1 || !time2" class="btn btn-sm btn-primary p-2" >{{status=='CONTACTING'?'Đổi lịch':'Tạo mới'}}</button>
     </div>
 </div>
 

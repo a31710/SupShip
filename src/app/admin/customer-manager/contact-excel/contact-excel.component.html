@@ -1,4 +1,6 @@
-
+<ng-container *ngIf="isLoad">
+  <div class="lds-ripple"><div></div><div></div></div>
+ </ng-container>
 
 <div class="p-4 mt-2 body" style="border: 1px solid rgb(216, 208, 208); border-top: none; background-color: white;">
 
@@ -63,7 +65,7 @@
               <div class="mt-3 mb-3">
                 <div id="switcher">
                   <div class="button selected" id="switcher-default">
-                    <button class="btn btn-sm btn-success" (click)="download()">Xuất Excel</button>
+                    <button class="btn btn-sm btn-success" (click)="exportFile()">Xuất Excel</button>
                   </div>
 
                 </div>
@@ -155,7 +157,7 @@
               <div class="mt-3 mb-3">
                 <div id="switcher">
                   <div class="button selected" id="switcher-default">
-                    <button class="btn btn-sm btn-success" (click)="download()">Xuất Excel</button>
+                    <button class="btn btn-sm btn-success" (click)="exportSuccessFile()">Xuất Excel</button>
                   </div>
 
                 </div>
@@ -246,7 +248,7 @@
               <div class="mt-3 mb-3">
                 <div id="switcher">
                   <div class="button selected" id="switcher-default">
-                    <button class="btn btn-sm btn-success" (click)="download()">Xuất Excel</button>
+                    <button class="btn btn-sm btn-success" (click)="exportErrorFile()">Xuất Excel</button>
                   </div>
 
                 </div>

@@ -1,4 +1,6 @@
-
+<ng-container *ngIf="loaderService.isLoading | async">
+  <div class="lds-ripple"><div></div><div></div></div>
+ </ng-container>
 <div class="body" >
 <div class="row p-fluid mt-2 ">
   <div class="p-field mt-2 col-lg-2">

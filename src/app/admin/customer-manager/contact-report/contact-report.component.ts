@@ -168,21 +168,24 @@ export class ContactReportComponent implements OnInit {
   });
   }
   exportExcelTuyen(){
-    this.customerService.exportExcelTuyen('bao-cao-excel-theo-tuyen.xlsx').subscribe( res =>{
+
+
+    this.customerService.exportExcelTuyen('bao-cao-excel-theo-tuyen.xlsx',this.datePipe(this.fromDate),this.datePipe(this.toDate),this.deptCodeSelect).subscribe( res =>{
       if(res){
         fileSaver.saveAs(this.returnBlob(res),'bao-cao-excel-theo-tuyen.xlsx');
       }
     })
   }
   exportExcelCN(){
-    this.customerService.exportExcelCN('bao-cao-excel-theo-chi-nhanh.xlsx').subscribe( res =>{
+    this.customerService.exportExcelCN('bao-cao-excel-theo-chi-nhanh.xlsx',this.datePipe(this.fromDate),this.datePipe(this.toDate),this.deptCodeSelect).subscribe( res =>{
       if(res){
         fileSaver.saveAs(this.returnBlob(res),'bao-cao-excel-theo-chi-nhanh.xlsx');
       }
     })
   }
   exportExcelBC(){
-    this.customerService.exportExcelBC('bao-cao-excel-theo-buu-cuc.xlsx').subscribe( res =>{
+    console.log(this.deptCodeSelect);
+    this.customerService.exportExcelBC('bao-cao-excel-theo-buu-cuc.xlsx',this.datePipe(this.fromDate),this.datePipe(this.toDate),this.deptCodeSelect).subscribe( res =>{
       if(res){
         fileSaver.saveAs(this.returnBlob(res),'bao-cao-excel-theo-buu-cuc.xlsx');
       }

@@ -80,6 +80,20 @@ constructor(private http: HttpClient) { }
     };
     return this.http.get(`${this.url}/api/lead-assigns/templates/download`,{...options, responseType: 'blob'} );
   }
+
+  exportFile(x :string,fileId:any,status:any){
+    const param = new HttpParams().set('filename',x);
+    const options = {
+      params: param
+    };
+    if(status){
+      return this.http.get(`${this.url}/api/lead-assigns/export-excel?fileId=${fileId}&status=${status}`,{...options, responseType: 'blob'} );
+    }else{
+      return this.http.get(`${this.url}/api/lead-assigns/export-excel?fileId=${fileId}`,{...options, responseType: 'blob'} );
+    }
+
+  }
+
   LeadAssign(body:any):Observable<any>{
     return this.http.post<any>(`${this.url}/api/lead-assigns`,body)
   }
@@ -107,29 +121,46 @@ constructor(private http: HttpClient) { }
     return this.http.get(`${this.url}/api/report/export-excel`,{...options, responseType: 'blob'});
   }
 
-  exportExcelTuyen(x: string):Observable<any>{
+  exportExcelTuyen(x: string,from:any, to:any, deptCode:any):Observable<any>{
     const param = new HttpParams().set('filename',x);
     const options = {
       params: param
     };
-    return this.http.get(`${this.url}/api/report/export-route`,{...options, responseType: 'blob'});
+    if(deptCode){
+      return this.http.get(`${this.url}/api/report/export-route?from=${from}&to=${to}&dept=${deptCode}`,{...options, responseType: 'blob'});
+    }else{
+      return this.http.get(`${this.url}/api/report/export-route?from=${from}&to=${to}`,{...options, responseType: 'blob'});
+    }
+
   }
-  exportExcelCN(x: string):Observable<any>{
+  exportExcelCN(x: string, from:any, to:any, deptCode:any):Observable<any>{
     const param = new HttpParams().set('filename',x);
     const options = {
       params: param
     };
-    return this.http.get(`${this.url}/api/report/export-cn`,{...options, responseType: 'blob'});
+    if(deptCode){
+      return this.http.get(`${this.url}/api/report/export-cn?from=${from}&to=${to}&dept=${deptCode}`,{...options, responseType: 'blob'});
+    }else{
+      return this.http.get(`${this.url}/api/report/export-cn?from=${from}&to=${to}`,{...options, responseType: 'blob'});
+    }
+
   }
-  exportExcelBC(x: string):Observable<any>{
+  exportExcelBC(x: string, from:any, to:any, deptCode:any):Observable<any>{
     const param = new HttpParams().set('filename',x);
     const options = {
       params: param
     };
-    return this.http.get(`${this.url}/api/report/export-bc`,{...options, responseType: 'blob'});
+    if(deptCode){
+      return this.http.get(`${this.url}/api/report/export-bc?from=${from}&to=${to}&dept=${deptCode}`,{...options, responseType: 'blob'});
+    }else{
+      return this.http.get(`${this.url}/api/report/export-bc?from=${from}&to=${to}`,{...options, responseType: 'blob'});
+    }
+
+
   }
 
   fillCbx():Observable<any>{
     return this.http.get<any>(`${this.url}/fillCbx`)
   }
+
 }

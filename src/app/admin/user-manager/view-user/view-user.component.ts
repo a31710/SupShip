@@ -31,9 +31,9 @@ export class ViewUserComponent implements OnInit {
   searchForm: FormGroup | any;
   constructor(private userService: UserService, private fb: FormBuilder,public loaderService: LoaderService) {
     this.userService.getListUser().subscribe(data=>{
-      this.size = data.totalItem;
+      this.size = data.content.length;
       this.dataUser = data.content;
-      console.log(data.content);
+      console.log(data);
     })
     this.CreateForm();
    }
@@ -131,9 +131,8 @@ export class ViewUserComponent implements OnInit {
           confirmButtonText: 'Chấp nhận'
         })
       }else{
-        this.size = data.totalItem;
-        this.dataUser = data.content;
-        console.log(data.content);
+        this.size = data.length;
+        this.dataUser = data;
       }
     })
   }

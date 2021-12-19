@@ -24,4 +24,8 @@ detailSchedule(id:any):Observable<any>{
 updateSchedule(body:any):Observable<any>{
   return this.http.post<any>(`${this.url}/api/results`,body)
 }
+
+changeSchedule(body:any,id:any):Observable<any>{
+  return this.http.put<any>(`${this.url}/api/schedules/update/${id}`,body);
+}
 }

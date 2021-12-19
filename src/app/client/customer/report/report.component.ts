@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { LoaderService } from 'src/app/service/loader.service';
 import { CustomerService } from '../../service/customer.service';
 
 @Component({
@@ -30,7 +31,7 @@ export class ReportComponent implements OnInit {
   empSystemId:any
 
 
-  constructor(private cookieService: CookieService, private customerService: CustomerService) {
+  constructor(private cookieService: CookieService, private customerService: CustomerService, public loaderService: LoaderService ) {
     this.fetchApi(this.dateValue);
 
   }

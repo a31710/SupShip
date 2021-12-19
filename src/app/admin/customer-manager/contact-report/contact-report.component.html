@@ -38,11 +38,11 @@
   </div>
   <div class="report-header">
     <h3 class="text-header text-primary">TL tiếp xúc</h3>
-    <div class="text-desc ">{{reportData?.totalAssigned}}</div>
+    <div class="text-desc ">{{reportData?.totalAssigned}}%</div>
   </div>
   <div class="report-header">
     <h3 class="text-header text-primary">TL hoàn thành KH</h3>
-    <div class="text-desc ">{{reportData?.totalAssigned}}</div>
+    <div class="text-desc ">{{reportData?.totalAssigned}}%</div>
   </div>
 
 
@@ -127,12 +127,36 @@
         <tr *ngFor="let item of pagiData" class="tbhov">
               <td class="text-primary"><a style="cursor: pointer;" (click)="toogleData(item?.deptCode)"><i *ngIf="item?.deptCode" class="fas fa-caret-right mr-2 text-primary"></i> {{item?.deptCode}}</a></td>
               <td class="text-info">{{item?.postCode?item?.postCode:item?.reportMonthlyPostOfficeDtos.length + ' Bưu cục'}}</td>
-              <td>{{item?.totalEmployees?item?.totalEmployees:345}}</td>
-              <td>{{item?.totalAssigns?item?.totalAssigns:0}}</td>
-              <td><span class="text-primary">{{item?.assigned?item?.assigned:0}}</span> (<span class="text-success">{{item?.assigned?item?.assigned:0}}</span> - <span class="text-warning">{{item?.contacting?item?.contacting:0}}</span> - <span class="text-danger">{{item?.fails?item?.fails:0}}</span>)</td>
-              <td class="text-danger">{{item?.employeeNotAssigned?item?.employeeNotAssigned:0}}</td>
-              <td class="text-success">0%</td>
-              <td class="text-warning">0</td>
+
+              <td>
+                <ng-container *ngIf="item?.totalEmployees || item?.totalEmployees == 0">
+                  {{item?.totalEmployees}}
+                </ng-container>
+                <ng-container *ngIf="item?.totalCountEmp || item?.totalCountEmp == 0">
+                  {{item?.totalCountEmp}}
+                </ng-container>
+              </td>
+              <td>{{item?.totalAssigns}}</td>
+              <td>
+                <ng-container *ngIf="item?.assigned || item?.assigned == 0">
+                  <span class="text-primary">{{item?.assigned}}</span> (<span class="text-success">{{item?.successes}}</span> - <span class="text-warning">{{item?.contacting}}</span> - <span class="text-danger">{{item?.fails}}</span>)
+                </ng-container>
+                <ng-container *ngIf="item?.totalAssigned || item?.totalAssigned == 0">
+                  <span class="text-primary">{{item?.totalAssigned}}</span> (<span class="text-success">{{item?.totalSuccesses}}</span> - <span class="text-warning">{{item?.totalContacting}}</span> - <span class="text-danger">{{item?.totalFails}}</span>)
+                </ng-container>
+
+              </td>
+              <td class="text-danger">
+                <ng-container *ngIf="item?.employeeNotAssigned || item?.employeeNotAssigned == 0">
+                  {{item?.employeeNotAssigned}}
+                </ng-container>
+                <ng-container *ngIf="item?.totalEmployeeNotAssigned || item?.totalEmployeeNotAssigned == 0">
+                  {{item?.totalEmployeeNotAssigned}}
+                </ng-container>
+
+              </td>
+              <td class="text-success">{{item?.tyHT}}%</td>
+              <td class="text-warning">{{item?.tyTX}}%</td>
               <td>0%</td>
               <td>
 

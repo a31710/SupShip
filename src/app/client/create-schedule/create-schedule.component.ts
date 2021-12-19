@@ -21,6 +21,8 @@ export class CreateScheduleComponent implements OnInit {
   day:Date = new Date;
   model: NgbDateStruct | any;
   today = this.calendar.getToday();
+  status:any
+  idSchedule:any
 
   constructor(private calendar: NgbCalendar, private fb: FormBuilder, private router:Router,private datePipe: DatePipe,
      private activateRoute: ActivatedRoute,private customerService:CustomerService, public loaderService: LoaderService,private scheduleService: ScheduleService) {
@@ -30,7 +32,8 @@ export class CreateScheduleComponent implements OnInit {
         this.customerService.getDetailCustomer(id).subscribe(data=>{
           this.scheduleData = [data]
           this.updateHour(data?.schedules)
-          console.log(data);
+          this.status = data.status;
+          this.idSchedule = data?.schedules[0].id;
         })
 
       })
@@ -81,30 +84,60 @@ export class CreateScheduleComponent implements OnInit {
     this.fromArr.setValue(form);
     this.toArr.setValue(to);
     console.log(this.scheduleForm.value);
-    this.customerService.createSchedule(this.scheduleForm.value).subscribe(data=>{
-      console.log(data);
-    if(data?.error == 'true'){
-      Swal.fire({
-        title: 'Đặt lịch thất bại?',
-        text: data?.message,
-        icon: 'error',
-        confirmButtonColor: '#4e73df',
-        confirmButtonText: 'Chấp nhận'
+
+
+    if(this.status == 'CONTACTING'){
+      this.scheduleService.changeSchedule(this.scheduleForm.value, this.idSchedule).subscribe(data=>{
+        console.log(data);
+      if(data?.error == 'true'){
+        Swal.fire({
+          title: 'Đổi lịch thất bại?',
+          text: data?.message,
+          icon: 'error',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'Chấp nhận'
+        })
+      }else{
+        this.scheduleForm.reset();
+        Swal.fire({
+          title: 'Đổi lịch thành công',
+          icon: 'success',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigateByUrl('/client/customer')
+          }
+        })
+      }
       })
     }else{
-      this.scheduleForm.reset();
-      Swal.fire({
-        title: 'Đặt lịch thành công',
-        icon: 'success',
-        confirmButtonColor: '#4e73df',
-        confirmButtonText: 'OK'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigateByUrl('/client/customer')
-        }
+      this.customerService.createSchedule(this.scheduleForm.value).subscribe(data=>{
+        console.log(data);
+      if(data?.error == 'true'){
+        Swal.fire({
+          title: 'Đặt lịch thất bại?',
+          text: data?.message,
+          icon: 'error',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'Chấp nhận'
+        })
+      }else{
+        this.scheduleForm.reset();
+        Swal.fire({
+          title: 'Đặt lịch thành công',
+          icon: 'success',
+          confirmButtonColor: '#4e73df',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigateByUrl('/client/customer')
+          }
+        })
+      }
       })
     }
-    })
+
   }
 
   datePipes(time:any){

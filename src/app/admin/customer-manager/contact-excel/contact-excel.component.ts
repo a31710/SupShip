@@ -36,7 +36,7 @@ export class ContactExcelComponent implements OnInit, OnChanges {
   limitFailed: number = 15;
   sizeFailed:any
   pagiFailed:any
-
+  isLoad:boolean = false;
   tabs = [{
     value:1, name:'Lịch sử Upload'
   },
@@ -58,10 +58,12 @@ export class ContactExcelComponent implements OnInit, OnChanges {
   ]
   selected = new FormControl(0);
   secondSelected = new FormControl(0);
-
+  idFile:any
 
   constructor(private customerService: CustomerService,public loaderService: LoaderService) {
+
     this.customerService.excelHistory().subscribe(data=>{
+
       this.historyData = data.data
       this.size = data.totalItem;
       this.pagiHistoryData = this.paginate(this.historyData,15,1);
@@ -72,13 +74,15 @@ export class ContactExcelComponent implements OnInit, OnChanges {
   }
   ngOnChanges(){
     if(this.loadExcel){
+
       this.customerService.excelHistory().subscribe(data=>{
+        this.isLoad = true;
         this.historyData = data.data
         this.size = data.totalItem;
         this.pagiHistoryData = this.paginate(this.historyData,15,1);
+        this.isLoad = false;
       })
     }
-
   }
 
   fetchExcel(value:any){
@@ -109,7 +113,7 @@ export class ContactExcelComponent implements OnInit, OnChanges {
   }
 
   detailTab(id:any){
-
+    this.idFile = id;
     this.tabs.forEach((d,i)=>{
       if(d.value == 2){
         this.selected.setValue(i);
@@ -159,6 +163,31 @@ export class ContactExcelComponent implements OnInit, OnChanges {
     this.customerService.DownloadFile(this.fileName).subscribe( res =>{
       if(res){
         fileSaver.saveAs(this.returnBlob(res),this.fileName);
+      }
+    })
+  }
+
+  exportFile(){
+    const status = undefined
+    this.customerService.exportFile('file-upload.xlsx',this.idFile,status).subscribe( res =>{
+      if(res){
+        fileSaver.saveAs(this.returnBlob(res),'file-upload.xlsx');
+      }
+    })
+  }
+  exportErrorFile(){
+    const status = '1'
+    this.customerService.exportFile('file-upload-loi.xlsx',this.idFile,status).subscribe( res =>{
+      if(res){
+        fileSaver.saveAs(this.returnBlob(res),'file-upload-loi.xlsx');
+      }
+    })
+  }
+  exportSuccessFile(){
+    const status = '0'
+    this.customerService.exportFile('file-upload-thanh-cong.xlsx',this.idFile,status).subscribe( res =>{
+      if(res){
+        fileSaver.saveAs(this.returnBlob(res),'file-upload-thanh-cong.xlsx');
       }
     })
   }
