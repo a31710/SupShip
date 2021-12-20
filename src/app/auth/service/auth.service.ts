@@ -82,15 +82,25 @@ userInfo(id:any):Observable<any>{
 logOut(){
   setTimeout(()=>{
     localStorage.clear();
+    this.resetCookie();
     this.cookieService.delete('roles');
     this.cookieService.delete('empSystemId');
     this.cookieService.delete('token');
+    this.cookieService.deleteAll('/','localhost');
+    console.log('đăng xuất');
+    console.log(this.cookieService.get('token'));
     if(this.cookieService.get('token')){
       this.logOut();
       this.cookieService.deleteAll();
     }
   },1000)
+}
 
+resetCookie(){
+  this.cookieService.delete('roles');
+  this.cookieService.delete('empSystemId');
+  this.cookieService.delete('token');
+  this.cookieService.deleteAll();
 }
 
 
@@ -103,7 +113,7 @@ getCheck(){
 }
 
 isLoggedIn(): boolean {
-  return this.cookieService.get('token')?true:false;
+  return this.cookieService.get('empSystemId')?true:false;
 }
 getUpdate(){
   return localStorage.getItem("isUpdate");
