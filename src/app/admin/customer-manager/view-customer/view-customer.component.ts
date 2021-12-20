@@ -222,6 +222,9 @@ dsbPost:boolean = false;
   get postCodeArr(){
     return this.tranferForm.get('postCode') as FormArray;
   }
+  get noteArr(){
+    return this.tranferForm.get('note') as FormArray;
+  }
 
   onSubmit(){
 

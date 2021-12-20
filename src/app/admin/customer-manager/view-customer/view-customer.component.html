@@ -314,7 +314,7 @@ aria-hidden="true">
 
 
       <ng-container *ngIf="isCTX==true">
-        <button class="btn btn-sm btn-success" [disabled]="tranferForm.invalid" (click)="onSubmit()" type="button"  data-dismiss="modal" aria-label="Close">
+        <button class="btn btn-sm btn-success" [disabled]="postCodeArr?.hasError('required') || deptCodeArr?.hasError('required') || userRecipientIdArr?.hasError('required') || noteArr?.hasError('required')" (click)="onSubmit()" type="button"  data-dismiss="modal" aria-label="Close">
             Chuyển tiếp xúc
       </button>
       </ng-container>
