@@ -30,13 +30,11 @@ export class ViewUserComponent implements OnInit {
   size: number = 70;
   totalPage:number = 3;
   searchForm: FormGroup | any;
+  pagiUserData:any;
+
   constructor(private userService: UserService, private fb: FormBuilder,public loaderService: LoaderService,private authService: AuthService) {
     this.roleFunction();
-    this.userService.getListUser().subscribe(data=>{
-      this.size = data.content.length;
-      this.dataUser = data.content;
-      console.log(data);
-    })
+    this.fetchApi();
     this.CreateForm();
    }
 
@@ -46,6 +44,15 @@ export class ViewUserComponent implements OnInit {
     })
     this.idFrom =this.fb.group({
       userUid:''
+    })
+  }
+
+  fetchApi(){
+    this.userService.getListUser().subscribe(data=>{
+      this.size = data.content.length;
+      this.dataUser = data.content;
+      this.pagiUserData = this.paginate(this.dataUser,15,1);
+      console.log(data);
     })
   }
 
@@ -59,6 +66,7 @@ export class ViewUserComponent implements OnInit {
   }
   onPageChange(offset: number) {
     this.offset = offset;
+    this.pagiUserData = this.paginate(this.dataUser,this.limit,(this.offset/this.limit)+1);
   }
   get req() {
     return this.searchForm.get('search') as FormArray;
@@ -69,6 +77,12 @@ export class ViewUserComponent implements OnInit {
     this.idFrom.controls['userUid'].setValue(userid);
     console.log(this.idFrom.value);
   }
+
+  paginate(array:any, pageSize:any, pageNumber:any) {
+    return array.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
+  }
+
+
 
   banUser(){
     this.userService.banUser(this.idFrom.value).subscribe(data=>{
@@ -142,6 +156,7 @@ export class ViewUserComponent implements OnInit {
       }else{
         this.size = data.length;
         this.dataUser = data;
+        this.pagiUserData = this.paginate(this.dataUser,15,1);
       }
     })
   }
@@ -150,6 +165,7 @@ export class ViewUserComponent implements OnInit {
     this.userService.getListUser().subscribe(data=>{
       this.size = data.totalItem;
       this.dataUser = data.content;
+      this.pagiUserData = this.paginate(this.dataUser,15,1);
       console.log(data.content);
     })
 

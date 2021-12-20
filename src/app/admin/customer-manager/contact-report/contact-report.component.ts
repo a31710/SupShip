@@ -165,7 +165,7 @@ export class ContactReportComponent implements OnInit {
     console.log('file Downloaded');
     return new Blob([res], {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-  });
+    });
   }
   exportExcelTuyen(){
 

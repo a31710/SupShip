@@ -158,6 +158,13 @@ constructor(private http: HttpClient) { }
 
 
   }
+  exportLead(x: string, from:any, to:any):Observable<any>{
+    const param = new HttpParams().set('filename',x);
+    const options = {
+      params: param
+    };
+    return this.http.get(`${this.url}/api/report/export-excel?from=${from}&to=${to}`,{...options, responseType: 'blob'});
+  }
 
   fillCbx():Observable<any>{
     return this.http.get<any>(`${this.url}/fillCbx`)

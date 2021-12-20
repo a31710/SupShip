@@ -152,6 +152,8 @@ dsbPost:boolean = false;
     })
   }
 
+
+
   reportRole(){
     const role = this.authService.getRole();
     if(role == 'BC'){
@@ -688,6 +690,16 @@ dsbPost:boolean = false;
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   });
   }
+
+  exportLead(){
+    this.customerService.exportLead('danh-sach-khach-hang.xlsx',this.datePipe(this.fromDate),this.datePipe(this.toDate))
+    .subscribe( res =>{
+      if(res){
+        fileSaver.saveAs(this.returnBlob(res),'danh-sach-khach-hang.xlsx');
+      }
+    })
+  }
+
   exportExcel(){
     this.customerService.exportExcelReport(this.fileName).subscribe( res =>{
       if(res){
