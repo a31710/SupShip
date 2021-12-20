@@ -537,11 +537,13 @@ dsbPost:boolean = false;
       this.isCTX = false;
     }
     this.idArray.push(id);
+
+
     const data  = this.listCustomer.filter((data:any)=> data.id === id);
     if(data[0].leadAssigns){
-      this.deptCodeSelect = data[0].leadAssigns[data[0].leadAssigns.length-1].deptCode
+      this.deptCodeSelect = data[0].leadAssigns[data[0].leadAssigns.length-1]?.deptCode
       this.getPostCode(this.deptCodeSelect);
-      this.postCodeSelect = data[0].leadAssigns[data[0].leadAssigns.length-1].postCode
+      this.postCodeSelect = data[0].leadAssigns[data[0].leadAssigns.length-1]?.postCode
       this.getListByPostCode(this.postCodeSelect);
     }
     this.tranferData= data;

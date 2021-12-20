@@ -38,11 +38,11 @@
   </div>
   <div class="report-header">
     <h3 class="text-header text-primary">TL tiếp xúc</h3>
-    <div class="text-desc ">{{reportData?.totalAssigned}}%</div>
+    <div class="text-desc ">{{reportData?.tyLeTX}}%</div>
   </div>
   <div class="report-header">
     <h3 class="text-header text-primary">TL hoàn thành KH</h3>
-    <div class="text-desc ">{{reportData?.totalAssigned}}%</div>
+    <div class="text-desc ">{{reportData?.tyLeHT}}%</div>
   </div>
 
 
@@ -155,8 +155,22 @@
                 </ng-container>
 
               </td>
-              <td class="text-success">{{item?.tyHT}}%</td>
-              <td class="text-warning">{{item?.tyTX}}%</td>
+              <td class="text-success">
+                <ng-container *ngIf="item?.tyHT || item?.tyHT == 0">
+                  {{item?.tyHT}}%
+                </ng-container>
+                <ng-container *ngIf="item?.tyLeHT || item?.tyLeHT == 0">
+                  {{item?.tyLeHT}}%
+                </ng-container>
+              </td>
+              <td class="text-warning">
+                <ng-container *ngIf="item?.tyTX || item?.tyTX == 0">
+                  {{item?.tyTX}}%
+                </ng-container>
+                <ng-container *ngIf="item?.tyLeTX || item?.tyLeTX == 0">
+                  {{item?.tyLeTX}}%
+                </ng-container>
+              </td>
               <td>0%</td>
               <td>
 
