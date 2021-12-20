@@ -32,13 +32,15 @@
 
       </div>
 
+      <ng-container *ngIf="isShow">
+        <div id="right">
+          <div class="button selected" id="switcher-default">
+            <button type="button" class="btn btn-sm btn-success" (click)="addTab()"><i class="fas fa-user-plus"></i> Thêm mới</button>
+          </div>
 
-      <div id="right">
-        <div class="button selected" id="switcher-default">
-          <button type="button" class="btn btn-sm btn-success" (click)="addTab()"><i class="fas fa-user-plus"></i> Thêm mới</button>
-        </div>
+      </div>
+      </ng-container>
 
-    </div>
 
   </div>
   </form>
