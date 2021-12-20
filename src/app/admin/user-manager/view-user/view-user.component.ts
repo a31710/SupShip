@@ -31,7 +31,7 @@ export class ViewUserComponent implements OnInit {
   totalPage:number = 3;
   searchForm: FormGroup | any;
   pagiUserData:any;
-
+ 
   constructor(private userService: UserService, private fb: FormBuilder,public loaderService: LoaderService,private authService: AuthService) {
     this.roleFunction();
     this.fetchApi();
@@ -47,6 +47,8 @@ export class ViewUserComponent implements OnInit {
     })
   }
 
+  // tạo body để gọi api post.  
+
   fetchApi(){
     this.userService.getListUser().subscribe(data=>{
       this.size = data.content.length;
@@ -55,6 +57,7 @@ export class ViewUserComponent implements OnInit {
       console.log(data);
     })
   }
+  // lấy data để hiển thị lên html
 
   roleFunction(){
     const role = this.authService.getRole();
@@ -62,25 +65,34 @@ export class ViewUserComponent implements OnInit {
       this.isShow = true;
     }
   }
+  // lấy quyền trong cookie để show các tính năng của quyền TCT
+
   ngOnInit() {
   }
   onPageChange(offset: number) {
     this.offset = offset;
     this.pagiUserData = this.paginate(this.dataUser,this.limit,(this.offset/this.limit)+1);
   }
+
+
+
+
   get req() {
     return this.searchForm.get('search') as FormArray;
   }
+  // lấy giá trị của ô input trên searchForm
 
   getIdUser(id:any){
     const userid = id.replace(/\s/g, '');
     this.idFrom.controls['userUid'].setValue(userid);
     console.log(this.idFrom.value);
   }
+  // lấy id theo user khi click vào user hoặc ban user
 
   paginate(array:any, pageSize:any, pageNumber:any) {
     return array.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
   }
+  // hàm trả về data đã lọc theo pagi
 
 
 
@@ -102,11 +114,7 @@ export class ViewUserComponent implements OnInit {
           confirmButtonText: 'OK'
         }).then((result) => {
           if (result.isConfirmed) {
-            this.userService.getListUser().subscribe(data=>{
-              this.size = data.totalItem;
-              this.dataUser = data.content;
-              console.log(data.content);
-            })
+           this.fetchApi();
           }
         })
       }
@@ -132,11 +140,7 @@ export class ViewUserComponent implements OnInit {
           confirmButtonText: 'OK'
         }).then((result) => {
           if (result.isConfirmed) {
-            this.userService.getListUser().subscribe(data=>{
-              this.size = data.totalItem;
-              this.dataUser = data.content;
-              console.log(data.content);
-            })
+            this.fetchApi();
           }
         })
       }
@@ -177,6 +181,7 @@ export class ViewUserComponent implements OnInit {
     this.selected.setValue(0);
     console.log(data);
   }
+  
   addTab(){
     const createCustomer = {title:'Tạo mới tài khoản', value:2}
     const oldData = this.tabs.filter(data => data.value == 2)

@@ -24,7 +24,7 @@ export class CreateUserComponent implements OnInit {
 
   constructor(private userService: UserService, private fb: FormBuilder,private config: NgSelectConfig,
     private authService: AuthService , private customerService: CustomerService) {
-    this.roleFunction()
+
     this.createUser =  new EventEmitter<any>();
     this.config.appendTo = 'body';
     this.config.bindValue = 'value';
@@ -33,28 +33,28 @@ export class CreateUserComponent implements OnInit {
    }
 
 
-  roleFunction(){
-    const role = this.authService.getRole();
-    if(role == 'CN'){
-      this.customerService.fillCbx().subscribe(data=>{
-        console.log(data);
-        this.deptCodeSelect = data.deptCode
-        this.dsbDept = true;
-        this.getPostCode(data.deptCode);
-        this.roleData = this.roleData.filter((d:any) => d.value == 'NV')
-      })
-    }
-    if(role == 'BC'){
-      this.customerService.fillCbx().subscribe(data=>{
-        this.deptCodeSelect = data.deptCode;
-        this.getPostCode(data.deptCode);
-        this.postCodeSelect = data.postCode;
-        this.dsbDept = true;
-        this.dsbPost = true;
-        this.roleData = this.roleData.filter((d:any) => d.value == 'NV')
-      })
-    }
-  }
+  // roleFunction(){
+  //   const role = this.authService.getRole();
+  //   if(role == 'CN'){
+  //     this.customerService.fillCbx().subscribe(data=>{
+  //       console.log(data);
+  //       this.deptCodeSelect = data.deptCode
+  //       this.dsbDept = true;
+  //       this.getPostCode(data.deptCode);
+  //       this.roleData = this.roleData.filter((d:any) => d.value == 'NV')
+  //     })
+  //   }
+  //   if(role == 'BC'){
+  //     this.customerService.fillCbx().subscribe(data=>{
+  //       this.deptCodeSelect = data.deptCode;
+  //       this.getPostCode(data.deptCode);
+  //       this.postCodeSelect = data.postCode;
+  //       this.dsbDept = true;
+  //       this.dsbPost = true;
+  //       this.roleData = this.roleData.filter((d:any) => d.value == 'NV')
+  //     })
+  //   }
+  // }
 
   ngOnInit() {
   }
