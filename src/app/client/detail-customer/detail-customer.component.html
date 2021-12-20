@@ -72,8 +72,8 @@
               <br>
               <br>
               <small class="mt-2"
-               [ngClass]="{'text-danger': event.result == 1, 'text-success' : event.result == 3,'text-info' : event.result == 5 }"
-               >{{event.result == 1?'Thất bại': event.result == 3?'Thành công':event.result == 5?'Gửi báo giá':''}}</small>
+               [ngClass]="{'text-danger': event.result == 5, 'text-success' : event.result == 3,'text-info' : event.result == 1 }"
+               >{{event.result == 5?'Thất bại': event.result == 3?'Thành công':event.result == 1?'Gửi báo giá':''}}</small>
 
           </ng-template>
 
