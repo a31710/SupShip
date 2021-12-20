@@ -50,9 +50,9 @@ export class ReportComponent implements OnInit {
         this.tlht = (data?.contacting)*100/(data?.totalAssigns);
       }
 
-      data?.successes == 0? this.successPct = 0: this.successPct = data?.successes/(data?.successes +  data?.fails + data?.contacting);
-      data?.fails == 0? this.failPct = 0: this.failPct = data?.fails/(data?.successes +  data?.fails + data?.contacting);
-      data?.contacting == 0? this.contactingPct = 0: this.contactingPct = data?.contacting/(data?.successes +  data?.fails + data?.contacting);
+      data?.successes == 0? this.successPct = 0: this.successPct = (data?.successes/(data?.successes +  data?.fails + data?.contacting)).toFixed(2);
+      data?.fails == 0? this.failPct = 0: this.failPct = (data?.fails/(data?.successes +  data?.fails + data?.contacting)).toFixed(2);
+      data?.contacting == 0? this.contactingPct = 0: this.contactingPct = (data?.contacting/(data?.successes +  data?.fails + data?.contacting)).toFixed(2);
       this.single=[ {
         "name": "Đang tiếp xúc",
         "value": data?.contacting
