@@ -68,7 +68,7 @@ export class CreateUserComponent implements OnInit {
 
   roleData = [
     {value:'TCT', name:'Tổng công ty'},
-    {value:'TBC', name: 'Tổng bưu cục'},
+    {value:'BC', name: 'Bưu cục'},
     {value:'CN', name:'Chi nhánh'},
     {value:'NV', name:'Nhân viên'},
   ]
